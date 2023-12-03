@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/03 22:10:25 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/03 22:23:23 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	is_geo(char *line)
 	geos = ft_split(GEO_IDENT, ' ');
 	element = ft_split(line, ' ');
 	if (!check_content(element))
-		return	(-1);
+		i = MAX_GEOM;
 	while (i < MAX_GEOM)
 	{
 		if (!ft_strcmp(element[0], geos[i]))
@@ -66,7 +66,7 @@ int	is_device(char *line)
 	devices = ft_split(DEV_IDENT, ' ');
 	element = ft_split(line, ' ');
 	if (!check_content(element))
-		return	(-1);
+		i = MAX_GEOM;
 	while (i < MAX_DEVICES)
 	{
 		if (!ft_strcmp(element[0], devices[i]))
@@ -85,10 +85,11 @@ int	is_device(char *line)
 t_field	*init_vars(char *filename)
 {
 	t_field	*field;
+	char	*raw_line;
 	char	*line;
 	int		fd;
 
-	field = (t_field *) malloc(sizeof(t_field));
+	field = (t_field *)malloc(sizeof(t_field));
 	if (!field)
 		return (NULL);
 
@@ -96,12 +97,12 @@ t_field	*init_vars(char *filename)
 	if (fd == -1)
 	{
 		ft_putstr_fd("File Error\n", 2);
-		return (NULL);
+		return (field);
 	}
-	line = get_next_line(fd);
-	while (line)
+	raw_line = get_next_line(fd);
+	while (raw_line)
 	{
-		line = ft_strtrim(line, "\n");
+		line = ft_strtrim(raw_line, "\n");
 		if (is_device(line) != -1)
 		{
 			printf("es un device -- $%s$\n", line);
@@ -116,10 +117,11 @@ t_field	*init_vars(char *filename)
 		{
 			ft_putstr_fd("Wrong Line Settings\n", 2);
 		}
-		free (line);
-		line = get_next_line(fd);
+		free(line);
+		free (raw_line);
+		raw_line = get_next_line(fd);
 	}
-	free(line);
+	free(raw_line);
 	return (field);
 }
 
