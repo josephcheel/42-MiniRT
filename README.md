@@ -10,6 +10,6 @@
 <!--FINISH HEADER-->
 
 
-### Resources
-**Ray Tracing in One Weekend, (Peter Shirley, Trevor David Black, Steve Hollasch) [Book]** [Link](https://raytracing.github.io/)
-**Ray Tracing [YouTube]**[Link](https://youtu.be/gfW1Fhd9u9Q?si=BI667gXh8sOryeaU)
+#### Resources
+* [**Ray Tracing in One Weekend, (Peter Shirley, Trevor David Black, Steve Hollasch)**](https://raytracing.github.io/)
+* [**Ray Tracing [YouTube]**](https://youtu.be/gfW1Fhd9u9Q?si=BI667gXh8sOryeaU)
