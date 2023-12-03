@@ -6,12 +6,15 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:11:27 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/11/07 02:36:28 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/03 01:18:01 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
+/*
+Check if a string is completely numeric
+*/
 int	ft_isnumeric(char *str)
 {
 	int		i;
