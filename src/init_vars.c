@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/03 23:10:18 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/04 00:07:36 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,9 @@ t_field	*init_vars(char *filename)
 	while (raw_line)
 	{
 		line = ft_strtrim(raw_line, "\n");
-		if (is_device(line) != -1)
+		if (!line || ft_strlen(line) == 0)
+			;
+		else if (is_device(line) != -1)
 		{
 			printf("es un device -- $%s$\n", line);
 			get_devices(field, line);
@@ -114,9 +116,7 @@ t_field	*init_vars(char *filename)
 			//get_geom(field, line);
 		}
 		else
-		{
 			ft_putstr_fd("Wrong Line Settings\n", 2);
-		}
 		free(line);
 		free (raw_line);
 		raw_line = get_next_line(fd);
