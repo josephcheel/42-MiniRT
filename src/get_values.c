@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/03 22:40:58 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/03 22:52:27 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void	get_light(t_field *field, char *line)
 	char **content;
 	content = ft_split(line, ' ');
 	
-	field->light.pos = add_vec3()
-	field->light.orientation = add_vec3
+	// field->light.pos = add_vec3(content[1]);
+	// field->light.orientation = add_vec3(content[2]);
+	// field->light.fov = ft_atoi(content[3]);
+	// field->light.next = NULL;
 }
 
 void	get_ambient_light(t_field *field, char *line)
