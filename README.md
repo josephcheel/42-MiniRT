@@ -8,3 +8,8 @@
  <!--<img alt="Complete" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/complete.svg">-->
 </h1>
 <!--FINISH HEADER-->
+
+
+### Resources
+**Ray Tracing in One Weekend, (Peter Shirley, Trevor David Black, Steve Hollasch) [Book]** [Link](https://raytracing.github.io/)
+**Ray Tracing [YouTube]**[Link](https://youtu.be/gfW1Fhd9u9Q?si=BI667gXh8sOryeaU)
