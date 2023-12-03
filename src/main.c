@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/02 12:23:54 by eavedill         ###   ########.fr       */
+/*   Updated: 2023/12/03 20:02:33 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	prt_help(void)
 {
-	printf("=========Usage==========\n");
-	printf("./miniRT file_name\n");
-	printf("====Parameter desctiprion=====\n");
-	printf("filename: name of the file with extension .rt\n");
-	printf("\texample: example.rt\n");
-	printf("See README file for more information\n");
+	ft_putstr_fd("\x1b[38;5;210m=========Usage==========\x1b[0m\n", 2);
+	ft_putstr_fd("./miniRT \x1b[34;01mfile_name\x1b[0m\n", 2);
+	ft_putstr_fd("\x1b[38;5;210m====Parameter desctiprion=====\x1b[48;5;0m\n", 2);
+	ft_putstr_fd("\x1b[34;01mfilename: \x1b[0mname of the file with extension .rt\n", 2);
+	ft_putstr_fd("\033[38;5;213m\texample:\x1b[0m example.rt\n", 2);
+	ft_putstr_fd("\x1b[38;5;146mSee README file for more information\n", 2);
 	return (0);
 }
 
