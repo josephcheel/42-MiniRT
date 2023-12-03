@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/03 23:56:09 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/04 00:23:31 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	check_file(char *filename)
 			light++;
 		else if (ft_strcmp(content[0], "C") == 0)
 			camera++;
+		ft_array_free(content, ft_array_size(content));
 		free(line);
 		line = get_next_line(fd);
 	}
