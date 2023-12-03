@@ -52,7 +52,7 @@ INCLUDE		+= -I $(INC)
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-PARSERS		= main.c
+PARSERS		= main.c init_vars.c
 GRAPHICS	=
 
 SRCS			+=	$(addprefix $(MDT_DIR), $(addprefix $(SRC_DIR), $(PARSERS)))
@@ -86,8 +86,9 @@ clean:
 			@$(RM) -r $(OBJ_DIR)
 			@echo "$(ERROR_COLOR)Dependencies and objects removed$(NO_COLOR)"
 
+## QUE QUIERE DECIR en -smC la "-m"??
 fclean:		clean
-			@make fclean -sC libft
+			@make fclean -smC libft
 			@$(RM) $(NAME) $(NAME_BONUS)
 			@echo "$(ERROR_COLOR)Programs removed$(NO_COLOR)"
 

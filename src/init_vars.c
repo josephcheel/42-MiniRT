@@ -3,58 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/02 12:23:54 by eavedill         ###   ########.fr       */
+/*   Updated: 2023/12/03 20:32:16 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
 
-int	is_geo(char *str)
+int	is_geo(char *line)
 {
 	int		i;
+	char	**element;
 	char	**geos;
 
 	i = 0;
 	geos = ft_split(GEO_IDENT, ' ');
+	element = ft_split(line, ' ');
 	while (i < MAX_GEOM)
 	{
-		if (!ft_strncmp(str, geos[i], 2))
+		if (!ft_strcmp(element[0], geos[i]))
 		{
 			ft_array_free(geos, ft_array_size(geos));
+			ft_array_free(element, ft_array_size(element));
 			return (i);
 		}
 		i++;
 	}
 	ft_array_free(geos, ft_array_size(geos));
+	ft_array_free(element, ft_array_size(element));
 	return (-1);
 }
 
-t_field	*init_vars(char *ac)
+int	is_device(char *line)
+{
+	int		i;
+	char	**element;
+	char	**devices;
+
+	i = 0;
+	devices = ft_split(DEV_IDENT, ' ');
+	element = ft_split(line, ' ');
+	while (i < MAX_DEVICES)
+	{
+		if (!ft_strcmp(element[0], devices[i]))
+		{
+			ft_array_free(devices, ft_array_size(devices));
+			ft_array_free(element, ft_array_size(element));
+			return (i);
+		}
+		i++;
+	}
+	ft_array_free(devices, ft_array_size(devices));
+	ft_array_free(element, ft_array_size(element));
+	return (-1);
+}
+
+t_field	*init_vars(char *filename)
 {
 	t_field	*field;
-	char	*data;
+	char	*line;
 	int		fd;
 
 	field = (t_field *) malloc(sizeof(t_field));
 	if (!field)
 		return (NULL);
-	fd = open(ac, O_RDONLY);
-	data = get_next_line(fd);
-	while (data)
+
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
 	{
-		if (data[0] == CAMERA || data[0] == LIGHT || data[0] == AMBNT_LGHT)
-			printf("es un device -- %s", data);
-			//get_devices(field,data);
-		else if (is_geo(data) != -1)
-			printf ("es un a geometria -- %s", data);
-			//get_geom(field, data);
-		free (data);
-		data = get_next_line(fd);
+		ft_putstr_fd("File Error\n", 2);
+		return (NULL);
 	}
-	free(data);
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (is_device(line)  != -1)//line[0] == CAMERA || line[0] == LIGHT || line[0] == AMBNT_LGHT)
+		{
+			printf("es un device -- %s", line);
+			//get_devices(field, line);
+		}
+		else if (is_geo(line) != -1)
+		{
+			printf ("es un a geometria -- %s", line);
+			//get_geom(field, line);
+		}
+		else
+		{
+			ft_putstr_fd("Wrong Line Setting\n", 2);
+		}
+		free (line);
+		line = get_next_line(fd);
+	}
+	free(line);
 	return (field);
 }
 
