@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/02 12:19:38 by eavedill         ###   ########.fr       */
+/*   Updated: 2023/12/03 20:25:29 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,17 @@ enum e_type_geo
 	MAX_GEOM
 };
 
+enum e_type_device
+{
+	C,
+	L,
+	A,
+	MAX_DEVICES
+};
+
+
 # define GEO_IDENT "sp pl cy cn"
+# define DEV_IDENT "C L A"
 
 # define CAMERA 'C'
 # define LIGHT 'L'
@@ -61,18 +71,18 @@ typedef struct s_color
 	int	a;
 }	t_color;
 
-typedef struct s_vector
+typedef struct s_vec3
 {
 	double	x;
 	double	y;
 	double	z;
-}	t_vector;
+}	t_vec3;
 
 typedef struct s_geom
 {
 	int			type;
-	t_vector	pt1;
-	t_vector	direction;
+	t_vec3	pt1;
+	t_vec3	direction;
 	double		r;
 	t_color		color;
 	void		*next;
@@ -80,15 +90,15 @@ typedef struct s_geom
 
 typedef struct s_camera
 {
-	t_vector	pos;
-	t_vector	orientation;
+	t_vec3	pos;
+	t_vec3	orientation;
 	int			fov;
 }	t_camera;
 
 typedef struct s_light
 {
-	t_vector	pos;
-	t_vector	orientation;
+	t_vec3	pos;
+	t_vec3	orientation;
 	int			fov;
 	void		*next;
 }	t_light;
