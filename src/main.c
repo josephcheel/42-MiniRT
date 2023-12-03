@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/03 20:02:33 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/03 23:13:03 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int av, char **ac)
 	if (av < 2 || !check_arg(ac[1]))
 		return (prt_help());
 	field = init_vars(ac[1]);
+	//printf("CAMERA X: %f\nCAMERA Y: %f\nCAMERA Z: %f", field->camera.pos.x, field->camera.pos.y, field->camera.pos.z);
 	free_field(field);
 	return (0);
 }

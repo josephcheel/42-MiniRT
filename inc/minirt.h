@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/03 20:25:29 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/03 23:10:34 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,4 +122,6 @@ typedef struct s_field
 t_field		*init_vars(char *ac);
 void		free_field(t_field *field);
 
+
+void	get_devices(t_field *field, char *line);
 #endif

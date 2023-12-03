@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/03 22:23:23 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/03 23:10:18 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ t_field	*init_vars(char *filename)
 		if (is_device(line) != -1)
 		{
 			printf("es un device -- $%s$\n", line);
-			//get_devices(field, line);
+			get_devices(field, line);
 		}
 		else if (is_geo(line) != -1)
 		{

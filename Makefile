@@ -62,7 +62,7 @@ INCLUDE		+= -I $(INC)
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-PARSERS		= main.c init_vars.c
+PARSERS		= main.c init_vars.c get_values.c
 GRAPHICS	=
 
 SRCS			+=	$(addprefix $(SRC_DIR), $(PARSERS))
