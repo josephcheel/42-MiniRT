@@ -27,7 +27,7 @@
 #  include "../inc/key_mouse_cod_lnx.h"
 # endif
 # ifdef KEY_MAC_H
-#  include "../inx/key_mouse_cod_mac.h"
+#  include "../inc/key_mouse_cod_mac.h"
 # endif
 
 enum e_type_geo

@@ -16,8 +16,18 @@ NAME		=	miniRT
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
 CC			=	gcc
-CFLAGS		=	-Wall -Werror -Wextra
-MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+#Flags to compile in MAC
+all : CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H
+all : MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+all:		mlx_link libft_link $(NAME)
+
+
+
+#Flags to compile in linux
+all_lnx: CFLAGS		=	-Wall -Werror -Wextra -D KEY_LNX_H
+all_lnx: MLXFLAGS = 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lm -lz 
+all_lnx:		mlx_link libft_link $(NAME)
+
 #XFLAGS		=	-fsanitize=address -g2 -g
 CLEAN_CAR	=	\033[2K\r
 
@@ -52,7 +62,7 @@ INCLUDE		+= -I $(INC)
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-PARSERS		= main.c
+PARSERS		= main.c init_vars.c
 GRAPHICS	=
 
 SRCS			+=	$(addprefix $(MDT_DIR), $(addprefix $(SRC_DIR), $(PARSERS)))
@@ -67,17 +77,15 @@ DEPS			+=	$(addsuffix .d, $(basename $(OBJS)))
 
 $(OBJ_DIR)%.o : %.c Makefile
 	@$(MD) $(dir $@)
-	@printf "$(CLEAN_CAR)$(OK_COLOR)[minishell Compiling]$(BLUE_COLOR) : $(WARN_COLOR)$<$(NO_COLOR)"
-	@$(CC) -MT $@ -MMD -MP -c $(CFLAGS) $(INCLUDE) -Imlx -I mlx/mlx.h $< -o $@ 
-
+	@printf "$(CLEAN_CAR)$(OK_COLOR)[miniRT Compiling]$(BLUE_COLOR) : $(WARN_COLOR)$<$(NO_COLOR)"
+	@$(CC) -MT $@ -MMD -MP -c $(CFLAGS) $(INCLUDE) -Imlx  $< -o $@ 
+#-I ./mlx/mlx.h
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─TARGET─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-all:		mlx_link libft_link $(NAME)
-
 $(NAME):	$(LIBFT) $(MLX) $(OBJS)
-			@$(CC) $(CFLAGS) $(MLXFLAGS) $(XFLAGS) $(LIBFT) $(OBJS) -o $(NAME)
+			@$(CC) $(CFLAGS) $(MLXFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(LNXMLXFLAGSS) -o $(NAME)
 			@echo "$(CLEAN_CAR)$(OK_COLOR)$(NAME) Compiled!$(NO_COLOR)"
 			@echo "Use $(BLUE_COLOR)./$(NAME)$(NO_COLOR) to launch the program"
 clean:

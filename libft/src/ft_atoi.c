@@ -33,7 +33,7 @@ int	ft_atoi(const char *str)
 		result = (result * 10) + (*str - 48);
 		str++;
 	}
-	if (result < -2147483648)
+	if (result <= -2147483648)
 		return (-1);
 	else if (result > 2147483647)
 		return (0);
