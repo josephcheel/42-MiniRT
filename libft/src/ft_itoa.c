@@ -37,7 +37,7 @@ char	*ft_itoa(int n)
 
 	lenght = ft_intlenght(n);
 	str = malloc(sizeof(char) * (lenght + 1));
-	if (!str || n > 2147483647 || n < -2147483648)
+	if (!str || n > 2147483647 || n <= -2147483648)
 		return (NULL);
 	str[lenght] = '\0';
 	if (n < 0)
