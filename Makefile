@@ -54,7 +54,7 @@ LIBFT_DIR	= 	libft/
 MLX			=	mlx/libmlx.a
 MLX_DIR		= 	mlx/
 
-INC			=	$(addprefix $(MDT_DIR), $(INC_DIR))
+INC			=	$(INC_DIR)
 
 INCLUDE		+= -I $(INC)
 
@@ -65,7 +65,7 @@ INCLUDE		+= -I $(INC)
 PARSERS		= main.c init_vars.c
 GRAPHICS	=
 
-SRCS			+=	$(addprefix $(MDT_DIR), $(addprefix $(SRC_DIR), $(PARSERS)))
+SRCS			+=	$(addprefix $(SRC_DIR), $(PARSERS))
 
 OBJS			=	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
