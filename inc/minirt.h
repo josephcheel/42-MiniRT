@@ -112,4 +112,11 @@ typedef struct s_field
 t_field		*init_vars(char *ac);
 void		free_field(t_field *field);
 
+//algebra vectorial
+t_vector	suma_vector(t_vector a, t_vector b);
+t_vector	resta_vector(t_vector a, t_vector b);
+t_vector	prod_vectorial(t_vector a, t_vector b);
+double		modulo_vector(t_vector a);
+double		prod_escalar(t_vector a, t_vector b);
+
 #endif
