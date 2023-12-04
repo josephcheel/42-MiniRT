@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/04 04:18:54 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/04 14:10:56 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,6 @@ int	main(int av, char **ac)
 	printf("=======AMBIENT=====\n");
 	printf("Brightness:\t\t%f\n", field->ambient.ratio);
 	printf("Color:\t\t\tR %d, G %d, B %d\n", field->ambient.color.r, field->ambient.color.g, field->ambient.color.b);
-	// printf("CAMERA X: %f\nCAMERA Y: %f\nCAMERA Z: %f\n", field->camera.pos.x, field->camera.pos.y, field->camera.pos.z);
-	// printf("LIGHT X: %f\nLIGHT Y: %f\nLIGHT Z: %f\n", field->light->pos.x, field->light->pos.y, field->light->pos.z);
-	// printf("LIGHT RATIO: %f\n", field->light->ratio);
-	// printf("LIGHT COLOR R: %d\nLIGHT COLOR G: %d\nLIGHT COLOR B: %d\n", field->light->color.r, field->light->color.g, field->light->color.b);
-	// printf("AMBIENT RATIO: %f\n", field->ambient.ratio);
-	// printf("AMBIENT COLOR R: %d\nAMB COLOR G: %d\nAMB COLOR B: %d\n", field->ambient.color.r, field->ambient.color.g, field->ambient.color.b);
 	free_field(field);
 	return (0);
 }
