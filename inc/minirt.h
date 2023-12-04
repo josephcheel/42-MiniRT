@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/03 23:10:34 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/04 04:01:33 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ typedef struct s_light
 {
 	t_vec3	pos;
 	t_vec3	orientation;
+	t_color	color;
+	float	ratio;
 	int			fov;
 	void		*next;
 }	t_light;
@@ -109,10 +111,17 @@ typedef struct s_mouse_pos
 	int	y;
 }	t_mouse_pos;
 
+typedef struct s_ambient
+{
+	t_color	color;
+	float	ratio;
+}	t_ambient;
+
 typedef struct s_field
 {
 	t_geom		*geom;
-	t_color		bck_col;
+	t_color		bck_col; // is this like ambient light?
+	t_ambient	ambient;
 	t_camera	camera;
 	t_light		*light;
 }	t_field;

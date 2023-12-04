@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/04 00:22:44 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/04 04:13:44 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,26 @@ t_vec3	add_vec3(char *vector3)
 	values = ft_split(vector3, ',');
 	if (ft_array_size(values) != 3)
 		return ((t_vec3){0});
-	vec.x = ft_atoi(values[0]); // AÑADIR strtod();?
-	vec.y = ft_atoi(values[1]);
-	vec.z = ft_atoi(values[2]);
+	vec.x = ft_atof(values[0]); // AÑADIR strtod();?
+	vec.y = ft_atof(values[1]);
+	vec.z = ft_atof(values[2]);
 	ft_array_free(values, ft_array_size(values));
 	return (vec);
+}
+
+t_color	add_color(char *color)
+{
+	t_color	rgba;
+	char **values;
+
+	values = ft_split(color, ',');
+	if (ft_array_size(values) != 3)
+		return ((t_color){0});
+	rgba.r = ft_atoi(values[0]); // AÑADIR strtod();?
+	rgba.g = ft_atoi(values[1]);
+	rgba.b = ft_atoi(values[2]);
+	ft_array_free(values, ft_array_size(values));
+	return (rgba);
 }
 
 void	get_camera(t_field *field, char *line)
@@ -40,21 +55,28 @@ void	get_camera(t_field *field, char *line)
 	field->camera.fov = ft_atoi(content[3]);
 	ft_array_free(content, ft_array_size(content));
 }
-// void	get_light(t_field *field, char *line)
-// {
-// 	char **content;
-// 	content = ft_split(line, ' ');
+
+void	get_light(t_field *field, char *line)
+{
+	char **content;
+	content = ft_split(line, ' ');
 	
-// 	// field->light.pos = add_vec3(content[1]);
-// 	// field->light.orientation = add_vec3(content[2]);
-// 	// field->light.fov = ft_atoi(content[3]);
-// 	// field->light.next = NULL;
-// }
+	field->light = malloc(sizeof(t_light));
+	field->light->pos = add_vec3(content[1]);
+	field->light->ratio = ft_atof(content[2]);
+	field->light->color = add_color(content[3]);
+	field->light->next = NULL;
+}
 
-// void	get_ambient_light(t_field *field, char *line)
-// {
-
-// }
+void	get_ambient_light(t_field *field, char *line)
+{
+	char **content;
+	content = ft_split(line, ' ');
+	
+	field->ambient.ratio = ft_atof(content[1]);
+	field->ambient.color = add_color(content[2]);
+	ft_array_free(content, ft_array_size(content));
+}
 
 void	get_devices(t_field *field, char *line)
 {
@@ -63,10 +85,10 @@ void	get_devices(t_field *field, char *line)
 	type = ft_split(line, ' ');
 	if (ft_strcmp(type[0], "C") == 0)
 		get_camera(field, line);
-	// else if (ft_strcmp(type[0], "L") == 0)
-	// 	get_light(field, line);
-	// else if (ft_strcmp(type[0], "A") == 0)
-	// 	get_ambient_light(field, line);
+	else if (ft_strcmp(type[0], "L") == 0)
+		get_light(field, line);
+	else if (ft_strcmp(type[0], "A") == 0)
+		get_ambient_light(field, line);
 	ft_array_free(type, ft_array_size(type));
 }
 

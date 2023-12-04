@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/04 00:23:31 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/04 04:18:54 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	prt_help(void)
 {
 	ft_putstr_fd("\x1b[38;5;210m=========Usage==========\x1b[0m\n", 2);
-	ft_putstr_fd("./miniRT \x1b[34;01mfile_name\x1b[0m\n", 2);
+	ft_putstr_fd("./miniRT \x1b[34;01mfilename\x1b[0m\n", 2);
 	ft_putstr_fd("\x1b[38;5;210m====Parameter desctiprion=====\x1b[48;5;0m\n", 2);
 	ft_putstr_fd("\x1b[34;01mfilename: \x1b[0mname of the file with extension .rt\n", 2);
 	ft_putstr_fd("\033[38;5;213m\texample:\x1b[0m example.rt\n", 2);
@@ -80,8 +80,23 @@ int	main(int av, char **ac)
 
 	field = init_vars(ac[1]);
 
-	printf("CAMERA X: %f\nCAMERA Y: %f\nCAMERA Z: %f\n", field->camera.pos.x, field->camera.pos.y, field->camera.pos.z);
-	// printf("CAMERA FOV %d\n", field->camera.fov);
+	printf("=======CAMERA======\n");
+	printf("Viewpoint:\t\tX %f, Y %f, Z %f\n", field->camera.pos.x, field->camera.pos.y, field->camera.pos.z);
+	printf("Orientation:\t\tX %f, Y %f, Z %f\n", field->camera.orientation.x, field->camera.orientation.y, field->camera.orientation.z);
+	printf("FOV:\t\t\t%d\n", field->camera.fov);
+	printf("=======LIGHT=======\n");
+	printf("Position:\t\tX %f, Y %f, Z %f\n", field->light->pos.x, field->light->pos.y, field->light->pos.z);
+	printf("Brightness:\t\t%f\n", field->light->ratio);
+	printf("Color:\t\t\t R %d, G %d, B %d\n", field->light->color.r, field->light->color.g, field->light->color.b);
+	printf("=======AMBIENT=====\n");
+	printf("Brightness:\t\t%f\n", field->ambient.ratio);
+	printf("Color:\t\t\tR %d, G %d, B %d\n", field->ambient.color.r, field->ambient.color.g, field->ambient.color.b);
+	// printf("CAMERA X: %f\nCAMERA Y: %f\nCAMERA Z: %f\n", field->camera.pos.x, field->camera.pos.y, field->camera.pos.z);
+	// printf("LIGHT X: %f\nLIGHT Y: %f\nLIGHT Z: %f\n", field->light->pos.x, field->light->pos.y, field->light->pos.z);
+	// printf("LIGHT RATIO: %f\n", field->light->ratio);
+	// printf("LIGHT COLOR R: %d\nLIGHT COLOR G: %d\nLIGHT COLOR B: %d\n", field->light->color.r, field->light->color.g, field->light->color.b);
+	// printf("AMBIENT RATIO: %f\n", field->ambient.ratio);
+	// printf("AMBIENT COLOR R: %d\nAMB COLOR G: %d\nAMB COLOR B: %d\n", field->ambient.color.r, field->ambient.color.g, field->ambient.color.b);
 	free_field(field);
 	return (0);
 }

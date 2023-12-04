@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/04 00:07:36 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/04 03:05:12 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_field	*init_vars(char *filename)
 	raw_line = get_next_line(fd);
 	while (raw_line)
 	{
-		line = ft_strtrim(raw_line, "\n");
+		line = ft_strtrim(raw_line, "\n ");
 		if (!line || ft_strlen(line) == 0)
 			;
 		else if (is_device(line) != -1)
