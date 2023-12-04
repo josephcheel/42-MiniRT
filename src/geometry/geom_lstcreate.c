@@ -44,3 +44,22 @@ t_geom	*ft_geomlast(t_geom *lst)
 	}
 	return (tmp);
 }
+
+void	ft_free_geometry(t_geom **head)
+{
+	t_geom *temp;
+
+	temp = *head;
+	while (temp)
+	{
+		temp = temp->next;
+		free(*head);
+		// temp->pt1;
+		// temp->direction;
+		// temp->height;
+		// temp->color;
+		// temp->r;
+		// temp->type;
+		*head = temp;
+	}
+}

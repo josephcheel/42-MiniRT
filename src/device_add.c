@@ -33,6 +33,7 @@ void	get_light(t_field *field, char *line)
 	field->light->ratio = ft_atof(content[2]);
 	field->light->color = add_color(content[3]);
 	field->light->next = NULL;
+	ft_array_free(content, ft_array_size(content));
 }
 
 void	get_ambient_light(t_field *field, char *line)

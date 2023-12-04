@@ -127,7 +127,8 @@ t_field	*init_vars(char *filename)
 
 void	free_field(t_field *field)
 {
-	//ft_free_geometry();
+	ft_free_geometry(&field->geom);
+	free(field->light);
 	free(field);
 	return ;
 }

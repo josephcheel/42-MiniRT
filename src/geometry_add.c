@@ -80,4 +80,5 @@ void	get_geom(t_field *field, char *line)
 	else if (ft_strcmp(type[0], "cy") == 0)
 		temp = get_cylinder(line);
 	ft_geomadd_back(&field->geom, temp);
+	ft_array_free(type, ft_array_size(type));
 }

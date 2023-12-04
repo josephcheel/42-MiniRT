@@ -144,11 +144,13 @@ t_color	add_color(char *color);
 // GEOMETRY LIST UTILS
 void	ft_geomadd_back(t_geom **lst, t_geom *new_node);
 t_geom	*ft_geomlast(t_geom *lst);
-
+void	ft_geom_size(t_geom *head);
+void	ft_free_geometry(t_geom **head);
 // JUST FOR DEBUGGING
 void	ft_print_geometry_node(t_geom *node);
 void	ft_print_geometry_full(t_geom *head);
 void	ft_print_camera(t_field *field);
 void	ft_print_light(t_field *field);
 void	ft_print_ambient(t_field *field);
+
 #endif

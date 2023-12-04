@@ -63,7 +63,7 @@ INCLUDE		+= -I $(INC)
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
 PARSERS		= main.c init_vars.c device_add.c geometry_add.c adders.c
-GEOMETRY	= geom_lstcreate.c geom_lstprint.c
+GEOMETRY	= geom_lstcreate.c geom_lstprint.c geom_lstutils.c
 GRAPHICS	=
 
 SRCS			+=	$(addprefix $(SRC_DIR), $(PARSERS))
