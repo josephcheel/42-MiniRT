@@ -17,7 +17,7 @@ NAME		=	miniRT
 
 CC			=	gcc
 #Flags to compile in MAC
-all : CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H
+all : CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H #-fsanitize=address
 all : MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 all:		mlx_link libft_link $(NAME)
 
@@ -40,8 +40,8 @@ CP			=	cp -f
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅DIRECTORIES✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-PATH_DIR		=	PATH/
-PATH_DIR		=	PATH/
+GEOMETRY_DIR		=	geometry/
+#PATH_DIR		=	PATH/
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
@@ -62,10 +62,12 @@ INCLUDE		+= -I $(INC)
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-PARSERS		= main.c init_vars.c get_values.c
+PARSERS		= main.c init_vars.c device_add.c geometry_add.c adders.c
+GEOMETRY	= geom_lstcreate.c geom_lstprint.c
 GRAPHICS	=
 
 SRCS			+=	$(addprefix $(SRC_DIR), $(PARSERS))
+SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(GEOMETRY_DIR), $(GEOMETRY)))
 
 OBJS			=	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
