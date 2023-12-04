@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 19:01:53 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/03 22:05:48 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/04 03:40:08 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,5 @@ int				ft_isallspace(char *str);
 
 char			*get_next_line(int fd);
 void			ft_print_array(char **array);
+double			ft_atof(const char *str);
 #endif
