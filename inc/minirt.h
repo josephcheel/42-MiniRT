@@ -14,7 +14,7 @@
 # define MINIRT_H
 # include "../mlx/mlx.h"
 # include "../libft/inc/libft.h"
-# include "geometry.h"
+//# include "geometry.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdbool.h>

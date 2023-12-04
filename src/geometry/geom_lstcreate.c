@@ -1,6 +1,6 @@
 
-#include "../../inc/geometry.h"
-
+//#include "../../inc/geometry.h"
+#include "../inc/minirt.h"
 // t_geom	*ftgeom_new(char *id, char *value)
 // {
 // 	t_geom	*str;
