@@ -92,7 +92,7 @@ t_field	*init_vars(char *filename)
 	field = (t_field *)malloc(sizeof(t_field));
 	if (!field)
 		return (NULL);
-
+	field->geom = NULL;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
@@ -113,7 +113,7 @@ t_field	*init_vars(char *filename)
 		else if (is_geo(line) != -1)
 		{
 			printf ("es un a geometria -- $%s$\n", line);
-			//get_geom(field, line);
+			get_geom(field, line);
 		}
 		else
 			ft_putstr_fd("Wrong Line Settings\n", 2);
@@ -127,6 +127,7 @@ t_field	*init_vars(char *filename)
 
 void	free_field(t_field *field)
 {
+	//ft_free_geometry();
 	free(field);
 	return ;
 }
