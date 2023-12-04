@@ -73,24 +73,18 @@ int	main(int av, char **ac)
 {
 	t_field	*field;
 
+	
+
 	if (av < 2 || !check_arg(ac[1]))
 		return (prt_help());
 	if (check_file(ac[1]))
 		return (1);
-
 	field = init_vars(ac[1]);
 
-	printf("=======CAMERA======\n");
-	printf("Viewpoint:\t\tX %f, Y %f, Z %f\n", field->camera.pos.x, field->camera.pos.y, field->camera.pos.z);
-	printf("Orientation:\t\tX %f, Y %f, Z %f\n", field->camera.orientation.x, field->camera.orientation.y, field->camera.orientation.z);
-	printf("FOV:\t\t\t%d\n", field->camera.fov);
-	printf("=======LIGHT=======\n");
-	printf("Position:\t\tX %f, Y %f, Z %f\n", field->light->pos.x, field->light->pos.y, field->light->pos.z);
-	printf("Brightness:\t\t%f\n", field->light->ratio);
-	printf("Color:\t\t\t R %d, G %d, B %d\n", field->light->color.r, field->light->color.g, field->light->color.b);
-	printf("=======AMBIENT=====\n");
-	printf("Brightness:\t\t%f\n", field->ambient.ratio);
-	printf("Color:\t\t\tR %d, G %d, B %d\n", field->ambient.color.r, field->ambient.color.g, field->ambient.color.b);
+	ft_print_camera(field);
+	ft_print_light(field);
+	ft_print_ambient(field);
+	ft_print_geometry_full(field->geom);
 	free_field(field);
 	return (0);
 }

@@ -1,0 +1,80 @@
+
+#include "../../inc/minirt.h"
+
+// void	ft_printlist_id(t_geom *head, char *id)
+// {
+// 	t_geom	*temporary;
+
+// 	temporary = head;
+// 	printf("%s: ", id);
+// 	while (temporary != NULL)
+// 	{
+// 		printf("%s - ", temporary->id);
+// 		temporary = temporary->next;
+// 	}
+// 	printf("\n");
+// }
+
+// void	ft_printlist_value(t_geom *head, char *id)
+// {
+// 	t_geom	*temporary;
+
+// 	temporary = head;
+// 	printf("%s: ", id);
+// 	while (temporary != NULL)
+// 	{
+// 		printf("%s - ", temporary->value);
+// 		temporary = temporary->next;
+// 	}
+// 	printf("\n");
+// }
+
+void	ft_print_geometry_full(t_geom *head)
+{
+	t_geom	*temporary;
+
+	temporary = head;
+	while (temporary != NULL)
+	{
+		ft_print_geometry_node(temporary);
+		temporary = temporary->next;
+	}
+	printf("\n");
+}
+
+void	ft_print_geometry_node(t_geom *node)
+{
+	if (node)
+	{
+		printf("\n\x1b[32;01m=====PRINT GEOMETRY NODE=====\x1b[0m\n");
+		printf("TYPE\t\t\t\t%u\n", node->type);
+		printf("POSITION\t\t\tX %lf Y %lf, Z %lf\n", node->pt1.x, node->pt1.y, node->pt1.z);
+		printf("NORMALIZATION DIRECTION \tX %lf Y %lf, Z %lf\n", node->direction.x, node->direction.y, node->direction.z);
+		printf("RADIUS\t\t\t\t%lf\n", node->r);
+		printf("POSITION\t\t\tR %d G %d B %d A %d\n", node->color.r, node->color.g, node->color.b, node->color.a);
+		printf("HEIGHT\t\t\t\t%lf\n", node->height);
+	}
+}
+
+void	ft_print_camera(t_field *field)
+{
+	printf("\n\x1b[38;5;36m=======CAMERA======\x1b[0m\n");
+	printf("Viewpoint:\t\t\tX %f, Y %f, Z %f\n", field->camera.pos.x, field->camera.pos.y, field->camera.pos.z);
+	printf("Orientation:\t\t\tX %f, Y %f, Z %f\n", field->camera.orientation.x, field->camera.orientation.y, field->camera.orientation.z);
+	printf("FOV:\t\t\t\t%d\n", field->camera.fov);
+}
+
+void	ft_print_light(t_field *field)
+{
+	printf("\n\x1b[38;5;38m=======LIGHT=======\x1b[0m\n");
+	printf("Position:\t\t\tX %f, Y %f, Z %f\n", field->light->pos.x, field->light->pos.y, field->light->pos.z);
+	printf("Brightness:\t\t\t%f\n", field->light->ratio);
+	printf("Color:\t\t\t\t R %d, G %d, B %d\n", field->light->color.r, field->light->color.g, field->light->color.b);
+}
+
+void	ft_print_ambient(t_field *field)
+{
+	printf("\n\x1b[38;5;60m=======AMBIENT=====\x1b[0m\n");
+	printf("Brightness:\t\t\t%f\n", field->ambient.ratio);
+	printf("Color:\t\t\t\tR %d, G %d, B %d\n", field->ambient.color.r, field->ambient.color.g, field->ambient.color.b);
+}
