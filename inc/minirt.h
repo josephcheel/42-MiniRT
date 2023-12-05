@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>
+# include <math.h>
 
 /// #include<limits.h>
 # ifdef KEY_LNX_H
@@ -133,6 +134,16 @@ typedef struct s_field
 t_field		*init_vars(char *ac);
 void		free_field(t_field *field);
 
+//algebra vectorial
+t_vector	suma_vector(t_vector a, t_vector b);
+t_vector	resta_vector(t_vector a, t_vector b);
+t_vector	prod_vectorial(t_vector a, t_vector b);
+double		modulo_vector(t_vector a);
+double		prod_escalar(t_vector a, t_vector b);
+t_vector	*int_vect_esfera(t_vector p1, t_vector v1, \
+				t_vector pr, double r);
+t_vector	prod_cte_vector(double a, t_vector b);
+double		dist_pto_vector(t_vector p1, t_vector p2, t_vector v);
 
 void	get_devices(t_field *field, char *line);
 void	get_geom(t_field *field, char *line);
