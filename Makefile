@@ -17,9 +17,9 @@ NAME		=	miniRT
 
 CC			=	gcc
 #Flags to compile in MAC
-all :	CFLAGS	=	-Wall -Werror -Wextra -D KEY_MAC_H
-all :	MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
-all :		mlx_link libft_link $(NAME)
+all : CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H #-fsanitize=address
+all : MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+all:		mlx_link libft_link $(NAME)
 
 #Flags to compile in linux
 all_lnx:	CFLAGS		=	-Wall -Werror -Wextra -D KEY_LNX_H
@@ -38,8 +38,8 @@ CP			=	cp -f
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅DIRECTORIES✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-PATH_DIR		=	PATH/
-PATH_DIR		=	PATH/
+GEOMETRY_DIR		=	geometry/
+#PATH_DIR		=	PATH/
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
@@ -52,7 +52,7 @@ LIBFT_DIR	= 	libft/
 MLX			=	mlx/libmlx.a
 MLX_DIR		= 	mlx/
 
-INC			=	$(addprefix $(MDT_DIR), $(INC_DIR))
+INC			=	$(INC_DIR)
 
 INCLUDE		+= -I $(INC)
 
@@ -60,12 +60,14 @@ INCLUDE		+= -I $(INC)
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-PARSERS		= main.c init_vars.c dist_pto_vector.c int_vect_esfera.c  \
+PARSERS		= main.c init_vars.c dist_pto_vector.c int_vect_esfera.c device_add.c geometry_add.c adders.c\
 			modulo_vector.c prod_cte_vector.c prod_escalar.c prod_vectorial.c \
 			resta_vector.c suma_vector.c
+GEOMETRY	= geom_lstcreate.c geom_lstprint.c #geom_lstutils.c
 GRAPHICS	=
 
-SRCS			+=	$(addprefix $(MDT_DIR), $(addprefix $(SRC_DIR), $(PARSERS)))
+SRCS			+=	$(addprefix $(SRC_DIR), $(PARSERS))
+SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(GEOMETRY_DIR), $(GEOMETRY)))
 
 OBJS			=	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
@@ -94,8 +96,9 @@ clean:
 			@$(RM) -r $(OBJ_DIR)
 			@echo "$(ERROR_COLOR)Dependencies and objects removed$(NO_COLOR)"
 
+## QUE QUIERE DECIR en -smC la "-m"??
 fclean:		clean
-			@make fclean -sC libft
+			@make fclean -smC libft
 			@$(RM) $(NAME) $(NAME_BONUS)
 			@echo "$(ERROR_COLOR)Programs removed$(NO_COLOR)"
 
