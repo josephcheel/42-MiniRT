@@ -51,7 +51,7 @@ void	ft_print_geometry_node(t_geom *node)
 		printf("POSITION\t\t\tX %lf Y %lf, Z %lf\n", node->pt1.x, node->pt1.y, node->pt1.z);
 		printf("NORMALIZATION DIRECTION \tX %lf Y %lf, Z %lf\n", node->direction.x, node->direction.y, node->direction.z);
 		printf("RADIUS\t\t\t\t%lf\n", node->r);
-		printf("POSITION\t\t\tR %d G %d B %d A %d\n", node->color.r, node->color.g, node->color.b, node->color.a);
+		printf("COLOR\t\t\t\tR %d G %d B %d A %d\n", node->color.r, node->color.g, node->color.b, node->color.a);
 		printf("HEIGHT\t\t\t\t%lf\n", node->height);
 	}
 }
