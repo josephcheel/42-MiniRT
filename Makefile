@@ -2,7 +2,7 @@
 #	 __  __    __    _  _  ____  ____  ____  __    ____ 		    	 	 #
 #	(  \/  )  /__\  ( )/ )( ___)( ___)(_  _)(  )  ( ___)		   		     #
 #	 )    (  /(__)\  )  (  )__)  )__)  _)(_  )(__  )__) 		     		 #
-#	(_/\/\_)(__)(__)(_)\_)(____)(__)  (____)(____)(____) 𝕓𝕪 𝕁𝕠𝕤𝕖𝕡𝕙 ℂ𝕙𝕖𝕖𝕝       #									
+#	(_/\/\_)(__)(__)(_)\_)(____)(__)  (____)(____)(____) 𝕓𝕪 𝕁𝕠𝕤𝕖𝕡𝕙 ℂ𝕙𝕖𝕖𝕝     #									
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
@@ -17,16 +17,14 @@ NAME		=	miniRT
 
 CC			=	gcc
 #Flags to compile in MAC
-all : CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H
-all : MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
-all:		mlx_link libft_link $(NAME)
-
-
+all :	CFLAGS	=	-Wall -Werror -Wextra -D KEY_MAC_H
+all :	MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+all :		mlx_link libft_link $(NAME)
 
 #Flags to compile in linux
-all_lnx: CFLAGS		=	-Wall -Werror -Wextra -D KEY_LNX_H
-all_lnx: MLXFLAGS = 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lm -lz 
-all_lnx:		mlx_link libft_link $(NAME)
+all_lnx:	CFLAGS		=	-Wall -Werror -Wextra -D KEY_LNX_H
+all_lnx:	MLXFLAGS 	= 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lm -lz 
+all_lnx:	mlx_link libft_link $(NAME)
 
 #XFLAGS		=	-fsanitize=address -g2 -g
 CLEAN_CAR	=	\033[2K\r
@@ -62,7 +60,9 @@ INCLUDE		+= -I $(INC)
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-PARSERS		= main.c init_vars.c
+PARSERS		= main.c init_vars.c dist_pto_vector.c int_vect_esfera.c  \
+			modulo_vector.c prod_cte_vector.c prod_escalar.c prod_vectorial.c \
+			resta_vector.c suma_vector.c
 GRAPHICS	=
 
 SRCS			+=	$(addprefix $(MDT_DIR), $(addprefix $(SRC_DIR), $(PARSERS)))
@@ -75,7 +75,7 @@ DEPS			+=	$(addsuffix .d, $(basename $(OBJS)))
 #•❅──────✧❅✦❅✧──────❅••❅───OBJECT DEPENDENCY TARGET───❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-$(OBJ_DIR)%.o : %.c Makefile
+$(OBJ_DIR)%.o : %.c Makefile 
 	@$(MD) $(dir $@)
 	@printf "$(CLEAN_CAR)$(OK_COLOR)[miniRT Compiling]$(BLUE_COLOR) : $(WARN_COLOR)$<$(NO_COLOR)"
 	@$(CC) -MT $@ -MMD -MP -c $(CFLAGS) $(INCLUDE) -Imlx  $< -o $@ 
@@ -85,7 +85,7 @@ $(OBJ_DIR)%.o : %.c Makefile
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
 $(NAME):	$(LIBFT) $(MLX) $(OBJS)
-			@$(CC) $(CFLAGS) $(MLXFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(LNXMLXFLAGSS) -o $(NAME)
+			$(CC) $(CFLAGS) $(MLXFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(LNXMLXFLAGSS) -o $(NAME)
 			@echo "$(CLEAN_CAR)$(OK_COLOR)$(NAME) Compiled!$(NO_COLOR)"
 			@echo "Use $(BLUE_COLOR)./$(NAME)$(NO_COLOR) to launch the program"
 clean:

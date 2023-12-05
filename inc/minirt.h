@@ -14,13 +14,13 @@
 # define MINIRT_H
 # include "../mlx/mlx.h"
 # include "../libft/inc/libft.h"
-# include <math.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>
+# include <math.h>
 
 /// #include<limits.h>
 # ifdef KEY_LNX_H
@@ -118,5 +118,8 @@ t_vector	resta_vector(t_vector a, t_vector b);
 t_vector	prod_vectorial(t_vector a, t_vector b);
 double		modulo_vector(t_vector a);
 double		prod_escalar(t_vector a, t_vector b);
-
+t_vector	*int_vect_esfera(t_vector p1, t_vector v1, \
+				t_vector pr, double r);
+t_vector	prod_cte_vector(double a, t_vector b);
+double		dist_pto_vector(t_vector p1, t_vector p2, t_vector v);
 #endif
