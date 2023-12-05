@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/05 17:20:58 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:39:06 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,15 +101,9 @@ int	read_file(char *filename, t_field *field)
 		if (!line || ft_strlen(line) == 0)
 			;
 		else if (is_device(line) != -1)
-		{
-			printf("es un device -- $%s$\n", line);
 			get_devices(field, line);
-		}
 		else if (is_geo(line) != -1)
-		{
-			printf ("es un a geometria -- $%s$\n", line);
 			get_geom(field, line);
-		}
 		else
 			ft_putstr_fd("Wrong Line Settings\n", 2);
 		free(line);
