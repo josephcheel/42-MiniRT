@@ -16,15 +16,18 @@ NAME		=	miniRT
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
 CC			=	gcc
+
 #Flags to compile in MAC
+
 all : CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H #-fsanitize=address
-all : MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
-all:		mlx_link libft_link $(NAME)
+all : MLXFLAGS		=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+all :			mlx_link libft_link $(NAME)
 
 #Flags to compile in linux
-all_lnx:	CFLAGS		=	-Wall -Werror -Wextra -D KEY_LNX_H
-all_lnx:	MLXFLAGS 	= 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lm -lz 
-all_lnx:	mlx_link libft_link $(NAME)
+
+all_lnx: CFLAGS		=	-Wall -Werror -Wextra -D KEY_LNX_H
+all_lnx: MLXFLAGS 	= 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lm -lz 
+all_lnx: 	mlx_link libft_link $(NAME)
 
 #XFLAGS		=	-fsanitize=address -g2 -g
 CLEAN_CAR	=	\033[2K\r
@@ -87,7 +90,7 @@ $(OBJ_DIR)%.o : %.c Makefile
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
 $(NAME):	$(LIBFT) $(MLX) $(OBJS)
-			$(CC) $(CFLAGS) $(MLXFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(LNXMLXFLAGSS) -o $(NAME)
+			@$(CC) $(CFLAGS) $(MLXFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(LNXMLXFLAGSS) -o $(NAME) -lm
 			@echo "$(CLEAN_CAR)$(OK_COLOR)$(NAME) Compiled!$(NO_COLOR)"
 			@echo "Use $(BLUE_COLOR)./$(NAME)$(NO_COLOR) to launch the program"
 clean:

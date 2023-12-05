@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   resta_vector.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/04 18:38:47 by eavedill         ###   ########.fr       */
+/*   Updated: 2023/12/05 12:44:27 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
 
-t_vector	resta_vector(t_vector a, t_vector b)
+t_vec3	resta_vector(t_vec3 a, t_vec3 b)
 {
-	t_vector	out;
+	t_vec3	out;
 
 	out.x = a.x - b.x;
 	out.y = a.y - b.y;

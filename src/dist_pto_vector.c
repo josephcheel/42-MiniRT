@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   dist_pto_vector.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/04 18:37:30 by eavedill         ###   ########.fr       */
+/*   Updated: 2023/12/05 12:44:27 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
 
-double	dist_pto_vector(t_vector p1, t_vector p2, t_vector v)
+double	dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v)
 {
 	double		out;
 	double		prod;
-	t_vector	v2;
+	t_vec3	v2;
 
 	v2 = resta_vector(p1, p2);
 	prod = prod_escalar(v, v2);

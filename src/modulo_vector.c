@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   modulo_vector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/04 18:37:52 by eavedill         ###   ########.fr       */
+/*   Updated: 2023/12/05 12:44:27 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
 
-double	modulo_vector(t_vector a)
+double	modulo_vector(t_vec3 a)
 {
 	double	out;
 

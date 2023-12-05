@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/04 04:01:33 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/05 12:44:27 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,15 +135,15 @@ t_field		*init_vars(char *ac);
 void		free_field(t_field *field);
 
 //algebra vectorial
-t_vector	suma_vector(t_vector a, t_vector b);
-t_vector	resta_vector(t_vector a, t_vector b);
-t_vector	prod_vectorial(t_vector a, t_vector b);
-double		modulo_vector(t_vector a);
-double		prod_escalar(t_vector a, t_vector b);
-t_vector	*int_vect_esfera(t_vector p1, t_vector v1, \
-				t_vector pr, double r);
-t_vector	prod_cte_vector(double a, t_vector b);
-double		dist_pto_vector(t_vector p1, t_vector p2, t_vector v);
+t_vec3	suma_vector(t_vec3 a, t_vec3 b);
+t_vec3	resta_vector(t_vec3 a, t_vec3 b);
+t_vec3	prod_vectorial(t_vec3 a, t_vec3 b);
+double		modulo_vector(t_vec3 a);
+double		prod_escalar(t_vec3 a, t_vec3 b);
+t_vec3	*int_vect_esfera(t_vec3 p1, t_vec3 v1, \
+				t_vec3 pr, double r);
+t_vec3	prod_cte_vector(double a, t_vec3 b);
+double		dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v);
 
 void	get_devices(t_field *field, char *line);
 void	get_geom(t_field *field, char *line);
