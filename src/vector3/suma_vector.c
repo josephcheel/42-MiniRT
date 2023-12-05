@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dist_pto_vector.c                                  :+:      :+:    :+:   */
+/*   suma_vector.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/05 12:44:27 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/05 13:01:22 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
 
-double	dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v)
+t_vec3	suma_vector(t_vec3 a, t_vec3 b)
 {
-	double		out;
-	double		prod;
-	t_vec3	v2;
+	t_vec3	out;
 
-	v2 = resta_vector(p1, p2);
-	prod = prod_escalar(v, v2);
-	out = sqrt(prod_escalar(v2, v2) - prod * prod + prod_escalar(v, v));
+	out.x = a.x + b.x;
+	out.y = a.y + b.y;
+	out.z = a.z + b.z;
 	return (out);
 }

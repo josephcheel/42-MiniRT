@@ -6,11 +6,11 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/04 03:05:12 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:20:58 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
 
 /*
 ** Check for the nbr of words in each line. Return 1 if okey and 0 if not
@@ -82,22 +82,17 @@ int	is_device(char *line)
 	return (-1);
 }
 
-t_field	*init_vars(char *filename)
+int	read_file(char *filename, t_field *field)
 {
-	t_field	*field;
 	char	*raw_line;
 	char	*line;
 	int		fd;
 
-	field = (t_field *)malloc(sizeof(t_field));
-	if (!field)
-		return (NULL);
-	field->geom = NULL;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
 		ft_putstr_fd("File Error\n", 2);
-		return (field);
+		return (1);
 	}
 	raw_line = get_next_line(fd);
 	while (raw_line)
@@ -122,7 +117,7 @@ t_field	*init_vars(char *filename)
 		raw_line = get_next_line(fd);
 	}
 	free(raw_line);
-	return (field);
+	return (0);
 }
 
 void	free_field(t_field *field)

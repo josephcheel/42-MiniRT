@@ -41,8 +41,10 @@ CP			=	cp -f
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅DIRECTORIES✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
+CHECKER_DIR			=	checker/
 GEOMETRY_DIR		=	geometry/
-#PATH_DIR		=	PATH/
+PARSER_DIR			=	parser/
+VECTOR3_DIR			=	vector3/
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
@@ -63,14 +65,20 @@ INCLUDE		+= -I $(INC)
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-PARSERS		= main.c init_vars.c dist_pto_vector.c int_vect_esfera.c device_add.c geometry_add.c adders.c\
-			modulo_vector.c prod_cte_vector.c prod_escalar.c prod_vectorial.c \
-			resta_vector.c suma_vector.c
-GEOMETRY	= geom_lstcreate.c geom_lstprint.c #geom_lstutils.c
-GRAPHICS	=
+SRC_MINIRT		=	main.c initializers.c close.c
+CHECKER			=	init_vars.c
+PARSERS			=	device_add.c geometry_add.c adders.c
+GEOMETRY		=	geom_lstcreate.c geom_lstprint.c #geom_lstutils.c
+VECTOR3			=	dist_pto_vector.c int_vect_esfera.c modulo_vector.c \
+					prod_cte_vector.c prod_escalar.c prod_vectorial.c \
+					resta_vector.c suma_vector.c
+GRAPHICS		=
 
-SRCS			+=	$(addprefix $(SRC_DIR), $(PARSERS))
+SRCS			+=	$(addprefix $(SRC_DIR), $(SRC_MINIRT))
+SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(CHECKER_DIR), $(CHECKER)))
+SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(PARSER_DIR), $(PARSERS)))
 SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(GEOMETRY_DIR), $(GEOMETRY)))
+SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(VECTOR3_DIR), $(VECTOR3)))
 
 OBJS			=	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 

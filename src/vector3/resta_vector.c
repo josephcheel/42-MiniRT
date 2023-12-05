@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prod_escalar.c                                     :+:      :+:    :+:   */
+/*   resta_vector.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/05 12:44:27 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/05 13:01:17 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
 
-double	prod_escalar(t_vec3 a, t_vec3 b)
+t_vec3	resta_vector(t_vec3 a, t_vec3 b)
 {
-	double	out;
+	t_vec3	out;
 
-	out = a.x * b.x + a.y * b.y + a.z * b.z;
+	out.x = a.x - b.x;
+	out.y = a.y - b.y;
+	out.z = a.z - b.z;
 	return (out);
 }

@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   resta_vector.c                                     :+:      :+:    :+:   */
+/*   modulo_vector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/05 12:44:27 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/05 13:01:03 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
 
-t_vec3	resta_vector(t_vec3 a, t_vec3 b)
+double	modulo_vector(t_vec3 a)
 {
-	t_vec3	out;
+	double	out;
 
-	out.x = a.x - b.x;
-	out.y = a.y - b.y;
-	out.z = a.z - b.z;
+	out = sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
 	return (out);
 }

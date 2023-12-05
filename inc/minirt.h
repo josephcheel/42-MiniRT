@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/05 12:44:27 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:24:28 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@
 
 /// #include<limits.h>
 # ifdef KEY_LNX_H
-#  include "../inc/key_mouse_cod_lnx.h"
+#	include "../inc/key_mouse_cod_lnx.h"
 # endif
 # ifdef KEY_MAC_H
-#  include "../inc/key_mouse_cod_mac.h"
+# 	include "../inc/key_mouse_cod_mac.h"
 # endif
-
+# define WIN_NAME "miniRT"
+# define WIN_X 800
+# define WIN_Y 600
 enum e_type_geo
 {
 	SPHERE,
@@ -120,6 +122,21 @@ typedef struct s_ambient
 	float	ratio;
 }t_ambient;
 
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+}t_mlx;
+
+typedef struct s_chck
+{
+	int		ambient;
+	int		camera;
+	int		light;
+}t_chck;
+
+
 typedef struct s_field
 {
 	t_geom		*geom;
@@ -127,11 +144,23 @@ typedef struct s_field
 	t_ambient	ambient;
 	t_camera	camera;
 	t_light		*light;
+	t_mlx		mlx;
+	t_chck		chck;
 }t_field;
 
 // funciones publicas
 //initvars
-t_field		*init_vars(char *ac);
+//Initializers
+t_field *initializer(char *av);
+t_field	*init_field(void);
+void init_mlx(t_field *field);
+
+//Closers
+int	ft_close_red_cross(t_mlx *mlx);
+int	ft_close(int keycode, t_mlx *mlx);
+
+
+int			read_file(char *filename, t_field *field);
 void		free_field(t_field *field);
 
 //algebra vectorial

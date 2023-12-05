@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_values.c                                       :+:      :+:    :+:   */
+/*   geometry_add.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/04 04:13:44 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/05 13:07:32 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
 
 t_geom	*get_sphere(char *line)
 {
@@ -41,7 +41,6 @@ t_geom	*get_plane(char *line)
 	plane->direction = add_vec3(content[2]);
 	plane->color = add_color(content[3]);
 	plane->next = NULL;
-	// field->geom->
 	ft_array_free(content, ft_array_size(content));
 	return (plane);
 }

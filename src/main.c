@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/04 14:10:56 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:31:41 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ int	check_arg(char *s)
 		return (1);
 	return (0);
 }
-
-int	check_file(char *filename)
+/*
+** Check if the file has the mandatory objects[A, L, C]
+*/
+int	validate_scene_file(char *filename)
 {
 	char	**content;
 	char	*line;
@@ -63,28 +65,35 @@ int	check_file(char *filename)
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (ambient != 1 || light != 1 || camera != 1)
-		return (write(2, "Error: Duplicated Object\n", 26));
 	free(line);
+	
+	if (ambient < 1 || light < 1 || camera < 1)
+		return (write(2, "The file does not has All Mandatory Objects\n Ambient Light(A), Light(C) and Camera(C)\n", 87));
+	else	if (ambient > 1 || light > 1 || camera > 1)
+		return (write(2, "Error: Duplicated Object\n", 26));
 	return (0);
 }
 
-int	main(int av, char **ac)
+int	main(int ac, char **av)
 {
 	t_field	*field;
 
-	
-
-	if (av < 2 || !check_arg(ac[1]))
+	if (ac < 2 || !check_arg(av[1]))
 		return (prt_help());
-	if (check_file(ac[1]))
+	if (validate_scene_file(av[1]))
 		return (1);
-	field = init_vars(ac[1]);
+	field = initializer(av[1]);
+	if (!field)
+		return (write(2, "Error: Malloc\n", 15));
 
+	//DEBUG
 	ft_print_camera(field);
 	ft_print_light(field);
 	ft_print_ambient(field);
 	ft_print_geometry_full(field->geom);
+
+	mlx_loop(field->mlx.mlx);
+	
 	free_field(field);
 	return (0);
 }

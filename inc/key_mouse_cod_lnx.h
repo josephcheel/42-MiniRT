@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_mouse_cod_lnx.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 07:19:38 by eavedill          #+#    #+#             */
-/*   Updated: 2023/03/29 07:19:41 by eavedill         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:08:20 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
