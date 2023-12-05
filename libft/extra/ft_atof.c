@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/04 22:48:39 by jcheel-n          #+#    #+#             */
+/*   Updated: 2023/12/04 22:57:36 by jcheel-n         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/libft.h"
 #include <stdio.h>
 
 double	ft_atof(const char *str)
 {
-	double	result;
 	int		sign;
-	int 		isdecimal;
-	double		decimal;
+	int		isdecimal;
+	double	result;
+	double	decimal;
 
 	isdecimal = 0;
 	decimal = 1.0;
