@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/05 13:01:46 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:38:38 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	get_ambient_light(t_field *field, char *line)
 void	get_devices(t_field *field, char *line)
 {
 	char **type;
+	
+	// DEBUG
+	printf("es un device -- $%s$\n", line);
 	
 	type = ft_split(line, ' ');
 	if (ft_strcmp(type[0], "C") == 0)

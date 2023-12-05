@@ -6,14 +6,14 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/05 13:01:48 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:42:46 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
 /*
-** Add values from a string with the format "x,y,z" to a t_vec3. (Should I check for maximum and minimum values?)
+** Add values from a string with the format "x,y,z" to a t_vec3. (Should I check for maximum and minimum values here?)
 */
 t_vec3	add_vec3(char *vector3)
 {
@@ -30,6 +30,9 @@ t_vec3	add_vec3(char *vector3)
 	return (vec);
 }
 
+/*
+** Add values from a string with the format "r,g,b" to a t_color. (Should I check for maximum and minimum values here?)
+*/
 t_color	add_color(char *color)
 {
 	t_color	rgba;

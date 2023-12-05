@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/05 13:07:32 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:38:10 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ void	get_geom(t_field *field, char *line)
 	t_geom *temp;
 	char **type;
 
+	// DEBUG
+	printf ("es un a geometria -- $%s$\n", line);
+	
 	temp = NULL;
 	type = ft_split(line, ' ');
 	if (ft_strcmp(type[0], "sp") == 0)
