@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dist_pto_vector.c                                  :+:      :+:    :+:   */
+/*   int_vect_plano.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/05 13:01:06 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/04 18:37:30 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "../inc/minirt.h"
 
-double	dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v)
+t_vec3	int_vect_plano(t_vec3 pt, t_vec3 v, t_vec3 pt_pl, t_vec3 v_pl)
 {
-	double	out;
-	double	prod;
-	t_vec3	v2;
+	double	lambda;
+	t_vec3	out;
 
-	v2 = resta_vector(p2, p1);
-	prod = prod_escalar(v, v2);
-	out = sqrt(prod_escalar(v2, v2) - prod * prod + prod_escalar(v, v));
+	lambda = prod_escalar(v_pl, resta_vector(pt, pt_pl));
+	lambda = lambda / prod_escalar(v_pl, v);
+	out = prod_cte_vector(lambda, v);
+	out = suma_vector(pt, out);
 	return (out);
 }
