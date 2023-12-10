@@ -23,7 +23,7 @@ all: 		MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 all: 		mlx_link libft_link $(NAME)
 
 #Flags to compile in linux
-all_lnx:	CFLAGS		=	-Wall -Werror -Wextra -D KEY_LNX_H -lm -O3
+all_lnx:	CFLAGS		=	-D KEY_LNX_H -lm -O3 #-Wall -Werror -Wextra 
 all_lnx:	MLXFLAGS 	= 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lz 
 all_lnx:	mlx_link libft_link $(NAME)
 
@@ -64,24 +64,15 @@ INCLUDE		+= -I $(INC)
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-<<<<<<< HEAD
 SRC_MINIRT		=	main.c initializers.c close.c
 CHECKER			=	init_vars.c
 PARSERS			=	device_add.c geometry_add.c adders.c
 GEOMETRY		=	geom_lstcreate.c geom_lstprint.c #geom_lstutils.c
-VECTOR3			=	dist_pto_vector.c int_vect_esfera.c modulo_vector.c \
-					prod_cte_vector.c prod_escalar.c prod_vectorial.c \
-					resta_vector.c suma_vector.c
+VECTOR3			=	conv_vect_unit.c   div_cte_vector.c   int_vect_esfera.c  \
+				modulo_vector.c    prod_escalar.c    resta_vector.c \
+				dist_pto_vector.c  int_vect_cilind.c  int_vect_plano.c   \
+				prod_cte_vector.c  prod_vectorial.c  suma_vector.c
 GRAPHICS		=
-=======
-PARSERS		= main.c init_vars.c dist_pto_vector.c int_vect_esfera.c \
-			device_add.c geometry_add.c adders.c\
-			modulo_vector.c prod_cte_vector.c prod_escalar.c prod_vectorial.c \
-			resta_vector.c suma_vector.c conv_vect_unit.c div_cte_vector.c \
-			int_vect_cilind.c int_vect_plano.c solv_eq_ord_2.c
-GEOMETRY	= geom_lstcreate.c geom_lstprint.c #geom_lstutils.c
-GRAPHICS	=
->>>>>>> 1b7a816 (add solver for int plane and cylinder)
 
 SRCS			+=	$(addprefix $(SRC_DIR), $(SRC_MINIRT))
 SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(CHECKER_DIR), $(CHECKER)))
@@ -107,11 +98,7 @@ $(OBJ_DIR)%.o : %.c Makefile
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
 $(NAME):	$(LIBFT) $(MLX) $(OBJS)
-<<<<<<< HEAD
-			@$(CC) $(CFLAGS) $(MLXFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(LNXMLXFLAGSS) -o $(NAME) -lm
-=======
 			$(CC) $(CFLAGS) $(MLXFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(MATHFLAG)
->>>>>>> 1b7a816 (add solver for int plane and cylinder)
 			@echo "$(CLEAN_CAR)$(OK_COLOR)$(NAME) Compiled!$(NO_COLOR)"
 			@echo "Use $(BLUE_COLOR)./$(NAME)$(NO_COLOR) to launch the program"
 clean:

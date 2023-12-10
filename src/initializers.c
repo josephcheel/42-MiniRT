@@ -11,8 +11,8 @@ void init_mlx(t_field *field)
 
 t_field	*init_field(void)
 {
-	t_field	*field;
-	
+	t_field *field;
+
 	field = (t_field *)malloc(sizeof(t_field));
 	if (!field)
 	{

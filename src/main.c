@@ -87,9 +87,6 @@ int	main(int ac, char **av)
 		return (write(2, "Error: Malloc\n", 15));
 
 	//DEBUG
-	field = init_vars(av[1]);
-	if (!field)
-		return(write(2, "Error: Malloc\n", 15));
 	ft_print_camera(field);
 	ft_print_light(field);
 	ft_print_ambient(field);
