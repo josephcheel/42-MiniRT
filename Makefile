@@ -37,6 +37,26 @@ MD			=	mkdir -p
 CP			=	cp -f
 
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
+#•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─COLOR──✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
+#●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
+
+ifeq ($(findstring re_lnx,$(MAKECMDGOALS)),$(findstring all_lnx,$(MAKECMDGOALS)))
+#ifeq (,$(findstring re,$(MAKECMDGOALS)))
+#LINUX_COLORS
+	NO_COLOR		=	\033[1;97m
+	OK_COLOR		=	\033[1;92m
+	ERROR_COLOR		=	\033[1;91m
+	WARN_COLOR		=	\033[1;93m
+	BLUE_COLOR		=	\033[1;94m#ifeq ($(or ($1,"all_lnx"),($1,"re_lnx")))
+else
+##MAC_COLORS
+	NO_COLOR		=	\x1b[0m
+	OK_COLOR		=	\x1b[32;01m
+	ERROR_COLOR		=	\x1b[31;01m
+	WARN_COLOR		=	\x1b[33;01m
+	BLUE_COLOR		=	\x1b[34;01melse
+endif
+#●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅DIRECTORIES✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
@@ -70,8 +90,8 @@ PARSERS			=	device_add.c geometry_add.c adders.c
 GEOMETRY		=	geom_lstcreate.c geom_lstprint.c #geom_lstutils.c
 VECTOR3			=	conv_vect_unit.c   div_cte_vector.c   int_vect_esfera.c  \
 				modulo_vector.c    prod_escalar.c    resta_vector.c \
-				dist_pto_vector.c  int_vect_cilind.c  int_vect_plano.c   \
-				prod_cte_vector.c  prod_vectorial.c  suma_vector.c print_vector.c create_vector.c
+				dist_pto_vector.c    int_vect_plano.c   \
+				prod_cte_vector.c  prod_vectorial.c  suma_vector.c print_vector.c create_vector.c #int_vect_cilind.c
 GRAPHICS		=
 
 SRCS			+=	$(addprefix $(SRC_DIR), $(SRC_MINIRT))
@@ -93,6 +113,7 @@ $(OBJ_DIR)%.o : %.c Makefile
 	@printf "$(CLEAN_CAR)$(OK_COLOR)[miniRT Compiling]$(BLUE_COLOR) : $(WARN_COLOR)$<$(NO_COLOR)"
 	@$(CC) -MT $@ -MMD -MP -c $(CFLAGS) $(INCLUDE) -Imlx  $< -o $@
 #-I ./mlx/mlx.h
+
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─TARGET─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
@@ -127,30 +148,4 @@ mlx_link:
 
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○IGNORE○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-.PHONY: all clean fclean re 
-
-#●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
-#•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─COLOR──✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
-#●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
-
-ifeq ($(findstring re_lnx,$(MAKECMDGOALS)),$(findstring all_lnx,$(MAKECMDGOALS)))
-#ifeq (,$(findstring re,$(MAKECMDGOALS)))
-#LINUX_COLORS
-	NO_COLOR		=	\033[1;97m
-	OK_COLOR		=	\033[1;92m
-	ERROR_COLOR		=	\033[1;91m
-	WARN_COLOR		=	\033[1;93m
-	BLUE_COLOR		=	\033[1;94m#ifeq ($(or ($1,"all_lnx"),($1,"re_lnx")))
-else
-##MAC_COLORS
-	NO_COLOR		=	\x1b[0m
-	OK_COLOR		=	\x1b[32;01m
-	ERROR_COLOR		=	\x1b[31;01m
-	WARN_COLOR		=	\x1b[33;01m
-	BLUE_COLOR		=	\x1b[34;01melse
-endif
-OK_STRING		=	$(OK_COLOR)[OK]$(NO_COLOR)
-ERROR_STRING	=	$(ERROR_COLOR)[ERRORS]$(NO_COLOR)
-WARN_STRING		=	$(WARN_COLOR)[WARNINGS]$(NO_COLOR)
-
-
+.PHONY: all clean fclean re
