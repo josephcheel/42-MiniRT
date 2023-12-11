@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/05 18:24:28 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/08 14:21:08 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # 	include "../inc/key_mouse_cod_mac.h"
 # endif
 # define WIN_NAME "miniRT"
-# define WIN_X 800
-# define WIN_Y 600
+# define WIN_X 1000
+# define WIN_Y 500
 enum e_type_geo
 {
 	SPHERE,
@@ -83,14 +83,20 @@ typedef struct s_vec3
 	double	z;
 }t_vec3;
 
+typedef struct s_vec2
+{
+	double	x;
+	double	y;
+}t_vec2;
+
 typedef struct s_geom
 {
 	enum e_type_geo	type;
 	t_vec3		pt1;
 	t_vec3		direction;
+	t_color		color;
 	double		r;
 	double		height;
-	t_color		color;
 	void		*next;
 }t_geom;
 
@@ -130,13 +136,11 @@ typedef struct s_mlx
 	void	*img;
 }t_mlx;
 
-typedef struct s_chck
+typedef struct s_ray
 {
-	int		ambient;
-	int		camera;
-	int		light;
-}t_chck;
-
+	t_vec3	*point;
+	t_vec3	*dir;	
+}t_ray;
 
 typedef struct s_field
 {
@@ -146,7 +150,6 @@ typedef struct s_field
 	t_camera	camera;
 	t_light		*light;
 	t_mlx		mlx;
-	t_chck		chck;
 }t_field;
 
 // funciones publicas
@@ -164,6 +167,8 @@ int	ft_close(int keycode, t_mlx *mlx);
 int			read_file(char *filename, t_field *field);
 void		free_field(t_field *field);
 
+
+t_vec3	create_vect(double x, double y, double z);
 //algebra vectorial
 t_vec3		suma_vector(t_vec3 a, t_vec3 b);
 t_vec3		resta_vector(t_vec3 a, t_vec3 b);
@@ -198,4 +203,5 @@ void		ft_print_camera(t_field *field);
 void		ft_print_light(t_field *field);
 void		ft_print_ambient(t_field *field);
 
+void ft_print_vec3(t_vec3 vec);
 #endif
