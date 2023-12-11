@@ -15,9 +15,9 @@
 t_vec3	*int_vect_esfera(t_vec3 p1, t_vec3 v1, t_vec3 pr, double r)
 {
 	t_vec3	*pt;
-	double		param[2];
+	double	param[2];
 	t_vec3	v2;
-	double		out;
+	double	out;
 
 	if (dist_pto_vector(p1, v1, pr) > r)
 		return (NULL);

@@ -18,7 +18,6 @@ t_geom	*get_sphere(char *line)
 	char	**content;
 	
 	content = ft_split(line, ' ');
-	
 	sphere = malloc(sizeof(t_geom));
 	sphere->type = SPHERE;
 	sphere->pt1 = add_vec3(content[1]);

@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dist_pto_vector.c                                  :+:      :+:    :+:   */
+/*   solv_eq_ord_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/05 13:01:06 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/04 18:38:47 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "../inc/minirt.h"
 
-double	dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v)
+double	*solv_eq_ord_2(double *p)
 {
-	double	out;
-	double	prod;
-	t_vec3	v2;
+	double	*out;
+	double	aux;
 
-	v2 = resta_vector(p2, p1);
-	prod = prod_escalar(v, v2);
-	out = sqrt(prod_escalar(v2, v2) - prod * prod + prod_escalar(v, v));
+	if (p[1] * p[1] < 4 * p[0] * p[2])
+		return (NULL);
+	out = (double *)malloc(2 * sizeof(double));
+	if (out == NULL)
+		return (out);
+	if (p[0] == 0)
+	{
+		out[0] = -p[2] / p[1];
+		out[1] = -p[2] / p[1];
+		return (out);
+	}
+	aux = sqrt(p[1] * p[1] - 4 * p[0] * p[2]);
+	out[0] = (-p[0] + aux) / 2 / p[0];
+	out[1] = (-p[0] - aux) / 2 / p[0];
 	return (out);
 }

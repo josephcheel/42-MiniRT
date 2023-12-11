@@ -18,17 +18,16 @@ NAME		=	miniRT
 CC			=	gcc
 
 #Flags to compile in MAC
-
-all : CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H #-fsanitize=address
-all : MLXFLAGS		=	-Lmlx -lmlx -framework OpenGL -framework AppKit
-all :			mlx_link libft_link $(NAME)
+all: 		CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H  -O3 #-fsanitize=address
+all: 		MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+all: 		mlx_link libft_link $(NAME)
 
 #Flags to compile in linux
+all_lnx:	CFLAGS		=	-D KEY_LNX_H -lm -O3 #-Wall -Werror -Wextra 
+all_lnx:	MLXFLAGS 	= 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lz 
+all_lnx:	mlx_link libft_link $(NAME)
 
-all_lnx: CFLAGS		=	-Wall -Werror -Wextra -D KEY_LNX_H
-all_lnx: MLXFLAGS 	= 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lm -lz 
-all_lnx: 	mlx_link libft_link $(NAME)
-
+MATHFLAG	=	-lm
 #XFLAGS		=	-fsanitize=address -g2 -g
 CLEAN_CAR	=	\033[2K\r
 
@@ -69,9 +68,10 @@ SRC_MINIRT		=	main.c initializers.c close.c
 CHECKER			=	init_vars.c
 PARSERS			=	device_add.c geometry_add.c adders.c
 GEOMETRY		=	geom_lstcreate.c geom_lstprint.c #geom_lstutils.c
-VECTOR3			=	dist_pto_vector.c int_vect_esfera.c modulo_vector.c \
-					prod_cte_vector.c prod_escalar.c prod_vectorial.c \
-					resta_vector.c suma_vector.c
+VECTOR3			=	conv_vect_unit.c   div_cte_vector.c   int_vect_esfera.c  \
+				modulo_vector.c    prod_escalar.c    resta_vector.c \
+				dist_pto_vector.c  int_vect_cilind.c  int_vect_plano.c   \
+				prod_cte_vector.c  prod_vectorial.c  suma_vector.c
 GRAPHICS		=
 
 SRCS			+=	$(addprefix $(SRC_DIR), $(SRC_MINIRT))
@@ -91,14 +91,14 @@ DEPS			+=	$(addsuffix .d, $(basename $(OBJS)))
 $(OBJ_DIR)%.o : %.c Makefile 
 	@$(MD) $(dir $@)
 	@printf "$(CLEAN_CAR)$(OK_COLOR)[miniRT Compiling]$(BLUE_COLOR) : $(WARN_COLOR)$<$(NO_COLOR)"
-	@$(CC) -MT $@ -MMD -MP -c $(CFLAGS) $(INCLUDE) -Imlx  $< -o $@ 
+	@$(CC) -MT $@ -MMD -MP -c $(CFLAGS) $(INCLUDE) -Imlx  $< -o $@
 #-I ./mlx/mlx.h
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─TARGET─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
 $(NAME):	$(LIBFT) $(MLX) $(OBJS)
-			@$(CC) $(CFLAGS) $(MLXFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(LNXMLXFLAGSS) -o $(NAME) -lm
+			$(CC) $(CFLAGS) $(MLXFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(MATHFLAG)
 			@echo "$(CLEAN_CAR)$(OK_COLOR)$(NAME) Compiled!$(NO_COLOR)"
 			@echo "Use $(BLUE_COLOR)./$(NAME)$(NO_COLOR) to launch the program"
 clean:
@@ -114,6 +114,7 @@ fclean:		clean
 			@echo "$(ERROR_COLOR)Programs removed$(NO_COLOR)"
 
 re:			fclean all
+re_lnx:		fclean all_lnx
 
 libft_link:	
 			@make -sC $(LIBFT_DIR)
@@ -132,12 +133,22 @@ mlx_link:
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─COLOR──✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-NO_COLOR		=	\x1b[0m
-OK_COLOR		=	\x1b[32;01m
-ERROR_COLOR		=	\x1b[31;01m
-WARN_COLOR		=	\x1b[33;01m
-BLUE_COLOR		=	\x1b[34;01m
-
+ifeq ($(findstring re_lnx,$(MAKECMDGOALS)),$(findstring all_lnx,$(MAKECMDGOALS)))
+#ifeq (,$(findstring re,$(MAKECMDGOALS)))
+#LINUX_COLORS
+	NO_COLOR		=	\033[1;97m
+	OK_COLOR		=	\033[1;92m
+	ERROR_COLOR		=	\033[1;91m
+	WARN_COLOR		=	\033[1;93m
+	BLUE_COLOR		=	\033[1;94m#ifeq ($(or ($1,"all_lnx"),($1,"re_lnx")))
+else
+##MAC_COLORS
+	NO_COLOR		=	\x1b[0m
+	OK_COLOR		=	\x1b[32;01m
+	ERROR_COLOR		=	\x1b[31;01m
+	WARN_COLOR		=	\x1b[33;01m
+	BLUE_COLOR		=	\x1b[34;01melse
+endif
 OK_STRING		=	$(OK_COLOR)[OK]$(NO_COLOR)
 ERROR_STRING	=	$(ERROR_COLOR)[ERRORS]$(NO_COLOR)
 WARN_STRING		=	$(WARN_COLOR)[WARNINGS]$(NO_COLOR)

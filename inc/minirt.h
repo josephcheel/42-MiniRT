@@ -15,6 +15,7 @@
 # include "../mlx/mlx.h"
 # include "../libft/inc/libft.h"
 //# include "geometry.h"
+# include "../inc/colors.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdbool.h>
@@ -164,33 +165,37 @@ int			read_file(char *filename, t_field *field);
 void		free_field(t_field *field);
 
 //algebra vectorial
-t_vec3	suma_vector(t_vec3 a, t_vec3 b);
-t_vec3	resta_vector(t_vec3 a, t_vec3 b);
-t_vec3	prod_vectorial(t_vec3 a, t_vec3 b);
+t_vec3		suma_vector(t_vec3 a, t_vec3 b);
+t_vec3		resta_vector(t_vec3 a, t_vec3 b);
+t_vec3		prod_vectorial(t_vec3 a, t_vec3 b);
 double		modulo_vector(t_vec3 a);
 double		prod_escalar(t_vec3 a, t_vec3 b);
-t_vec3	*int_vect_esfera(t_vec3 p1, t_vec3 v1, \
+t_vec3		*int_vect_esfera(t_vec3 p1, t_vec3 v1, \
 				t_vec3 pr, double r);
-t_vec3	prod_cte_vector(double a, t_vec3 b);
+t_vec3		*int_vect_cilind(t_vec3 p1, t_vec3 v1, t_vec3 pc, t_vec3 vc, double r);
+t_vec3		int_vect_plano(t_vec3 pt, t_vec3 v, t_vec3 pt_pl, t_vec3 v_pl);
+t_vec3		prod_cte_vector(double a, t_vec3 b);
+t_vec3		div_cte_vector(double a, t_vec3 b);
 double		dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v);
-
-void	get_devices(t_field *field, char *line);
-void	get_geom(t_field *field, char *line);
+void		get_devices(t_field *field, char *line);
+void		get_geom(t_field *field, char *line);
+double		*solv_eq_ord_2(double *p);
+t_vec3		conv_vect_unit(t_vec3 v);
 
 // Adders
-t_vec3	add_vec3(char *vector3);
-t_color	add_color(char *color);
+t_vec3 add_vec3(char *vector3);
+t_color		add_color(char *color);
 
 // GEOMETRY LIST UTILS
-void	ft_geomadd_back(t_geom **lst, t_geom *new_node);
-t_geom	*ft_geomlast(t_geom *lst);
-void	ft_geom_size(t_geom *head);
-void	ft_free_geometry(t_geom **head);
+void		ft_geomadd_back(t_geom **lst, t_geom *new_node);
+t_geom		*ft_geomlast(t_geom *lst);
+void		ft_geom_size(t_geom *head);
+void		ft_free_geometry(t_geom **head);
 // JUST FOR DEBUGGING
-void	ft_print_geometry_node(t_geom *node);
-void	ft_print_geometry_full(t_geom *head);
-void	ft_print_camera(t_field *field);
-void	ft_print_light(t_field *field);
-void	ft_print_ambient(t_field *field);
+void		ft_print_geometry_node(t_geom *node);
+void		ft_print_geometry_full(t_geom *head);
+void		ft_print_camera(t_field *field);
+void		ft_print_light(t_field *field);
+void		ft_print_ambient(t_field *field);
 
 #endif
