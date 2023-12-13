@@ -20,6 +20,6 @@ double	dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v)
 
 	v2 = resta_vector(p2, p1);
 	prod = prod_escalar(v, v2) / modulo_vector(v);
-	out = sqrt(prod_escalar(v2, v2) - prod * prod) ;
+	out = sqrt(prod_escalar(v2, v2) - prod * prod);
 	return (out);
 }

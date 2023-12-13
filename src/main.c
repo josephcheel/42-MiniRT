@@ -74,60 +74,23 @@ int	validate_scene_file(char *filename)
 	return (0);
 }
 
-void	test(t_field *field)
-{
-	t_vec3 *vect;
-	
-	for(int y = 0; y < WIN_Y; y++)
-	{
-		for(int x = 0; x < WIN_X; x++)
-		{
-			// for(int z = 0; z < 2; z++)
-			// {
-				if (dist_pto_vector(create_vect(500, 250, -5), create_vect(x, y, 0), create_vect(0, 0, -10)) <= 200)
-					mlx_pixel_put(field->mlx.mlx, field->mlx.win, x, y, 0x00FF0000);
-				else
-					mlx_pixel_put(field->mlx.mlx, field->mlx.win, x, y, 0x000091e4);
-				// vect = int_vect_esfera(create_vect(-500, -500, -500), create_vect(x, y, 0), create_vect(1, 1, 0), 400);
-				// if (vect)
-				// {
-				// 	mlx_pixel_put(field->mlx.mlx, field->mlx.win, x, y, 0x00FF0000);
-				// 	ft_print_vec3(vect[0]);
-				// 	ft_print_vec3(vect[1]);
-				// }
-				// else
-				// {
-				// 	mlx_pixel_put(field->mlx.mlx, field->mlx.win, x, y, 0x000091e4);
-				// 	printf("No hay interseccion\n");
-			// }
-		}
-	}
-	vect = int_vect_esfera(create_vect(0, 0, -1), create_vect(1, 1, 2), create_vect(0, 0, 0), 20);
-	if (vect)
-	{
-		ft_print_vec3(vect[0]);
-		ft_print_vec3(vect[1]);
-	}
-	else
-		printf("No hay interseccion\n");
-	// printf("vect[0]: %lf\n", vect[0].x);
-}
+
 
 int	main(int ac, char **av)
 {
-	t_field	*field;
+//	t_field	*field;
 
 	if (ac < 2 || !check_arg(av[1]))
 		return (prt_help());
 	if (validate_scene_file(av[1]))
 		return (1);
-	field = initializer(av[1]);
+/*	field = initializer(av[1]);
 	if (!field)
 		return (write(2, "Error: Malloc\n", 15));
 	//DEBUG
-
-//	ft_check_calculations();
-	ft_print_camera(field);
+*/
+	ft_check_calculations();
+/*	ft_print_camera(field);
 	ft_print_light(field);
 	ft_print_ambient(field);
 	ft_print_geometry_full(field->geom);
@@ -136,5 +99,5 @@ int	main(int ac, char **av)
 	mlx_loop(field->mlx.mlx);
 	
 	free_field(field);
-	return (0);
+*/	return (0);
 }

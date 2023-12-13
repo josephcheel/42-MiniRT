@@ -18,11 +18,10 @@ void create_field_vectors(t_field *field)
 	int			j;
 	t_vec_pos	*aux;
 
-	aux = (t_vec_pos *) malloc ((WIN_X * WIN_Y + 1) * sizeof(t_vec_pos));
-	aux[WIN_X * WIN_Y + 1] = NULL;
-	i = ++i;
+	aux = (t_vec_pos *) malloc ((WIN_X * WIN_Y) * sizeof(t_vec_pos));
+	i = -1;
 	j = 0;
-	while (aux[++i + j * WIN_X])
+	while (++i < WIN_X && j < WIN_Y)
 	{
 		
 		if(i == WIN_X)
