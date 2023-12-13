@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asign_val.c                                        :+:      :+:    :+:   */
+/*   is_zero_vec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/04 04:13:44 by jcheel-n         ###   ########.fr       */
+/*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
+/*   Updated: 2023/12/04 18:37:30 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
 
-void asign_val(t_vec3 *v, double x, double y, double z)
+int	is_zero_vec(t_vec3 v)
 {
-	v->x = x;
-	v->y = y;
-	v->z = z;
+	if (v.x == 0 && v.y == 0 && v.z == 0)
+		return (1);
+	return (0);
 }

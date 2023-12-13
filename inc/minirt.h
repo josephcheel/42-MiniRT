@@ -35,6 +35,7 @@
 # define WIN_NAME "miniRT"
 # define WIN_X 1000
 # define WIN_Y 500
+# define PIXEL 0.0000054
 enum e_type_geo
 {
 	SPHERE,
@@ -89,6 +90,13 @@ typedef struct s_vec2
 	double	y;
 }t_vec2;
 
+typedef struct s_vec_pos
+{
+	t_vec3	pt;
+	t_vec3	v;
+	t_color	c;
+}t_vec_pos;
+
 typedef struct s_geom
 {
 	enum e_type_geo	type;
@@ -102,9 +110,12 @@ typedef struct s_geom
 
 typedef struct s_camera
 {
-	t_vec3	pos;
-	t_vec3	orientation;
-	int			fov;
+	t_vec3		pos;
+	t_vec3		orientation;
+	t_vec3		orientation2;
+	t_vec3		observer;
+	t_vec_pos 	*field_vectors;
+	int		fov;
 }t_camera;
 
 typedef struct s_light
@@ -113,8 +124,8 @@ typedef struct s_light
 	t_vec3	orientation;
 	t_color	color;
 	float	ratio;
-	int			fov;
-	void		*next;
+	int		fov;
+	void	*next;
 }t_light;
 
 typedef struct s_mouse_pos
@@ -186,7 +197,7 @@ void		get_devices(t_field *field, char *line);
 void		get_geom(t_field *field, char *line);
 double		*solv_eq_ord_2(double *p);
 t_vec3		conv_vect_unit(t_vec3 v);
-void		asign_val(t_vec3 *v, double x, double y, double z);
+int			is_zero_vec(t_vec3 v);
 
 // Adders
 t_vec3		add_vec3(char *vector3);

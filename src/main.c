@@ -88,7 +88,7 @@ int	main(int ac, char **av)
 
 	//DEBUG
 
-	ft_check_calculations();
+//	ft_check_calculations();
 	ft_print_camera(field);
 	ft_print_light(field);
 	ft_print_ambient(field);

@@ -17,8 +17,8 @@ t_vec3	int_vect_plano(t_vec3 pt, t_vec3 v, t_vec3 pt_pl, t_vec3 v_pl)
 	double	lambda;
 	t_vec3	out;
 
-	lambda = prod_escalar(v_pl, resta_vector(pt, pt_pl));
-	lambda = lambda / prod_escalar(v_pl, v);
+	out = resta_vector(pt_pl, pt);
+	lambda = prod_escalar(v_pl, out) / prod_escalar(v_pl, v);
 	out = prod_cte_vector(lambda, v);
 	out = suma_vector(pt, out);
 	return (out);

@@ -29,7 +29,7 @@ double	*solv_eq_ord_2(double *p)
 		return (out);
 	}
 	aux = sqrt(p[1] * p[1] - 4 * p[0] * p[2]);
-	out[0] = (-p[0] + aux) / 2 / p[0];
-	out[1] = (-p[0] - aux) / 2 / p[0];
+	out[0] = (-p[1] + aux) / (2 * p[0]);
+	out[1] = (-p[1] - aux) / (2 * p[0]);
 	return (out);
 }
