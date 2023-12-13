@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/08 14:21:08 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/12 22:41:47 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,4 +204,7 @@ void		ft_print_light(t_field *field);
 void		ft_print_ambient(t_field *field);
 
 void ft_print_vec3(t_vec3 vec);
+
+
+int	rgb_to_hex(t_color color)
 #endif
