@@ -186,9 +186,10 @@ void		get_devices(t_field *field, char *line);
 void		get_geom(t_field *field, char *line);
 double		*solv_eq_ord_2(double *p);
 t_vec3		conv_vect_unit(t_vec3 v);
+void		asign_val(t_vec3 *v, double x, double y, double z);
 
 // Adders
-t_vec3 add_vec3(char *vector3);
+t_vec3		add_vec3(char *vector3);
 t_color		add_color(char *color);
 
 // GEOMETRY LIST UTILS
@@ -202,6 +203,7 @@ void		ft_print_geometry_full(t_geom *head);
 void		ft_print_camera(t_field *field);
 void		ft_print_light(t_field *field);
 void		ft_print_ambient(t_field *field);
+void		ft_check_calculations(void);
 
-void ft_print_vec3(t_vec3 vec);
+void		ft_print_vec3(t_vec3 vec);
 #endif
