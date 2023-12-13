@@ -39,24 +39,12 @@ CP			=	cp -f
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─COLOR──✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
+NO_COLOR		=	\033[1;97m
+OK_COLOR		=	\033[1;92m
+ERROR_COLOR		=	\033[1;91m
+WARN_COLOR		=	\033[1;93m
+BLUE_COLOR		=	\033[1;94m
 
-ifeq ($(findstring "re_lnx",$(MAKECMDGOALS)),$(findstring "all_lnx",$(MAKECMDGOALS)))
-#ifeq (,$(findstring re,$(MAKECMDGOALS)))
-#LINUX_COLORS
-	NO_COLOR		=	\033[1;97m
-	OK_COLOR		=	\033[1;92m
-	ERROR_COLOR		=	\033[1;91m
-	WARN_COLOR		=	\033[1;93m
-	BLUE_COLOR		=	\033[1;94m
-#ifeq ($(or ($1,"all_lnx"),($1,"re_lnx")))
-else
-##MAC_COLORS
-	NO_COLOR		=	\x1b[0m
-	OK_COLOR		=	\x1b[32;01m
-	ERROR_COLOR		=	\x1b[31;01m
-	WARN_COLOR		=	\x1b[33;01m
-	BLUE_COLOR		=	\x1b[34;01melse
-endif
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅DIRECTORIES✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
@@ -85,7 +73,7 @@ INCLUDE		+= -I $(INC)
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-SRC_MINIRT		=	main.c initializers.c close.c solv_eq_ord_2.c
+SRC_MINIRT		=	main.c initializers.c close.c
 CHECKER			=	init_vars.c
 PARSERS			=	device_add.c geometry_add.c adders.c
 GEOMETRY		=	geom_lstcreate.c geom_lstprint.c ft_check_calculations.c #geom_lstutils.c
@@ -93,7 +81,7 @@ VECTOR3			=	conv_vect_unit.c div_cte_vector.c int_vect_esfera.c  \
 				modulo_vector.c prod_escalar.c resta_vector.c \
 				dist_pto_vector.c int_vect_plano.c prod_cte_vector.c \
 				prod_vectorial.c suma_vector.c print_vector.c \
-				create_vector.c int_vect_cilind.c solv_eq_ord_2.c is_zero_vec.c
+				create_vector.c int_vect_cilind.c solv_eq_ord_2.c is_zero_vect.c
 
 GRAPHICS		=
 

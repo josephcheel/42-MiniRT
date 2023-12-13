@@ -186,10 +186,9 @@ t_vec3		resta_vector(t_vec3 a, t_vec3 b);
 t_vec3		prod_vectorial(t_vec3 a, t_vec3 b);
 double		modulo_vector(t_vec3 a);
 double		prod_escalar(t_vec3 a, t_vec3 b);
-t_vec3		*int_vect_esfera(t_vec3 p1, t_vec3 v1, \
-				t_vec3 pr, double r);
-t_vec3		*int_vect_cilind(t_vec3 p1, t_vec3 v1, t_vec3 pc, t_vec3 vc, double r);
-t_vec3		int_vect_plano(t_vec3 pt, t_vec3 v, t_vec3 pt_pl, t_vec3 v_pl);
+t_vec_pos	*int_vect_esfera(t_vec_pos vp1,	t_vec3 pr, double r);
+t_vec_pos	*int_vect_cilind(t_vec_pos vp1, t_vec_pos vpc, double r);
+t_vec_pos	int_vect_plano(t_vec_pos pi, t_vec_pos pl);
 t_vec3		prod_cte_vector(double a, t_vec3 b);
 t_vec3		div_cte_vector(double a, t_vec3 b);
 double		dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v);

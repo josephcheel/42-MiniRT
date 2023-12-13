@@ -10,16 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
 
-t_vec3	int_vect_plano(t_vec3 pt, t_vec3 v, t_vec3 pt_pl, t_vec3 v_pl)
+t_vec_pos	int_vect_plano(t_vec_pos pi, t_vec_pos pl)
 {
-	double	lambda;
-	t_vec3	out;
+	double		lambda;
+	t_vec_pos	out;
 
-	out = resta_vector(pt_pl, pt);
-	lambda = prod_escalar(v_pl, out) / prod_escalar(v_pl, v);
-	out = prod_cte_vector(lambda, v);
-	out = suma_vector(pt, out);
+	out.pt = resta_vector(pl.pt, pi.pt);
+	lambda = prod_escalar(pl.v, out.pt) / prod_escalar(pl.v, pi.v);
+	out.pt = prod_cte_vector(lambda, pi.v);
+	out.pt = suma_vector(pi.pt, out.pt);
+	out.v = pl.v;
 	return (out);
 }

@@ -28,36 +28,36 @@ static double	*calc_lambda(t_vec3 *v, double r)
 	return (out);
 }
 
-static t_vec3	*get_vect_result(double *lambda, t_vec3 p1, t_vec3 v1)
+static t_vec_pos	*get_vect_result(double *lambda, t_vec3 p1, t_vec3 v1)
 {
-	t_vec3	*out;
+	t_vec_pos	*out;
 
-	out = (t_vec3 *)malloc(2 * sizeof(t_vec3));
-	out[0] = prod_cte_vector(lambda[0], v1);
-	out[0] = suma_vector(out[0], p1);
-	out[1] = prod_cte_vector(lambda[1], v1);
-	out[1] = suma_vector(out[1], p1);
+	out = (t_vec_pos *)malloc(2 * sizeof(t_vec_pos));
+	out[0].pt = prod_cte_vector(lambda[0], v1);
+	out[0].pt = suma_vector(out[0].pt, p1);
+	out[1].pt = prod_cte_vector(lambda[1], v1);
+	out[1].pt = suma_vector(out[1].pt, p1);
 	return (out);
 }
 
-t_vec3	*int_vect_cilind(t_vec3 p1, t_vec3 v1, t_vec3 pc, t_vec3 vc, double r)
+t_vec_pos	*int_vect_cilind(t_vec_pos vpi, t_vec_pos vpc, double r)
 {
-	t_vec3	vaux[2];
-	t_vec3	pci;
-	t_vec3	*out;
-	double	*lambda;
+	t_vec3		vaux[2];
+	t_vec3		pci;
+	t_vec_pos	*out;
+	double		*lambda;
 
-	pci = resta_vector(p1, pc);
-	vaux[0] = prod_cte_vector(prod_escalar(vc, pci), vc);
-	vaux[0] = div_cte_vector(prod_escalar(vc, vc), vaux[0]);
+	pci = resta_vector(vpi.pt, vpc.pt);
+	vaux[0] = prod_cte_vector(prod_escalar(vpc.v, pci), vpc.v);
+	vaux[0] = div_cte_vector(prod_escalar(vpc.v, vpc.v), vaux[0]);
 	vaux[0] = resta_vector(pci, vaux[0]);
-	vaux[1] = prod_cte_vector(prod_escalar(v1, vc), vc);
-	vaux[1] = div_cte_vector(prod_escalar(vc, vc), vaux[1]);
-	vaux[1] = resta_vector(v1, vaux[1]);
+	vaux[1] = prod_cte_vector(prod_escalar(vpi.v, vpc.v), vpc.v);
+	vaux[1] = div_cte_vector(prod_escalar(vpc.v, vpc.v), vaux[1]);
+	vaux[1] = resta_vector(vpi.v, vaux[1]);
 	lambda = calc_lambda(vaux, r);
 	if (!lambda)
 		return (NULL);
-	out = get_vect_result(lambda, p1, v1);
+	out = get_vect_result(lambda, vpi.pt, vpi.v);
 	free(lambda);
 	return (out);
 }
