@@ -12,15 +12,50 @@
 
 #include "../../inc/minirt.h"
 
+void create_field_vectors(t_field *field)
+{
+	int			i;
+	int			j;
+	t_vec_pos	*aux;
+
+	aux = (t_vec_pos *) malloc ((WIN_X * WIN_Y + 1) * sizeof(t_vec_pos));
+	aux[WIN_X * WIN_Y + 1] = NULL;
+	i = ++i;
+	j = 0;
+	while (aux[++i + j * WIN_X])
+	{
+		
+		if(i == WIN_X)
+		{
+			i = -1;
+			j++;
+		}
+	}
+	field->camera.field_vectors = aux;
+}
+
 void	get_camera(t_field *field, char *line)
 {
 	char **content;
-	content = ft_split(line, ' ');
+	t_vec3	aux;
+	double	lambda;
 
+	content = ft_split(line, ' ');
 	field->camera.pos = add_vec3(content[1]);
-	field->camera.orientation = add_vec3(content[2]);
+	aux = add_vec3(content[2]);
+	field->camera.orientation = div_cte_vector(modulo_vector(aux), aux);
+	aux = create_vect(0, 0, 1);
+	aux = prod_vectorial(field->camera.orientation, aux);
+	if (is_zero_vec(aux))
+		field->camera.orientation2 = create_vect(0, 1, 0);
+	else
+		field->camera.orientation2 =  div_cte_vector(modulo_vector(aux), aux);
 	field->camera.fov = ft_atoi(content[3]);
+	lambda = - WIN_X * PIXEL / tan(field->camera.fov / 2);
+	aux = prod_cte_vector(lambda, field->camera.orientation);
+	field->camera.observer = suma_vector(field->camera.pos, aux);
 	ft_array_free(content, ft_array_size(content));
+	create_field_vectors(field);
 }
 
 void	get_light(t_field *field, char *line)

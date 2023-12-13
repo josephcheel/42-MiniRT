@@ -23,7 +23,7 @@ all: 		MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 all: 		mlx_link libft_link $(NAME)
 
 #Flags to compile in linux
-all_lnx:	CFLAGS		=	-D KEY_LNX_H -lm -O3 #-Wall -Werror -Wextra 
+all_lnx:	CFLAGS		=	-D KEY_LNX_H -O3 #-Wall -Werror -Wextra 
 all_lnx:	MLXFLAGS 	= 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lz 
 all_lnx:	mlx_link libft_link $(NAME)
 
@@ -40,14 +40,15 @@ CP			=	cp -f
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─COLOR──✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-ifeq ($(findstring re_lnx,$(MAKECMDGOALS)),$(findstring all_lnx,$(MAKECMDGOALS)))
+ifeq ($(findstring "re_lnx",$(MAKECMDGOALS)),$(findstring "all_lnx",$(MAKECMDGOALS)))
 #ifeq (,$(findstring re,$(MAKECMDGOALS)))
 #LINUX_COLORS
 	NO_COLOR		=	\033[1;97m
 	OK_COLOR		=	\033[1;92m
 	ERROR_COLOR		=	\033[1;91m
 	WARN_COLOR		=	\033[1;93m
-	BLUE_COLOR		=	\033[1;94m#ifeq ($(or ($1,"all_lnx"),($1,"re_lnx")))
+	BLUE_COLOR		=	\033[1;94m
+#ifeq ($(or ($1,"all_lnx"),($1,"re_lnx")))
 else
 ##MAC_COLORS
 	NO_COLOR		=	\x1b[0m
@@ -87,11 +88,13 @@ INCLUDE		+= -I $(INC)
 SRC_MINIRT		=	main.c initializers.c close.c solv_eq_ord_2.c
 CHECKER			=	init_vars.c
 PARSERS			=	device_add.c geometry_add.c adders.c
-GEOMETRY		=	geom_lstcreate.c geom_lstprint.c #geom_lstutils.c
-VECTOR3			=	conv_vect_unit.c   div_cte_vector.c   int_vect_esfera.c  \
-				modulo_vector.c    prod_escalar.c    resta_vector.c \
-				dist_pto_vector.c    int_vect_plano.c   \
-				prod_cte_vector.c  prod_vectorial.c  suma_vector.c print_vector.c create_vector.c int_vect_cilind.c
+GEOMETRY		=	geom_lstcreate.c geom_lstprint.c ft_check_calculations.c #geom_lstutils.c
+VECTOR3			=	conv_vect_unit.c div_cte_vector.c int_vect_esfera.c  \
+				modulo_vector.c prod_escalar.c resta_vector.c \
+				dist_pto_vector.c int_vect_plano.c prod_cte_vector.c \
+				prod_vectorial.c suma_vector.c print_vector.c \
+				create_vector.c int_vect_cilind.c solv_eq_ord_2.c is_zero_vec.c
+
 GRAPHICS		=
 
 SRCS			+=	$(addprefix $(SRC_DIR), $(SRC_MINIRT))
@@ -119,8 +122,8 @@ $(OBJ_DIR)%.o : %.c Makefile
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
 $(NAME):	$(LIBFT) $(MLX) $(OBJS)
+			$(CC) $(CFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME) $(MATHFLAG)
 			@echo ""
-			$(CC) $(CFLAGS) $(MLXFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(MATHFLAG)
 			@echo "$(CLEAN_CAR)$(OK_COLOR)$(NAME) Compiled!$(NO_COLOR)"
 			@echo "Use $(BLUE_COLOR)./$(NAME)$(NO_COLOR) to launch the program"
 clean:

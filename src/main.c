@@ -125,6 +125,8 @@ int	main(int ac, char **av)
 	if (!field)
 		return (write(2, "Error: Malloc\n", 15));
 	//DEBUG
+
+//	ft_check_calculations();
 	ft_print_camera(field);
 	ft_print_light(field);
 	ft_print_ambient(field);

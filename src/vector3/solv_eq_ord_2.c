@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prod_vectorial.c                                   :+:      :+:    :+:   */
+/*   solv_eq_ord_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/05 13:01:15 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/04 18:38:47 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "../inc/minirt.h"
 
-t_vec3	prod_vectorial(t_vec3 a, t_vec3 b)
+double	*solv_eq_ord_2(double *p)
 {
-	t_vec3	out;
+	double	*out;
+	double	aux;
 
-	out.x = a.y * b.z - a.z * b.y;
-	out.y = a.z * b.x - a.x * b.z;
-	out.z = a.x * b.y - a.y * b.x;
+	if (p[1] * p[1] < 4 * p[0] * p[2])
+		return (NULL);
+	out = (double *)malloc(2 * sizeof(double));
+	if (out == NULL)
+		return (out);
+	if (p[0] == 0)
+	{
+		out[0] = -p[2] / p[1];
+		out[1] = -p[2] / p[1];
+		return (out);
+	}
+	aux = sqrt(p[1] * p[1] - 4 * p[0] * p[2]);
+	out[0] = (-p[1] + aux) / (2 * p[0]);
+	out[1] = (-p[1] - aux) / (2 * p[0]);
 	return (out);
 }
