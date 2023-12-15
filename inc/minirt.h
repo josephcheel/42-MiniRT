@@ -17,6 +17,7 @@
 //# include "geometry.h"
 # include "../inc/colors.h"
 # include <math.h>
+# include <limits.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <fcntl.h>
@@ -35,6 +36,8 @@
 # define WIN_NAME "miniRT"
 # define WIN_X 1000
 # define WIN_Y 500
+# define FRAME 10
+
 # define PIXEL 0.0000054
 enum e_type_geo
 {
@@ -60,7 +63,12 @@ enum e_type_device
 # define CAMERA 'C'
 # define LIGHT 'L'
 # define AMBNT_LGHT 'A'
-
+typedef struct s_indexes
+{
+	int i;
+	int j;
+	int k;
+} t_indexes;
 typedef struct s_img_buff
 {
 	int		pixel_bits;
@@ -100,8 +108,9 @@ typedef struct s_vec_pos
 typedef struct s_geom
 {
 	enum e_type_geo	type;
-	t_vec3		pt1;
-	t_vec3		direction;
+	t_vec_pos	vp; //vp = vector posicionado.
+//	t_vec3		pt1; sustituido por vp.pt
+//	t_vec3		direction; sustituido por vp.v
 	t_color		color;
 	double		r;
 	double		height;
@@ -114,8 +123,9 @@ typedef struct s_camera
 	t_vec3		orientation;
 	t_vec3		orientation2;
 	t_vec3		observer;
-	t_vec_pos 	*field_vectors;
-	int		fov;
+	t_vec_pos	*field_vectors;
+	t_vec_pos	*int_vectors;
+	int			fov;
 }t_camera;
 
 typedef struct s_light
@@ -145,7 +155,10 @@ typedef struct s_mlx
 	void	*mlx;
 	void	*win;
 	void	*img;
-}t_mlx;
+	int		frame;
+	int		size_x;
+	int		size_y;
+} t_mlx;
 
 typedef struct s_ray
 {
@@ -166,20 +179,20 @@ typedef struct s_field
 // funciones publicas
 //initvars
 //Initializers
-t_field *initializer(char *av);
-t_field	*init_field(void);
-void init_mlx(t_field *field);
+t_field 	*initializer(char *av);
+t_field		*init_field(void);
+void 		init_mlx(t_field *field);
 
 //Closers
-int	ft_close_red_cross(t_mlx *mlx);
-int	ft_close(int keycode, t_mlx *mlx);
+int			ft_close_red_cross(t_mlx *mlx);
+int			ft_close(int keycode, t_mlx *mlx);
 
 
 int			read_file(char *filename, t_field *field);
 void		free_field(t_field *field);
 
 
-t_vec3	create_vect(double x, double y, double z);
+t_vec3		create_vect(double x, double y, double z);
 //algebra vectorial
 t_vec3		suma_vector(t_vec3 a, t_vec3 b);
 t_vec3		resta_vector(t_vec3 a, t_vec3 b);
@@ -188,7 +201,7 @@ double		modulo_vector(t_vec3 a);
 double		prod_escalar(t_vec3 a, t_vec3 b);
 t_vec_pos	*int_vect_esfera(t_vec_pos vp1,	t_vec3 pr, double r);
 t_vec_pos	*int_vect_cilind(t_vec_pos vp1, t_vec_pos vpc, double r);
-t_vec_pos	int_vect_plano(t_vec_pos pi, t_vec_pos pl);
+t_vec_pos	*int_vect_plano(t_vec_pos pi, t_vec_pos pl);
 t_vec3		prod_cte_vector(double a, t_vec3 b);
 t_vec3		div_cte_vector(double a, t_vec3 b);
 double		dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v);

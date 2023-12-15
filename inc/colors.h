@@ -33,6 +33,7 @@
 # define CHR_MGENTA	"\033[0;35m"
 # define CHR_CYAN	"\033[0;36m"
 # define CHR_WHITE	"\033[0;37m"
+# define CHR_README "\033[38;5;146m"
 
 # define BLACK	"\033[30m"
 # define RED	"\033[31m"

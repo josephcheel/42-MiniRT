@@ -20,9 +20,12 @@ int	check_content(char **type)
 	int		size;
 
 	size = ft_array_size(type);
-	if ((ft_strcmp(type[0], "A") == 0) && size != 3 )
+	if ((ft_strcmp(type[0], "A") == 0) && size != 3)
 		return (0);
-	else if ((ft_strcmp(type[0], "C") == 0|| ft_strcmp(type[0], "L") == 0|| ft_strcmp(type[0], "sp") == 0 || ft_strcmp(type[0], "pl") == 0) && size != 4)
+	else if ((ft_strcmp(type[0], "C") == 0 || \
+				ft_strcmp(type[0], "L") == 0 || \
+				ft_strcmp(type[0], "sp") == 0 || \
+				ft_strcmp(type[0], "pl") == 0) && size != 4)
 		return (0);
 	else if ((ft_strcmp(type[0], "cy")) == 0 && size != 6)
 		return (0);
@@ -36,7 +39,6 @@ int	is_geo(char *line)
 	char	**geos;
 
 	i = 0;
-	
 	geos = ft_split(GEO_IDENT, ' ');
 	element = ft_split(line, ' ');
 	if (!check_content(element))

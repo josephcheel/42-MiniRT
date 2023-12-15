@@ -54,8 +54,8 @@ void	ft_free_geometry(t_geom **head)
 	{
 		temp = temp->next;
 		free(*head);
-		// temp->pt1;
-		// temp->direction;
+		// temp->vp.pt;
+		// temp->vp.v;
 		// temp->height;
 		// temp->color;
 		// temp->r;

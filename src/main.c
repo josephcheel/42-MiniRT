@@ -14,12 +14,26 @@
 
 int	prt_help(void)
 {
-	ft_putstr_fd("\x1b[38;5;210m=========Usage==========\x1b[0m\n", 2);
-	ft_putstr_fd("./miniRT \x1b[34;01mfilename\x1b[0m\n", 2);
-	ft_putstr_fd("\x1b[38;5;210m====Parameter desctiprion=====\x1b[48;5;0m\n", 2);
-	ft_putstr_fd("\x1b[34;01mfilename: \x1b[0mname of the file with extension .rt\n", 2);
-	ft_putstr_fd("\033[38;5;213m\texample:\x1b[0m example.rt\n", 2);
-	ft_putstr_fd("\x1b[38;5;146mSee README file for more information\n", 2);
+	ft_putstr_fd(CHR_RED, 2);
+	ft_putstr_fd("=========Usage==========\n", 2);
+	ft_putstr_fd(RESET, 2);
+	ft_putstr_fd("./miniRT \n", 2);
+	ft_putstr_fd(CHR_BLUE, 2);
+	ft_putstr_fd("filename\n", 2);
+	ft_putstr_fd(RESET, 2);
+	ft_putstr_fd(CHR_RED, 2);
+	ft_putstr_fd("====Parameter desctiprion=====\n", 2);
+	ft_putstr_fd(CHR_BLUE, 2);
+	ft_putstr_fd("filename: ", 2);
+	ft_putstr_fd(RESET, 2);
+	ft_putstr_fd("name of the file with extension .rt\n", 2);
+	ft_putstr_fd(CHR_MGENTA, 2);
+	ft_putstr_fd("\t example: ", 2);
+	ft_putstr_fd(RESET, 2);
+	ft_putstr_fd("example.rt\n", 2);
+	ft_putstr_fd(CHR_README, 2);
+	ft_putstr_fd("See README file for more information\n", 2);
+	ft_putstr_fd(RESET, 2);
 	return (0);
 }
 
@@ -78,26 +92,26 @@ int	validate_scene_file(char *filename)
 
 int	main(int ac, char **av)
 {
-//	t_field	*field;
+	t_field	*field;
 
 	if (ac < 2 || !check_arg(av[1]))
 		return (prt_help());
 	if (validate_scene_file(av[1]))
 		return (1);
-/*	field = initializer(av[1]);
+	field = initializer(av[1]);
 	if (!field)
 		return (write(2, "Error: Malloc\n", 15));
 	//DEBUG
-*/
-	ft_check_calculations();
-/*	ft_print_camera(field);
+
+/*	ft_check_calculations();
+	ft_print_camera(field);
 	ft_print_light(field);
 	ft_print_ambient(field);
 	ft_print_geometry_full(field->geom);
-
-	test(field);
+*/
+	//test(field);
 	mlx_loop(field->mlx.mlx);
 	
 	free_field(field);
-*/	return (0);
+	return (0);
 }
