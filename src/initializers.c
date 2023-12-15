@@ -4,7 +4,11 @@ void init_mlx(t_field *field)
 {
 	field->mlx.mlx = mlx_init();
 	field->mlx.win = mlx_new_window(field->mlx.mlx, WIN_X, WIN_Y, WIN_NAME);
-	mlx_hook(field->mlx.win , 17, 0, ft_close_red_cross, &field->mlx);
+	field->mlx.img = mlx_new_image(field->mlx.win, WIN_X, WIN_Y);
+	field->mlx.frame = FRAME;
+	field->mlx.size_x = WIN_X;
+	field->mlx.size_y = WIN_Y;
+	mlx_hook(field->mlx.win, 17, 0, ft_close_red_cross, &field->mlx);
 	mlx_key_hook(field->mlx.win, ft_close, &field->mlx);
 	// mlx_loop(field->mlx.mlx);
 }

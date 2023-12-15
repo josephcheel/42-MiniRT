@@ -36,6 +36,8 @@
 # define WIN_NAME "miniRT"
 # define WIN_X 1000
 # define WIN_Y 500
+# define FRAME 10
+
 # define PIXEL 0.0000054
 enum e_type_geo
 {
@@ -61,7 +63,12 @@ enum e_type_device
 # define CAMERA 'C'
 # define LIGHT 'L'
 # define AMBNT_LGHT 'A'
-
+typedef struct s_indexes
+{
+	int i;
+	int j;
+	int k;
+} t_indexes;
 typedef struct s_img_buff
 {
 	int		pixel_bits;
@@ -148,7 +155,10 @@ typedef struct s_mlx
 	void	*mlx;
 	void	*win;
 	void	*img;
-}t_mlx;
+	int		frame;
+	int		size_x;
+	int		size_y;
+} t_mlx;
 
 typedef struct s_ray
 {
