@@ -76,7 +76,8 @@ INCLUDE		+= -I $(INC)
 SRC_MINIRT		=	main.c initializers.c close.c
 CHECKER			=	init_vars.c
 PARSERS			=	device_add.c geometry_add.c adders.c
-GEOMETRY		=	geom_lstcreate.c geom_lstprint.c ft_check_calculations.c #geom_lstutils.c
+GEOMETRY		=	geom_lstcreate.c geom_lstprint.c ft_check_calculations.c \
+					set_pict_colors.c #geom_lstutils.c
 VECTOR3			=	conv_vect_unit.c div_cte_vector.c int_vect_esfera.c  \
 				modulo_vector.c prod_escalar.c resta_vector.c \
 				dist_pto_vector.c int_vect_plano.c prod_cte_vector.c \

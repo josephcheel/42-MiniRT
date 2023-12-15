@@ -6,7 +6,7 @@ void ft_check_calculations(void)
 	t_vec3 aux;
 	double r, m;
 
-	out = (t_vec_pos *)malloc(2 * sizeof(t_vec_pos));
+	//out = (t_vec_pos *)malloc(2 * sizeof(t_vec_pos));
 	vp1.pt = create_vect(64, 20, -11);
 	vp1.v = create_vect(-11.384,26.972, -17.192);
 	r = prod_escalar(vp1.pt, vp1.v);
@@ -45,7 +45,7 @@ void ft_check_calculations(void)
 	//estudio para plano
 	vp2.pt = create_vect(25, 40, 66);
 	vp2.v = create_vect(64, 20, -11);
-	out[0] = int_vect_plano(vp1, vp2);
+	out = int_vect_plano(vp1, vp2);
 	printf("%sPlano%s\n", CHR_GREEN, RESET);
 	printf("Punto de itnerseccion x= %f y=%f z=%f \n", out[0].pt.x, out[0].pt.y, out[0].pt.z);
 	printf("%scomprobacion%s\n", CHR_GREEN, RESET);
@@ -73,8 +73,10 @@ void ft_check_calculations(void)
 	printf("radio= %f \n", r);
 	if (out != NULL)
 	{
-		printf("Punto de itnerseccion x= %f y=%f z=%f \n", out[0].pt.x, out[0].pt.y, out[0].pt.z);
-		printf("Punto de itnerseccion x= %f y=%f z=%f \n", out[1].pt.x, out[1].pt.y, out[1].pt.z);
+		printf("Punto de itnerseccion 1 x= %f y=%f z=%f \n", out[0].pt.x, out[0].pt.y, out[0].pt.z);
+		printf("vector de direccion 1   x= %f y=%f z=%f \n", out[0].v.x, out[0].v.y, out[0].v.z);
+		printf("Punto de itnerseccion 2 x= %f y=%f z=%f \n", out[1].pt.x, out[1].pt.y, out[1].pt.z);
+		printf("vector de direccion 2   x= %f y=%f z=%f \n", out[1].v.x, out[1].v.y, out[1].v.z);
 	}
 	else
 		printf("Sin interseccion\n");
@@ -92,8 +94,10 @@ void ft_check_calculations(void)
 	printf("radio= %f \n", r);
 	if (out != NULL)
 	{
-		printf("Punto de itnerseccion x= %f y=%f z=%f \n", out[0].pt.x, out[0].pt.y, out[0].pt.z);
-		printf("Punto de itnerseccion x= %f y=%f z=%f \n", out[1].pt.x, out[1].pt.y, out[1].pt.z);
+		printf("Punto de itnerseccion 1 x= %f y=%f z=%f \n", out[0].pt.x, out[0].pt.y, out[0].pt.z);
+		printf("vector de direccion 1   x= %f y=%f z=%f \n", out[0].v.x, out[0].v.y, out[0].v.z);
+		printf("Punto de itnerseccion 2 x= %f y=%f z=%f \n", out[1].pt.x, out[1].pt.y, out[1].pt.z);
+		printf("vector de direccion 2   x= %f y=%f z=%f \n", out[1].v.x, out[1].v.y, out[1].v.z);
 	}
 	else
 		printf("Sin interseccion\n");

@@ -48,8 +48,8 @@ void	ft_print_geometry_node(t_geom *node)
 	{
 		printf("\n\x1b[32;01m=====PRINT GEOMETRY NODE=====\x1b[0m\n");
 		printf("TYPE\t\t\t\t%u\n", node->type);
-		printf("POSITION\t\t\tX %lf Y %lf, Z %lf\n", node->pt1.x, node->pt1.y, node->pt1.z);
-		printf("NORMALIZATION DIRECTION \tX %lf Y %lf, Z %lf\n", node->direction.x, node->direction.y, node->direction.z);
+		printf("POSITION\t\t\tX %lf Y %lf, Z %lf\n", node->vp.pt.x, node->vp.pt.y, node->vp.pt.z);
+		printf("NORMALIZATION DIRECTION \tX %lf Y %lf, Z %lf\n", node->vp.v.x, node->vp.v.y, node->vp.v.z);
 		printf("RADIUS\t\t\t\t%lf\n", node->r);
 		printf("COLOR\t\t\t\tR %d G %d B %d A %d\n", node->color.r, node->color.g, node->color.b, node->color.a);
 		printf("HEIGHT\t\t\t\t%lf\n", node->height);

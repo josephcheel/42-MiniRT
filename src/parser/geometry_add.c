@@ -20,7 +20,8 @@ t_geom	*get_sphere(char *line)
 	content = ft_split(line, ' ');
 	sphere = malloc(sizeof(t_geom));
 	sphere->type = SPHERE;
-	sphere->pt1 = add_vec3(content[1]);
+	sphere->vp.pt = add_vec3(content[1]);
+	sphere->vp.v = create_vect(0, 0, 0);
 	sphere->r = ft_atof(content[2]) / 2;
 	sphere->color = add_color(content[3]);
 	sphere->next = NULL;
@@ -36,8 +37,8 @@ t_geom	*get_plane(char *line)
 	content = ft_split(line, ' ');
 	plane = malloc(sizeof(t_geom));
 	plane->type = PLANE;
-	plane->pt1 = add_vec3(content[1]);
-	plane->direction = add_vec3(content[2]);
+	plane->vp.pt = add_vec3(content[1]);
+	plane->vp.v = conv_vect_unit(add_vec3(content[2]));
 	plane->color = add_color(content[3]);
 	plane->next = NULL;
 	ft_array_free(content, ft_array_size(content));
@@ -54,8 +55,8 @@ t_geom	*get_cylinder( char *line)
 
 	cylinder = malloc(sizeof(t_geom));
 	cylinder->type = CYLINDER;
-	cylinder->pt1 = add_vec3(content[1]);
-	cylinder->direction = add_vec3(content[2]);
+	cylinder->vp.pt = add_vec3(content[1]);
+	cylinder->vp.v = conv_vect_unit(add_vec3(content[2]));
 	cylinder->r = ft_atof(content[3]) / 2;
 	cylinder->height = ft_atof(content[4]);
 	cylinder->color = add_color(content[5]);

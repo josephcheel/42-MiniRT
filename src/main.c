@@ -78,26 +78,26 @@ int	validate_scene_file(char *filename)
 
 int	main(int ac, char **av)
 {
-//	t_field	*field;
+	t_field	*field;
 
 	if (ac < 2 || !check_arg(av[1]))
 		return (prt_help());
 	if (validate_scene_file(av[1]))
 		return (1);
-/*	field = initializer(av[1]);
+	field = initializer(av[1]);
 	if (!field)
 		return (write(2, "Error: Malloc\n", 15));
 	//DEBUG
-*/
-	ft_check_calculations();
-/*	ft_print_camera(field);
+
+/*	ft_check_calculations();
+	ft_print_camera(field);
 	ft_print_light(field);
 	ft_print_ambient(field);
 	ft_print_geometry_full(field->geom);
-
-	test(field);
+*/
+	//test(field);
 	mlx_loop(field->mlx.mlx);
 	
 	free_field(field);
-*/	return (0);
+	return (0);
 }
