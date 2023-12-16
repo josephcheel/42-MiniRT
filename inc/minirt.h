@@ -132,7 +132,6 @@ typedef struct s_camera
 typedef struct s_light
 {
 	t_vec3	pos;
-	t_vec3	orientation;
 	t_color	color;
 	float	ratio;
 	int		fov;
@@ -193,8 +192,8 @@ int			read_file(char *filename, t_field *field);
 void		free_field(t_field *field);
 
 
-t_vec3		create_vect(double x, double y, double z);
 //algebra vectorial
+t_vec3		create_vect(double x, double y, double z);
 t_vec3		suma_vector(t_vec3 a, t_vec3 b);
 t_vec3		resta_vector(t_vec3 a, t_vec3 b);
 t_vec3		prod_vectorial(t_vec3 a, t_vec3 b);
@@ -221,6 +220,9 @@ void		ft_geomadd_back(t_geom **lst, t_geom *new_node);
 t_geom		*ft_geomlast(t_geom *lst);
 void		ft_geom_size(t_geom *head);
 void		ft_free_geometry(t_geom **head);
+void		create_field_vectors(t_field *field);
+void		set_pict_colors(t_field *field);
+
 // JUST FOR DEBUGGING
 void		ft_print_geometry_node(t_geom *node);
 void		ft_print_geometry_full(t_geom *head);

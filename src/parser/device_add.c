@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
-
+/*
 t_vec3 calculate_ray_direction(t_vec3 camPos, t_vec3 imgPoint)
 {
 	t_vec3	raydir;
@@ -55,7 +55,7 @@ void create_field_vectors(t_field *field)
 	}
 	field->camera.field_vectors = aux;
 }
-
+*/
 void	get_camera(t_field *field, char *line)
 {
 	char **content;

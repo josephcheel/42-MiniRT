@@ -32,10 +32,12 @@ void	put_pixel_color(char *pixel, t_color color)
 static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, t_geom *geom)
 {
 	t_vec_pos		out;
-	unsigned int	long_cur;
-	unsigned int	long_new;
+	double		long_cur;
+	double		long_new;
 
 	out = cur;
+	if (!new)
+		return (cur);
 	long_cur = modulo_vector(cur.pt);
 	long_new = modulo_vector(new[0].pt);
 	if (long_cur > long_new)
@@ -66,38 +68,39 @@ static t_vec_pos	get_int_pt(t_vec_pos vps, t_geom *geom)
 	vp_int = init_vp();
 	while (ptr)
 	{
-		if (geom->type == SPHERE)
+		if (ptr->type == SPHERE)
 			out = int_vect_esfera(vps, ptr->vp.pt, ptr->r);
-		else if (geom->type == CYLINDER)
+		else if (ptr->type == CYLINDER)
 			out = int_vect_cilind(vps, ptr->vp, ptr->r);
-		else if (geom->type == PLANE)
+		else if (ptr->type == PLANE)
 			out = int_vect_plano(vps, ptr->vp);
-		vp_int = get_min_vect(vps, out, geom);
+		if (out !=  NULL)
+			vp_int = get_min_vect(vps, out, ptr);
 		free(out);
 		ptr = ptr->next;
 	}
 	return (vp_int);
 }
 
-void	set_pict_colors(t_field field)
+void	set_pict_colors(t_field *field)
 {
 	t_indexes	ind;
 	t_img_buff	buf;
 
-	buf.buffer = mlx_get_data_addr(field.mlx.img, &buf.pixel_bits,
+	buf.buffer = mlx_get_data_addr(field->mlx.img, &buf.pixel_bits,
 			&buf.line_bytes, &buf.endian);
-	ind.i = field.mlx.frame - 1;
-	while (++ind.i < field.mlx.size_x - field.mlx.frame)
+	ind.i = - 1;
+	while (++ind.i < field->mlx.size_x - 2 * FRAME )
 	{
-		ind.j = field.mlx.frame - 1;
-		while (++ind.j < field.mlx.size_y - field.mlx.frame)
+		ind.j = - 1;
+		while (++ind.j < field->mlx.size_y - 2 * FRAME)
 		{
-			ind.k = ind.i + ind.j * field.mlx.size_y;
-			field.camera.int_vectors[ind.k] = \
-				get_int_pt(field.camera.field_vectors[ind.k], field.geom);
+			ind.k = ind.i + ind.j * field->mlx.size_y;
+			field->camera.int_vectors[ind.k] = \
+				get_int_pt(field->camera.field_vectors[ind.k], field->geom);
 			put_pixel_color(&buf.buffer[ind.j * buf.line_bytes + \
-				ind.i * buf.pixel_bits / 8], field.camera.int_vectors[ind.k].c);
+				ind.i * buf.pixel_bits / 8], field->camera.int_vectors[ind.k].c);
 		}
 	}
-	mlx_put_image_to_window(field.mlx.mlx, field.mlx.win, field.mlx.img, 0, 0);
+	mlx_put_image_to_window(field->mlx.mlx, field->mlx.win, field->mlx.img, 0, 0);
 }

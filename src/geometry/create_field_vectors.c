@@ -22,6 +22,8 @@ void create_field_vectors(t_field *field)
 	i[1] = 0;
 	aux = (t_vec_pos *) malloc(((field->mlx.size_x - FRAME * 2) * \
 			(field->mlx.size_y - FRAME * 2)) * sizeof(t_vec_pos));
+	if (!aux)
+		return ;
 	while (++i[0] < field->mlx.size_x - FRAME * 2 && \
 			i[1] < field->mlx.size_y - FRAME * 2)
 	{

@@ -101,15 +101,19 @@ int	main(int ac, char **av)
 	field = initializer(av[1]);
 	if (!field)
 		return (write(2, "Error: Malloc\n", 15));
-	create_field_vectors(field);
 	//DEBUG
 
 /*	ft_check_calculations();
-	ft_print_camera(field);
+*/	ft_print_camera(field);
 	ft_print_light(field);
 	ft_print_ambient(field);
 	ft_print_geometry_full(field->geom);
-*/
+
+	create_field_vectors(field);
+	if (!field->camera.field_vectors)
+		return (1);
+	set_pict_colors(field);
+
 	//test(field);
 	mlx_loop(field->mlx.mlx);
 	
