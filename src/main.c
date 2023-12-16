@@ -101,6 +101,7 @@ int	main(int ac, char **av)
 	field = initializer(av[1]);
 	if (!field)
 		return (write(2, "Error: Malloc\n", 15));
+	create_field_vectors(field);
 	//DEBUG
 
 /*	ft_check_calculations();

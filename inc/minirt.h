@@ -120,8 +120,9 @@ typedef struct s_geom
 typedef struct s_camera
 {
 	t_vec3		pos;
-	t_vec3		orientation;
-	t_vec3		orientation2;
+	t_vec3		orient_x;
+	t_vec3		orient_y;
+	t_vec3		orient_z;
 	t_vec3		observer;
 	t_vec_pos	*field_vectors;
 	t_vec_pos	*int_vectors;

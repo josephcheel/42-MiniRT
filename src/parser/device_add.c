@@ -12,59 +12,46 @@
 
 #include "../../inc/minirt.h"
 
-t_vec3 calculate_ray_direction(t_vec3 camPos, t_vec3 imgPoint) {
-	t_vec3 rayDir;
-	rayDir.x = imgPoint.x - camPos.x;
-	rayDir.y = imgPoint.y - camPos.y;
-	rayDir.z = imgPoint.z - camPos.z;
-	return (rayDir);
-}
-
-double calculate_distance_to_screen(int fov)
+t_vec3 calculate_ray_direction(t_vec3 camPos, t_vec3 imgPoint)
 {
-	double fov_rad;
-	
-	// Pasamos el fov a radianes
-	fov_rad = fov * M_PI / 180.0;
-	// Calcular la Distancia focal
-	double distanciaFocal = 1 / tan(fov_rad / 2);
-
-	 // Cálculo de la magnificación angular
-    double magnificacionAngular = atan(WIN_X * WIN_Y * PIXEL / (2 * distanciaFocal));
-
-    // Cálculo de la distancia entre la cámara y la pantalla
-    double distanciaCamaraPantalla = WIN_X * WIN_Y * PIXEL / (2 * tan(magnificacionAngular));
-	return (distanciaCamaraPantalla);
+	t_vec3	raydir;
+	raydir.x = imgPoint.x - camPos.x;
+	raydir.y = imgPoint.y - camPos.y;
+	raydir.z = imgPoint.z - camPos.z;
+	return (raydir);
 }
 
-// calculate_point(t_field *field, int x, int y)
-// {
-	
-// 	field->camera.pos - WIN_X * WIN_Y * PIXEL 
-// }
+t_vec3	get_screen_center(t_field *field)
+{
+	t_vec3 center;
 
+	center = create_vect(WIN_X/2, WIN_Y/2, calculate_distance_to_screen(field->camera.fov) * 100);
+	return (center);
+}
 
 void create_field_vectors(t_field *field)
 {
-	int			i;
-	int			j;
+	int			x;
+	int			y;
 	t_vec_pos	*aux;
 
 	aux = (t_vec_pos *) malloc ((WIN_X * WIN_Y) * sizeof(t_vec_pos));
-	i = -1;
-	j = 0;
-	printf("DISTANCIA SCREEN %f\n", calculate_distance_to_screen(field->camera.fov));
-
-	while (++i < WIN_X && j < WIN_Y)
+	x = 0;
+	y = 0;
+	
+	// aux[(WIN_X * WIN_Y) / 2].pt = get_screen_center(field);
+	while (x <= WIN_X && y <= WIN_Y)
 	{
 		
-		if(i == WIN_X)
+		aux[x * y].pt = calculate_point(field, x, y);
+		//aux[i].v = calculate_ray_direction(field->camera.pos, field->camera.field_vectors[j].pt);
+		if(x % WIN_X == 0)
 		{
-			i = -1;
-			// aux[i].pt = calculate_point(field, x, y)
-			aux[i].v = calculate_ray_direction(field->camera.pos, field->camera.field_vectors[j].pt);
-			j++;
+			x = 0;
+			y++;
 		}
+		x++;
+		
 	}
 	field->camera.field_vectors = aux;
 }
@@ -77,20 +64,17 @@ void	get_camera(t_field *field, char *line)
 
 	content = ft_split(line, ' ');
 	field->camera.pos = add_vec3(content[1]);
-	aux = add_vec3(content[2]);
-	field->camera.orientation = div_cte_vector(modulo_vector(aux), aux);
+	field->camera.orient_x = conv_vect_unit(add_vec3(content[2]));
 	aux = create_vect(0, 0, 1);
-	aux = prod_vectorial(field->camera.orientation, aux);
-	if (is_zero_vec(aux))
-		field->camera.orientation2 = create_vect(0, 1, 0);
-	else
-		field->camera.orientation2 =  div_cte_vector(modulo_vector(aux), aux);
+	field->camera.orient_y = prod_vectorial(aux, field->camera.orient_x);
+	if (is_zero_vec(field->camera.orient_y))
+		field->camera.orient_y = create_vect(0, 1, 0);
+	field->camera.orient_z = prod_vectorial(field->camera.orient_x, field->camera.orient_y);
 	field->camera.fov = ft_atoi(content[3]);
-	lambda = - WIN_X * PIXEL / tan(field->camera.fov / 2);
-	aux = prod_cte_vector(lambda, field->camera.orientation);
+	lambda = - (field->mlx.size_x - FRAME) * PIXEL / 2 / tan(field->camera.fov / 2);
+	aux = prod_cte_vector(lambda, field->camera.orient_x);
 	field->camera.observer = suma_vector(field->camera.pos, aux);
 	ft_array_free(content, ft_array_size(content));
-	create_field_vectors(field);
 }
 
 void	get_light(t_field *field, char *line)
