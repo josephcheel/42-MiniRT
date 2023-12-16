@@ -6,11 +6,43 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/05 18:38:38 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/15 23:27:17 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
+
+t_vec3 calculate_ray_direction(t_vec3 camPos, t_vec3 imgPoint) {
+	t_vec3 rayDir;
+	rayDir.x = imgPoint.x - camPos.x;
+	rayDir.y = imgPoint.y - camPos.y;
+	rayDir.z = imgPoint.z - camPos.z;
+	return (rayDir);
+}
+
+double calculate_distance_to_screen(int fov)
+{
+	double fov_rad;
+	
+	// Pasamos el fov a radianes
+	fov_rad = fov * M_PI / 180.0;
+	// Calcular la Distancia focal
+	double distanciaFocal = 1 / tan(fov_rad / 2);
+
+	 // Cálculo de la magnificación angular
+    double magnificacionAngular = atan(WIN_X * WIN_Y * PIXEL / (2 * distanciaFocal));
+
+    // Cálculo de la distancia entre la cámara y la pantalla
+    double distanciaCamaraPantalla = WIN_X * WIN_Y * PIXEL / (2 * tan(magnificacionAngular));
+	return (distanciaCamaraPantalla);
+}
+
+// calculate_point(t_field *field, int x, int y)
+// {
+	
+// 	field->camera.pos - WIN_X * WIN_Y * PIXEL 
+// }
+
 
 void create_field_vectors(t_field *field)
 {
@@ -21,12 +53,16 @@ void create_field_vectors(t_field *field)
 	aux = (t_vec_pos *) malloc ((WIN_X * WIN_Y) * sizeof(t_vec_pos));
 	i = -1;
 	j = 0;
+	printf("DISTANCIA SCREEN %f\n", calculate_distance_to_screen(field->camera.fov));
+
 	while (++i < WIN_X && j < WIN_Y)
 	{
 		
 		if(i == WIN_X)
 		{
 			i = -1;
+			// aux[i].pt = calculate_point(field, x, y)
+			aux[i].v = calculate_ray_direction(field->camera.pos, field->camera.field_vectors[j].pt);
 			j++;
 		}
 	}
