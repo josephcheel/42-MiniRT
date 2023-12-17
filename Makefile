@@ -74,11 +74,11 @@ INCLUDE		+= -I $(INC)
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-SRC_MINIRT		=	main.c initializers.c close.c
+SRC_MINIRT		=	main.c initializers.c close.c 
 CHECKER			=	init_vars.c
 PARSERS			=	device_add.c geometry_add.c adders.c
 GEOMETRY		=	geom_lstcreate.c geom_lstprint.c ft_check_calculations.c \
-					set_pict_colors.c #geom_lstutils.c
+					set_pict_colors.c create_field_vectors.c #geom_lstutils.c
 VECTOR3			=	conv_vect_unit.c div_cte_vector.c int_vect_esfera.c  \
 				modulo_vector.c prod_escalar.c resta_vector.c \
 				dist_pto_vector.c int_vect_plano.c prod_cte_vector.c \
@@ -112,8 +112,8 @@ $(OBJ_DIR)%.o : %.c Makefile
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
 $(NAME):	$(LIBFT) $(MLX) $(OBJS)
-			$(CC) $(CFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME) $(MATHFLAG)
 			@echo ""
+			$(CC) $(CFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME) $(MATHFLAG)
 			@echo "$(CLEAN_CAR)$(OK_COLOR)$(NAME) Compiled!$(NO_COLOR)"
 			@echo "Use $(BLUE_COLOR)./$(NAME)$(NO_COLOR) to launch the program"
 clean:

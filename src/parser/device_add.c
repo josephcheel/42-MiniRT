@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/15 23:27:17 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/17 21:39:28 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,40 @@ t_vec3 calculate_ray_direction(t_vec3 camPos, t_vec3 imgPoint)
 	return (raydir);
 }
 
-t_vec3	get_screen_center(t_field *field)
-{
-	t_vec3 center;
+// t_vec3	get_screen_center(t_field *field)
+// {
+// 	t_vec3 center;
 
-	center = create_vect(WIN_X/2, WIN_Y/2, calculate_distance_to_screen(field->camera.fov) * 100);
-	return (center);
-}
+// 	center = create_vect(WIN_X/2, WIN_Y/2, calculate_distance_to_screen(field->camera.fov) * 100);
+// 	return (center);
+// }
 
-void create_field_vectors(t_field *field)
-{
-	int			x;
-	int			y;
-	t_vec_pos	*aux;
+// void create_field_vectors(t_field *field)
+// {
+// 	int			x;
+// 	int			y;
+// 	t_vec_pos	*aux;
 
-	aux = (t_vec_pos *) malloc ((WIN_X * WIN_Y) * sizeof(t_vec_pos));
-	x = 0;
-	y = 0;
+// 	aux = (t_vec_pos *) malloc ((WIN_X * WIN_Y) * sizeof(t_vec_pos));
+// 	x = 0;
+// 	y = 0;
 	
-	// aux[(WIN_X * WIN_Y) / 2].pt = get_screen_center(field);
-	while (x <= WIN_X && y <= WIN_Y)
-	{
+// 	// aux[(WIN_X * WIN_Y) / 2].pt = get_screen_center(field);
+// 	while (x <= WIN_X && y <= WIN_Y)
+// 	{
 		
-		aux[x * y].pt = calculate_point(field, x, y);
-		//aux[i].v = calculate_ray_direction(field->camera.pos, field->camera.field_vectors[j].pt);
-		if(x % WIN_X == 0)
-		{
-			x = 0;
-			y++;
-		}
-		x++;
+// 		aux[x * y].pt = calculate_point(field, x, y);
+// 		//aux[i].v = calculate_ray_direction(field->camera.pos, field->camera.field_vectors[j].pt);
+// 		if(x % WIN_X == 0)
+// 		{
+// 			x = 0;
+// 			y++;
+// 		}
+// 		x++;
 		
-	}
-	field->camera.field_vectors = aux;
-}
+// 	}
+// 	field->camera.field_vectors = aux;
+// }
 
 void	get_camera(t_field *field, char *line)
 {
