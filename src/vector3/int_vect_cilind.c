@@ -45,8 +45,8 @@ static t_vec_pos	*get_point_result(double *lambda, t_vec_pos vpi, \
 				lambda[0] * prod_escalar(vpi.v, vpc.v);
 	lambda_c = lambda_c / prod_escalar(vpc.v, vpc.v);
 	aux = suma_vector(vpc.pt, prod_cte_vector(lambda_c, vpc.v));
-	out[0].v = conv_vect_unit(resta_vector(out[0].pt, aux));
-	out[1].v = conv_vect_unit(resta_vector(out[1].pt, aux));
+	out[0].v = conv_v_unit(resta_vector(out[0].pt, aux));
+	out[1].v = conv_v_unit(resta_vector(out[1].pt, aux));
 	return (out);
 }
 

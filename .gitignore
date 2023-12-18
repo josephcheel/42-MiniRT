@@ -1,6 +1,7 @@
 .DS_Store
 .gitignore
 .vscode
+miniRT.dSYM/
 *.a
 *.o
 *.d

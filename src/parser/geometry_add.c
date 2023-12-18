@@ -38,7 +38,7 @@ t_geom	*get_plane(char *line)
 	plane = malloc(sizeof(t_geom));
 	plane->type = PLANE;
 	plane->vp.pt = add_vec3(content[1]);
-	plane->vp.v = conv_vect_unit(add_vec3(content[2]));
+	plane->vp.v = conv_v_unit(add_vec3(content[2]));
 	plane->color = add_color(content[3]);
 	plane->next = NULL;
 	ft_array_free(content, ft_array_size(content));
@@ -56,7 +56,7 @@ t_geom	*get_cylinder( char *line)
 	cylinder = malloc(sizeof(t_geom));
 	cylinder->type = CYLINDER;
 	cylinder->vp.pt = add_vec3(content[1]);
-	cylinder->vp.v = conv_vect_unit(add_vec3(content[2]));
+	cylinder->vp.v = conv_v_unit(add_vec3(content[2]));
 	cylinder->r = ft_atof(content[3]) / 2;
 	cylinder->height = ft_atof(content[4]);
 	cylinder->color = add_color(content[5]);
@@ -71,7 +71,7 @@ void	get_geom(t_field *field, char *line)
 	char **type;
 
 	// DEBUG
-	printf ("es un a geometria -- $%s$\n", line);
+//	printf ("es un a geometria -- $%s$\n", line);
 	
 	temp = NULL;
 	type = ft_split(line, ' ');

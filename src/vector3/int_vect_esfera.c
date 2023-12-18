@@ -33,8 +33,8 @@ t_vec_pos	*int_vect_esfera(t_vec_pos vpi, t_vec3 pr, double r)
 			return (NULL);
 		pt[0].pt = suma_vector(vpi.pt, prod_cte_vector(lambda[0], vpi.v));
 		pt[1].pt = suma_vector(vpi.pt, prod_cte_vector(lambda[1], vpi.v));
-		pt[0].v = conv_vect_unit(resta_vector(pt[0].pt, pr));
-		pt[1].v = conv_vect_unit(resta_vector(pt[1].pt, pr));
+		pt[0].v = conv_v_unit(resta_vector(pt[0].pt, pr));
+		pt[1].v = conv_v_unit(resta_vector(pt[1].pt, pr));
 	}
 	else
 		return (NULL);

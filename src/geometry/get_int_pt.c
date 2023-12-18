@@ -21,17 +21,9 @@ static t_vec_pos	init_vp(void)
 	return (vp);
 }
 
-void	put_pixel_color(char *pixel, t_color color)
-{
-	pixel[0] = color.r;
-	pixel[1] = color.g;
-	pixel[2] = color.b;
-	pixel[3] = color.a;
-}
-
 static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, t_geom *geom)
 {
-	t_vec_pos		out;
+	t_vec_pos	out;
 	double		long_cur;
 	double		long_new;
 
@@ -58,7 +50,7 @@ static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, t_geom *geom)
 	return (out);
 }
 
-static t_vec_pos	get_int_pt(t_vec_pos vps, t_geom *geom)
+t_vec_pos	get_int_pt(t_vec_pos vps, t_geom *geom)
 {
 	t_geom		*ptr;
 	t_vec_pos	*out;
@@ -74,33 +66,10 @@ static t_vec_pos	get_int_pt(t_vec_pos vps, t_geom *geom)
 			out = int_vect_cilind(vps, ptr->vp, ptr->r);
 		else if (ptr->type == PLANE)
 			out = int_vect_plano(vps, ptr->vp);
-		if (out !=  NULL)
+		if (out != NULL)
 			vp_int = get_min_vect(vps, out, ptr);
 		free(out);
 		ptr = ptr->next;
 	}
 	return (vp_int);
-}
-
-void	set_pict_colors(t_field *field)
-{
-	t_indexes	ind;
-	t_img_buff	buf;
-
-	buf.buffer = mlx_get_data_addr(field->mlx.img, &buf.pixel_bits,
-			&buf.line_bytes, &buf.endian);
-	ind.i = - 1;
-	while (++ind.i < field->mlx.size_x - 2 * FRAME )
-	{
-		ind.j = - 1;
-		while (++ind.j < field->mlx.size_y - 2 * FRAME)
-		{
-			ind.k = ind.i + ind.j * field->mlx.size_y;
-			field->camera.int_vectors[ind.k] = \
-				get_int_pt(field->camera.field_vectors[ind.k], field->geom);
-			put_pixel_color(&buf.buffer[ind.j * buf.line_bytes + \
-				ind.i * buf.pixel_bits / 8], field->camera.int_vectors[ind.k].c);
-		}
-	}
-	mlx_put_image_to_window(field->mlx.mlx, field->mlx.win, field->mlx.img, 0, 0);
 }
