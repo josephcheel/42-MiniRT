@@ -14,8 +14,8 @@
 * [**Ray Tracing in One Weekend, (Peter Shirley, Trevor David Black, Steve Hollasch)**](https://raytracing.github.io/)
 * [**Ray Tracing [YouTube]**](https://youtu.be/gfW1Fhd9u9Q?si=BI667gXh8sOryeaU)
 
-Description of file arguments structure:
-Ambient light
+### Description of file arguments structure:
+# Ambient light
 A 0.2            255,255,255
 ^  ^ Brightness        rgb color separeted by a comma.
 | identifier  
