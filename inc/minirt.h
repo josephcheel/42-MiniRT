@@ -34,11 +34,12 @@
 # 	include "../inc/key_mouse_cod_mac.h"
 # endif
 # define WIN_NAME "miniRT"
-# define WIN_X 1000
-# define WIN_Y 500
-# define FRAME 50
+# define WIN_X 1040
+# define WIN_Y 540
+# define FRAME 20
 
-# define PIXEL 0.0000054
+//# define PIXEL 0.0000054
+# define PIXEL 1
 enum e_type_geo
 {
 	SPHERE,
