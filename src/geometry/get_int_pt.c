@@ -21,7 +21,21 @@ static t_vec_pos	init_vp(void)
 	return (vp);
 }
 
-static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, t_geom *geom)
+bool	is_new_closer(t_vec_pos new, t_field *field)
+{
+	double observer_point;
+	double observer_camera;
+	t_vec3 temp;
+
+	temp = resta_vector( new.pt, field->camera.observer);
+	observer_point = sqrt(prod_escalar(temp, temp));
+	observer_camera = (field->mlx.size_x - FRAME) * PIXEL / 2 / tan(field->camera.fov / 2);
+	if (observer_point <= observer_camera)
+		return (true);
+	return (false);
+}
+
+static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, t_geom *geom, t_field *field)
 {
 	t_vec_pos	out;
 	double		long_cur;
@@ -34,6 +48,8 @@ static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, t_geom *geom)
 	long_new = modulo_vector(new[0].pt);
 	if (long_cur > long_new)
 	{
+		if (is_new_closer(new[0], field))
+			return (cur);
 		out = new[0];
 		out.c = geom->color;
 	}
@@ -43,6 +59,8 @@ static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, t_geom *geom)
 		long_new = modulo_vector(new[1].pt);
 		if (long_cur > long_new)
 		{
+			if (is_new_closer(new[1], field))
+				return (cur);
 			out = new[1];
 			out.c = geom->color;
 		}
@@ -50,7 +68,7 @@ static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, t_geom *geom)
 	return (out);
 }
 
-t_vec_pos	get_int_pt(t_vec_pos vps, t_geom *geom)
+t_vec_pos	get_int_pt(t_vec_pos vps, t_geom *geom, t_field *field)
 {
 	t_geom		*ptr;
 	t_vec_pos	*out;
@@ -67,7 +85,7 @@ t_vec_pos	get_int_pt(t_vec_pos vps, t_geom *geom)
 		else if (ptr->type == PLANE)
 			out = int_vect_plano(vps, ptr->vp);
 		if (out != NULL)
-			vp_int = get_min_vect(vp_int, out, ptr);
+			vp_int = get_min_vect(vp_int, out, ptr, field);
 		free(out);
 		ptr = ptr->next;
 	}

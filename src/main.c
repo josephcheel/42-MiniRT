@@ -75,6 +75,7 @@ int	validate_scene_file(char *filename)
 			light++;
 		else if (ft_strcmp(content[0], "C") == 0)
 			camera++;
+		printf("%s\n", content[0]);
 		ft_array_free(content, ft_array_size(content));
 		free(line);
 		line = get_next_line(fd);
@@ -82,7 +83,7 @@ int	validate_scene_file(char *filename)
 	free(line);
 	
 	if (ambient < 1 || light < 1 || camera < 1)
-		return (write(2, "The file does not has All Mandatory Objects\n Ambient Light(A), Light(C) and Camera(C)\n", 87));
+		return (write(2, "The file does not has All Mandatory Objects\n Ambient Light(A), Light(L) and Camera(C)\n", 87));
 	else	if (ambient > 1 || light > 1 || camera > 1)
 		return (write(2, "Error: Duplicated Object\n", 26));
 	return (0);

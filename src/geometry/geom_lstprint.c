@@ -59,7 +59,7 @@ void	ft_print_geometry_node(t_geom *node)
 void	ft_print_camera(t_field *field)
 {
 	printf("\n\x1b[38;5;36m=======CAMERA======\x1b[0m\n");
-	printf("Viewpoint:\t\t\tX %f, Y %f, Z %f\n", field->camera.pos.x, field->camera.pos.y, field->camera.pos.z);
+	//printf("Viewpoint:\t\t\tX %f, Y %f, Z %f\n", field->camera.pos.x, field->camera.pos.y, field->camera.pos.z);
 	//printf("Orientation:\t\t\tX %f, Y %f, Z %f\n", field->camera.orient_x, field->camera.orientation.y, field->camera.orientation.z);
 	printf("FOV:\t\t\t\t%d\n", field->camera.fov);
 }

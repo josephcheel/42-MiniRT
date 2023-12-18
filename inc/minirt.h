@@ -227,7 +227,7 @@ void		ft_geom_size(t_geom *head);
 void		ft_free_geometry(t_geom **head);
 void		create_field_vectors(t_field *field);
 void		def_pixel_vp(t_field *field, t_indexes in, t_indexes lim);
-t_vec_pos	get_int_pt(t_vec_pos vps, t_geom *geom);
+t_vec_pos	get_int_pt(t_vec_pos vps, t_geom *geom, t_field *field);
 void		set_point_int(t_field *field);
 int			dump_mem_2_scr(t_field *field);
 
