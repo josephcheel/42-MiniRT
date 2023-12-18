@@ -28,9 +28,16 @@ void	get_camera(t_field *field, char *line)
 	field->camera.center.vz = prod_vectorial(field->camera.center.vx, \
 			field->camera.center.vy);
 	field->camera.fov = ft_atoi(content[3]);
-	lambda = - (field->mlx.size_x - FRAME) * PIXEL / 2 / tan(field->camera.fov / 2);
-	aux = prod_cte_vector(lambda, field->camera.center.vx);
-	field->camera.observer = suma_vector(field->camera.center.pos, aux);
+	if (field->camera.fov == 0)
+	{
+		field->camera.observer = create_vect(LONG_MIN, LONG_MIN, LONG_MIN);
+	}
+	else
+	{
+		lambda = - (field->mlx.size_x - FRAME) * PIXEL / 2 / tan(field->camera.fov / 2);
+		aux = prod_cte_vector(lambda, field->camera.center.vx);
+		field->camera.observer = suma_vector(field->camera.center.pos, aux);
+	}
 	ft_array_free(content, ft_array_size(content));
 }
 

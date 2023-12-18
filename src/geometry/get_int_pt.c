@@ -67,7 +67,7 @@ t_vec_pos	get_int_pt(t_vec_pos vps, t_geom *geom)
 		else if (ptr->type == PLANE)
 			out = int_vect_plano(vps, ptr->vp);
 		if (out != NULL)
-			vp_int = get_min_vect(vps, out, ptr);
+			vp_int = get_min_vect(vp_int, out, ptr);
 		free(out);
 		ptr = ptr->next;
 	}
