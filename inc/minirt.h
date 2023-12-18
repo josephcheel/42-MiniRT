@@ -36,7 +36,7 @@
 # define WIN_NAME "miniRT"
 # define WIN_X 1000
 # define WIN_Y 500
-# define FRAME 10
+# define FRAME 50
 
 # define PIXEL 0.0000054
 enum e_type_geo
@@ -108,31 +108,34 @@ typedef struct s_vec_pos
 typedef struct s_geom
 {
 	enum e_type_geo	type;
-	t_vec_pos	vp; //vp = vector posicionado.
-//	t_vec3		pt1; sustituido por vp.pt
-//	t_vec3		direction; sustituido por vp.v
+	t_vec_pos	vp; 
 	t_color		color;
 	double		r;
 	double		height;
 	void		*next;
 }t_geom;
 
-typedef struct s_camera
+typedef struct s_axis
 {
 	t_vec3		pos;
-	t_vec3		orient_x;
-	t_vec3		orient_y;
-	t_vec3		orient_z;
+	t_vec3		vx;
+	t_vec3		vy;
+	t_vec3		vz;
+}	t_axis;
+
+
+typedef struct s_camera
+{
+	t_axis		center;
 	t_vec3		observer;
-	t_vec_pos	*field_vectors;
-	t_vec_pos	*int_vectors;
+	t_vec_pos	*field_vp;
+	t_vec_pos	*int_vp;
 	int			fov;
 }t_camera;
 
 typedef struct s_light
 {
 	t_vec3	pos;
-	t_vec3	orientation;
 	t_color	color;
 	float	ratio;
 	int		fov;
@@ -193,8 +196,8 @@ int			read_file(char *filename, t_field *field);
 void		free_field(t_field *field);
 
 
-t_vec3		create_vect(double x, double y, double z);
 //algebra vectorial
+t_vec3		create_vect(double x, double y, double z);
 t_vec3		suma_vector(t_vec3 a, t_vec3 b);
 t_vec3		resta_vector(t_vec3 a, t_vec3 b);
 t_vec3		prod_vectorial(t_vec3 a, t_vec3 b);
@@ -209,7 +212,7 @@ double		dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v);
 void		get_devices(t_field *field, char *line);
 void		get_geom(t_field *field, char *line);
 double		*solv_eq_ord_2(double *p);
-t_vec3		conv_vect_unit(t_vec3 v);
+t_vec3		conv_v_unit(t_vec3 v);
 int			is_zero_vec(t_vec3 v);
 
 // Adders
@@ -221,6 +224,12 @@ void		ft_geomadd_back(t_geom **lst, t_geom *new_node);
 t_geom		*ft_geomlast(t_geom *lst);
 void		ft_geom_size(t_geom *head);
 void		ft_free_geometry(t_geom **head);
+void		create_field_vectors(t_field *field);
+void		def_pixel_vp(t_field *field, t_indexes in, t_indexes lim);
+t_vec_pos	get_int_pt(t_vec_pos vps, t_geom *geom);
+void		set_point_int(t_field *field);
+int			dump_mem_2_scr(t_field *field);
+
 // JUST FOR DEBUGGING
 void		ft_print_geometry_node(t_geom *node);
 void		ft_print_geometry_full(t_geom *head);
@@ -228,6 +237,7 @@ void		ft_print_camera(t_field *field);
 void		ft_print_light(t_field *field);
 void		ft_print_ambient(t_field *field);
 void		ft_check_calculations(void);
+void		ft_print_vector(char *s, t_vec_pos v);
 
 
 void		ft_print_vec3(t_vec3 vec);

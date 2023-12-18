@@ -78,3 +78,9 @@ void	ft_print_ambient(t_field *field)
 	printf("Brightness:\t\t\t%f\n", field->ambient.ratio);
 	printf("Color:\t\t\t\tR %d, G %d, B %d\n", field->ambient.color.r, field->ambient.color.g, field->ambient.color.b);
 }
+void	ft_print_vector(char *s, t_vec_pos v)
+{
+	printf("\n%s=======%s=====%s\n", CHR_BLUE, s, RESET);
+	printf("Posicion:\tx<%f>\txy<%f>\tz<%f>\n", v.pt.x, v.pt.y, v.pt.z);
+	printf("Direccion:\tx<%f>\txy<%f>\tz<%f>\n", v.v.x, v.v.y, v.v.z);
+}

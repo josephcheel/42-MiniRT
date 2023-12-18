@@ -26,6 +26,8 @@ t_vec3	add_vec3(char *vector3)
 	vec.x = ft_atof(values[0]);
 	vec.y = ft_atof(values[1]);
 	vec.z = ft_atof(values[2]);
+	if(!vec.x && !vec.y && !vec.z)
+		vec.x = 1;
 	ft_array_free(values, ft_array_size(values));
 	return (vec);
 }

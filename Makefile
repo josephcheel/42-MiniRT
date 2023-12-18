@@ -28,7 +28,7 @@ all_lnx:	MLXFLAGS 	= 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lz
 all_lnx:	mlx_link libft_link $(NAME)
 
 MATHFLAG	=	-lm
-#XFLAGS		=	-fsanitize=address -g2 -g
+XFLAGS		=	-g2 -g #-fsanitize=address 
 CLEAN_CAR	=	\033[2K\r
 
 AR			=	ar rcs
@@ -58,7 +58,7 @@ VECTOR3_DIR			=	vector3/
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 
-INC_DIR		=	inc/
+INC_DIR		=	inc/ -I libft/inc/
 
 LIBFT		=	libft/libft.a
 LIBFT_DIR	= 	libft/
@@ -68,7 +68,7 @@ MLX_DIR		= 	mlx/
 
 INC			=	$(INC_DIR)
 
-INCLUDE		+= -I $(INC)
+INCLUDE		+= $(addprefix -I , $(INC))
 
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
@@ -78,8 +78,9 @@ SRC_MINIRT		=	main.c initializers.c close.c
 CHECKER			=	init_vars.c
 PARSERS			=	device_add.c geometry_add.c adders.c
 GEOMETRY		=	geom_lstcreate.c geom_lstprint.c ft_check_calculations.c \
-					set_pict_colors.c create_field_vectors.c #geom_lstutils.c
-VECTOR3			=	conv_vect_unit.c div_cte_vector.c int_vect_esfera.c  \
+					get_int_pt.c def_pixel_vp.c dump_mem_2_scr.c \
+					#geom_lstutils.c set_pict_colors.c create_field_vectors.c #geom_lstutils.c
+VECTOR3			=	conv_vect_unit.c div_cte_vector.c int_vect_esfera.c  \ss
 				modulo_vector.c prod_escalar.c resta_vector.c \
 				dist_pto_vector.c int_vect_plano.c prod_cte_vector.c \
 				prod_vectorial.c suma_vector.c print_vector.c \
@@ -103,8 +104,8 @@ DEPS			+=	$(addsuffix .d, $(basename $(OBJS)))
 
 $(OBJ_DIR)%.o : %.c Makefile 
 	@$(MD) $(dir $@)
-	@printf "$(CLEAN_CAR)$(OK_COLOR)[miniRT Compiling]$(BLUE_COLOR) : $(WARN_COLOR)$<$(NO_COLOR)"
-	@$(CC) -MT $@ -MMD -MP -c $(CFLAGS) $(INCLUDE) -Imlx  $< -o $@
+	@printf "$(CLEAN_CAR)$(OK_COLOR)[miniRT Compiling]$(BLUE_COLOR) : $(WARN_COLOR)$<$(NO_COLOR) "
+	@$(CC) -MT $@ -MMD -MP -c $(CFLAGS) $(XFLAGS)  $(INCLUDE) -Imlx  $< -o $@
 #-I ./mlx/mlx.h
 
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
