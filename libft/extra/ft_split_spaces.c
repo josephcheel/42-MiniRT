@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 19:16:35 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/10/20 13:26:50 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:37:15 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	wordcounter(char const *s)
 	words = 0;
 	while (s[i])
 	{
-		if ( ft_isspace(s[i]))
+		if (ft_isspace(s[i]))
 			i++;
 		if (!ft_isspace(s[i]) && s[i])
 			words++;

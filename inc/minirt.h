@@ -28,10 +28,10 @@
 
 /// #include<limits.h>
 # ifdef KEY_LNX_H
-#	include "../inc/key_mouse_cod_lnx.h"
+#  include "../inc/key_mouse_cod_lnx.h"
 # endif
 # ifdef KEY_MAC_H
-# 	include "../inc/key_mouse_cod_mac.h"
+#  include "../inc/key_mouse_cod_mac.h"
 # endif
 # define WIN_NAME "miniRT"
 # define WIN_X 1040
@@ -40,6 +40,13 @@
 
 //# define PIXEL 0.0000054
 # define PIXEL 0.05
+# define GEO_IDENT "sp cy pl cn"
+# define DEV_IDENT "C L A"
+
+# define CAMERA 'C'
+# define LIGHT 'L'
+# define AMBNT_LGHT 'A'
+
 enum e_type_geo
 {
 	SPHERE,
@@ -57,26 +64,21 @@ enum e_type_device
 	MAX_DEVICES
 };
 
-
-# define GEO_IDENT "sp cy pl cn"
-# define DEV_IDENT "C L A"
-
-# define CAMERA 'C'
-# define LIGHT 'L'
-# define AMBNT_LGHT 'A'
 typedef struct s_indexes
 {
-	int i;
-	int j;
-	int k;
-} t_indexes;
+	int	i;
+	int	j;
+	int	k;
+
+}	t_indexes;
+
 typedef struct s_img_buff
 {
 	int		pixel_bits;
 	int		line_bytes;
 	int		endian;
 	char	*buffer;
-}t_img_buff;
+}	t_img_buff;
 
 typedef struct s_color
 {
@@ -84,37 +86,37 @@ typedef struct s_color
 	int	g;
 	int	b;
 	int	a;
-}t_color;
+}	t_color;
 
 typedef struct s_vec3
 {
 	double	x;
 	double	y;
 	double	z;
-}t_vec3;
+}	t_vec3;
 
 typedef struct s_vec2
 {
 	double	x;
 	double	y;
-}t_vec2;
+}	t_vec2;
 
 typedef struct s_vec_pos
 {
 	t_vec3	pt;
 	t_vec3	v;
 	t_color	c;
-}t_vec_pos;
+}	t_vec_pos;
 
 typedef struct s_geom
 {
 	enum e_type_geo	type;
-	t_vec_pos	vp; 
-	t_color		color;
-	double		r;
-	double		height;
-	void		*next;
-}t_geom;
+	t_vec_pos		vp;
+	t_color			color;
+	double			r;
+	double			height;
+	void			*next;
+}	t_geom;
 
 typedef struct s_axis
 {
@@ -124,7 +126,6 @@ typedef struct s_axis
 	t_vec3		vz;
 }	t_axis;
 
-
 typedef struct s_camera
 {
 	t_axis		center;
@@ -132,7 +133,7 @@ typedef struct s_camera
 	t_vec_pos	*field_vp;
 	t_vec_pos	*int_vp;
 	int			fov;
-}t_camera;
+}	t_camera;
 
 typedef struct s_light
 {
@@ -141,19 +142,19 @@ typedef struct s_light
 	float	ratio;
 	int		fov;
 	void	*next;
-}t_light;
+}	t_light;
 
 typedef struct s_mouse_pos
 {
 	int	x;
 	int	y;
-}t_mouse_pos;
+}	t_mouse_pos;
 
 typedef struct s_ambient
 {
 	t_color	color;
 	float	ratio;
-}t_ambient;
+}	t_ambient;
 
 typedef struct s_mlx
 {
@@ -163,13 +164,13 @@ typedef struct s_mlx
 	int		frame;
 	int		size_x;
 	int		size_y;
-} t_mlx;
+}	t_mlx;
 
 typedef struct s_ray
 {
 	t_vec3	*point;
 	t_vec3	*dir;	
-}t_ray;
+}	t_ray;
 
 typedef struct s_field
 {
@@ -179,23 +180,21 @@ typedef struct s_field
 	t_camera	camera;
 	t_light		*light;
 	t_mlx		mlx;
-}t_field;
+}	t_field;
 
 // funciones publicas
 //initvars
 //Initializers
-t_field 	*initializer(char *av);
+t_field		*initializer(char *av);
 t_field		*init_field(void);
-void 		init_mlx(t_field *field);
+void		init_mlx(t_field *field);
 
 //Closers
 int			ft_close_red_cross(t_mlx *mlx);
 int			ft_close(int keycode, t_mlx *mlx);
 
-
 int			read_file(char *filename, t_field *field);
 void		free_field(t_field *field);
-
 
 //algebra vectorial
 t_vec3		create_vect(double x, double y, double z);
@@ -210,8 +209,8 @@ t_vec_pos	*int_vect_plano(t_vec_pos pi, t_vec_pos pl);
 t_vec3		prod_cte_vector(double a, t_vec3 b);
 t_vec3		div_cte_vector(double a, t_vec3 b);
 double		dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v);
-void		get_devices(t_field *field, char *line);
-void		get_geom(t_field *field, char *line);
+void		get_devices(t_field *field, char **content);
+void		get_geom(t_field *field, char **content);
 double		*solv_eq_ord_2(double *p);
 t_vec3		conv_v_unit(t_vec3 v);
 int			is_zero_vec(t_vec3 v);
@@ -241,11 +240,9 @@ void		ft_print_ambient(t_field *field);
 void		ft_check_calculations(void);
 void		ft_print_vector(char *s, t_vec_pos v);
 
-
 void		ft_print_vec3(t_vec3 vec);
 
-
-void create_field_vectors(t_field *field);
-int	rgb_to_hex(t_color color);
+void		create_field_vectors(t_field *field);
+int			rgb_to_hex(t_color color);
 
 #endif
