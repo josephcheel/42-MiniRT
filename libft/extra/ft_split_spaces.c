@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_spaces.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../inc/libft.h"
 
-static int	wordcounter(char const *s, char c)
+static int	wordcounter(char const *s)
 {
 	size_t	words;
 	size_t	i;
@@ -21,17 +21,17 @@ static int	wordcounter(char const *s, char c)
 	words = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
+		if ( ft_isspace(s[i]))
 			i++;
-		if (s[i] != c && s[i])
+		if (!ft_isspace(s[i]) && s[i])
 			words++;
-		while (s[i] != c && s[i])
+		while (!ft_isspace(s[i]) && s[i])
 			i++;
 	}
 	return (words);
 }
 
-static char	*stringreturn(char const *s, char c)
+static char	*stringreturn(char const *s)
 {
 	char	*str;
 	int		i;
@@ -39,13 +39,13 @@ static char	*stringreturn(char const *s, char c)
 	i = 0;
 	if (!s)
 		return (NULL);
-	while (s[i] && s[i] != c)
+	while (s[i] && !ft_isspace(s[i]))
 		i++;
 	str = malloc(sizeof(char) * (i + 1));
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (s[i] && s[i] != c)
+	while (s[i] && !ft_isspace(s[i]))
 	{
 		str[i] = s[i];
 		i++;
@@ -62,22 +62,22 @@ static char	**ft_free(char **ret, int i)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split_spaces(char const *s)
 {
 	char	**ret;
 	int		i;
 	int		string;
 
-	string = wordcounter(s, c);
+	string = wordcounter(s);
 	i = 0;
 	ret = malloc(sizeof(char **) * (string + 1));
 	if (!ret || !s)
 		return (NULL);
 	while (i < string)
 	{
-		while (*s == c)
+		while (ft_isspace(*s))
 			s++;
-		ret[i] = stringreturn(s, c);
+		ret[i] = stringreturn(s);
 		if (ret[i] == NULL)
 			return (ft_free(ret, i));
 		s += ft_strlen(ret[i]);

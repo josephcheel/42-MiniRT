@@ -102,4 +102,6 @@ int				ft_isallspace(char *str);
 char			*get_next_line(int fd);
 void			ft_print_array(char **array);
 double			ft_atof(const char *str);
+char			**ft_split_spaces(char const *s);
+
 #endif
