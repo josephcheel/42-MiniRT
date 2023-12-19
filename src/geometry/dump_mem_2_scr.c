@@ -46,9 +46,9 @@ static t_indexes	alloc_field_mem(t_field *field)
 
 static void	put_pixel_color(char *pixel, t_color color)
 {
-	pixel[0] = color.r;
+	pixel[0] = color.b;
 	pixel[1] = color.g;
-	pixel[2] = color.b;
+	pixel[2] = color.r;
 	pixel[3] = color.a;
 }
 

@@ -12,16 +12,18 @@
 
 #include "../../inc/minirt.h"
 
-static t_vec_pos	init_vp(void)
+static t_vec_pos	init_vp(t_color c)
 {
 	t_vec_pos	vp;
 
 	vp.v = create_vect(0, 0, 0);
 	vp.pt = create_vect(LONG_MAX, LONG_MAX, LONG_MAX);
+	vp.c = c;
 	return (vp);
 }
-
+/*
 bool	is_new_closer(t_vec_pos new, t_field *field)
+
 {
 	double observer_point;
 	double observer_camera;
@@ -34,8 +36,19 @@ bool	is_new_closer(t_vec_pos new, t_field *field)
 		return (true);
 	return (false);
 }
+*/
 
-static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, t_geom *geom, t_field *field)
+bool	is_new_closer(t_vec_pos new, t_vec_pos vps)
+{
+	t_vec3 temp;
+
+	temp = conv_v_unit(resta_vector(new.pt, vps.pt));
+	if (prod_escalar(temp, vps.v) > 0)
+		return (false);
+	return (true);
+}
+
+static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, t_geom *geom, t_vec_pos vps)
 {
 	t_vec_pos	out;
 	double		long_cur;
@@ -48,7 +61,7 @@ static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, t_geom *geom, t_fie
 	long_new = modulo_vector(new[0].pt);
 	if (long_cur > long_new)
 	{
-		if (is_new_closer(new[0], field))
+		if (is_new_closer(new[0], vps))
 			return (cur);
 		out = new[0];
 		out.c = geom->color;
@@ -59,10 +72,10 @@ static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, t_geom *geom, t_fie
 		long_new = modulo_vector(new[1].pt);
 		if (long_cur > long_new)
 		{
-			if (is_new_closer(new[1], field))
+			if (is_new_closer(new[1], vps))
 				return (cur);
 			out = new[1];
-			out.c = geom->color;
+		out.c = geom->color;
 		}
 	}
 	return (out);
@@ -75,7 +88,7 @@ t_vec_pos	get_int_pt(t_vec_pos vps, t_geom *geom, t_field *field)
 	t_vec_pos	vp_int;
 
 	ptr = geom;
-	vp_int = init_vp();
+	vp_int = init_vp(vps.c);
 	while (ptr)
 	{
 		if (ptr->type == SPHERE)
@@ -85,7 +98,10 @@ t_vec_pos	get_int_pt(t_vec_pos vps, t_geom *geom, t_field *field)
 		else if (ptr->type == PLANE)
 			out = int_vect_plano(vps, ptr->vp);
 		if (out != NULL)
-			vp_int = get_min_vect(vp_int, out, ptr, field);
+		{
+			vp_int = get_min_vect(vp_int, out, ptr, vps);
+			vp_int.c = set_pixel_color( vp_int, field->light->pos);
+		}
 		free(out);
 		ptr = ptr->next;
 	}
