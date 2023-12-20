@@ -12,9 +12,10 @@
 
 #include "../../inc/minirt.h"
 
-static t_color apply_fact (t_color c, double f)
+static t_color	apply_fact(t_color c, double f)
 {
-	t_color out;
+	t_color	out;
+
 	out.r = (int)c.r * f;
 	out.g = (int)c.g * f;
 	out.b = (int)c.b * f;
@@ -24,12 +25,12 @@ static t_color apply_fact (t_color c, double f)
 t_color	set_pixel_color(t_vec_pos vp, t_vec3 vl)
 {
 	t_vec_pos	v_luz_pt;
-	double	shadow_fact;
+	double		shadow_fact;
 
 	v_luz_pt.pt = vl;
 	v_luz_pt.v = conv_v_unit(resta_vector(vp.pt, vl));
 	shadow_fact = prod_escalar (vp.v, v_luz_pt.v);
 	shadow_fact = (1 - shadow_fact) / 2;
-	vp.c = apply_fact ( vp.c, shadow_fact);
+	vp.c = apply_fact (vp.c, shadow_fact);
 	return (vp.c);
 }
