@@ -69,7 +69,7 @@ int	dump_mem_2_scr(t_field *field)
 	{
 		in.k = in.i + in.j * (lim.i);
 		def_pixel_vp(field, in, lim);
-		get_int_pt(in.k, field);
+		get_colored_int_pt(in.k, field);
 		put_pixel_color(&buf.buffer[(in.j + FRAME) * buf.line_bytes + \
 			(in.i + FRAME) * buf.pixel_bits / 8], field->camera.int_vp[in.k].c);
 		in = inc_indexes(in, lim);

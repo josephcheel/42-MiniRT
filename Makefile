@@ -84,8 +84,8 @@ VECTOR3			=	conv_v_unit.c div_cte_vector.c int_vect_esfera.c \
 				modulo_vector.c prod_escalar.c resta_vector.c \
 				dist_pto_vector.c int_vect_plano.c prod_cte_vector.c \
 				prod_vectorial.c suma_vector.c print_vector.c \
-				create_vector.c int_vect_cilind.c solv_eq_ord_2.c is_zero_vect.c
-
+				create_vector.c int_vect_cilind.c solv_eq_ord_2.c is_zero_vect.c \
+				init_vp.c
 GRAPHICS		=
 
 SRCS			+=	$(addprefix $(SRC_DIR), $(SRC_MINIRT))

@@ -12,16 +12,6 @@
 
 #include "../../inc/minirt.h"
 
-static t_vec_pos	init_vp(t_color c)
-{
-	t_vec_pos	vp;
-
-	vp.v = create_vect(0, 0, 0);
-	vp.pt = create_vect(LONG_MAX, LONG_MAX, LONG_MAX);
-	vp.c = c;
-	return (vp);
-}
-
 bool	is_new_closer(t_vec_pos new, t_vec_pos vps)
 {
 	t_vec3	temp;
@@ -59,7 +49,22 @@ static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, \
 	return (out);
 }
 
-void	get_int_pt(int pixel, t_field *field)
+t_vec_pos *get_int_pt(t_vec_pos *vps, t_geom *geo)
+{
+	t_vec_pos	*out;
+
+	if (geo->type == SPHERE)
+		out = int_vect_esfera(*vps, geo->vp.pt, geo->r);
+	else if (geo->type == CYLINDER)
+		out = int_vect_cilind(*vps, geo->vp, geo->r);
+	else if (geo->type == PLANE)
+		out = int_vect_plano(*vps, geo->vp);
+	else
+		out = NULL;
+	return (out);
+}
+
+void	get_colored_int_pt(int pixel, t_field *field)
 {
 	t_geom		*ptr;
 	t_vec_pos	*out;
@@ -72,18 +77,13 @@ void	get_int_pt(int pixel, t_field *field)
 	*vp_int = init_vp(vps->c);
 	while (ptr)
 	{
-		if (ptr->type == SPHERE)
-			out = int_vect_esfera(*vps, ptr->vp.pt, ptr->r);
-		else if (ptr->type == CYLINDER)
-			out = int_vect_cilind(*vps, ptr->vp, ptr->r);
-		else if (ptr->type == PLANE)
-			out = int_vect_plano(*vps, ptr->vp);
+		out = get_int_pt(vps, ptr);
 		if (out != NULL)
 		{
 			*vp_int = get_min_vect(*vp_int, out, ptr, *vps);
-			vp_int->c = set_pixel_color(*vp_int, field->light->pos);
+			vp_int->c = set_pixel_color(*vp_int, field);
+			free(out);
 		}
-		free(out);
 		ptr = ptr->next;
 	}
 }

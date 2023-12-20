@@ -35,11 +35,11 @@
 # endif
 # define WIN_NAME "miniRT"
 # define WIN_X 1040
-# define WIN_Y 540
+# define WIN_Y 1040
 # define FRAME 20
 
 //# define PIXEL 0.0000054
-# define PIXEL 0.05
+# define PIXEL 0.5
 # define GEO_IDENT "sp cy pl cn"
 # define DEV_IDENT "C L A"
 
@@ -214,6 +214,7 @@ void		get_geom(t_field *field, char *content);
 double		*solv_eq_ord_2(double *p);
 t_vec3		conv_v_unit(t_vec3 v);
 int			is_zero_vec(t_vec3 v);
+t_vec_pos	init_vp(t_color c);
 
 // Adders
 t_vec3		add_vec3(char *vector3);
@@ -226,10 +227,11 @@ void		ft_geom_size(t_geom *head);
 void		ft_free_geometry(t_geom **head);
 void		create_field_vectors(t_field *field);
 void		def_pixel_vp(t_field *field, t_indexes in, t_indexes lim);
-void		get_int_pt(int pixel, t_field *field);
+void		get_colored_int_pt(int pixel, t_field *field);
+t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo);
 void		set_point_int(t_field *field);
 int			dump_mem_2_scr(t_field *field);
-t_color		set_pixel_color(t_vec_pos vp, t_vec3 vl);
+t_color		set_pixel_color(t_vec_pos vp, t_field *field);
 
 // JUST FOR DEBUGGING
 void		ft_print_geometry_node(t_geom *node);
