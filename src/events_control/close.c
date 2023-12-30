@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_vector.c                                  :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/13 12:45:46 by jcheel-n         ###   ########.fr       */
+/*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
+/*   Updated: 2023/12/13 12:45:33 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-void	ft_print_vec3(char *s, t_vec3 vec)
+/// @brief Function to free all variables and close the windows.
+/// @param field 
+/// @return integer as a return function.
+int	ft_close(t_field *field)
 {
-	printf("%s ", s);
-	printf("x: %lf, y: %lf, z: %lf\n", vec.x, vec.y, vec.z);
+	free_field(field);
+	exit(EXIT_SUCCESS);
+	return (0);
 }
+/*
+int	ft_close(int keycode, t_mlx *mlx)
+{
+	if (keycode == XK_ESC)
+	{
+		mlx_destroy_window(mlx->mlx, mlx->win);
+		exit(EXIT_SUCCESS);
+		return (1);
+	}
+	return (0);
+}
+*/

@@ -34,9 +34,9 @@
 #  include "../inc/key_mouse_cod_mac.h"
 # endif
 # define WIN_NAME "miniRT"
-# define WIN_X 1040
-# define WIN_Y 1040
-# define FRAME 20
+# define WIN_X 540
+# define WIN_Y 540
+# define FRAME 0
 
 //# define PIXEL 0.0000054
 # define PIXEL 0.5
@@ -46,6 +46,28 @@
 # define CAMERA 'C'
 # define LIGHT 'L'
 # define AMBNT_LGHT 'A'
+
+// eventslist
+// Key	Event	 	Key	Event	 	Key	Event
+#define EVENT_KEY_PRESS 02
+#define EVENT_KEY_RELEASE 03
+#define EVENT_BUTTON_PRESS 04
+#define EVENT_BUTTON_RELEASE 05
+#define EVENT_MOTION_NOTIFY 06
+#define EVENT_DESTROY_NOTIFY 17
+// Key	Event	 	Key	Event	 	Key	Event
+#define MASK_KEY_PRESS 0
+#define MASK_KEY_RELEASE 1
+#define MASK_BUTTON_PRESS 2
+#define MASK_BUTTON_RELEASE 3
+#define MASK_MOTION_NOTIFY 6
+#define MASK_DESTROY_NOTIFY 17
+//Buttno definition
+#define MOUSE_BTN_LEFT 1
+#define MOUSE_BTN_RIGHT 3
+#define MOUSE_BTN_MIDDLE 2
+#define MOUSE_BTN_ROT_UP 4
+#define MOUSE_BTN_ROT_DW 5
 
 enum e_type_geo
 {
@@ -126,12 +148,18 @@ typedef struct s_axis
 	t_vec3		vz;
 }	t_axis;
 
+typedef struct s_int_pts
+{
+	t_vec_pos	pt;
+	void		*geom;
+}	t_int_pts;
+
 typedef struct s_camera
 {
 	t_axis		center;
 	t_vec3		observer;
 	t_vec_pos	*field_vp;
-	t_vec_pos	*int_vp;
+	t_int_pts	*int_vp;
 	int			fov;
 }	t_camera;
 
@@ -144,11 +172,16 @@ typedef struct s_light
 	void	*next;
 }	t_light;
 
-typedef struct s_mouse_pos
+typedef struct s_event
 {
-	int	x;
-	int	y;
-}	t_mouse_pos;
+	int	key_ctrl_press;
+	char	key_pres2;
+	int		btn_rght_presd;
+	int		btn_cent_presd;
+	int		btn_left_presd;
+	int		x;
+	int		y;
+}	t_event;
 
 typedef struct s_ambient
 {
@@ -180,6 +213,8 @@ typedef struct s_field
 	t_camera	camera;
 	t_light		*light;
 	t_mlx		mlx;
+	t_event		events;
+	t_vec3		aux;
 }	t_field;
 
 // funciones publicas
@@ -190,8 +225,8 @@ t_field		*init_field(void);
 void		init_mlx(t_field *field);
 
 //Closers
-int			ft_close_red_cross(t_mlx *mlx);
-int			ft_close(int keycode, t_mlx *mlx);
+int			ft_close(t_field *field);
+//int			ft_close(int keycode, t_mlx *mlx);
 
 int			read_file(char *filename, t_field *field);
 void		free_field(t_field *field);
@@ -231,7 +266,8 @@ void		get_colored_int_pt(int pixel, t_field *field);
 t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo);
 void		set_point_int(t_field *field);
 int			dump_mem_2_scr(t_field *field);
-t_color		set_pixel_color(t_vec_pos vp, t_field *field);
+int			move_light(t_field *field);
+t_color		set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl);
 
 // JUST FOR DEBUGGING
 void		ft_print_geometry_node(t_geom *node);
@@ -241,10 +277,18 @@ void		ft_print_light(t_field *field);
 void		ft_print_ambient(t_field *field);
 void		ft_check_calculations(void);
 void		ft_print_vector(char *s, t_vec_pos v);
-
-void		ft_print_vec3(t_vec3 vec);
+void		print_pixel_values(int x, int y, t_field *field);
+void		ft_print_vec3(char *s, t_vec3 vec);
+void		print_color_values(char *s, t_color c);
 
 void		create_field_vectors(t_field *field);
 int			rgb_to_hex(t_color color);
+
+//events
+int			mouse_events_mov(int x, int y, t_field *field);
+int			mouse_events_rel(int mouse, int x, int y, t_field *field);
+int			mouse_events_pre(int mouse, int x, int y, t_field *field);
+int			key_events_press(int key, t_field *field);
+int			key_events_release(int key, t_field *field);
 
 #endif

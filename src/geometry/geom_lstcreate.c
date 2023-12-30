@@ -1,5 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   geom_lstcreate.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
+/*   Updated: 2023/12/04 04:13:44 by jcheel-n         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-//#include "../../inc/geometry.h"
 #include "../../inc/minirt.h"
 // t_geom	*ftgeom_new(char *id, char *value)
 // {
@@ -47,19 +57,13 @@ t_geom	*ft_geomlast(t_geom *lst)
 
 void	ft_free_geometry(t_geom **head)
 {
-	t_geom *temp;
+	t_geom	*temp;
 
 	temp = *head;
 	while (temp)
 	{
 		temp = temp->next;
 		free(*head);
-		// temp->vp.pt;
-		// temp->vp.v;
-		// temp->height;
-		// temp->color;
-		// temp->r;
-		// temp->type;
 		*head = temp;
 	}
 }

@@ -12,7 +12,7 @@
 
 #include "../../inc/minirt.h"
 
-bool	is_new_closer(t_vec_pos new, t_vec_pos vps)
+static bool	is_behind_cam(t_vec_pos new, t_vec_pos vps)
 {
 	t_vec3	temp;
 
@@ -22,10 +22,10 @@ bool	is_new_closer(t_vec_pos new, t_vec_pos vps)
 	return (true);
 }
 
-static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, \
+static t_int_pts	get_min_vect(t_int_pts cur, t_vec_pos *new, \
 						t_geom *geom, t_vec_pos vps)
 {
-	t_vec_pos	out;
+	t_int_pts	out;
 	t_vec_pos	aux;
 	double		long_cur;
 	double		long_new;
@@ -34,22 +34,23 @@ static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, \
 	aux = new[0];
 	if (!new)
 		return (cur);
-	long_cur = modulo_vector(cur.pt);
+	long_cur = modulo_vector(cur.pt.pt);
 	long_new = modulo_vector(new[0].pt);
 	if (geom->type != PLANE && modulo_vector(new[1].pt) < long_new)
 	{
 		aux = new[1];
 		long_new = modulo_vector(new[1].pt);
 	}
-	if (long_cur > long_new && !is_new_closer(aux, vps))
+	if (long_cur > long_new && !is_behind_cam(aux, vps))
 	{
-		out = aux;
-		out.c = geom->color;
+		out.pt = aux;
+		out.pt.c = geom->color;
+		out.geom = geom;
 	}
 	return (out);
 }
 
-t_vec_pos *get_int_pt(t_vec_pos *vps, t_geom *geo)
+t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo)
 {
 	t_vec_pos	*out;
 
@@ -64,26 +65,31 @@ t_vec_pos *get_int_pt(t_vec_pos *vps, t_geom *geo)
 	return (out);
 }
 
+/// @brief Gives the color of the closest surface to the pixel.
+/// @param pixel
+/// @param field
 void	get_colored_int_pt(int pixel, t_field *field)
 {
 	t_geom		*ptr;
 	t_vec_pos	*out;
-	t_vec_pos	*vp_int;
+	t_int_pts	*vp_int;
 	t_vec_pos	*vps;
 
 	ptr = field->geom;
 	vps = &field->camera.field_vp[pixel];
 	vp_int = &field->camera.int_vp[pixel];
-	*vp_int = init_vp(vps->c);
+	vp_int->pt = init_vp(vps->c);
+	vp_int->geom = NULL;
 	while (ptr)
 	{
 		out = get_int_pt(vps, ptr);
 		if (out != NULL)
 		{
 			*vp_int = get_min_vect(*vp_int, out, ptr, *vps);
-			vp_int->c = set_pixel_color(*vp_int, field);
+			vps->c = vp_int->pt.c;
 			free(out);
 		}
 		ptr = ptr->next;
 	}
+	vp_int->pt.c = set_pixel_color(*vp_int, field, *vps);
 }
