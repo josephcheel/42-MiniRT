@@ -174,8 +174,9 @@ typedef struct s_light
 
 typedef struct s_event
 {
-	int	key_ctrl_press;
-	char	key_pres2;
+	int		key_ctrl_press;
+	int		key_alt_press;
+	int		key_shift_press;
 	int		btn_rght_presd;
 	int		btn_cent_presd;
 	int		btn_left_presd;
