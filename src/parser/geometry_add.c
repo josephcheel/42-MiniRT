@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/05 18:38:10 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/02 01:48:42 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_geom	*get_sphere(char *line)
 {
 	t_geom	*sphere;
 	char	**content;
-	
+
 	content = ft_split(line, ' ');
 	sphere = malloc(sizeof(t_geom));
 	sphere->type = SPHERE;
@@ -32,8 +32,8 @@ t_geom	*get_sphere(char *line)
 t_geom	*get_plane(char *line)
 {
 	t_geom	*plane;
-	char **content;
-	
+	char	**content;
+
 	content = ft_split(line, ' ');
 	plane = malloc(sizeof(t_geom));
 	plane->type = PLANE;
@@ -49,10 +49,8 @@ t_geom	*get_cylinder( char *line)
 {
 	t_geom	*cylinder;
 	char	**content;
-	
-	
-	content = ft_split(line, ' ');
 
+	content = ft_split(line, ' ');
 	cylinder = malloc(sizeof(t_geom));
 	cylinder->type = CYLINDER;
 	cylinder->vp.pt = add_vec3(content[1]);
@@ -67,12 +65,9 @@ t_geom	*get_cylinder( char *line)
 
 void	get_geom(t_field *field, char *line)
 {
-	t_geom *temp;
-	char **type;
+	t_geom	*temp;
+	char	**type;
 
-	// DEBUG
-//	printf ("es un a geometria -- $%s$\n", line);
-	
 	temp = NULL;
 	type = ft_split(line, ' ');
 	if (ft_strcmp(type[0], "sp") == 0)

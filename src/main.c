@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/13 12:45:33 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/02 01:59:16 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,11 @@ int	validate_scene_file(char *filename)
 	char	**content;
 	char	*line;
 	int		fd;
-	int		ambient;
-	int		light;
-	int		camera;
-	
-	ambient = 0;
-	light = 0;
-	camera = 0;
+	t_vec3	elem;
+
+	elem.x = 0;
+	elem.y = 0;
+	elem.z = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (write(2, "File Error\n", 12));
@@ -83,19 +81,19 @@ int	validate_scene_file(char *filename)
 	{
 		content = ft_split(line, ' ');
 		if (ft_strcmp(content[0], "A") == 0)
-			ambient++;
+			elem.x ++;
 		else if (ft_strcmp(content[0], "L") == 0)
-			light++;
+			elem.y++;
 		else if (ft_strcmp(content[0], "C") == 0)
-			camera++;
+			elem.z++;
 		ft_array_free(content, ft_array_size(content));
 		free(line);
 		line = get_next_line(fd);
 	}
 	free(line);
-	if (ambient < 1 || light < 1 || camera < 1)
+	if (elem.x < 1 || elem.y < 1 || elem.z < 1)
 		return (prt_error());
-	else	if (ambient > 1 || light > 1 || camera > 1)
+	else if (elem.x > 1 || elem.y > 1 || elem.z > 1)
 		return (write(2, "Error: Duplicated Object\n", 26));
 	return (0);
 }
@@ -117,12 +115,3 @@ int	main(int ac, char **av)
 	free_field(field);
 	return (0);
 }
-	//DEBUG
-/*
-	ft_check_calculations();
-	ft_print_camera(field);
-	ft_print_light(field);
-	ft_print_ambient(field);
-	ft_print_geometry_full(field->geom);
-*/
-	// DEBUG END

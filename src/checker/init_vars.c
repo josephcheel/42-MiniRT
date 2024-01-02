@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/05 18:39:06 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/02 01:53:15 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,7 @@ int	read_file(char *filename, t_field *field)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-	{
-		ft_putstr_fd("File Error\n", 2);
-		return (1);
-	}
+		return (write(2, "File Error\n", 12));
 	raw_line = get_next_line(fd);
 	while (raw_line)
 	{
@@ -118,7 +115,7 @@ int	read_file(char *filename, t_field *field)
 
 void	free_field(t_field *field)
 {
-	//mlx_destroy_image(field->mlx.mlx, field->mlx.img);
+	mlx_destroy_image(field->mlx.mlx, field->mlx.img);
 	mlx_destroy_window(field->mlx.mlx, field->mlx.win);
 	ft_free_geometry(&field->geom);
 	free(field->light);

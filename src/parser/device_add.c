@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/17 21:39:28 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/02 01:52:07 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	get_camera(t_field *field, char *line)
 {
-	char **content;
+	char	**content;
 	t_vec3	aux;
 	double	lambda;
 
@@ -43,8 +43,7 @@ void	get_camera(t_field *field, char *line)
 
 void	get_light(t_field *field, char *line)
 {
-//	t_geom *sphere;
-	char **content;
+	char	**content;
 
 	content = ft_split(line, ' ');
 	field->light = malloc(sizeof(t_light));
@@ -52,22 +51,14 @@ void	get_light(t_field *field, char *line)
 	field->light->ratio = ft_atof(content[2]);
 	field->light->color = add_color(content[3]);
 	field->light->next = NULL;
-/*	sphere = malloc(sizeof(t_geom));
-	sphere->type = SPHERE;
-	sphere->vp.pt = add_vec3(content[1]);
-	sphere->vp.v = create_vect(0, 0, 0);
-	sphere->r = 5;
-	sphere->color = add_color(content[3]);
-	sphere->next = NULL;
-	ft_geomadd_back(&field->geom, sphere);
-*/	ft_array_free(content, ft_array_size(content));
+	ft_array_free(content, ft_array_size(content));
 }
 
 void	get_ambient_light(t_field *field, char *line)
 {
-	char **content;
+	char	**content;
+
 	content = ft_split(line, ' ');
-	
 	field->ambient.ratio = ft_atof(content[1]);
 	field->ambient.color = add_color(content[2]);
 	ft_array_free(content, ft_array_size(content));
@@ -75,11 +66,8 @@ void	get_ambient_light(t_field *field, char *line)
 
 void	get_devices(t_field *field, char *line)
 {
-	char **type;
-	
-	// DEBUG
-//	printf("es un device -- $%s$\n", line);
-	
+	char	**type;
+
 	type = ft_split(line, ' ');
 	if (ft_strcmp(type[0], "C") == 0)
 		get_camera(field, line);

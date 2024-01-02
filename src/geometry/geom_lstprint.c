@@ -1,33 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   geom_lstprint.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/02 02:06:01 by jcheel-n          #+#    #+#             */
+/*   Updated: 2024/01/02 02:06:04 by jcheel-n         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minirt.h"
-
-// void	ft_printlist_id(t_geom *head, char *id)
-// {
-// 	t_geom	*temporary;
-
-// 	temporary = head;
-// 	printf("%s: ", id);
-// 	while (temporary != NULL)
-// 	{
-// 		printf("%s - ", temporary->id);
-// 		temporary = temporary->next;
-// 	}
-// 	printf("\n");
-// }
-
-// void	ft_printlist_value(t_geom *head, char *id)
-// {
-// 	t_geom	*temporary;
-
-// 	temporary = head;
-// 	printf("%s: ", id);
-// 	while (temporary != NULL)
-// 	{
-// 		printf("%s - ", temporary->value);
-// 		temporary = temporary->next;
-// 	}
-// 	printf("\n");
-// }
 
 void	ft_print_geometry_full(t_geom *head)
 {

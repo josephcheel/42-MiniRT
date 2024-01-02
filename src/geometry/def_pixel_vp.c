@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/04 04:13:44 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/02 02:05:03 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 /// @param lim
 /// @param axis
 /// @return A vector t_vec3 of the position in space ()
+
 static t_vec3	pix_vec(t_indexes in, t_indexes lim, t_axis axis)
 {
 	t_vec3	tmp[3];
@@ -38,6 +39,7 @@ static t_vec3	pix_vec(t_indexes in, t_indexes lim, t_axis axis)
 /// @param field
 /// @param in
 /// @param lim
+
 void	def_pixel_vp(t_field *field, t_indexes in, t_indexes lim)
 {
 	field->camera.field_vp[in.i + in.j * (lim.i)].pt = \

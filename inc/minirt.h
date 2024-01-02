@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/20 17:06:37 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/02 02:00:32 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,25 @@
 
 // eventslist
 // Key	Event	 	Key	Event	 	Key	Event
-#define EVENT_KEY_PRESS 02
-#define EVENT_KEY_RELEASE 03
-#define EVENT_BUTTON_PRESS 04
-#define EVENT_BUTTON_RELEASE 05
-#define EVENT_MOTION_NOTIFY 06
-#define EVENT_DESTROY_NOTIFY 17
+# define EVENT_KEY_PRESS 02
+# define EVENT_KEY_RELEASE 03
+# define EVENT_BUTTON_PRESS 04
+# define EVENT_BUTTON_RELEASE 05
+# define EVENT_MOTION_NOTIFY 06
+# define EVENT_DESTROY_NOTIFY 17
 // Key	Event	 	Key	Event	 	Key	Event
-#define MASK_KEY_PRESS 0
-#define MASK_KEY_RELEASE 1
-#define MASK_BUTTON_PRESS 2
-#define MASK_BUTTON_RELEASE 3
-#define MASK_MOTION_NOTIFY 6
-#define MASK_DESTROY_NOTIFY 17
+# define MASK_KEY_PRESS 0
+# define MASK_KEY_RELEASE 1
+# define MASK_BUTTON_PRESS 2
+# define MASK_BUTTON_RELEASE 3
+# define MASK_MOTION_NOTIFY 6
+# define MASK_DESTROY_NOTIFY 17
 //Buttno definition
-#define MOUSE_BTN_LEFT 1
-#define MOUSE_BTN_RIGHT 3
-#define MOUSE_BTN_MIDDLE 2
-#define MOUSE_BTN_ROT_UP 4
-#define MOUSE_BTN_ROT_DW 5
+# define MOUSE_BTN_LEFT 1
+# define MOUSE_BTN_RIGHT 3
+# define MOUSE_BTN_MIDDLE 2
+# define MOUSE_BTN_ROT_UP 4
+# define MOUSE_BTN_ROT_DW 5
 
 enum e_type_geo
 {
@@ -209,7 +209,7 @@ typedef struct s_ray
 typedef struct s_field
 {
 	t_geom		*geom;
-	t_color		bck_col; // is this like ambient light?
+	t_color		bck_col;
 	t_ambient	ambient;
 	t_camera	camera;
 	t_light		*light;
