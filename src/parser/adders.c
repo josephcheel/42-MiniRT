@@ -43,10 +43,12 @@ t_color	add_color(char *color)
 	values = ft_split(color, ',');
 	if (ft_array_size(values) != 3)
 		return ((t_color){0});
+//	printf("%s -- %s -- %s", values[0], values[1], values[2]);
 	rgba.r = ft_atoi(values[0]);
 	rgba.g = ft_atoi(values[1]);
 	rgba.b = ft_atoi(values[2]);
 	rgba.a = 0;
 	ft_array_free(values, ft_array_size(values));
+//	print_color_values("valor color ambiente:", rgba);
 	return (rgba);
 }

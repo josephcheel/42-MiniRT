@@ -12,6 +12,13 @@
 
 #include "../../inc/minirt.h"
 
+/// @brief Calculates the position in space of the i, j picture of the camera.
+/// @brief The position depends of the PIXEL dimension which is defined into
+/// @brief  the .hfile.
+/// @param in
+/// @param lim
+/// @param axis
+/// @return A vector t_vec3 of the position in space ()
 static t_vec3	pix_vec(t_indexes in, t_indexes lim, t_axis axis)
 {
 	t_vec3	tmp[3];
@@ -26,6 +33,11 @@ static t_vec3	pix_vec(t_indexes in, t_indexes lim, t_axis axis)
 	return (aux);
 }
 
+/// @brief creates the field of vectors (position & direction) for every pixel
+/// @brief in the camera.
+/// @param field
+/// @param in
+/// @param lim
 void	def_pixel_vp(t_field *field, t_indexes in, t_indexes lim)
 {
 	field->camera.field_vp[in.i + in.j * (lim.i)].pt = \

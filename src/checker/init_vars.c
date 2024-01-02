@@ -118,6 +118,8 @@ int	read_file(char *filename, t_field *field)
 
 void	free_field(t_field *field)
 {
+	//mlx_destroy_image(field->mlx.mlx, field->mlx.img);
+	mlx_destroy_window(field->mlx.mlx, field->mlx.win);
 	ft_free_geometry(&field->geom);
 	free(field->light);
 	free(field);

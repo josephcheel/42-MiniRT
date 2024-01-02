@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   int_vect_plano.c                                  :+:      :+:    :+:   */
+/*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/04 18:37:30 by eavedill         ###   ########.fr       */
+/*   Created: 2023/02/26 15:51:44 by eavedill          #+#    #+#             */
+/*   Updated: 2023/04/02 09:32:16 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-t_vec_pos	*int_vect_plano(t_vec_pos pi, t_vec_pos pl)
+int	key_events(int key, t_field *field)
 {
-	double		lambda;
-	t_vec_pos	*out;
-
-	out = (t_vec_pos *)malloc(2 * sizeof(t_vec_pos));
-	out[0].pt = resta_vector(pl.pt, pi.pt);
-	lambda = prod_escalar(pl.v, out[0].pt) / prod_escalar(pl.v, pi.v);
-	out[0].pt = prod_cte_vector(lambda, pi.v);
-	out[0].pt = suma_vector(pi.pt, out[0].pt);
-	out[0].v = pl.v;
-	out[1] = init_vp(pi.c);
-	return (out);
+	printf("Entro en keyevents press %x -- %p\n", key, field);
+	if (key == XK_CTRL)
+	{
+		printf("key Ctrl antes %x -->%i\n", key, field->events.key_ctrl_press);
+		field->events.key_ctrl_press = 1;
+		if (!field->events.btn_left_presd)
+			field->aux = create_vect(0, 0, 0);
+		printf("key Ctrl post activado %x -->%i\n",
+			key, field->events.key_ctrl_press);
+	}
+	return (0);
 }

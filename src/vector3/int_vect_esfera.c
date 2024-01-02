@@ -19,7 +19,7 @@ t_vec_pos	*int_vect_esfera(t_vec_pos vpi, t_vec3 pr, double r)
 	t_vec3		v2;
 	double		*lambda;
 
-	if (dist_pto_vector(vpi.pt, vpi.v, pr) > r)
+	if (dist_pto_vector(vpi.pt, pr, vpi.v) > r)
 		return (NULL);
 	v2 = resta_vector(vpi.pt, pr);
 	param[0] = prod_escalar(vpi.v, vpi.v);

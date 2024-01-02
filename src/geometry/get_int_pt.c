@@ -12,35 +12,9 @@
 
 #include "../../inc/minirt.h"
 
-static t_vec_pos	init_vp(t_color c)
+static bool	is_behind_cam(t_vec_pos new, t_vec_pos vps)
 {
-	t_vec_pos	vp;
-
-	vp.v = create_vect(0, 0, 0);
-	vp.pt = create_vect(LONG_MAX, LONG_MAX, LONG_MAX);
-	vp.c = c;
-	return (vp);
-}
-/*
-bool	is_new_closer(t_vec_pos new, t_field *field)
-
-{
-	double observer_point;
-	double observer_camera;
-	t_vec3 temp;
-
-	temp = resta_vector( new.pt, field->camera.observer);
-	observer_point = sqrt(prod_escalar(temp, temp));
-	observer_camera = (field->mlx.size_x - FRAME) * PIXEL / 2 / tan(field->camera.fov / 2);
-	if (observer_point <= observer_camera)
-		return (true);
-	return (false);
-}
-*/
-
-bool	is_new_closer(t_vec_pos new, t_vec_pos vps)
-{
-	t_vec3 temp;
+	t_vec3	temp;
 
 	temp = conv_v_unit(resta_vector(new.pt, vps.pt));
 	if (prod_escalar(temp, vps.v) > 0)
@@ -48,62 +22,74 @@ bool	is_new_closer(t_vec_pos new, t_vec_pos vps)
 	return (true);
 }
 
-static t_vec_pos	get_min_vect(t_vec_pos cur, t_vec_pos *new, t_geom *geom, t_vec_pos vps)
+static t_int_pts	get_min_vect(t_int_pts cur, t_vec_pos *new, \
+						t_geom *geom, t_vec_pos vps)
 {
-	t_vec_pos	out;
+	t_int_pts	out;
+	t_vec_pos	aux;
 	double		long_cur;
 	double		long_new;
 
 	out = cur;
+	aux = new[0];
 	if (!new)
 		return (cur);
-	long_cur = modulo_vector(cur.pt);
+	long_cur = modulo_vector(cur.pt.pt);
 	long_new = modulo_vector(new[0].pt);
-	if (long_cur > long_new)
+	if (geom->type != PLANE && modulo_vector(new[1].pt) < long_new)
 	{
-		if (is_new_closer(new[0], vps))
-			return (cur);
-		out = new[0];
-		out.c = geom->color;
-	}
-	if (geom->type != PLANE)
-	{
-		long_cur = modulo_vector(out.pt);
+		aux = new[1];
 		long_new = modulo_vector(new[1].pt);
-		if (long_cur > long_new)
-		{
-			if (is_new_closer(new[1], vps))
-				return (cur);
-			out = new[1];
-		out.c = geom->color;
-		}
+	}
+	if (long_cur > long_new && !is_behind_cam(aux, vps))
+	{
+		out.pt = aux;
+		out.pt.c = geom->color;
+		out.geom = geom;
 	}
 	return (out);
 }
 
-t_vec_pos	get_int_pt(t_vec_pos vps, t_geom *geom, t_field *field)
+t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo)
+{
+	t_vec_pos	*out;
+
+	if (geo->type == SPHERE)
+		out = int_vect_esfera(*vps, geo->vp.pt, geo->r);
+	else if (geo->type == CYLINDER)
+		out = int_vect_cilind(*vps, geo->vp, geo->r);
+	else if (geo->type == PLANE)
+		out = int_vect_plano(*vps, geo->vp);
+	else
+		out = NULL;
+	return (out);
+}
+
+/// @brief Gives the color of the closest surface to the pixel.
+/// @param pixel
+/// @param field
+void	get_colored_int_pt(int pixel, t_field *field)
 {
 	t_geom		*ptr;
 	t_vec_pos	*out;
-	t_vec_pos	vp_int;
+	t_int_pts	*vp_int;
+	t_vec_pos	*vps;
 
-	ptr = geom;
-	vp_int = init_vp(vps.c);
+	ptr = field->geom;
+	vps = &field->camera.field_vp[pixel];
+	vp_int = &field->camera.int_vp[pixel];
+	vp_int->pt = init_vp(vps->c);
+	vp_int->geom = NULL;
 	while (ptr)
 	{
-		if (ptr->type == SPHERE)
-			out = int_vect_esfera(vps, ptr->vp.pt, ptr->r);
-		else if (ptr->type == CYLINDER)
-			out = int_vect_cilind(vps, ptr->vp, ptr->r);
-		else if (ptr->type == PLANE)
-			out = int_vect_plano(vps, ptr->vp);
+		out = get_int_pt(vps, ptr);
 		if (out != NULL)
 		{
-			vp_int = get_min_vect(vp_int, out, ptr, vps);
-			vp_int.c = set_pixel_color( vp_int, field->light->pos);
+			*vp_int = get_min_vect(*vp_int, out, ptr, *vps);
+			vps->c = vp_int->pt.c;
+			free(out);
 		}
-		free(out);
 		ptr = ptr->next;
 	}
-	return (vp_int);
+	vp_int->pt.c = set_pixel_color(*vp_int, field, *vps);
 }

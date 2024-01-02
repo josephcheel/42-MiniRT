@@ -17,16 +17,6 @@ NAME		=	miniRT
 
 CC			=	gcc
 
-#Flags to compile in MAC
-all: 		CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H  -O3 -fsanitize=address
-all: 		MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
-all: 		mlx_link libft_link $(NAME)
-
-#Flags to compile in linux
-all_lnx:	CFLAGS		=	-D KEY_LNX_H -O3 #-Wall -Werror -Wextra 
-all_lnx:	MLXFLAGS 	= 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lz 
-all_lnx:	mlx_link libft_link $(NAME)
-
 MATHFLAG	=	-lm
 XFLAGS		=	-g2 -g #-fsanitize=address 
 CLEAN_CAR	=	\033[2K\r
@@ -54,6 +44,8 @@ CHECKER_DIR			=	checker/
 GEOMETRY_DIR		=	geometry/
 PARSER_DIR			=	parser/
 VECTOR3_DIR			=	vector3/
+EVENTS_DIR			=	events_control/
+TEST_DIR			=	for_test/
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
@@ -74,25 +66,45 @@ INCLUDE		+= $(addprefix -I , $(INC))
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-SRC_MINIRT		=	main.c initializers.c close.c 
+SRC_MINIRT		=	main.c initializers.c
 CHECKER			=	init_vars.c
 PARSERS			=	device_add.c geometry_add.c adders.c
-GEOMETRY		=	geom_lstcreate.c geom_lstprint.c ft_check_calculations.c \
-					get_int_pt.c def_pixel_vp.c dump_mem_2_scr.c set_pixel_color.c\
-					#geom_lstutils.c set_pict_colors.c create_field_vectors.c #geom_lstutils.c
+GEOMETRY		=	geom_lstcreate.c geom_lstprint.c get_int_pt.c def_pixel_vp.c \
+					dump_mem_2_scr.c set_pixel_color.c
+					#geom_lstutils.c set_pict_colors.c create_field_vectors.c 
+					#geom_lstutils.c
 VECTOR3			=	conv_v_unit.c div_cte_vector.c int_vect_esfera.c \
 				modulo_vector.c prod_escalar.c resta_vector.c \
 				dist_pto_vector.c int_vect_plano.c prod_cte_vector.c \
 				prod_vectorial.c suma_vector.c print_vector.c \
-				create_vector.c int_vect_cilind.c solv_eq_ord_2.c is_zero_vect.c
-
+				create_vector.c int_vect_cilind.c solv_eq_ord_2.c is_zero_vect.c \
+				init_vp.c
 GRAPHICS		=
+EVENTS_MAC		= key_events_mac.c mouse_events.c close.c
+EVENTS_LNX		= key_events_lnx.c mouse_events.c close.c
+TEST 			= ft_check_calculations.c print_pixel_values.c
 
 SRCS			+=	$(addprefix $(SRC_DIR), $(SRC_MINIRT))
 SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(CHECKER_DIR), $(CHECKER)))
 SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(PARSER_DIR), $(PARSERS)))
 SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(GEOMETRY_DIR), $(GEOMETRY)))
 SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(VECTOR3_DIR), $(VECTOR3)))
+SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(TEST_DIR), $(TEST)))
+ifeq ($(filter $(1),"all_lnx" "re_lnx" "clean_lnx" "fclean_lnx"),)
+    SRCS 		+= $(addprefix $(SRC_DIR), $(addprefix $(EVENTS_DIR), $(EVENTS_LNX)))
+else
+    SRCS 		+= $(addprefix $(SRC_DIR), $(addprefix $(EVENTS_DIR), $(EVENTS_MAC)))
+endif
+
+#Flags to compile in MAC
+all: 		CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H  -O3 -fsanitize=address
+all: 		MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+all: 		mlx_link libft_link $(NAME)
+
+#Flags to compile in linux
+all_lnx:	CFLAGS		=	-Wall -Werror -Wextra -D KEY_LNX_H -O3 # 
+all_lnx:	MLXFLAGS 	= 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lz 
+all_lnx:	mlx_lnx_link libft_link $(NAME)
 
 OBJS			=	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
@@ -112,9 +124,10 @@ $(OBJ_DIR)%.o : %.c Makefile
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─TARGET─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
+
 $(NAME):	$(LIBFT) $(MLX) $(OBJS)
 			@echo ""
-			$(CC) $(CFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME) $(MATHFLAG)
+			@$(CC) $(CFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME) $(MATHFLAG)
 			@echo "$(CLEAN_CAR)$(OK_COLOR)$(NAME) Compiled!$(NO_COLOR)"
 			@echo "Use $(BLUE_COLOR)./$(NAME)$(NO_COLOR) to launch the program"
 clean:
@@ -129,14 +142,33 @@ fclean:		clean
 			@$(RM) $(NAME) $(NAME_BONUS)
 			@echo "$(ERROR_COLOR)Programs removed$(NO_COLOR)"
 
+#●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
+#•❅──────✧❅✦❅✧─────❅••❅───✧❅✦❅✧─TARGET FOR MAC─✧❅✦❅✧───❅••❅─────✧❅✦❅✧──────❅•#
+#●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 re:			fclean all
-re_lnx:		fclean all_lnx
 
 libft_link:	
 			@make -sC $(LIBFT_DIR)
 
 mlx_link:	
 			@make -sC $(MLX_DIR)
+
+re_lnx:		fclean_lnx all_lnx
+
+#●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
+#•❅───✧❅✦❅✧────❅••❅───✧❅✦❅✧──TARGET  LINUX UBUNTU──✧❅✦❅✧───❅••❅────✧❅✦❅✧───❅•#
+#●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
+mlx_lnx_link:
+			@make -f Makefile_2.gen -sC $(MLX_DIR)
+clean_lnx:
+			@make clean -f Makefile_2.gen -sC mlx
+			@make clean -sC libft
+			@$(RM) -r $(OBJ_DIR)
+			@echo "$(ERROR_COLOR)Dependencies and objects removed$(NO_COLOR)"
+fclean_lnx:		clean_lnx
+			@make fclean -smC libft
+			@$(RM) $(NAME) $(NAME_BONUS)
+			@echo "$(ERROR_COLOR)Programs removed$(NO_COLOR)"
 
 -include $(DEPS)
 -include $(DEPS_BONUS)
