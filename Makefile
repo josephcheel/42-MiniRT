@@ -67,7 +67,7 @@ INCLUDE		+= $(addprefix -I , $(INC))
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
 SRC_MINIRT		=	main.c initializers.c
-CHECKER			=	init_vars.c
+CHECKER			=	init_vars.c checks.c
 PARSERS			=	device_add.c geometry_add.c adders.c
 GEOMETRY		=	geom_lstcreate.c geom_lstprint.c get_int_pt.c def_pixel_vp.c \
 					dump_mem_2_scr.c set_pixel_color.c

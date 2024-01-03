@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/02 02:00:32 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/02 23:43:07 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,9 @@ t_field		*initializer(char *av);
 t_field		*init_field(void);
 void		init_mlx(t_field *field);
 
+// Checkers
+int	validate_scene_file(char *filename);
+
 //Closers
 int			ft_close(t_field *field);
 //int			ft_close(int keycode, t_mlx *mlx);
@@ -291,5 +294,6 @@ int			mouse_events_rel(int mouse, int x, int y, t_field *field);
 int			mouse_events_pre(int mouse, int x, int y, t_field *field);
 int			key_events_press(int key, t_field *field);
 int			key_events_release(int key, t_field *field);
+
 
 #endif
