@@ -14,7 +14,6 @@
 # define MINIRT_H
 # include "../mlx/mlx.h"
 # include "../libft/inc/libft.h"
-//# include "geometry.h"
 # include "../inc/colors.h"
 # include <math.h>
 # include <limits.h>
@@ -25,8 +24,6 @@
 # include <unistd.h>
 # include <stddef.h>
 # include <math.h>
-
-/// #include<limits.h>
 # ifdef KEY_LNX_H
 #  include "../inc/key_mouse_cod_lnx.h"
 # endif
@@ -226,7 +223,7 @@ t_field		*init_field(void);
 void		init_mlx(t_field *field);
 
 // Checkers
-int	validate_scene_file(char *filename);
+int			validate_scene_file(char *filename);
 
 //Closers
 int			ft_close(t_field *field);
@@ -294,6 +291,5 @@ int			mouse_events_rel(int mouse, int x, int y, t_field *field);
 int			mouse_events_pre(int mouse, int x, int y, t_field *field);
 int			key_events_press(int key, t_field *field);
 int			key_events_release(int key, t_field *field);
-
 
 #endif

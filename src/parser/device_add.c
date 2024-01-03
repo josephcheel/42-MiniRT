@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/02 01:52:07 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:26:29 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ void	get_camera(t_field *field, char *line)
 			field->camera.center.vy);
 	field->camera.fov = ft_atoi(content[3]);
 	if (field->camera.fov == 0)
-	{
 		field->camera.observer = create_vect(LONG_MIN, LONG_MIN, LONG_MIN);
-	}
 	else
 	{
-		lambda = - (field->mlx.size_x - FRAME) * PIXEL / 2 / tan(field->camera.fov / 2);
+		lambda = - (field->mlx.size_x - FRAME) \
+		* PIXEL / 2 / tan(field->camera.fov / 2);
 		aux = prod_cte_vector(lambda, field->camera.center.vx);
 		field->camera.observer = suma_vector(field->camera.center.pos, aux);
 	}

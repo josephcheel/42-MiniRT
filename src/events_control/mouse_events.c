@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_events.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:50:25 by eavedill          #+#    #+#             */
-/*   Updated: 2023/02/26 15:50:58 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:29:12 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static void cam_rotate(t_field *field, int x, int y)
 
 int	mouse_events_pre(int mouse, int x, int y, t_field *field)
 {
-
 	if (mouse == MOUSE_BTN_ROT_UP)
 	{
 		zoom(-10, field);
