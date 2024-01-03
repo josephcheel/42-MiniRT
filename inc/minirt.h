@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/17 21:40:16 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/02 23:43:07 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINIRT_H
 # include "../mlx/mlx.h"
 # include "../libft/inc/libft.h"
-//# include "geometry.h"
 # include "../inc/colors.h"
 # include <math.h>
 # include <limits.h>
@@ -25,8 +24,6 @@
 # include <unistd.h>
 # include <stddef.h>
 # include <math.h>
-
-/// #include<limits.h>
 # ifdef KEY_LNX_H
 #  include "../inc/key_mouse_cod_lnx.h"
 # endif
@@ -49,25 +46,25 @@
 
 // eventslist
 // Key	Event	 	Key	Event	 	Key	Event
-#define EVENT_KEY_PRESS 02
-#define EVENT_KEY_RELEASE 03
-#define EVENT_BUTTON_PRESS 04
-#define EVENT_BUTTON_RELEASE 05
-#define EVENT_MOTION_NOTIFY 06
-#define EVENT_DESTROY_NOTIFY 17
+# define EVENT_KEY_PRESS 02
+# define EVENT_KEY_RELEASE 03
+# define EVENT_BUTTON_PRESS 04
+# define EVENT_BUTTON_RELEASE 05
+# define EVENT_MOTION_NOTIFY 06
+# define EVENT_DESTROY_NOTIFY 17
 // Key	Event	 	Key	Event	 	Key	Event
-#define MASK_KEY_PRESS 0
-#define MASK_KEY_RELEASE 1
-#define MASK_BUTTON_PRESS 2
-#define MASK_BUTTON_RELEASE 3
-#define MASK_MOTION_NOTIFY 6
-#define MASK_DESTROY_NOTIFY 17
+# define MASK_KEY_PRESS 0
+# define MASK_KEY_RELEASE 1
+# define MASK_BUTTON_PRESS 2
+# define MASK_BUTTON_RELEASE 3
+# define MASK_MOTION_NOTIFY 6
+# define MASK_DESTROY_NOTIFY 17
 //Buttno definition
-#define MOUSE_BTN_LEFT 1
-#define MOUSE_BTN_RIGHT 3
-#define MOUSE_BTN_MIDDLE 2
-#define MOUSE_BTN_ROT_UP 4
-#define MOUSE_BTN_ROT_DW 5
+# define MOUSE_BTN_LEFT 1
+# define MOUSE_BTN_RIGHT 3
+# define MOUSE_BTN_MIDDLE 2
+# define MOUSE_BTN_ROT_UP 4
+# define MOUSE_BTN_ROT_DW 5
 
 enum e_type_geo
 {
@@ -209,7 +206,7 @@ typedef struct s_ray
 typedef struct s_field
 {
 	t_geom		*geom;
-	t_color		bck_col; // is this like ambient light?
+	t_color		bck_col;
 	t_ambient	ambient;
 	t_camera	camera;
 	t_light		*light;
@@ -224,6 +221,9 @@ typedef struct s_field
 t_field		*initializer(char *av);
 t_field		*init_field(void);
 void		init_mlx(t_field *field);
+
+// Checkers
+int			validate_scene_file(char *filename);
 
 //Closers
 int			ft_close(t_field *field);
@@ -245,8 +245,8 @@ t_vec_pos	*int_vect_plano(t_vec_pos pi, t_vec_pos pl);
 t_vec3		prod_cte_vector(double a, t_vec3 b);
 t_vec3		div_cte_vector(double a, t_vec3 b);
 double		dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v);
-void		get_devices(t_field *field, char *content);
-void		get_geom(t_field *field, char *content);
+void		get_devices(t_field *field, char *line);
+void		get_geom(t_field *field, char *line);
 double		*solv_eq_ord_2(double *p);
 t_vec3		conv_v_unit(t_vec3 v);
 int			is_zero_vec(t_vec3 v);
