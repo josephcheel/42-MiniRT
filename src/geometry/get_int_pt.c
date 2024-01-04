@@ -57,7 +57,7 @@ t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo)
 	if (geo->type == SPHERE)
 		out = int_vect_esfera(*vps, geo->vp.pt, geo->r);
 	else if (geo->type == CYLINDER)
-		out = int_vect_cilind(*vps, geo->vp, geo->r);
+		out = int_vect_cilind(*vps, geo->vp, geo->r, geo->height);
 	else if (geo->type == PLANE)
 		out = int_vect_plano(*vps, geo->vp);
 	else

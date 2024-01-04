@@ -4,7 +4,7 @@ void ft_check_calculations(void)
 	t_vec_pos vp1, vp2;
 	t_vec_pos *out;
 	t_vec3 aux;
-	double r, m;
+	double r, m, h;
 
 	//out = (t_vec_pos *)malloc(2 * sizeof(t_vec_pos));
 	vp1.pt = create_vect(64, 20, -11);
@@ -85,7 +85,8 @@ void ft_check_calculations(void)
 	vp2.pt = create_vect(174, 384, 213);
 	vp2.v = create_vect(248, -165, 126);
 	r = 104;
-	out = int_vect_cilind(vp1, vp2, r);
+	h = 123;
+	out = int_vect_cilind(vp1, vp2, r, h);
 	printf("%sCILINDRO%s\n", CHR_BLUE, RESET);
 	printf("punto 1  x= %f y=%f z=%f \n", vp1.pt.x, vp1.pt.y, vp1.pt.z);
 	printf("vector   x= %f y=%f z=%f \n", vp1.v.x, vp1.v.y, vp1.v.z);

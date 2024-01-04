@@ -24,33 +24,89 @@ static double	*calc_lambda(t_vec3 *v, double r)
 	p[1] = 2 * prod_escalar(v[0], v[1]);
 	p[2] = prod_escalar(v[0], v[0]) - r * r;
 	out = solv_eq_ord_2(p);
-	free(p);
 	return (out);
 }
+
+static double	*limit_lambda(double *lambda, t_vec_pos vpi, \
+					t_vec_pos vpc, double h)
+{
+	double	*lambda_c;
+	t_vec3	pci;
+	int		i;
+
+	pci = resta_vector(vpi.pt, vpc.pt);
+	i = -1;
+	lambda_c = (double *) malloc(2 * sizeof(double));
+	while (++i < 2)
+	{
+		lambda_c[i] = prod_escalar(vpc.v, pci) + lambda[i] * \
+				prod_escalar(vpi.v, vpc.v);
+		lambda_c[i] = lambda_c[i] / prod_escalar(vpc.v, vpc.v);
+		if (lambda_c[i] > h)
+			lambda_c[i] = h;
+		else if (lambda_c[i] < 0)
+			lambda_c[i] = 0;
+	}
+	return (lambda_c);
+}
+/*
+static t_vec_pos calc_point (double lambda, double lambda_c, t_vec_pos vpi, double h)
+{
+	if(lambda_c == 0)
+
+}
+*/
 
 static t_vec_pos	*get_point_result(double *lambda, t_vec_pos vpi, \
-							t_vec_pos vpc)
+							t_vec_pos vpc, double h)
 {
 	t_vec_pos	*out;
-	double		lambda_c;
-	t_vec3		aux;
+	double		*lambda_c;
+	t_vec_pos	aux;
+	int			i;
 
+	lambda_c = limit_lambda(lambda, vpi, vpc, h);
+	if (lambda_c[0] == 0 && lambda_c[1] == 0)
+		return (NULL);
+	if (lambda_c[0] == h && lambda_c[1] == h)
+		return (NULL);
 	out = (t_vec_pos *)malloc(2 * sizeof(t_vec_pos));
-	out[0].pt = prod_cte_vector(lambda[0], vpi.v);
-	out[0].pt = suma_vector(out[0].pt, vpi.pt);
-	out[1].pt = prod_cte_vector(lambda[1], vpi.v);
-	out[1].pt = suma_vector(out[1].pt, vpi.pt);
-	aux = resta_vector(vpi.pt, vpc.pt);
-	lambda_c = prod_escalar(vpc.v, aux) + \
-				lambda[0] * prod_escalar(vpi.v, vpc.v);
-	lambda_c = lambda_c / prod_escalar(vpc.v, vpc.v);
-	aux = suma_vector(vpc.pt, prod_cte_vector(lambda_c, vpc.v));
-	out[0].v = conv_v_unit(resta_vector(out[0].pt, aux));
-	out[1].v = conv_v_unit(resta_vector(out[1].pt, aux));
+	i = -1;
+	while (++i < 2)
+	{
+		if (lambda_c[i] == 0)
+		{
+			aux = vpc;
+			aux.v = prod_cte_vector(-1, aux.v);
+			out[i] = int_vect_plano(vpi, aux)[0];
+		}
+		else if (lambda_c[i] == h)
+		{
+			aux = vpc;
+			aux.pt = suma_vector(vpc.pt, prod_cte_vector(h, vpc.v));
+			out[i] = int_vect_plano(vpi, aux)[0];
+		}
+		else
+		{
+			out[i].pt = prod_cte_vector(lambda[i], vpi.v);
+			out[i].pt = suma_vector(out[i].pt, vpi.pt);
+			aux.pt = suma_vector(vpc.pt, prod_cte_vector(lambda_c[i], vpc.v));
+			out[i].v = conv_v_unit(resta_vector(out[i].pt, aux.pt));
+		}
+	}
+	free(lambda_c);
 	return (out);
 }
+//	out[1].pt = prod_cte_vector(lambda[1], vpi.v);
+//	out[1].pt = suma_vector(out[1].pt, vpi.pt);
+//	aux = suma_vector(vpc.pt, prod_cte_vector(lambda_c[1], vpc.v));
+//	out[1].v = conv_v_unit(resta_vector(out[1].pt, aux));
+//	aux = resta_vector(vpi.pt, vpc.pt);
+//	lambda_c = prod_escalar(vpc.v, aux) + 
+//				lambda[0] * prod_escalar(vpi.v, vpc.v);
+//	lambda_c = lambda_c / prod_escalar(vpc.v, vpc.v);
 
-t_vec_pos	*int_vect_cilind(t_vec_pos vpi, t_vec_pos vpc, double r)
+t_vec_pos	*int_vect_cilind(t_vec_pos vpi, t_vec_pos vpc, double r, double h)
 {
 	t_vec3		vaux[2];
 	t_vec3		pci;
@@ -67,7 +123,7 @@ t_vec_pos	*int_vect_cilind(t_vec_pos vpi, t_vec_pos vpc, double r)
 	lambda = calc_lambda(vaux, r);
 	if (!lambda)
 		return (NULL);
-	out = get_point_result(lambda, vpi, vpc);
+	out = get_point_result(lambda, vpi, vpc, h);
 	free(lambda);
 	return (out);
 }
