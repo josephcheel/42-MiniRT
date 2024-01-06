@@ -65,7 +65,8 @@
 # define MOUSE_BTN_MIDDLE 2
 # define MOUSE_BTN_ROT_UP 4
 # define MOUSE_BTN_ROT_DW 5
-
+//PArametros ara el movimiento de rotacion
+# define ROT_SPH 200
 enum e_type_geo
 {
 	SPHERE,
@@ -252,6 +253,7 @@ double		*solv_eq_ord_2(double *p);
 t_vec3		conv_v_unit(t_vec3 v);
 int			is_zero_vec(t_vec3 v);
 t_vec_pos	init_vp(t_color c);
+t_vec3		rotate_vector(t_vec3 v, t_vec3 k, double ang_rot);
 
 // Adders
 t_vec3		add_vec3(char *vector3);
