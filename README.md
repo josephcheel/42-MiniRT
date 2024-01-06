@@ -3,7 +3,6 @@
   <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://cdn.simpleicons.org/42/white">
   <img alt="42" width=40 align="center" src="https://cdn.simpleicons.org/42/Black">
-  <img alt="42" width=40 align="center" src="https://en.wikipedia.org/wiki/Phong_reflection_model">
  </picture>
  Cursus 
  <!--<img alt="Complete" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/complete.svg">-->
@@ -14,7 +13,7 @@
 #### Resources
 * [**Ray Tracing in One Weekend, (Peter Shirley, Trevor David Black, Steve Hollasch)**](https://raytracing.github.io/)
 * [**Ray Tracing [YouTube]**](https://youtu.be/gfW1Fhd9u9Q?si=BI667gXh8sOryeaU)
-
+* [**Phong Reflection Model**](src="https://en.wikipedia.org/wiki/Phong_reflection_model)
 ### Description of file arguments structure:
 # Ambient light
 A 0.2            255,255,255
