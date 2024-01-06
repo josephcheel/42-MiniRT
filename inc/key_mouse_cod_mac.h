@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 07:20:01 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/05 18:02:53 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/04 23:58:07 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 # define XK_J		0x26	/*julia fractal*/
 # define XK_B		0xb		/*burningship fractal*/
 # define XK_T		0x11	/*burningship fractal*/
-# define XK_CTRL	0xffe3	/*control*/
-# define XK_ALT		0xffe9	/*alt*/
-# define XK_SHIFT	0xffe1	/*shift*/
+# define XK_CTRL	256		/*control*/
+# define XK_ALT		261		/*alt*/
+# define XK_SHIFT	257	/*shift*/
 # define XK_1		0x12	/*key 1 */
 # define XK_2		0x13	/*key 2*/
 # define XK_3		0x14	/*key 3*/

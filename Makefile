@@ -90,10 +90,12 @@ SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(PARSER_DIR), $(PARSERS)))
 SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(GEOMETRY_DIR), $(GEOMETRY)))
 SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(VECTOR3_DIR), $(VECTOR3)))
 SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(TEST_DIR), $(TEST)))
-ifeq ($(filter $(1),"all_lnx" "re_lnx" "clean_lnx" "fclean_lnx"),)
-    SRCS 		+= $(addprefix $(SRC_DIR), $(addprefix $(EVENTS_DIR), $(EVENTS_LNX)))
-else
+
+
+ifeq ($(filter $(word 1,$(MAKECMDGOALS)),"all_lnx" "re_lnx" "clean_lnx" "fclean_lnx"),)
     SRCS 		+= $(addprefix $(SRC_DIR), $(addprefix $(EVENTS_DIR), $(EVENTS_MAC)))
+else
+    SRCS 		+= $(addprefix $(SRC_DIR), $(addprefix $(EVENTS_DIR), $(EVENTS_LNX)))
 endif
 
 #Flags to compile in MAC
@@ -126,9 +128,8 @@ $(OBJ_DIR)%.o : %.c Makefile
 
 
 $(NAME):	$(LIBFT) $(MLX) $(OBJS)
-			@echo ""
-			@$(CC) $(CFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME) $(MATHFLAG)
 			@echo "$(CLEAN_CAR)$(OK_COLOR)$(NAME) Compiled!$(NO_COLOR)"
+			$(CC) $(CFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME) $(MATHFLAG)
 			@echo "Use $(BLUE_COLOR)./$(NAME)$(NO_COLOR) to launch the program"
 clean:
 			@make clean -sC mlx
@@ -136,7 +137,6 @@ clean:
 			@$(RM) -r $(OBJ_DIR)
 			@echo "$(ERROR_COLOR)Dependencies and objects removed$(NO_COLOR)"
 
-## QUE QUIERE DECIR en -smC la "-m"??
 fclean:		clean
 			@make fclean -smC libft
 			@$(RM) $(NAME) $(NAME_BONUS)
