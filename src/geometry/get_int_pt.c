@@ -26,26 +26,27 @@ static t_int_pts	get_min_vect(t_int_pts cur, t_vec_pos *new, \
 						t_geom *geom, t_vec_pos vps)
 {
 	t_int_pts	out;
-	t_vec_pos	aux;
 	double		long_cur;
-	double		long_new;
+	int			i;
 
 	out = cur;
-	aux = new[0];
 	if (!new)
 		return (cur);
 	long_cur = modulo_vector(cur.pt.pt);
-	long_new = modulo_vector(new[0].pt);
-	if (geom->type != PLANE && modulo_vector(new[1].pt) < long_new)
+	i = -1;
+	while(++i < 2)
 	{
-		aux = new[1];
-		long_new = modulo_vector(new[1].pt);
-	}
-	if (long_cur > long_new && !is_behind_cam(aux, vps))
-	{
-		out.pt = aux;
-		out.pt.c = geom->color;
-		out.geom = geom;
+		if (!is_behind_cam(new[i], vps))
+		{
+			if(modulo_vector(new[i].pt) < long_cur)
+			{
+				out.pt = new[i];
+				out.pt.c = geom->color;
+				out.geom = geom;
+			}
+		}
+		if(geom->type == PLANE)
+			i++;
 	}
 	return (out);
 }
@@ -56,10 +57,12 @@ t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo)
 
 	if (geo->type == SPHERE)
 		out = int_vect_esfera(*vps, geo->vp.pt, geo->r);
-	else if (geo->type == CYLINDER)
-		out = int_vect_cilind(*vps, geo->vp, geo->r, geo->height);
+//	else if (geo->type == CYLINDER)
+//		out = int_vect_cilind(*vps, geo->vp, geo->r, geo->height);
 	else if (geo->type == PLANE)
 		out = int_vect_plano(*vps, geo->vp);
+	else if (geo->type == CYLINDER)
+		out = int_vect_cono(*vps, geo->vp, geo->r, geo->height);
 	else
 		out = NULL;
 	return (out);

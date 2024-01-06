@@ -17,12 +17,14 @@ void print_color_values(char *s, t_color c)
 	printf("%s", s);
 	printf("R=%x, G=%x, B=%x, a=%x\n", c.r, c.g, c.b, c.a);
 }
-static bool is_behind_cam(t_vec_pos new, t_vec_pos vps)
+static bool is_behind_cam(t_vec3 pint, t_vec3 pi, t_vec3 vx)
 {
-	t_vec3 temp;
+	t_vec3		temp;
+	double		aux;
 
-	temp = conv_v_unit(resta_vector(new.pt, vps.pt));
-	if (prod_escalar(temp, vps.v) > 0)
+	temp = conv_v_unit(resta_vector(pint, pi));
+	aux = prod_escalar(vx, temp);
+	if (aux > 0)
 		return (false);
 	return (true);
 }
@@ -31,15 +33,29 @@ static t_int_pts get_min_vect(t_int_pts cur, t_vec_pos *new,
 							  t_geom *geom, t_vec_pos vps)
 {
 	t_int_pts	out;
-	t_vec_pos	aux;
 	double		long_cur;
-	double		long_new;
+	int			i;
 
 	out = cur;
-	aux = new[0];
 	if (!new)
 		return (cur);
 	long_cur = modulo_vector(cur.pt.pt);
+	i = -1;
+	while(++i < 2)
+	{
+			if(modulo_vector(new[i].pt) < long_cur)
+			{
+				out.pt = new[i];
+				out.pt.c = geom->color;
+				out.geom = geom;
+			}
+	}
+	return (out);
+}
+/*
+	t_vec_pos	aux;
+	aux = new[0];
+	double		long_new;
 	long_new = modulo_vector(new[0].pt);
 	if (geom->type != PLANE && modulo_vector(new[1].pt) < long_new)
 	{
@@ -48,19 +64,16 @@ static t_int_pts get_min_vect(t_int_pts cur, t_vec_pos *new,
 	}
 	if (long_cur > long_new && !is_behind_cam(aux, vps))
 	{
-		out.pt = aux;
-		out.pt.c = geom->color;
-		out.geom = geom;
 	}
-	return (out);
-}
 
+*/
 t_int_pts	calcula_color(int pixel, t_field *field)
 {
 	t_geom		*ptr;
 	t_vec_pos	*out;
 	t_int_pts	vp_int;
 	t_vec_pos	*vps;
+	int			i;
 
 	ptr = field->geom;
 	vps = &field->camera.field_vp[pixel];
@@ -69,10 +82,13 @@ t_int_pts	calcula_color(int pixel, t_field *field)
 	while (ptr)
 	{
 		out = get_int_pt(vps, ptr);
-		if (out != NULL)
+		i = -1;
+		while( ++i < 2)
 		{
-			vp_int = get_min_vect(vp_int, out, ptr, *vps);
-			free(out);
+			if (out && !is_behind_cam(out[i].pt, vps->pt, field->camera.center.vx))
+				vp_int = get_min_vect(vp_int, out, ptr, *vps);
+			if (ptr->type == PLANE)
+				i++;
 		}
 		ptr = ptr->next;
 	}
