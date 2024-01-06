@@ -78,7 +78,7 @@ VECTOR3			=	conv_v_unit.c div_cte_vector.c int_vect_esfera.c \
 				dist_pto_vector.c int_vect_plano.c prod_cte_vector.c \
 				prod_vectorial.c suma_vector.c print_vector.c \
 				create_vector.c int_vect_cilind.c solv_eq_ord_2.c is_zero_vect.c \
-				init_vp.c
+				init_vp.c int_vect_cono.c 
 GRAPHICS		=
 EVENTS_MAC		= key_events_mac.c mouse_events.c close.c
 EVENTS_LNX		= key_events_lnx.c mouse_events.c close.c

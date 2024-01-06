@@ -49,13 +49,6 @@ static double	*limit_lambda(double *lambda, t_vec_pos vpi, \
 	}
 	return (lambda_c);
 }
-/*
-static t_vec_pos calc_point (double lambda, double lambda_c, t_vec_pos vpi, double h)
-{
-	if(lambda_c == 0)
-
-}
-*/
 
 static t_vec_pos	*get_point_result(double *lambda, t_vec_pos vpi, \
 							t_vec_pos vpc, double h)
@@ -97,14 +90,6 @@ static t_vec_pos	*get_point_result(double *lambda, t_vec_pos vpi, \
 	free(lambda_c);
 	return (out);
 }
-//	out[1].pt = prod_cte_vector(lambda[1], vpi.v);
-//	out[1].pt = suma_vector(out[1].pt, vpi.pt);
-//	aux = suma_vector(vpc.pt, prod_cte_vector(lambda_c[1], vpc.v));
-//	out[1].v = conv_v_unit(resta_vector(out[1].pt, aux));
-//	aux = resta_vector(vpi.pt, vpc.pt);
-//	lambda_c = prod_escalar(vpc.v, aux) + 
-//				lambda[0] * prod_escalar(vpi.v, vpc.v);
-//	lambda_c = lambda_c / prod_escalar(vpc.v, vpc.v);
 
 t_vec_pos	*int_vect_cilind(t_vec_pos vpi, t_vec_pos vpc, double r, double h)
 {

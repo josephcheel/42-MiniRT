@@ -242,6 +242,7 @@ double		prod_escalar(t_vec3 a, t_vec3 b);
 t_vec_pos	*int_vect_esfera(t_vec_pos vp1,	t_vec3 pr, double r);
 t_vec_pos	*int_vect_cilind(t_vec_pos vp1, t_vec_pos vpc, double r, double h);
 t_vec_pos	*int_vect_plano(t_vec_pos pi, t_vec_pos pl);
+t_vec_pos	*int_vect_cono(t_vec_pos vpi, t_vec_pos vpc, double r, double h);
 t_vec3		prod_cte_vector(double a, t_vec3 b);
 t_vec3		div_cte_vector(double a, t_vec3 b);
 double		dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v);
