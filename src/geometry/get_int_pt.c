@@ -12,41 +12,38 @@
 
 #include "../../inc/minirt.h"
 
-static bool	is_behind_cam(t_vec_pos new, t_vec_pos vps)
+static bool	is_bhd_cam(t_vec3 pint, t_vec3 pi, t_vec3 vx)
 {
 	t_vec3	temp;
+	double	aux;
 
-	temp = conv_v_unit(resta_vector(new.pt, vps.pt));
-	if (prod_escalar(temp, vps.v) > 0)
+	temp = conv_v_unit(resta_vector(pint, pi));
+	aux = prod_escalar(vx, temp);
+	if (aux > 0)
 		return (false);
 	return (true);
 }
 
-static t_int_pts	get_min_vect(t_int_pts cur, t_vec_pos *new, \
-						t_geom *geom, t_vec_pos vps)
+static t_int_pts	get_min_vect(t_int_pts *cur, t_vec_pos *new,
+						t_geom *geom)
 {
 	t_int_pts	out;
 	double		long_cur;
 	int			i;
 
-	out = cur;
+	out = *cur;
 	if (!new)
-		return (cur);
-	long_cur = modulo_vector(cur.pt.pt);
+		return (out);
+	long_cur = modulo_vector(cur->pt.pt);
 	i = -1;
-	while(++i < 2)
+	while (++i < 2)
 	{
-		if (!is_behind_cam(new[i], vps))
+		if (modulo_vector(new[i].pt) < long_cur)
 		{
-			if(modulo_vector(new[i].pt) < long_cur)
-			{
-				out.pt = new[i];
-				out.pt.c = geom->color;
-				out.geom = geom;
-			}
+			out.pt = new[i];
+			out.pt.c = geom->color;
+			out.geom = geom;
 		}
-		if(geom->type == PLANE)
-			i++;
 	}
 	return (out);
 }
@@ -77,6 +74,7 @@ void	get_colored_int_pt(int pixel, t_field *field)
 	t_vec_pos	*out;
 	t_int_pts	*vp_int;
 	t_vec_pos	*vps;
+	int			i;
 
 	ptr = field->geom;
 	vps = &field->camera.field_vp[pixel];
@@ -86,11 +84,13 @@ void	get_colored_int_pt(int pixel, t_field *field)
 	while (ptr)
 	{
 		out = get_int_pt(vps, ptr);
-		if (out != NULL)
+		i = -1;
+		while (++i < 2)
 		{
-			*vp_int = get_min_vect(*vp_int, out, ptr, *vps);
-			vps->c = vp_int->pt.c;
-			free(out);
+			if (out && !is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))
+				vp_int = get_min_vect(vp_int, out, ptr);
+			if (ptr->type == PLANE)
+				i++;
 		}
 		ptr = ptr->next;
 	}
