@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:51:44 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/04 23:57:07 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/07 23:05:13 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	key_events_press(int key, t_field *field)
 	}
 	else if (key == XK_L)
 	{
-		//field->light = field->orig_light;
+		field->light =ft_clone_light(field->orig_light);
 		dump_mem_2_scr(field);
 		printf("\nRestarting Camera\n");
 	}

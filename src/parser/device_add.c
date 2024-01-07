@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/03 16:26:29 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/07 23:04:30 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	get_devices(t_field *field, char *line)
 	else if (ft_strcmp(type[0], "L") == 0)
 	{
 		get_light(field, line);
-		//clon_light();
+		field->orig_light = ft_clone_light(field->light);
 	}
 	else if (ft_strcmp(type[0], "A") == 0)
 		get_ambient_light(field, line);

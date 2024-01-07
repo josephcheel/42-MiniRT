@@ -42,6 +42,7 @@ CP			=	cp -f
 
 CHECKER_DIR			=	checker/
 GEOMETRY_DIR		=	geometry/
+LIGHTS_DIR			=	lights/
 PARSER_DIR			=	parser/
 VECTOR3_DIR			=	vector3/
 EVENTS_DIR			=	events_control/
@@ -73,12 +74,15 @@ GEOMETRY		=	geom_lstcreate.c geom_lstprint.c get_int_pt.c def_pixel_vp.c \
 					dump_mem_2_scr.c set_pixel_color.c
 					#geom_lstutils.c set_pict_colors.c create_field_vectors.c 
 					#geom_lstutils.c
+LIGHTS			=	lights_lstcreate.c
+
 VECTOR3			=	conv_v_unit.c div_cte_vector.c int_vect_esfera.c \
 				modulo_vector.c prod_escalar.c resta_vector.c \
 				dist_pto_vector.c int_vect_plano.c prod_cte_vector.c \
 				prod_vectorial.c suma_vector.c print_vector.c \
 				create_vector.c int_vect_cilind.c solv_eq_ord_2.c is_zero_vect.c \
 				init_vp.c int_vect_cono.c rotate_vector.c 
+GRAPHICS		=
 GRAPHICS		=
 EVENTS_MAC		= key_events_mac.c mouse_events.c close.c
 EVENTS_LNX		= key_events_lnx.c mouse_events.c close.c
@@ -88,6 +92,7 @@ SRCS			+=	$(addprefix $(SRC_DIR), $(SRC_MINIRT))
 SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(CHECKER_DIR), $(CHECKER)))
 SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(PARSER_DIR), $(PARSERS)))
 SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(GEOMETRY_DIR), $(GEOMETRY)))
+SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(LIGHTS_DIR), $(LIGHTS)))
 SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(VECTOR3_DIR), $(VECTOR3)))
 SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(TEST_DIR), $(TEST)))
 
