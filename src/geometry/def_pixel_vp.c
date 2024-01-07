@@ -36,10 +36,9 @@ static t_vec3	pix_vec(t_indexes in, t_indexes lim, t_axis axis)
 
 /// @brief creates the field of vectors (position & direction) for every pixel
 /// @brief in the camera.
-/// @param field
-/// @param in
-/// @param lim
-
+/// @param field variable that contains all information for the visualization
+/// @param in Current pixel point
+/// @param lim Max pixels in screen
 void	def_pixel_vp(t_field *field, t_indexes in, t_indexes lim)
 {
 	field->camera.field_vp[in.i + in.j * (lim.i)].pt = \

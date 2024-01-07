@@ -24,7 +24,7 @@ int	key_events(int key, t_field *field)
 		printf("key Ctrl post activado %x -->%i\n",
 			key, field->events.key_ctrl_press);
 	}
-	return (0); 
+	return (0);
 }
 
 int	key_events_press(int key, t_field *field)

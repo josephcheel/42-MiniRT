@@ -116,6 +116,8 @@ void	print_pixel_values(int x, int y, t_field *field)
 	c.r = buf.buffer[k + 2];
 	c.a = buf.buffer[k + 3];
 	k = (x - FRAME)  + (y - FRAME) * (field->mlx.size_x - 2 * FRAME);
+	printf("========================Datos generales=======================\n");
+	ft_print_vec3("El observador de la cámara está en: ", field->camera.observer);
 	printf("==============================================================\n");
 	printf("El punto es x=%i, y=%i\n", x, y);
 	ft_print_vec3("El centro de la cámara está en: ", field->camera.center.pos);

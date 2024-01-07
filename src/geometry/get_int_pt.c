@@ -12,10 +12,10 @@
 
 #include "../../inc/minirt.h"
 
-static bool is_bhd_cam(t_vec3 pint, t_vec3 pi, t_vec3 vx)
+static bool	is_bhd_cam(t_vec3 pint, t_vec3 pi, t_vec3 vx)
 {
-	t_vec3 temp;
-	double aux;
+	t_vec3	temp;
+	double	aux;
 
 	temp = conv_v_unit(resta_vector(pint, pi));
 	aux = prod_escalar(vx, temp);
@@ -24,12 +24,12 @@ static bool is_bhd_cam(t_vec3 pint, t_vec3 pi, t_vec3 vx)
 	return (true);
 }
 
-static t_int_pts get_min_vect(t_int_pts *cur, t_vec_pos *new,
-							  t_geom *geom)
+static t_int_pts	get_min_vect(t_int_pts *cur, t_vec_pos *new,
+						t_geom *geom)
 {
-	t_int_pts out;
-	double long_cur;
-	int i;
+	t_int_pts	out;
+	double		long_cur;
+	int			i;
 
 	out = *cur;
 	if (!new)
@@ -74,7 +74,7 @@ void	get_colored_int_pt(int pixel, t_field *field)
 	t_vec_pos	*out;
 	t_int_pts	*vp_int;
 	t_vec_pos	*vps;
-	int i;
+	int			i;
 
 	ptr = field->geom;
 	vps = &field->camera.field_vp[pixel];
@@ -87,7 +87,7 @@ void	get_colored_int_pt(int pixel, t_field *field)
 		i = -1;
 		while (++i < 2)
 		{
-			if (out && !is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))*
+			if (out && !is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))
 				vp_int = get_min_vect(vp_int, out, ptr);
 			if (ptr->type == PLANE)
 				i++;
