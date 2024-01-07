@@ -26,7 +26,8 @@
 # define XK_T		0x11	/*burningship fractal*/
 # define XK_CTRL	256		/*control*/
 # define XK_ALT		261		/*alt*/
-# define XK_SHIFT	257	/*shift*/
+# define XK_SHIFT	257		/*shift*/
+# define XK_CMD		259		/*mac command*/
 # define XK_1		0x12	/*key 1 */
 # define XK_2		0x13	/*key 2*/
 # define XK_3		0x14	/*key 3*/

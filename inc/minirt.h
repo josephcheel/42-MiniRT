@@ -211,9 +211,13 @@ typedef struct s_field
 	t_ambient	ambient;
 	t_camera	camera;
 	t_light		*light;
+	
 	t_mlx		mlx;
 	t_event		events;
 	t_vec3		aux;
+
+	t_camera	orig_camera;
+	t_light		*orig_light;
 }	t_field;
 
 // funciones publicas

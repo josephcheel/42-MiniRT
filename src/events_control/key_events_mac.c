@@ -57,6 +57,10 @@ int	key_events_press(int key, t_field *field)
 		printf("key ALT post activado %x -->%i\n", \
 			key, field->events.key_shift_press);
 	}
+	else if (key == XK_CMD)
+	{
+		printf("CMDDD");
+	}
 	return (0);
 }
 
