@@ -12,6 +12,7 @@
 
 #include "../../inc/minirt.h"
 
+
 void	get_camera(t_field *field, char *line)
 {
 	char	**content;
@@ -69,9 +70,15 @@ void	get_devices(t_field *field, char *line)
 
 	type = ft_split(line, ' ');
 	if (ft_strcmp(type[0], "C") == 0)
+	{
 		get_camera(field, line);
+		field->orig_camera = field->camera;
+	}
 	else if (ft_strcmp(type[0], "L") == 0)
+	{
 		get_light(field, line);
+		//clon_light();
+	}
 	else if (ft_strcmp(type[0], "A") == 0)
 		get_ambient_light(field, line);
 	ft_array_free(type, ft_array_size(type));

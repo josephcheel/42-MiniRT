@@ -29,7 +29,7 @@ int	key_events(int key, t_field *field)
 
 int	key_events_press(int key, t_field *field)
 {
-	printf("Entro en keyevents press %x -- %p\n", key, field);
+	printf("Entro en keyevents press %d -- %p\n", key, field);
 	if (key == 256)
 	{
 		printf("key Ctrl antes %x -->%i\n", key, field->events.key_ctrl_press);
@@ -57,9 +57,17 @@ int	key_events_press(int key, t_field *field)
 		printf("key ALT post activado %x -->%i\n", \
 			key, field->events.key_shift_press);
 	}
-	else if (key == XK_CMD)
+	else if (key == XK_R)
 	{
-		printf("CMDDD");
+		field->camera = field->orig_camera;
+		dump_mem_2_scr(field);
+		printf("\nRestarting Camera\n");
+	}
+	else if (key == XK_L)
+	{
+		//field->light = field->orig_light;
+		dump_mem_2_scr(field);
+		printf("\nRestarting Camera\n");
 	}
 	return (0);
 }

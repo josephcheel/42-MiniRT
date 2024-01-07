@@ -24,6 +24,8 @@
 # define XK_J		0x26	/*julia fractal*/
 # define XK_B		0xb		/*burningship fractal*/
 # define XK_T		0x11	/*burningship fractal*/
+# define XK_R		15		/*Camera Reset*/
+# define XK_L		37		/*Light Reset*/
 # define XK_CTRL	256		/*control*/
 # define XK_ALT		261		/*alt*/
 # define XK_SHIFT	257		/*shift*/
