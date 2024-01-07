@@ -12,12 +12,13 @@
 
 #include "../../inc/minirt.h"
 
-void print_color_values(char *s, t_color c)
+void	print_color_values(char *s, t_color c)
 {
 	printf("%s", s);
 	printf("R=%x, G=%x, B=%x, a=%x\n", c.r, c.g, c.b, c.a);
 }
-static bool is_behind_cam(t_vec3 pint, t_vec3 pi, t_vec3 vx)
+
+static bool	is_bhd_cam(t_vec3 pint, t_vec3 pi, t_vec3 vx)
 {
 	t_vec3		temp;
 	double		aux;
@@ -30,7 +31,7 @@ static bool is_behind_cam(t_vec3 pint, t_vec3 pi, t_vec3 vx)
 }
 
 static t_int_pts get_min_vect(t_int_pts cur, t_vec_pos *new,
-							  t_geom *geom, t_vec_pos vps)
+							  t_geom *geom)
 {
 	t_int_pts	out;
 	double		long_cur;
@@ -41,14 +42,14 @@ static t_int_pts get_min_vect(t_int_pts cur, t_vec_pos *new,
 		return (cur);
 	long_cur = modulo_vector(cur.pt.pt);
 	i = -1;
-	while(++i < 2)
+	while (++i < 2)
 	{
-			if(modulo_vector(new[i].pt) < long_cur)
-			{
-				out.pt = new[i];
-				out.pt.c = geom->color;
-				out.geom = geom;
-			}
+		if (modulo_vector(new[i].pt) < long_cur)
+		{
+			out.pt = new[i];
+			out.pt.c = geom->color;
+			out.geom = geom;
+		}
 	}
 	return (out);
 }
@@ -67,6 +68,7 @@ static t_int_pts get_min_vect(t_int_pts cur, t_vec_pos *new,
 	}
 
 */
+
 t_int_pts	calcula_color(int pixel, t_field *field)
 {
 	t_geom		*ptr;
@@ -83,10 +85,10 @@ t_int_pts	calcula_color(int pixel, t_field *field)
 	{
 		out = get_int_pt(vps, ptr);
 		i = -1;
-		while( ++i < 2)
+		while (++i < 2)
 		{
-			if (out && !is_behind_cam(out[i].pt, vps->pt, field->camera.center.vx))
-				vp_int = get_min_vect(vp_int, out, ptr, *vps);
+			if (out && !is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))
+				vp_int = get_min_vect(vp_int, out, ptr);
 			if (ptr->type == PLANE)
 				i++;
 		}
