@@ -24,14 +24,14 @@ static bool	is_bhd_cam(t_vec3 pint, t_vec3 pi, t_vec3 vx)
 	return (true);
 }
 
-static t_int_pts	get_min_vect(t_int_pts *cur, t_vec_pos *new,
+static t_int_pts	*get_min_vect(t_int_pts *cur, t_vec_pos *new,
 						t_geom *geom)
 {
-	t_int_pts	out;
+	t_int_pts	*out;
 	double		long_cur;
 	int			i;
 
-	out = *cur;
+	out = cur;
 	if (!new)
 		return (out);
 	long_cur = modulo_vector(cur->pt.pt);
@@ -40,9 +40,9 @@ static t_int_pts	get_min_vect(t_int_pts *cur, t_vec_pos *new,
 	{
 		if (modulo_vector(new[i].pt) < long_cur)
 		{
-			out.pt = new[i];
-			out.pt.c = geom->color;
-			out.geom = geom;
+			out->pt = new[i];
+			out->pt.c = geom->color;
+			out->geom = geom;
 		}
 	}
 	return (out);

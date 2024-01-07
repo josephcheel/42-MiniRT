@@ -108,14 +108,15 @@ t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 	{
 		fact[0] = field->ambient.ratio;
 		fact[1] = 0;
-		fact[2] = 0;
+		fact[2] = field->ambient.ratio * -0.5;
 	}
 	else
 	{
 		fact[0] = field->ambient.ratio;
-		fact[1] = field->light->ratio * get_difuse(vp.pt, v_luz_pt);
-		fact[2] = field->light->ratio * get_specular(vp.pt, v_luz_pt, pixl);
+		fact[1] = field->light->ratio * get_difuse(vp.pt, v_luz_pt) * 0.5;
+		fact[2] = field->light->ratio * get_specular(vp.pt, v_luz_pt, pixl);// * 0.7;
 	}
 	vp.pt.c = apply_fact(vp.pt.c, fact, v_luz_pt.c);
+
 	return (vp.pt.c);
 }
