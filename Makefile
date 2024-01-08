@@ -10,6 +10,7 @@
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
 NAME		=	miniRT
+NAME_BONUS	=	miniRT_bonus
 
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──CMD───✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
@@ -48,11 +49,14 @@ VECTOR3_DIR			=	vector3/
 EVENTS_DIR			=	events_control/
 TEST_DIR			=	for_test/
 
+MAN_DIR		=	mandatory/
+BON_DIR		=	bonus/
+
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 
-INC_DIR		=	inc/ -I libft/inc/
-
+INC_DIR		=	mandatory/inc/ -I libft/inc/
+INC_DIR_BON	=	bonus/inc/ -I libft/inc/
 LIBFT		=	libft/libft.a
 LIBFT_DIR	= 	libft/
 
@@ -88,19 +92,18 @@ EVENTS_MAC		= key_events_mac.c mouse_events.c close.c
 EVENTS_LNX		= key_events_lnx.c mouse_events.c close.c
 TEST 			= ft_check_calculations.c print_pixel_values.c
 
-SRCS			+=	$(addprefix $(SRC_DIR), $(SRC_MINIRT))
-SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(CHECKER_DIR), $(CHECKER)))
-SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(PARSER_DIR), $(PARSERS)))
-SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(GEOMETRY_DIR), $(GEOMETRY)))
-SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(LIGHTS_DIR), $(LIGHTS)))
-SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(VECTOR3_DIR), $(VECTOR3)))
-SRCS			+=	$(addprefix $(SRC_DIR), $(addprefix $(TEST_DIR), $(TEST)))
-
+SRCS			+=	$(addprefix $(MAN_DIR), $(addprefix $(SRC_DIR), $(SRC_MINIRT)))
+SRCS			+=	$(addprefix $(MAN_DIR), $(addprefix $(SRC_DIR), $(addprefix $(CHECKER_DIR), $(CHECKER))))
+SRCS			+=	$(addprefix $(MAN_DIR), $(addprefix $(SRC_DIR), $(addprefix $(PARSER_DIR), $(PARSERS))))
+SRCS			+=	$(addprefix $(MAN_DIR), $(addprefix $(SRC_DIR), $(addprefix $(GEOMETRY_DIR), $(GEOMETRY))))
+SRCS			+=	$(addprefix $(MAN_DIR), $(addprefix $(SRC_DIR), $(addprefix $(LIGHTS_DIR), $(LIGHTS))))
+SRCS			+=	$(addprefix $(MAN_DIR), $(addprefix $(SRC_DIR), $(addprefix $(VECTOR3_DIR), $(VECTOR3))))
+SRCS			+=	$(addprefix $(MAN_DIR), $(addprefix $(SRC_DIR), $(addprefix $(TEST_DIR), $(TEST))))
 
 ifeq ($(filter $(word 1,$(MAKECMDGOALS)),"all_lnx" "re_lnx" "clean_lnx" "fclean_lnx"),)
-    SRCS 		+= $(addprefix $(SRC_DIR), $(addprefix $(EVENTS_DIR), $(EVENTS_MAC)))
+    SRCS 		+= $(addprefix $(MAN_DIR), $(addprefix $(SRC_DIR), $(addprefix $(EVENTS_DIR), $(EVENTS_MAC))))
 else
-    SRCS 		+= $(addprefix $(SRC_DIR), $(addprefix $(EVENTS_DIR), $(EVENTS_LNX)))
+    SRCS 		+= $(addprefix $(MAN_DIR), $(addprefix $(SRC_DIR), $(addprefix $(EVENTS_DIR), $(EVENTS_LNX))))
 endif
 
 #Flags to compile in MAC
@@ -114,7 +117,6 @@ all_lnx:	MLXFLAGS 	= 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lz
 all_lnx:	mlx_lnx_link libft_link $(NAME)
 
 OBJS			=	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
-
 DEPS			+=	$(addsuffix .d, $(basename $(OBJS)))
 
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
@@ -152,6 +154,10 @@ fclean:		clean
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 re:			fclean all
 
+bonus:	
+
+bonus_lnx:
+
 libft_link:	
 			@make -sC $(LIBFT_DIR)
 
@@ -180,4 +186,4 @@ fclean_lnx:		clean_lnx
 
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○IGNORE○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus libft_link mlx_link re_lnx mlx_lnx_link clean_lnx fclean_lnx bonus_lnx
