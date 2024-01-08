@@ -42,7 +42,7 @@ static void	displ(t_field *field, int x, int y)
 	{
 		field->events.btn_left_presd = 0;
 		v = resta_vector(create_vect(0, x, y), field->aux);
-		v = suma_vector(prod_cte_vector(v.y, field->camera.center.vy), \
+		v = resta_vector(prod_cte_vector(v.y, field->camera.center.vy), \
 				prod_cte_vector(v.z, field->camera.center.vz));
 		field->camera.center.pos = suma_vector(field->camera.center.pos, v);
 	}
