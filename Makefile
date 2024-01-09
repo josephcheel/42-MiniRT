@@ -71,14 +71,14 @@ INCLUDE		+= $(addprefix -I , $(INC))
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-SRC_MINIRT		=	main.c initializers.c
+SRC_MINIRT		=	main.c initializers.c error_msg.c
 CHECKER			=	init_vars.c checks.c
 PARSERS			=	device_add.c geometry_add.c adders.c
 GEOMETRY		=	geom_lstcreate.c geom_lstprint.c get_int_pt.c def_pixel_vp.c \
 					dump_mem_2_scr.c set_pixel_color.c
 					#geom_lstutils.c set_pict_colors.c create_field_vectors.c 
 					#geom_lstutils.c
-LIGHTS			=	lights_lstcreate.c
+LIGHTS			=	lights_lstcreate.c lights_clone.c
 
 VECTOR3			=	conv_v_unit.c div_cte_vector.c int_vect_esfera.c \
 				modulo_vector.c prod_escalar.c resta_vector.c \

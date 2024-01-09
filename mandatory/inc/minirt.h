@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/07 23:02:46 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:15:36 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,11 +211,9 @@ typedef struct s_field
 	t_ambient	ambient;
 	t_camera	camera;
 	t_light		*light;
-	
 	t_mlx		mlx;
 	t_event		events;
 	t_vec3		aux;
-
 	t_camera	orig_camera;
 	t_light		*orig_light;
 }	t_field;
@@ -251,8 +249,8 @@ t_vec_pos	*int_vect_cono(t_vec_pos vpi, t_vec_pos vpc, double r, double h);
 t_vec3		prod_cte_vector(double a, t_vec3 b);
 t_vec3		div_cte_vector(double a, t_vec3 b);
 double		dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v);
-void		get_devices(t_field *field, char *line);
-void		get_geom(t_field *field, char *line);
+int			get_devices(t_field *field, char *line);
+int			get_geom(t_field *field, char *line);
 double		*solv_eq_ord_2(double *p);
 t_vec3		conv_v_unit(t_vec3 v);
 int			is_zero_vec(t_vec3 v);
@@ -306,5 +304,11 @@ int			mouse_events_rel(int mouse, int x, int y, t_field *field);
 int			mouse_events_pre(int mouse, int x, int y, t_field *field);
 int			key_events_press(int key, t_field *field);
 int			key_events_release(int key, t_field *field);
+
+int			rgb_error(t_color color);
+int			ratio_double_error(double min, double max, double nbr);
+int			ratio_int_error(int min, int max, int nbr);
+int 		ratio_vec3_error(int min, int max, t_vec3 vector);
+t_geom		*geom_error(char *str);
 
 #endif

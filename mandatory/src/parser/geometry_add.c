@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/05 13:35:05 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:15:39 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_geom	*get_sphere(char *line)
 	sphere->vp.v = create_vect(0, 0, 0);
 	sphere->r = ft_atof(content[2]) / 2;
 	sphere->color = add_color(content[3]);
+	if (rgb_error(sphere->color))
+		return (geom_error("Sphere Color: out of range\n"));
 	sphere->next = NULL;
 	ft_array_free(content, ft_array_size(content));
 	return (sphere);
@@ -38,8 +40,12 @@ t_geom	*get_plane(char *line)
 	plane = malloc(sizeof(t_geom));
 	plane->type = PLANE;
 	plane->vp.pt = add_vec3(content[1]);
+	if (ratio_vec3_error(-1, 1, add_vec3(content[2])))
+		return (geom_error("Plane normalized Orientatio: out of range\n"));
 	plane->vp.v = conv_v_unit(add_vec3(content[2]));
 	plane->color = add_color(content[3]);
+	if (rgb_error(plane->color))
+		return (geom_error("Plane Color: out of range\n"));
 	plane->next = NULL;
 	ft_array_free(content, ft_array_size(content));
 	return (plane);
@@ -54,10 +60,14 @@ t_geom	*get_cylinder( char *line)
 	cylinder = malloc(sizeof(t_geom));
 	cylinder->type = CYLINDER;
 	cylinder->vp.pt = add_vec3(content[1]);
+	if (ratio_vec3_error(-1, 1, add_vec3(content[2])))
+		return (geom_error("Cylinder normalized Orientatio: out of range\n"));
 	cylinder->vp.v = conv_v_unit(add_vec3(content[2]));
 	cylinder->r = ft_atof(content[3]) / 2;
 	cylinder->height = ft_atof(content[4]);
 	cylinder->color = add_color(content[5]);
+	if (rgb_error(cylinder->color))
+		return (geom_error("Cylinder Color: out of range\n"));
 	cylinder->next = NULL;
 	ft_array_free(content, ft_array_size(content));
 	return (cylinder);
@@ -81,7 +91,7 @@ t_geom	*get_conus( char *line)
 	return (cone);
 }
 
-void	get_geom(t_field *field, char *line)
+int	get_geom(t_field *field, char *line)
 {
 	t_geom	*temp;
 	char	**type;
@@ -98,4 +108,5 @@ void	get_geom(t_field *field, char *line)
 		temp = get_conus(line);
 	ft_geomadd_back(&field->geom, temp);
 	ft_array_free(type, ft_array_size(type));
+	return (0);
 }
