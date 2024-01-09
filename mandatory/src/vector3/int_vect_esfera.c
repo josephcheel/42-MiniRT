@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/05 13:01:05 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:42:42 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_vec_pos	*int_vect_esfera(t_vec_pos vpi, t_vec3 pr, double r)
 		pt[1].pt = suma_vector(vpi.pt, prod_cte_vector(lambda[1], vpi.v));
 		pt[0].v = conv_v_unit(resta_vector(pt[0].pt, pr));
 		pt[1].v = conv_v_unit(resta_vector(pt[1].pt, pr));
+		free(lambda);
 	}
 	else
 		return (NULL);

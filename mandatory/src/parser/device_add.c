@@ -6,11 +6,24 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/09 13:00:21 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:06:05 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
+
+static void	get_camera_center(t_field *field, char **content)
+{
+	t_vec3	aux;
+
+	field->camera.center.vx = conv_v_unit(add_vec3(content[2]));
+	aux = create_vect(0, 0, 1);
+	field->camera.center.vy = prod_vectorial(aux, field->camera.center.vx);
+	if (is_zero_vec(field->camera.center.vy))
+		field->camera.center.vy = create_vect(0, 1, 0);
+	field->camera.center.vz = prod_vectorial(field->camera.center.vx, \
+			field->camera.center.vy);
+}
 
 int	get_camera(t_field *field, char *line)
 {
@@ -22,13 +35,7 @@ int	get_camera(t_field *field, char *line)
 	field->camera.center.pos = add_vec3(content[1]);
 	if (ratio_vec3_error(-1, 1, add_vec3(content[2])))
 		return (write(2, "Camera normalized Orientatio: out of range\n", 44));
-	field->camera.center.vx = conv_v_unit(add_vec3(content[2]));
-	aux = create_vect(0, 0, 1);
-	field->camera.center.vy = prod_vectorial(aux, field->camera.center.vx);
-	if (is_zero_vec(field->camera.center.vy))
-		field->camera.center.vy = create_vect(0, 1, 0);
-	field->camera.center.vz = prod_vectorial(field->camera.center.vx, \
-			field->camera.center.vy);
+	get_camera_center(field, content);
 	field->camera.fov = ft_atoi(content[3]);
 	if (ratio_int_error(0, 180, field->camera.fov))
 		return (write(2, "Camera FOV: out of range\n", 26));

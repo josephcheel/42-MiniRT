@@ -18,6 +18,8 @@ t_vec_pos	*int_vect_plano(t_vec_pos pi, t_vec_pos pl)
 	t_vec_pos	*out;
 
 	out = (t_vec_pos *)malloc(2 * sizeof(t_vec_pos));
+	if (!out)
+		return (NULL);
 	out[0].pt = resta_vector(pl.pt, pi.pt);
 	lambda = prod_escalar(pl.v, out[0].pt) / prod_escalar(pl.v, pi.v);
 	out[0].pt = prod_cte_vector(lambda, pi.v);

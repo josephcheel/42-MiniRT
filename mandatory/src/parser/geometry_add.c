@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/09 13:15:39 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:12:50 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,14 @@ t_geom	*get_conus( char *line)
 	cone = malloc(sizeof(t_geom));
 	cone->type = CONUS;
 	cone->vp.pt = add_vec3(content[1]);
+	if (ratio_vec3_error(-1, 1, add_vec3(content[2])))
+		return (geom_error("Conus normalized Orientatio: out of range\n"));
 	cone->vp.v = conv_v_unit(add_vec3(content[2]));
 	cone->r = ft_atof(content[3]) / 2;
 	cone->height = ft_atof(content[4]);
 	cone->color = add_color(content[5]);
+	if (rgb_error(cone->color))
+		return (geom_error("Conus Color: out of range\n"));
 	cone->next = NULL;
 	ft_array_free(content, ft_array_size(content));
 	return (cone);

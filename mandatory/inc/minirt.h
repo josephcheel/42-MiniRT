@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/09 13:15:36 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/09 21:04:25 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@
 # define MOUSE_BTN_ROT_DW 5
 //PArametros ara el movimiento de rotacion
 # define ROT_SPH 200
+
 enum e_type_geo
 {
 	SPHERE,
@@ -276,12 +277,12 @@ int			move_light(t_field *field);
 t_color		set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl);
 
 // LIGHTS LIST UTILS
-t_light	*ft_clone_light(t_light *light);
-t_light	*ft_lightlast(t_light *lst);
-void	ft_lightadd_back(t_light **lst, t_light *new_node);
-int	ft_lightsize(t_light *lst);
-void	ft_free_light(t_light **head);
-t_light *ft_clone_lightning(t_light *light);
+t_light		*ft_clone_light(t_light *light);
+t_light		*ft_lightlast(t_light *lst);
+void		ft_lightadd_back(t_light **lst, t_light *new_node);
+int			ft_lightsize(t_light *lst);
+void		ft_free_light(t_light **head);
+t_light		*ft_clone_lightning(t_light *light);
 
 // JUST FOR DEBUGGING
 void		ft_print_geometry_node(t_geom *node);
@@ -308,7 +309,7 @@ int			key_events_release(int key, t_field *field);
 int			rgb_error(t_color color);
 int			ratio_double_error(double min, double max, double nbr);
 int			ratio_int_error(int min, int max, int nbr);
-int 		ratio_vec3_error(int min, int max, t_vec3 vector);
+int			ratio_vec3_error(int min, int max, t_vec3 vector);
 t_geom		*geom_error(char *str);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   int_vect_cilind.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/04 18:37:30 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/09 23:14:23 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static double	*calc_lambda(t_vec3 *v, double r)
 	p[1] = 2 * prod_escalar(v[0], v[1]);
 	p[2] = prod_escalar(v[0], v[0]) - r * r;
 	out = solv_eq_ord_2(p);
+	free(p);
 	return (out);
 }
 
