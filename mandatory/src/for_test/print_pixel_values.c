@@ -93,6 +93,7 @@ t_int_pts	calcula_color(int pixel, t_field *field)
 				i++;
 		}
 		ptr = ptr->next;
+		free (out);
 	}
 	vp_int.pt.c = set_pixel_color(vp_int, field, *vps);
 	return (vp_int);
