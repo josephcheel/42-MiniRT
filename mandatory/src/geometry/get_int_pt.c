@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_pict_colors.c                                  :+:      :+:    :+:   */
+/*   get_int_pt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/04 04:13:44 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/09 23:10:04 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo)
 
 	if (geo->type == SPHERE)
 		out = int_vect_esfera(*vps, geo->vp.pt, geo->r);
-//	else if (geo->type == CYLINDER)
-//		out = int_vect_cilind(*vps, geo->vp, geo->r, geo->height);
+	else if (geo->type == CYLINDER)
+		out = int_vect_cilind(*vps, geo->vp, geo->r, geo->height);
 	else if (geo->type == PLANE)
 		out = int_vect_plano(*vps, geo->vp);
-	else if (geo->type == CYLINDER)
+	else if (geo->type == CONUS)
 		out = int_vect_cono(*vps, geo->vp, geo->r, geo->height);
 	else
 		out = NULL;
@@ -93,6 +93,7 @@ void	get_colored_int_pt(int pixel, t_field *field)
 				i++;
 		}
 		ptr = ptr->next;
+		free(out);
 	}
 	vp_int->pt.c = set_pixel_color(*vp_int, field, *vps);
 }

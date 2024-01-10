@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/04 04:13:44 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/09 21:37:02 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static bool	is_behind_srf(t_int_pts vp, t_vec_pos vl_pt, t_geom *geo)
 				if (prod_escalar(aux, vl_pt.v) < 0)
 					dist[2] = LONG_MAX;
 			}
+			free(out);
 			if (dist[0] > dist[1] || dist[0] > dist[2])
 				return (true);
 		}
@@ -90,12 +91,14 @@ static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
 	return (aux);
 }
 
-/// @brief Calculates the color of the pixel depending of the light position
-/// @brief The function also takes into account if there is any surface that
-/// @brief is in between the point and the light (Shadow from other element)
-/// @param vp
-/// @param field
-/// @return Returns the color of the pixel.
+/*
+@brief Calculates the color of the pixel depending of the light position
+@brief The function also takes into account if there is any surface that
+@brief is in between the point and the light (Shadow from other element)
+@param vp
+@param field
+@return Returns the color of the pixel.
+*/
 t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 {
 	t_vec_pos	v_luz_pt;
