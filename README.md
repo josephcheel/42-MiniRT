@@ -14,6 +14,8 @@
 * [**Ray Tracing in One Weekend, (Peter Shirley, Trevor David Black, Steve Hollasch)**](https://raytracing.github.io/)
 * [**Ray Tracing [YouTube]**](https://youtu.be/gfW1Fhd9u9Q?si=BI667gXh8sOryeaU)
 * [**Phong Reflection Model**](https://en.wikipedia.org/wiki/Phong_reflection_model)
+* [**HSL to RGB conversion**] https://www.programmingalgorithms.com/algorithm/hsl-to-rgb/c/
+
 ### Description of file arguments structure:
 # Ambient light
 A 0.2            255,255,255

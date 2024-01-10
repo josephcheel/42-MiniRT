@@ -16,6 +16,14 @@ static t_color	apply_fact(t_color c, double *f, t_color clm)
 {
 	t_color	out;
 
+	(void)clm;
+	out = c;
+	out.s = out.s * (f[0] + f[1]);
+	out.l = out.l * f[2];
+	hsl_to_rgb(&out);
+	return (out);
+}
+/*
 	out.r = (int)(c.r * f[0] + c.r * f[1] + clm.r * f[2]);
 	if (out.r < 0)
 		out.r = 0;
@@ -32,7 +40,7 @@ static t_color	apply_fact(t_color c, double *f, t_color clm)
 	else if (out.b > 255)
 		out.b = 255;
 	return (out);
-}
+}*/
 
 static bool	is_behind_srf(t_int_pts vp, t_vec_pos vl_pt, t_geom *geo)
 {

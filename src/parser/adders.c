@@ -47,6 +47,7 @@ t_color	add_color(char *color)
 	rgba.g = ft_atoi(values[1]);
 	rgba.b = ft_atoi(values[2]);
 	rgba.a = 0;
+	rgb_to_hsl(&rgba);
 	ft_array_free(values, ft_array_size(values));
 	return (rgba);
 }
