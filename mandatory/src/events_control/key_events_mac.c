@@ -67,7 +67,7 @@ int	key_events_press(int key, t_field *field)
 	{
 		field->light =ft_clone_light(field->orig_light);
 		dump_mem_2_scr(field);
-		printf("\nRestarting Camera\n");
+		printf("\nRestarting Light\n");
 	}
 	return (0);
 }
