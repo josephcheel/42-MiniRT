@@ -9,8 +9,22 @@
 </h1>
 <!--FINISH HEADER-->
 
+>A project on Ray-Tracing and rendering three-dimensional computer-generated images. Using MiniLibX, the 42 graphical library.
 
-#### Resources
+<div align="center">
+<img align="center"  width="600" src="https://github.com/josephcheel/42-MiniRT/Scenes/Images/img1.png">
+</div>
+
+### What is the project about
+
+
+## General Instrucctions
+
+## Mandatory Instrucctions
+
+## Bonus Instrucctions
+
+### Resources
 * [**Ray Tracing in One Weekend, (Peter Shirley, Trevor David Black, Steve Hollasch)**](https://raytracing.github.io/)
 * [**Ray Tracing [YouTube]**](https://youtu.be/gfW1Fhd9u9Q?si=BI667gXh8sOryeaU)
 * [**Phong Reflection Model**](https://en.wikipedia.org/wiki/Phong_reflection_model)
