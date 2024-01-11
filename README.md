@@ -29,7 +29,49 @@ MiniRT is a project that introduces the basics of Ray tracing, focusing on 3D co
 > [!WARNING]
 > Maps must have the ***.rt*** extension
 ## Mandatory Instrucctions
-#### File configuration structure:
+Configuration file has three **mandatory** elements: **Camera**, **Light** and **Ambient Light**. And three optional geomtrical figures: **Plane**, **Sphere**, **Cylinder**. Each element has the following identifier:
+
+|      Name     | Identifier |   Name   | Identifier  |
+|:-------------:|:----------:|:--------:|:-----------:|
+| Ambient Light |      A     |   Plane  |      pl     |
+|     Camera    |      C     |  Sphere  |      sp     |
+|     Light     |      L     | Cylinder |      cy     |
+
+
+
+### File configuration:
+##### Mandatory Elements
+*  Ambient Light:
+    * **Identifier**: A
+    *  **Ambient lighting ratio** in range [0.0,1.0]: 0.2
+    *  **Colors** in RGB in range [0-255]: 255, 255, 255
+*  Camera
+    *  **Identifier**: C
+    *  **XYZ coordinates** of the view point: -50.0,0,20
+    *  **3D normalized orientation** vector. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
+    *  FOV : Horizontal field of view in degrees in range [0,180]: 70
+*  Light
+    * **Identifier**: L
+    * **XYZ coordinates** of the light point: -40.0,50.0,0.0
+    * The light brightness ratio in range [0.0,1.0]: 0.6
+    * (unused in mandatory part)R,G,B colors in range [0-255]: 10, 0, 255  
+
+##### Optional Elements
+*  Plane
+    * **Identifier**: pl
+    * **XYZ coordinates** of a point in the plane: 0.0,0.0,-10.0
+    * **3D normalized** vector. In range [-1,1] for each x,y,z axis: 0.0,1.0,0.0 ∗ R,G,B colors in range [0-255]: 0,0,225
+*  Sphere
+    * **Identifier**: sp
+    * **XYZ coordinates** of the sphere center: 0.0,0.0,20.6 ∗ the sphere diameter: 12.6
+    * **Colors** in RGB in range [0-255]: 10, 0, 255
+*   Cylinder
+    * **Identifier**: cy
+    * **XYZ coordinates** of the center of the cylinder: 50.0,0.0,20.6
+    * **3D normalized** vector of axis of cylinder. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
+    * **Diameter**: 14.2
+    * **Height**: 21.42
+    * **Colors** in RGB in range [0,255]: 10, 0, 255
 
 ## Bonus Instrucctions
 
