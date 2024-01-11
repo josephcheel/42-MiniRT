@@ -38,8 +38,8 @@ Configuration file has three **mandatory** elements: **Camera**, **Light** and *
 |     Light     |      L     | Cylinder |      cy     |
 
 
-
-## File configuration
+---
+### File configuration
 ##### Mandatory Elements
 *  Ambient Light:
   ![Ambient light line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/ambient_line.png)
