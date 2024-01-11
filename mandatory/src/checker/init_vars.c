@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/09 20:00:10 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:37:19 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ void	free_field(t_field *field)
 	mlx_destroy_image(field->mlx.mlx, field->mlx.img);
 	mlx_destroy_window(field->mlx.mlx, field->mlx.win);
 	ft_free_geometry(&field->geom);
-	// ft_free_vectors_camera(field);
 	free(field->camera.field_vp);
 	free(field->camera.int_vp);
 	free(field->light);

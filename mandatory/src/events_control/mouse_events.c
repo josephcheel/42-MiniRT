@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:50:25 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/03 16:29:12 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:51:41 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,26 +68,26 @@ static void	cam_rotate(t_field *field, int x, int y)
 	{
 		aux = sqrt(pow(ROT_SPH, 2) - pow(x, 2) - pow(y, 2));
 		v_rot[1] = conv_v_unit(create_vect(aux, x, y));
-		aux = sqrt(pow(ROT_SPH, 2) - pow(field->aux.y, 2) - pow(field->aux.z, 2));
+		aux = sqrt(pow(ROT_SPH, 2) - \
+		pow(field->aux.y, 2) - pow(field->aux.z, 2));
 		v_rot[0] = conv_v_unit(create_vect(aux, field->aux.y, field->aux.z));
 		v_rot[2] = conv_v_unit(prod_vectorial(v_rot[1], v_rot[0]));
 		ang_rot = acos(prod_escalar(v_rot[1], v_rot[0]));
-		field->camera.center.vx = rotate_vector(field->camera.center.vx, v_rot[2], ang_rot);
+		field->camera.center.vx = \
+		rotate_vector(field->camera.center.vx, v_rot[2], ang_rot);
 	}
-	field->camera.center.vy = rotate_vector(field->camera.center.vy, v_rot[2], ang_rot);
-	field->camera.center.vz = rotate_vector(field->camera.center.vz, v_rot[2], ang_rot);
+	field->camera.center.vy = \
+	rotate_vector(field->camera.center.vy, v_rot[2], ang_rot);
+	field->camera.center.vz = \
+	rotate_vector(field->camera.center.vz, v_rot[2], ang_rot);
 }
 
 int	mouse_events_pre(int mouse, int x, int y, t_field *field)
 {
 	if (mouse == MOUSE_BTN_ROT_UP)
-	{
 		zoom(-10, field);
-	}
 	else if (mouse == MOUSE_BTN_ROT_DW)
-	{
 		zoom(10, field);
-	}
 	else if (mouse == MOUSE_BTN_MIDDLE)
 		field->events.btn_cent_presd = 1;
 	else if (mouse == MOUSE_BTN_RIGHT)

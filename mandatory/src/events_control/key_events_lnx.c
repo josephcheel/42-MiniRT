@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events_lnx.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:51:44 by eavedill          #+#    #+#             */
-/*   Updated: 2023/02/26 15:51:47 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:39:56 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,21 @@ int	key_events_press(int key, t_field *field)
 	printf("Entro en keyevents press %x -- %p\n", key, field);
 	if (key == XK_CTRL)
 	{
-		printf("key Ctrl antes %x -->%i\n", key, field->events.key_ctrl_press);
 		field->events.key_ctrl_press = 1;
 		if (!field->events.btn_left_presd)
 			field->aux = create_vect(0, 0, 0);
-		printf("key Ctrl post activado %x -->%i\n", \
-			key, field->events.key_ctrl_press);
 	}
 	else if (key == XK_ALT)
 	{
-		printf("key Ctrl antes %x -->%i\n", key, field->events.key_alt_press);
 		field->events.key_alt_press = 1;
 		if (!field->events.btn_left_presd)
 			field->aux = create_vect(0, 0, 0);
-		printf("key ALT post activado %x -->%i\n", \
-			key, field->events.key_alt_press);
 	}
 	else if (key == XK_SHIFT)
 	{
-		printf("key Ctrl antes %x -->%i\n", key, field->events.key_shift_press);
 		field->events.key_shift_press = 1;
 		if (!field->events.btn_left_presd)
 			field->aux = create_vect(0, 0, 0);
-		printf("key ALT post activado %x -->%i\n", \
-			key, field->events.key_shift_press);
 	}
 	return (0);
 }
