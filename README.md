@@ -39,7 +39,7 @@ Configuration file has three **mandatory** elements: **Camera**, **Light** and *
 
 
 
-### File configuration:
+## File configuration
 ##### Mandatory Elements
 *  Ambient Light:
     * **Identifier**: A
