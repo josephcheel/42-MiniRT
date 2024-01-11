@@ -12,7 +12,7 @@
 >A project on Ray-Tracing and rendering three-dimensional computer-generated images. Using MiniLibX, the 42 graphical library.
 
 <div align="center">
-<img align="center"  width="600" src="https://github.com/josephcheel/42-MiniRT/Scenes/Images/img1.png">
+<img align="center"  width="600" height="600"src="https://github.com/josephcheel/42-MiniRT/blob/main/Scenes/Images/img1.png">
 </div>
 
 ### What is the project about
