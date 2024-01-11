@@ -19,7 +19,7 @@ NAME_BONUS	=	miniRT_bonus
 CC			=	gcc
 
 MATHFLAG	=	-lm
-XFLAGS		=	-g2 -g #-fsanitize=address 
+XFLAGS		=	-g2 -g#-fsanitize=address 
 CLEAN_CAR	=	\033[2K\r
 
 AR			=	ar rcs
@@ -107,7 +107,7 @@ else
 endif
 
 #Flags to compile in MAC
-all: 		CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H  -O3 #-fsanitize=address
+all: 		CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H -O3#-fsanitize=address
 all: 		MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 all: 		mlx_link libft_link $(NAME)
 
@@ -126,7 +126,7 @@ DEPS			+=	$(addsuffix .d, $(basename $(OBJS)))
 $(OBJ_DIR)%.o : %.c Makefile 
 	@$(MD) $(dir $@)
 	@printf "$(CLEAN_CAR)$(OK_COLOR)[miniRT Compiling]$(BLUE_COLOR) : $(WARN_COLOR)$<$(NO_COLOR) "
-	@$(CC) -MT $@ -MMD -MP -c $(CFLAGS) $(XFLAGS)  $(INCLUDE) -Imlx  $< -o $@
+	@$(CC) -MT $@ -MMD -MP -c $(CFLAGS) $(XFLAGS) $(INCLUDE) -Imlx  $< -o $@
 #-I ./mlx/mlx.h
 
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#

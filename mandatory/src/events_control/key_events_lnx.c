@@ -6,11 +6,28 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:51:44 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/11 19:39:56 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/11 20:53:12 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
+
+static void	key_events_resets(int key, t_field *field)
+{
+	if (key == XK_R)
+	{
+		field->camera = field->orig_camera;
+		dump_mem_2_scr(field);
+		printf("Restarting Camera\n");
+	}
+	else if (key == XK_L)
+	{
+		field->light = ft_clone_light(field->orig_light);
+		dump_mem_2_scr(field);
+		printf("Restarting Light\n");
+	}
+}
+
 
 int	key_events_press(int key, t_field *field)
 {
@@ -33,6 +50,7 @@ int	key_events_press(int key, t_field *field)
 		if (!field->events.btn_left_presd)
 			field->aux = create_vect(0, 0, 0);
 	}
+	key_events_resets(key, field);
 	return (0);
 }
 
