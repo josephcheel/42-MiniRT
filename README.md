@@ -42,18 +42,18 @@ Configuration file has three **mandatory** elements: **Camera**, **Light** and *
 ## File configuration
 ##### Mandatory Elements
 *  Ambient Light:
-  ![Ambient light line](https://github.com/josephcheel/42-MiniRT/)
+  ![Ambient light line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/ambient_line.png)
     * **Identifier**: A
     *  **Ambient lighting ratio** in range [0.0,1.0]: 0.2
     *  **Colors** in RGB in range [0-255]: 255, 255, 255
 *  Camera
-   ![Camera line](https://github.com/josephcheel/42-MiniRT/)
+   ![Camera line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/camera_line.png)
     *  **Identifier**: C
     *  **XYZ coordinates** of the view point: -50.0,0,20
     *  **3D normalized orientation** vector. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
     *  FOV : Horizontal field of view in degrees in range [0,180]: 70
 *  Light
-  ![Light line](https://github.com/josephcheel/42-MiniRT/)
+  ![Light line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/light_line.png)
     * **Identifier**: L
     * **XYZ coordinates** of the light point: -40.0,50.0,0.0
     * The light brightness ratio in range [0.0,1.0]: 0.6
@@ -61,17 +61,17 @@ Configuration file has three **mandatory** elements: **Camera**, **Light** and *
 
 ##### Optional Elements
 *  Plane
-  ![Plane line](https://github.com/josephcheel/42-MiniRT/)
+  ![Plane line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/plane_line.png)
     * **Identifier**: pl
     * **XYZ coordinates** of a point in the plane: 0.0,0.0,-10.0
     * **3D normalized** vector. In range [-1,1] for each x,y,z axis: 0.0,1.0,0.0 ∗ R,G,B colors in range [0-255]: 0,0,225
 *  Sphere
-   ![Sphere line](https://github.com/josephcheel/42-MiniRT/)
+   ![Sphere line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/sphere_line.png)
     * **Identifier**: sp
     * **XYZ coordinates** of the sphere center: 0.0,0.0,20.6 ∗ the sphere diameter: 12.6
     * **Colors** in RGB in range [0-255]: 10, 0, 255
 *   Cylinder
-   ![Cylinder line](https://github.com/josephcheel/42-MiniRT/)
+   ![Cylinder line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/cylinder_line.png)
     * **Identifier**: cy
     * **XYZ coordinates** of the center of the cylinder: 50.0,0.0,20.6
     * **3D normalized** vector of axis of cylinder. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
