@@ -37,6 +37,23 @@ Configuration file has three **mandatory** elements: **Camera**, **Light** and *
 |     Camera    |      C     |  Sphere  |      sp     |
 |     Light     |      L     | Cylinder |      cy     |
 
+### Keyboard Commands
+#### Displacement Camera
+
+* **MAC** <kbd>Option ⌥</kbd> + <kbd>Right Click<kbd> and swip with the mouse
+* **LINUX** <kbd>Alt</kbd> + <kbd>Left Click<kbd> and swip with the mouse
+#### Zoom Camera
+* **MAC** <kbd>Option ⌥</kbd> + <kbd>Mouse Wheel</kbd>
+* **LINUX** <kbd>Alt</kbd> + <kbd>Mouse Wheel</kbd>
+#### Rotation Camera
+* <kbd>Shift ⇧</kbd> + <kbd>Left Click<kbd> and swip with the mouse
+#### Displacement Light
+* <kbd>Ctrl ^</kbd> 
+
+<!--CTRL + Left button : Displacement of the light in coordinates o z,y of the camera CTRL + Wheel : Displacement of the light in x direction of the camera-->
+#### Reset settings
+* <kbd>R</kbd> Reset Camera Position
+* <kbd>L</kbd> Reset Light Position
 
 ---
 ### File configuration
