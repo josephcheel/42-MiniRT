@@ -15,7 +15,7 @@
 void	print_color_values(char *s, t_color c)
 {
 	printf("%s", s);
-	printf("R=%x, G=%x, B=%x, a=%x\n", c.r, c.g, c.b, c.a);
+	printf("R=%x, G=%x, B=%x, a=%x, H=%f, S=%f, L=%f\n", c.r, c.g, c.b, c.a, c.h, c.s, c.l);
 }
 
 static bool	is_bhd_cam(t_vec3 pint, t_vec3 pi, t_vec3 vx)

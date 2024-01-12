@@ -18,9 +18,11 @@ static t_color	apply_fact(t_color c, double *f, t_color clm)
 
 	(void)clm;
 	out = c;
-	out.s = out.s * (f[0] + f[1]);
-	out.l = out.l * f[2];
+	out.s = (f[0] + f[1]); // out.s *
+	out.l = (f[0]+ f[2]); //out.l * 
 	hsl_to_rgb(&out);
+	print_color_values("El Color del objeto es: ", out);
+
 	return (out);
 }
 /*
@@ -83,6 +85,8 @@ static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt)
 	double	aux;
 
 	aux = prod_escalar(vp.v, vl_pt.v);
+//	if (aux < 0)
+//		return (0);
 	return (aux);
 }
 
@@ -92,9 +96,11 @@ static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
 	t_vec3	out;
 
 	aux = 2 * prod_escalar(vp.v, vl_pt.v);
+	if (aux < 0)
+		return (0);
 	out = resta_vector(prod_cte_vector(aux, vp.v), vl_pt.v);
 	aux = prod_escalar(out, pixl.v);
-	aux = aux * aux * aux * aux;
+	aux = pow(aux, 2);
 	return (aux);
 }
 
