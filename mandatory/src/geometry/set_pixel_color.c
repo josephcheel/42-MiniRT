@@ -12,38 +12,6 @@
 
 #include "../../inc/minirt.h"
 
-static t_color	apply_fact(t_color c, double *f, t_color clm)
-{
-	t_color	out;
-
-	(void)clm;
-	out = c;
-	out.s = (f[0] + f[1]); // out.s *
-	out.l = (f[0]+ f[2]); //out.l * 
-	hsl_to_rgb(&out);
-	print_color_values("El Color del objeto es: ", out);
-
-	return (out);
-}
-/*
-	out.r = (int)(c.r * f[0] + c.r * f[1] + clm.r * f[2]);
-	if (out.r < 0)
-		out.r = 0;
-	else if (out.r > 255)
-		out.r = 255;
-	out.g = (int)(c.g * f[0] + c.g * f[1] + clm.g * f[2]);
-	if (out.g < 0)
-		out.g = 0;
-	else if (out.g > 255)
-		out.g = 255;
-	out.b = (int)(c.b * f[0] + c.b * f[1] + clm.b * f[2]);
-	if (out.b < 0)
-		out.b = 0;
-	else if (out.b > 255)
-		out.b = 255;
-	return (out);
-}*/
-
 static bool	is_behind_srf(t_int_pts vp, t_vec_pos vl_pt, t_geom *geo)
 {
 	double		dist[3];
@@ -86,8 +54,9 @@ static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt)
 	double	aux;
 
 	aux = prod_escalar(vp.v, vl_pt.v);
-//	if (aux < 0)
-//		return (0);
+	if (aux < 0)
+		return (0);
+	aux = pow(aux, 4);
 	return (aux);
 }
 
@@ -101,7 +70,7 @@ static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
 		return (0);
 	out = resta_vector(prod_cte_vector(aux, vp.v), vl_pt.v);
 	aux = prod_escalar(out, pixl.v);
-	aux = pow(aux, 2);
+	aux = pow(aux, 3);
 	return (aux);
 }
 
@@ -125,15 +94,17 @@ t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 	{
 		fact[0] = field->ambient.ratio;
 		fact[1] = 0;
-		fact[2] = field->ambient.ratio * -0.5;
+		fact[2] = 0;
 	}
 	else
 	{
 		fact[0] = field->ambient.ratio;
-		fact[1] = field->light->ratio * get_difuse(vp.pt, v_luz_pt) * 0.5;
-		fact[2] = field->light->ratio * get_specular(vp.pt, v_luz_pt, pixl);// * 0.7;
+		fact[1] = field->light->ratio * get_difuse(vp.pt, v_luz_pt);
+		fact[2] = field->light->ratio * get_specular(vp.pt, v_luz_pt, pixl);
 	}
-	vp.pt.c = apply_fact(vp.pt.c, fact, v_luz_pt.c);
-
+	vp.pt.c.l = fact[0] + fact[1] + fact[2];
+	if (vp.pt.c.l > 1)
+		vp.pt.c.l = 1;
+	hsl_to_rgb(&vp.pt.c);
 	return (vp.pt.c);
 }

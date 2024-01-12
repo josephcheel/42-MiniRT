@@ -12,9 +12,9 @@
 
 #ifndef MINIRT_H
 # define MINIRT_H
-# include "../mlx/mlx.h"
-# include "../libft/inc/libft.h"
-# include "../inc/colors.h"
+# include "../../mlx/mlx.h"
+# include "../../libft/inc/libft.h"
+# include "colors.h"
 # include <math.h>
 # include <limits.h>
 # include <stdio.h>
