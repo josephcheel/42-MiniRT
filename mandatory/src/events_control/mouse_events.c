@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:50:25 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/11 19:51:41 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/12 01:42:49 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	displ(t_field *field, int x, int y)
 	{
 		field->events.btn_left_presd = 0;
 		v = resta_vector(field->aux, create_vect(0, x, y));
-		v = suma_vector(prod_cte_vector(v.y, field->camera.center.vy), \
+		v = resta_vector(prod_cte_vector(v.y, field->camera.center.vy), \
 				prod_cte_vector(v.z, field->camera.center.vz));
 		field->light->pos = suma_vector(field->light->pos, v);
 	}
