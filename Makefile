@@ -71,7 +71,7 @@ INCLUDE		+= $(addprefix -I , $(INC))
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-SRC_MINIRT		=	main.c initializers.c error_msg.c
+SRC_MINIRT		=	main.c initializers.c error_msg.c hsl_to_rgb.c rgb_to_hsl.c
 CHECKER			=	init_vars.c checks.c
 PARSERS			=	device_add.c geometry_add.c adders.c
 GEOMETRY		=	geom_lstcreate.c geom_lstprint.c get_int_pt.c def_pixel_vp.c \
@@ -86,8 +86,6 @@ VECTOR3			=	conv_v_unit.c div_cte_vector.c int_vect_esfera.c \
 				prod_vectorial.c suma_vector.c print_vector.c \
 				create_vector.c int_vect_cilind.c solv_eq_ord_2.c is_zero_vect.c \
 				init_vp.c int_vect_cono.c rotate_vector.c 
-GRAPHICS		=
-GRAPHICS		=
 EVENTS_MAC		= key_events_mac.c mouse_events.c close.c
 EVENTS_LNX		= key_events_lnx.c mouse_events.c close.c
 TEST 			= ft_check_calculations.c print_pixel_values.c

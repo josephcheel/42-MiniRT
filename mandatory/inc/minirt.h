@@ -103,10 +103,13 @@ typedef struct s_img_buff
 
 typedef struct s_color
 {
-	int	r;
-	int	g;
-	int	b;
-	int	a;
+	int		r;
+	int		g;
+	int		b;
+	int		a;
+	double	h;
+	double	s;
+	double	l;
 }	t_color;
 
 typedef struct s_vec3
@@ -275,6 +278,8 @@ void		set_point_int(t_field *field);
 int			dump_mem_2_scr(t_field *field);
 int			move_light(t_field *field);
 t_color		set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl);
+void		rgb_to_hsl(t_color *c);
+void		hsl_to_rgb(t_color *c);
 
 // LIGHTS LIST UTILS
 t_light		*ft_clone_light(t_light *light);
