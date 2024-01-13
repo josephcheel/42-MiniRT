@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/09 23:14:23 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/13 12:36:44 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static t_vec_pos	*get_point_result(double *lambda, t_vec_pos vpi, \
 	t_vec_pos	*out;
 	double		*lambda_c;
 	t_vec_pos	aux;
+	t_vec_pos	*out_aux;
 	int			i;
 
 	lambda_c = limit_lambda(lambda, vpi, vpc, h);
@@ -68,17 +69,16 @@ static t_vec_pos	*get_point_result(double *lambda, t_vec_pos vpi, \
 	i = -1;
 	while (++i < 2)
 	{
-		if (lambda_c[i] == 0)
+		if (lambda_c[i] == 0 || lambda_c[i] == h)
 		{
 			aux = vpc;
-			aux.v = prod_cte_vector(-1, aux.v);
-			out[i] = int_vect_plano(vpi, aux)[0];
-		}
-		else if (lambda_c[i] == h)
-		{
-			aux = vpc;
-			aux.pt = suma_vector(vpc.pt, prod_cte_vector(h, vpc.v));
-			out[i] = int_vect_plano(vpi, aux)[0];
+			if (lambda_c[i] == 0)
+				aux.v = prod_cte_vector(-1, aux.v);
+			else
+				aux.pt = suma_vector(vpc.pt, prod_cte_vector(h, vpc.v));
+			out_aux = int_vect_plano(vpi, aux);
+			out[i] = out_aux[0];
+			free(out_aux);
 		}
 		else
 		{
