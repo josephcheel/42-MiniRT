@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/13 11:27:14 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/13 11:35:58 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 		fact[2] = field->light->ratio * get_specular(vp.pt, v_luz_pt, pixl);
 	}
 	vp.pt.c.l = fact[0] + fact[1] + fact[2];
-	if (vp.pt.c.l > 1)
-		vp.pt.c.l = 1;
+	if (vp.pt.c.l > field->light->ratio)
+		vp.pt.c.l = field->light->ratio;
 	hsl_to_rgb(&vp.pt.c);
 	return (vp.pt.c);
 }
