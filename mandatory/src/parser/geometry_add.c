@@ -26,6 +26,7 @@ t_geom	*get_sphere(char *line)
 	sphere->color = add_color(content[3]);
 	if (rgb_error(sphere->color))
 		return (geom_error("Sphere Color: out of range\n"));
+	sphere->sense = 1;
 	sphere->next = NULL;
 	ft_array_free(content, ft_array_size(content));
 	return (sphere);
@@ -46,6 +47,7 @@ t_geom	*get_plane(char *line)
 	plane->color = add_color(content[3]);
 	if (rgb_error(plane->color))
 		return (geom_error("Plane Color: out of range\n"));
+	plane->sense = 1;
 	plane->next = NULL;
 	ft_array_free(content, ft_array_size(content));
 	return (plane);
@@ -68,6 +70,7 @@ t_geom	*get_cylinder( char *line)
 	cylinder->color = add_color(content[5]);
 	if (rgb_error(cylinder->color))
 		return (geom_error("Cylinder Color: out of range\n"));
+	cylinder->sense = 1;
 	cylinder->next = NULL;
 	ft_array_free(content, ft_array_size(content));
 	return (cylinder);
@@ -90,6 +93,7 @@ t_geom	*get_conus( char *line)
 	cone->color = add_color(content[5]);
 	if (rgb_error(cone->color))
 		return (geom_error("Conus Color: out of range\n"));
+	cone->sense = 1;
 	cone->next = NULL;
 	ft_array_free(content, ft_array_size(content));
 	return (cone);
