@@ -40,13 +40,13 @@ Configuration file has three **mandatory** elements: **Camera**, **Light** and *
 ### Keyboard Commands
 #### Displacement Camera
 
-* **MAC** <kbd>Option ⌥</kbd> + <kbd>Right Click<kbd> and swip with the mouse
-* **LINUX** <kbd>Alt</kbd> + <kbd>Left Click<kbd> and swip with the mouse
+* **MAC** <kbd>Option ⌥</kbd> + <kbd>Right Clickand swip with the mouse</kbd> 
+* **LINUX** <kbd>Alt</kbd> + <kbd>Left Click and swip with the mouse</kbd>
 #### Zoom Camera
 * **MAC** <kbd>Option ⌥</kbd> + <kbd>Mouse Wheel</kbd>
 * **LINUX** <kbd>Alt</kbd> + <kbd>Mouse Wheel</kbd>
 #### Rotation Camera
-* <kbd>Shift ⇧</kbd> + <kbd>Left Click<kbd> and swip with the mouse
+* <kbd>Shift ⇧</kbd> + <kbd>Left Click and swip with the mouse</kbd> 
 #### Displacement Light
 * <kbd>Ctrl ^</kbd> 
 
