@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/09 21:37:02 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/13 11:27:14 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
 		return (0);
 	out = resta_vector(prod_cte_vector(aux, vp.v), vl_pt.v);
 	aux = prod_escalar(out, pixl.v);
-	aux = pow(aux, 3);
+	aux = pow(aux, 4);
 	return (aux);
 }
 
