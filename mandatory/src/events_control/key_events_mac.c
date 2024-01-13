@@ -6,25 +6,37 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:51:44 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/11 19:46:53 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/13 13:08:26 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
+static void	restart_screen(t_field *field)
+{
+	free(field->camera.int_vp);
+	free(field->camera.field_vp);
+	dump_mem_2_scr(field);
+}
+
 static void	key_events_resets(int key, t_field *field)
 {
-	if (key == XK_R)
+	if (key == XK_R || key == XK_L)
 	{
-		field->camera = field->orig_camera;
-		dump_mem_2_scr(field);
-		printf("Restarting Camera\n");
-	}
-	else if (key == XK_L)
-	{
-		field->light = ft_clone_light(field->orig_light);
-		dump_mem_2_scr(field);
-		printf("Restarting Light\n");
+		if (key == XK_R)
+		{
+			free(field->camera.int_vp);
+			free(field->camera.field_vp);
+			field->camera = field->orig_camera;
+			printf("Restarting Camera\n");
+		}
+		else if (key == XK_L)
+		{
+			free(field->light);
+			field->light = ft_clone_light(field->orig_light);
+			printf("Restarting Light\n");
+		}
+		restart_screen(field);
 	}
 }
 
@@ -60,17 +72,17 @@ int	key_events_release(int key, t_field *field)
 	else if (key == XK_CTRL)
 	{
 		field->events.key_ctrl_press = 0;
-		dump_mem_2_scr(field);
+		restart_screen(field);
 	}
 	else if (key == XK_ALT)
 	{
 		field->events.key_alt_press = 0;
-		dump_mem_2_scr(field);
+		restart_screen(field);
 	}
 	else if (key == XK_SHIFT)
 	{
 		field->events.key_shift_press = 0;
-		dump_mem_2_scr(field);
+		restart_screen(field);
 	}
 	return (0);
 }
