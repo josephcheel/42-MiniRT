@@ -106,7 +106,9 @@ Configuration file has three **mandatory** elements: **Camera**, **Light** and *
 * [**Phong Reflection Model**](https://en.wikipedia.org/wiki/Phong_reflection_model)
 * [**Modelo de Color HSV**](https://es.wikipedia.org/wiki/Modelo_de_color_HSV?useskin=vector)
 * [**HSL to RGB conversion**](https://www.programmingalgorithms.com/algorithm/hsl-to-rgb/c/)
-### Description of file arguments structure:
+
+
+<!--### Description of file arguments structure:
 # Ambient light
 A 0.2            255,255,255
 ^  ^ Brightness        rgb color separeted by a comma.
