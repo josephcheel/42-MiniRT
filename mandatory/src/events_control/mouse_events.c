@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:50:25 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/12 01:42:49 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/13 12:23:05 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	mouse_events_pre(int mouse, int x, int y, t_field *field)
 		field->events.btn_rght_presd = 1;
 	else if (mouse == MOUSE_BTN_LEFT)
 	{
-		print_pixel_values(x, y, field);
+		// print_pixel_values(x, y, field);
 		field->events.btn_left_presd = 1;
 		x = x - field->mlx.size_x / 2;
 		y = field->mlx.size_y / 2 - y;
