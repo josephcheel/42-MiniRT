@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/09 21:04:25 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/13 13:31:35 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@
 # define MOUSE_BTN_MIDDLE 2
 # define MOUSE_BTN_ROT_UP 4
 # define MOUSE_BTN_ROT_DW 5
-//PArametros ara el movimiento de rotacion
+//Parametros ara el movimiento de rotacion
 # define ROT_SPH 200
 
 enum e_type_geo
@@ -316,5 +316,9 @@ int			ratio_double_error(double min, double max, double nbr);
 int			ratio_int_error(int min, int max, int nbr);
 int			ratio_vec3_error(int min, int max, t_vec3 vector);
 t_geom		*geom_error(char *str);
+
+void	zoom(int cte, t_field *field);
+void	displ(t_field *field, int x, int y);
+void	cam_rotate(t_field *field, int x, int y);
 
 #endif

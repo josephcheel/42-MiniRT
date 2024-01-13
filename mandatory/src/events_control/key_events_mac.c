@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:51:44 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/13 13:08:26 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/13 13:09:48 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	key_events_resets(int key, t_field *field)
 	}
 }
 
-// printf("Entro en keyevents press %d -- %p\n", key, field);
 int	key_events_press(int key, t_field *field)
 {
 	if (key == XK_CTRL)
