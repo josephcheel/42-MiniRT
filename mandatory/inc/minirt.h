@@ -139,6 +139,7 @@ typedef struct s_geom
 	t_color			color;
 	double			r;
 	double			height;
+	int				sense;
 	void			*next;
 }	t_geom;
 
@@ -288,6 +289,7 @@ void		ft_lightadd_back(t_light **lst, t_light *new_node);
 int			ft_lightsize(t_light *lst);
 void		ft_free_light(t_light **head);
 t_light		*ft_clone_lightning(t_light *light);
+void		def_vector_sense(t_field *field);
 
 // JUST FOR DEBUGGING
 void		ft_print_geometry_node(t_geom *node);
@@ -317,8 +319,8 @@ int			ratio_int_error(int min, int max, int nbr);
 int			ratio_vec3_error(int min, int max, t_vec3 vector);
 t_geom		*geom_error(char *str);
 
-void	zoom(int cte, t_field *field);
-void	displ(t_field *field, int x, int y);
-void	cam_rotate(t_field *field, int x, int y);
+void		zoom(int cte, t_field *field);
+void		displ(t_field *field, int x, int y);
+void		cam_rotate(t_field *field, int x, int y);
 
 #endif

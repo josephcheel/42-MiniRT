@@ -120,8 +120,10 @@ void	print_pixel_values(int x, int y, t_field *field)
 	printf("========================Datos generales=======================\n");
 	ft_print_vec3("El observador de la cámara está en: ", field->camera.observer);
 	printf("==============================================================\n");
-	printf("El punto es x=%i, y=%i\n", x, y);
 	ft_print_vec3("El centro de la cámara está en: ", field->camera.center.pos);
+	ft_print_vec3("El observador respecto a la cámara está en: ", resta_vector(field->camera.observer, field->camera.center.pos));
+	printf("Modulo vector observador cámara está en: %f\n", modulo_vector(resta_vector(field->camera.observer, field->camera.center.pos)));
+	printf("El punto es x=%i, y=%i\n", x, y);
 	ft_print_vec3("El punto de luz está en: ", field->light->pos);
 	printf("Datos del vector del pixel de la cámara:\n");
 	ft_print_vec3("El Vector camara es", field->camera.field_vp[k].pt);

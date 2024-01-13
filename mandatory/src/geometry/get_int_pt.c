@@ -88,7 +88,10 @@ void	get_colored_int_pt(int pixel, t_field *field)
 		while (++i < 2)
 		{
 			if (out && !is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))
+			{
 				vp_int = get_min_vect(vp_int, out, ptr);
+				vp_int->pt.v = prod_cte_vector(ptr->sense, vp_int->pt.v);
+			}
 			if (ptr->type == PLANE)
 				i++;
 		}

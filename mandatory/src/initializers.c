@@ -70,5 +70,6 @@ t_field	*initializer(char *av)
 	init_mlx(field);
 	if (read_file(av, field))
 		return (NULL);
+	def_vector_sense(field);
 	return (field);
 }

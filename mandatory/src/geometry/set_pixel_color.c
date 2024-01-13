@@ -56,7 +56,7 @@ static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt)
 	aux = prod_escalar(vp.v, vl_pt.v);
 	if (aux < 0)
 		return (0);
-	aux = pow(aux, 4);
+	aux = pow(aux, 2);
 	return (aux);
 }
 
