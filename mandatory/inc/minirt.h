@@ -319,8 +319,8 @@ int			ratio_int_error(int min, int max, int nbr);
 int			ratio_vec3_error(int min, int max, t_vec3 vector);
 t_geom		*geom_error(char *str);
 
-void	zoom(int cte, t_field *field);
-void	displ(t_field *field, int x, int y);
-void	cam_rotate(t_field *field, int x, int y);
+void		zoom(int cte, t_field *field);
+void		displ(t_field *field, int x, int y);
+void		cam_rotate(t_field *field, int x, int y);
 
 #endif

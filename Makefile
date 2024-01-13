@@ -89,7 +89,7 @@ VECTOR3			=	conv_v_unit.c div_cte_vector.c int_vect_esfera.c \
 				init_vp.c int_vect_cono.c rotate_vector.c 
 EVENTS_MAC		= key_events_mac.c mouse_events.c close.c disp_rot_zoom.c
 EVENTS_LNX		= key_events_lnx.c mouse_events.c close.c disp_rot_zoom.c
-TEST 			= ft_check_calculations.c print_pixel_values.c
+TEST 			= print_pixel_values.c
 
 SRCS			+=	$(addprefix $(MAN_DIR), $(addprefix $(SRC_DIR), $(SRC_MINIRT)))
 SRCS			+=	$(addprefix $(MAN_DIR), $(addprefix $(SRC_DIR), $(addprefix $(CHECKER_DIR), $(CHECKER))))

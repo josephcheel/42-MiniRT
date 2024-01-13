@@ -24,7 +24,7 @@ int	mouse_events_pre(int mouse, int x, int y, t_field *field)
 		field->events.btn_rght_presd = 1;
 	else if (mouse == MOUSE_BTN_LEFT)
 	{
-		// print_pixel_values(x, y, field);
+		print_pixel_values(x, y, field);
 		field->events.btn_left_presd = 1;
 		x = x - field->mlx.size_x / 2;
 		y = field->mlx.size_y / 2 - y;
