@@ -52,9 +52,12 @@ static double	*calc_lambda(double *lambda_c, t_vec_pos vpi, t_vec_pos vpc)
 	}
 	return (lambda);
 }
+
 /*
-@brief The variable out[0] is the tw intersection points that retirn the function, out[1] is an auxiliar or temp; 
-@return returns a t_vec_pos	* which represents the intersection points of the cone.
+@brief The variable out[0] is the tw intersection points that 
+retirn the function, out[1] is an auxiliar or temp; 
+@return returns a t_vec_pos	* which represents the intersection 
+points of the cone.
 */
 static t_vec_pos	*calculate_point(double *lambda, double \
 				*lambda_c, t_vec_pos vpi, t_vec_pos vpc)
