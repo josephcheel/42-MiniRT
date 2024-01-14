@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   int_vect_cono.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2023/12/04 18:37:30 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/14 12:04:38 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,13 @@ static double	*calc_lambda(double *lambda_c, t_vec_pos vpi, t_vec_pos vpc)
 	return (lambda);
 }
 
-static t_vec_pos	*get_point_result(double *lambda_c, t_vec_pos vpi, \
-							t_vec_pos vpc, double h)
+static t_vec_pos	*calculate_point(double *lambda, double \
+				*lambda_c, t_vec_pos vpi, t_vec_pos vpc)
 {
 	t_vec_pos	*out;
-	double		*lambda;
 	t_vec_pos	aux;
 	int			i;
 
-	if ((lambda_c[0] == 0 && lambda_c[1] == 0) || \
-		(lambda_c[0] == h && lambda_c[1] == h))
-		return (NULL);
-	lambda = calc_lambda(lambda_c, vpi, vpc);
 	out = (t_vec_pos *)malloc(2 * sizeof(t_vec_pos));
 	i = -1;
 	while (++i < 2)
@@ -83,6 +78,20 @@ static t_vec_pos	*get_point_result(double *lambda_c, t_vec_pos vpi, \
 			out[i].v = conv_v_unit(resta_vector(out[i].pt, aux.pt));
 		}
 	}
+	return (out);
+}
+
+static t_vec_pos	*get_point_result(double *lambda_c, t_vec_pos vpi, \
+							t_vec_pos vpc, double h)
+{
+	t_vec_pos	*out;
+	double		*lambda;
+
+	if ((lambda_c[0] == 0 && lambda_c[1] == 0) || \
+		(lambda_c[0] == h && lambda_c[1] == h))
+		return (NULL);
+	lambda = calc_lambda(lambda_c, vpi, vpc);
+	out = calculate_point(lambda, lambda_c, vpi, vpc);
 	free(lambda);
 	return (out);
 }
