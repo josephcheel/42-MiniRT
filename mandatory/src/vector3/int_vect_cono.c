@@ -52,16 +52,18 @@ static double	*calc_lambda(double *lambda_c, t_vec_pos vpi, t_vec_pos vpc)
 	}
 	return (lambda);
 }
-
+/*
+@brief The variable out[0] is the tw intersection points that retirn the function, out[1] is an auxiliar or temp; 
+@return returns a t_vec_pos	* which represents the intersection points of the cone.
+*/
 static t_vec_pos	*calculate_point(double *lambda, double \
 				*lambda_c, t_vec_pos vpi, t_vec_pos vpc)
 {
-	t_vec_pos	*out;
+	t_vec_pos	*out[2];
 	t_vec_pos	aux;
-	t_vec_pos	*out_aux;
 	int			i;
 
-	out = (t_vec_pos *)malloc(2 * sizeof(t_vec_pos));
+	out[0] = (t_vec_pos *)malloc(2 * sizeof(t_vec_pos));
 	i = -1;
 	while (++i < 2)
 	{
@@ -69,19 +71,19 @@ static t_vec_pos	*calculate_point(double *lambda, double \
 		{
 			aux = vpc;
 			aux.v = prod_cte_vector(-1, aux.v);
-			out_aux = int_vect_plano(vpi, aux);
-			out[i] = out_aux[0];
-			free(out_aux);
+			out[1] = int_vect_plano(vpi, aux);
+			out[0][i] = out[1][0];
+			free(out[1]);
 		}
 		else
 		{
-			out[i].pt = prod_cte_vector(lambda[i], vpi.v);
-			out[i].pt = suma_vector(out[i].pt, vpi.pt);
+			out[0][i].pt = prod_cte_vector(lambda[i], vpi.v);
+			out[0][i].pt = suma_vector(out[0][i].pt, vpi.pt);
 			aux.pt = suma_vector(vpc.pt, prod_cte_vector(lambda_c[i], vpc.v));
-			out[i].v = conv_v_unit(resta_vector(out[i].pt, aux.pt));
+			out[0][i].v = conv_v_unit(resta_vector(out[0][i].pt, aux.pt));
 		}
 	}
-	return (out);
+	return (out[0]);
 }
 
 static t_vec_pos	*get_point_result(double *lambda_c, t_vec_pos vpi, \
