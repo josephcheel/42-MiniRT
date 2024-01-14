@@ -50,13 +50,13 @@ EVENTS_DIR			=	events_control/
 TEST_DIR			=	for_test/
 
 MAN_DIR		=	mandatory/
-BON_DIR		=	bonus/
+BONUS_DIR		=	bonus/
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 
 INC_DIR		=	mandatory/inc/ -I libft/inc/
-INC_DIR_BON	=	bonus/inc/ -I libft/inc/
+INC_DIR_BONUS	=	bonus/inc/ -I libft/inc/
 LIBFT		=	libft/libft.a
 LIBFT_DIR	= 	libft/
 
@@ -64,8 +64,10 @@ MLX			=	mlx/libmlx.a
 MLX_DIR		= 	mlx/
 
 INC			=	$(INC_DIR)
+INC_BONUS	=	$(INC_DIR_BONUS)
 
-INCLUDE		+= $(addprefix -I , $(INC))
+INCLUDE			+=	$(addprefix -I , $(INC))
+INCLUDE_BONUS	+=	$(addprefix -I , $(INC_BONUS))
 
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
@@ -117,24 +119,78 @@ OBJS			=	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 DEPS			+=	$(addsuffix .d, $(basename $(OBJS)))
 
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
+#•❅────✧❅✦❅✧─────❅••❅──────✧❅✦❅✧─SORCES BONUS─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧───❅•#
+#●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
+
+SRC_MINIRT_BN		=	main_bonus.c initializers_bonus.c error_msg_bonus.c hsl_to_rgb_bonus.c rgb_to_hsl_bonus.c \
+					def_vector_sense_bonus.c
+CHECKER_BN			=	init_vars_bonus.c checks_bonus.c
+PARSERS_BN		=	device_add_bonus.c geometry_add_bonus.c adders_bonus.c
+GEOMETRY_BN		=	geom_lstcreate_bonus.c get_int_pt_bonus.c def_pixel_vp_bonus.c \
+					dump_mem_2_scr_bonus.c set_pixel_color_bonus.c
+LIGHTS_BN			=	lights_lstcreate_bonus.c lights_clone_bonus.c
+
+VECTOR3_BN			=	conv_v_unit_bonus.c div_cte_vector_bonus.c int_vect_esfera_bonus.c \
+				modulo_vector_bonus.c prod_escalar_bonus.c resta_vector_bonus.c \
+				dist_pto_vector_bonus.c int_vect_plano_bonus.c prod_cte_vector_bonus.c \
+				prod_vectorial_bonus.c suma_vector_bonus.c print_vector_bonus.c \
+				create_vector_bonus.c int_vect_cilind_bonus.c solv_eq_ord_2_bonus.c is_zero_vect_bonus.c \
+				init_vp_bonus.c int_vect_cono_bonus.c rotate_vector_bonus.c 
+EVENTS_MAC_BN		= key_events_mac_bonus.c mouse_events_bonus.c close_bonus.c disp_rot_zoom_bonus.c
+EVENTS_LNX_BN		= key_events_lnx_bonus.c mouse_events_bonus.c close_bonus.c disp_rot_zoom_bonus.c
+TEST_BN 			= print_pixel_values_bonus.c
+
+SRCS_BN			+=	$(addprefix $(BONUS_DIR), $(addprefix $(SRC_DIR), $(SRC_MINIRT_BN)))
+SRCS_BN			+=	$(addprefix $(BONUS_DIR), $(addprefix $(SRC_DIR), $(addprefix $(CHECKER_DIR), $(CHECKER_BN))))
+SRCS_BN			+=	$(addprefix $(BONUS_DIR), $(addprefix $(SRC_DIR), $(addprefix $(PARSER_DIR), $(PARSERS_BN))))
+SRCS_BN			+=	$(addprefix $(BONUS_DIR), $(addprefix $(SRC_DIR), $(addprefix $(GEOMETRY_DIR), $(GEOMETRY_BN))))
+SRCS_BN			+=	$(addprefix $(BONUS_DIR), $(addprefix $(SRC_DIR), $(addprefix $(LIGHTS_DIR), $(LIGHTS_BN))))
+SRCS_BN			+=	$(addprefix $(BONUS_DIR), $(addprefix $(SRC_DIR), $(addprefix $(VECTOR3_DIR), $(VECTOR3_BN))))
+SRCS_BN			+=	$(addprefix $(BONUS_DIR), $(addprefix $(SRC_DIR), $(addprefix $(TEST_DIR), $(TEST_BN))))
+
+ifeq ($(filter $(word 1,$(MAKECMDGOALS)),"all_lnx" "re_lnx" "clean_lnx" "fclean_lnx"),)
+    SRCS_BN 		+= $(addprefix $(BONUS_DIR), $(addprefix $(SRC_DIR), $(addprefix $(EVENTS_DIR), $(EVENTS_MAC_BN))))
+else
+    SRCS_BN 		+= $(addprefix $(BONUS_DIR), $(addprefix $(SRC_DIR), $(addprefix $(EVENTS_DIR), $(EVENTS_LNX_BN))))
+endif
+
+#Flags to compile in MAC
+bonus: 		CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H -O3#-fsanitize=address
+bonus: 		MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+bonus: 		mlx_link libft_link $(NAME_BONUS)
+
+#Flags to compile in linux
+bonus_lnx:	CFLAGS		=	-Wall -Werror -Wextra -D KEY_LNX_H -O3 # 
+bonus_lnx:	MLXFLAGS 	= 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lz 
+bonus_lnx:	mlx_lnx_link libft_link $(NAME_BONUS)
+
+OBJS_BONUS			=	$(addprefix $(OBJ_DIR), $(SRCS_BN:.c=.o))
+DEPS_BONUS			+=	$(addsuffix .d, $(basename $(OBJS_BONUS)))
+
+
+#●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 #•❅──────✧❅✦❅✧──────❅••❅───OBJECT DEPENDENCY TARGET───❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
 $(OBJ_DIR)%.o : %.c Makefile 
 	@$(MD) $(dir $@)
 	@printf "$(CLEAN_CAR)$(OK_COLOR)[miniRT Compiling]$(BLUE_COLOR) : $(WARN_COLOR)$<$(NO_COLOR) "
-	@$(CC) -MT $@ -MMD -MP -c $(CFLAGS) $(XFLAGS) $(INCLUDE) -Imlx  $< -o $@
-#-I ./mlx/mlx.h
+	@$(CC) -MT $@ -MMD -MP -c $(CFLAGS) $(XFLAGS) $(INCLUDE) $(INCLUDE_BONUS) -Imlx  $< -o $@
 
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─TARGET─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-
 $(NAME):	$(LIBFT) $(MLX) $(OBJS)
 			@echo "$(CLEAN_CAR)$(OK_COLOR)$(NAME) Compiled!$(NO_COLOR)"
 			$(CC) $(CFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME) $(MATHFLAG)
 			@echo "Use $(BLUE_COLOR)./$(NAME)$(NO_COLOR) to launch the program"
+
+$(NAME_BONUS):	$(LIBFT) $(MLX) $(OBJS_BONUS)
+			@echo "$(CLEAN_CAR)$(OK_COLOR)$(NAME_BONUS) Compiled!$(NO_COLOR)"
+			$(CC) $(CFLAGS) $(XFLAGS) $(OBJS_BONUS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME_BONUS) $(MATHFLAG)
+			@echo "Use $(BLUE_COLOR)./$(NAME_BONUS)$(NO_COLOR) to launch the program"
+
 clean:
 			@make clean -sC mlx
 			@make clean -sC libft
@@ -150,10 +206,6 @@ fclean:		clean
 #•❅──────✧❅✦❅✧─────❅••❅───✧❅✦❅✧─TARGET FOR MAC─✧❅✦❅✧───❅••❅─────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 re:			fclean all
-
-bonus:	
-
-bonus_lnx:
 
 libft_link:	
 			@make -sC $(LIBFT_DIR)
