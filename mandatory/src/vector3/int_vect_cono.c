@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/14 12:04:38 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/14 14:46:29 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static t_vec_pos	*calculate_point(double *lambda, double \
 {
 	t_vec_pos	*out;
 	t_vec_pos	aux;
+	t_vec_pos	*out_aux;
 	int			i;
 
 	out = (t_vec_pos *)malloc(2 * sizeof(t_vec_pos));
@@ -68,7 +69,9 @@ static t_vec_pos	*calculate_point(double *lambda, double \
 		{
 			aux = vpc;
 			aux.v = prod_cte_vector(-1, aux.v);
-			out[i] = int_vect_plano(vpi, aux)[0];
+			out_aux = int_vect_plano(vpi, aux);
+			out[i] = out_aux[0];
+			free(out_aux);
 		}
 		else
 		{
