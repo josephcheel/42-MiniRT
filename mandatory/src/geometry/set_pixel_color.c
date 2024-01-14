@@ -6,42 +6,50 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/13 12:08:47 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/14 02:08:19 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-static bool	is_behind_srf(t_int_pts vp, t_vec_pos vl_pt, t_geom *geo)
+static double	calculate_behind_pts(t_int_pts vp, t_vec_pos vl_pt, t_geom *ptr)
 {
-	double		dist[3];
-	t_geom		*ptr;
-	t_vec_pos	*out;
 	t_vec3		aux;
+	double		dist[3];
+	t_vec_pos	*out;
 
 	aux = resta_vector(vp.pt.pt, vl_pt.pt);
 	dist[0] = modulo_vector(aux);
 	dist[1] = LONG_MAX;
 	dist[2] = LONG_MAX;
+	out = get_int_pt(&vl_pt, ptr);
+	if (out != NULL)
+	{
+		aux = resta_vector(vl_pt.pt, out[0].pt);
+		dist[1] = modulo_vector(aux);
+		if (prod_escalar(aux, vl_pt.v) < 0)
+			dist[1] = LONG_MAX;
+		aux = resta_vector(vl_pt.pt, out[1].pt);
+		dist[2] = modulo_vector(aux);
+		if (prod_escalar(aux, vl_pt.v) < 0)
+			dist[2] = LONG_MAX;
+	}
+	free(out);
+	if (dist[0] > dist[1] || dist[0] > dist[2])
+		return (true);
+	return (false);
+}
+
+static bool	is_behind_srf(t_int_pts vp, t_vec_pos vl_pt, t_geom *geo)
+{
+	t_geom	*ptr;
+
 	ptr = geo;
 	while (ptr)
 	{
 		if (ptr != vp.geom)
 		{
-			out = get_int_pt(&vl_pt, ptr);
-			if (out != NULL)
-			{
-				aux = resta_vector(vl_pt.pt, out[0].pt);
-				dist[1] = modulo_vector(aux);
-				if (prod_escalar(aux, vl_pt.v) < 0)
-					dist[1] = LONG_MAX;
-				aux = resta_vector(vl_pt.pt, out[1].pt);
-				dist[2] = modulo_vector(aux);
-				if (prod_escalar(aux, vl_pt.v) < 0)
-					dist[2] = LONG_MAX;
-			}
-			free(out);
-			if (dist[0] > dist[1] || dist[0] > dist[2])
+			if (calculate_behind_pts(vp, vl_pt, ptr))
 				return (true);
 		}
 		ptr = ptr->next;

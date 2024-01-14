@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/09 23:10:04 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/14 00:33:54 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,36 @@ t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo)
 	return (out);
 }
 
+static t_int_pts	*get_colored_loop(t_vec_pos *vps, t_field *field,
+						t_int_pts *vp_int, t_geom *ptr)
+{
+	t_vec_pos	*out;
+	int			i;
+
+	out = get_int_pt(vps, ptr);
+	i = -1;
+	while (++i < 2)
+	{
+		if (out && !is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))
+		{
+			vp_int = get_min_vect(vp_int, out, ptr);
+			vp_int->pt.v = prod_cte_vector(ptr->sense, vp_int->pt.v);
+		}
+		if (ptr->type == PLANE)
+			i++;
+	}
+	free(out);
+	return (vp_int);
+}
+
 /// @brief Gives the color of the closest surface to the pixel.
 /// @param pixel
 /// @param field
 void	get_colored_int_pt(int pixel, t_field *field)
 {
 	t_geom		*ptr;
-	t_vec_pos	*out;
 	t_int_pts	*vp_int;
 	t_vec_pos	*vps;
-	int			i;
 
 	ptr = field->geom;
 	vps = &field->camera.field_vp[pixel];
@@ -83,20 +103,8 @@ void	get_colored_int_pt(int pixel, t_field *field)
 	vp_int->geom = NULL;
 	while (ptr)
 	{
-		out = get_int_pt(vps, ptr);
-		i = -1;
-		while (++i < 2)
-		{
-			if (out && !is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))
-			{
-				vp_int = get_min_vect(vp_int, out, ptr);
-				vp_int->pt.v = prod_cte_vector(ptr->sense, vp_int->pt.v);
-			}
-			if (ptr->type == PLANE)
-				i++;
-		}
+		vp_int = get_colored_loop(vps, field, vp_int, ptr);
 		ptr = ptr->next;
-		free(out);
 	}
 	vp_int->pt.c = set_pixel_color(*vp_int, field, *vps);
 }

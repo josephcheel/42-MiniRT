@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/05 18:42:46 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/14 00:52:39 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	print_color_values(char *s, t_color c)
 {
 	printf("%s", s);
-	printf("R=%x, G=%x, B=%x, a=%x, H=%f, S=%f, L=%f\n", c.r, c.g, c.b, c.a, c.h, c.s, c.l);
+	printf("R=%x, G=%x, B=%x, a=%x, H=%f, S=%f, L=%f\n", \
+	c.r, c.g, c.b, c.a, c.h, c.s, c.l);
 }
 
 static bool	is_bhd_cam(t_vec3 pint, t_vec3 pi, t_vec3 vx)
@@ -30,8 +31,8 @@ static bool	is_bhd_cam(t_vec3 pint, t_vec3 pi, t_vec3 vx)
 	return (true);
 }
 
-static t_int_pts get_min_vect(t_int_pts cur, t_vec_pos *new,
-							  t_geom *geom)
+static t_int_pts	get_min_vect(t_int_pts cur, t_vec_pos *new,
+						t_geom *geom)
 {
 	t_int_pts	out;
 	double		long_cur;
@@ -53,6 +54,7 @@ static t_int_pts get_min_vect(t_int_pts cur, t_vec_pos *new,
 	}
 	return (out);
 }
+
 /*
 	t_vec_pos	aux;
 	aux = new[0];
@@ -108,21 +110,25 @@ void	print_pixel_values(int x, int y, t_field *field)
 
 	if (x < FRAME || y < FRAME || x > field->mlx.size_x - FRAME || \
 		y > field->mlx.size_y - FRAME)
-		return;
+		return ;
 	buf.buffer = mlx_get_data_addr(field->mlx.img, &buf.pixel_bits,
-								   &buf.line_bytes, &buf.endian);
+			&buf.line_bytes, &buf.endian);
 	k = y * buf.line_bytes + x * buf.pixel_bits / 8;
 	c.b = buf.buffer[k];
 	c.g = buf.buffer[k + 1];
 	c.r = buf.buffer[k + 2];
 	c.a = buf.buffer[k + 3];
-	k = (x - FRAME)  + (y - FRAME) * (field->mlx.size_x - 2 * FRAME);
+	k = (x - FRAME) + (y - FRAME) * (field->mlx.size_x - 2 * FRAME);
 	printf("========================Datos generales=======================\n");
-	ft_print_vec3("El observador de la cámara está en: ", field->camera.observer);
+	ft_print_vec3("El observador de la cámara está en: ", \
+	field->camera.observer);
 	printf("==============================================================\n");
 	ft_print_vec3("El centro de la cámara está en: ", field->camera.center.pos);
-	ft_print_vec3("El observador respecto a la cámara está en: ", resta_vector(field->camera.observer, field->camera.center.pos));
-	printf("Modulo vector observador cámara está en: %f\n", modulo_vector(resta_vector(field->camera.observer, field->camera.center.pos)));
+	ft_print_vec3("El observador respecto a la cámara está en: ", \
+	resta_vector(field->camera.observer, field->camera.center.pos));
+	printf("Modulo vector observador cámara está en: %f\n", \
+	modulo_vector(resta_vector(field->camera.observer, \
+	field->camera.center.pos)));
 	printf("El punto es x=%i, y=%i\n", x, y);
 	ft_print_vec3("El punto de luz está en: ", field->light->pos);
 	printf("Datos del vector del pixel de la cámara:\n");
@@ -132,7 +138,8 @@ void	print_pixel_values(int x, int y, t_field *field)
 	printf("Datos del punto visualizado por la cámara:\n");
 	ft_print_vec3("El Vector camara es", field->camera.int_vp[k].pt.pt);
 	ft_print_vec3("El Vector direccional  es ", field->camera.int_vp[k].pt.v);
-	print_color_values("El color resultante es: ", field->camera.int_vp[k].pt.c);
+	print_color_values("El color resultante es: ", \
+	field->camera.int_vp[k].pt.c);
 	print_color_values("El color de la pantallea es: ", c);
 	inters = calcula_color(k, field);
 	printf("Datos del punto calculado:\n");

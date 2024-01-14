@@ -6,11 +6,26 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/09 18:42:42 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/14 00:46:31 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
+
+static t_vec_pos	*calculate_intersection(t_vec_pos vpi, \
+	double *lambda, t_vec3 pr)
+{
+	t_vec_pos	*pt;
+
+	pt = (t_vec_pos *)malloc(2 * sizeof(t_vec_pos));
+	if (pt == NULL)
+		return (NULL);
+	pt[0].pt = suma_vector(vpi.pt, prod_cte_vector(lambda[0], vpi.v));
+	pt[1].pt = suma_vector(vpi.pt, prod_cte_vector(lambda[1], vpi.v));
+	pt[0].v = conv_v_unit(resta_vector(pt[0].pt, pr));
+	pt[1].v = conv_v_unit(resta_vector(pt[1].pt, pr));
+	return (pt);
+}
 
 t_vec_pos	*int_vect_esfera(t_vec_pos vpi, t_vec3 pr, double r)
 {
@@ -28,13 +43,7 @@ t_vec_pos	*int_vect_esfera(t_vec_pos vpi, t_vec3 pr, double r)
 	lambda = solv_eq_ord_2(param);
 	if (lambda != NULL)
 	{
-		pt = (t_vec_pos *)malloc(2 * sizeof(t_vec_pos));
-		if (pt == NULL)
-			return (NULL);
-		pt[0].pt = suma_vector(vpi.pt, prod_cte_vector(lambda[0], vpi.v));
-		pt[1].pt = suma_vector(vpi.pt, prod_cte_vector(lambda[1], vpi.v));
-		pt[0].v = conv_v_unit(resta_vector(pt[0].pt, pr));
-		pt[1].v = conv_v_unit(resta_vector(pt[1].pt, pr));
+		pt = calculate_intersection(vpi, lambda, pr);
 		free(lambda);
 	}
 	else
