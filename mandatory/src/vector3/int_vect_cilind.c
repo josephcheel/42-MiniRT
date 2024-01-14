@@ -117,10 +117,13 @@ t_vec_pos	*int_vect_cilind(t_vec_pos vpi, t_vec_pos vpc, double r, double h)
 	if (!lambda[0])
 		return (NULL);
 	lambda[1] = limit_lambda(lambda[0], vpi, vpc, h);
-	if (lambda[1][0] == 0 && lambda[1][1] == 0)
+	if ((lambda[1][0] == 0 && lambda[1][1] == 0) \
+				|| (lambda[1][0] == h && lambda[1][1] == h))
+	{
+		free(lambda[0]);
+		free(lambda[1]);
 		return (NULL);
-	if (lambda[1][0] == h && lambda[1][1] == h)
-		return (NULL);
+	}
 	out = get_point_result(lambda, vpi, vpc, h);
 	free(lambda[0]);
 	free(lambda[1]);
