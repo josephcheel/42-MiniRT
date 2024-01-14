@@ -12,7 +12,7 @@
 >A project on Ray-Tracing and rendering three-dimensional computer-generated images. Using MiniLibX, the 42 graphical library.
 
 <div align="center">
-<img align="center"  width="800" src="https://github.com/josephcheel/42-MiniRT/blob/main/Scenes/Images/img5.png">
+<img align="center"  width="800" src="https://github.com/josephcheel/42-MiniRT/blob/main/Resources/Img/img5.png">
 </div>
 
 ### What is the project about
@@ -59,18 +59,18 @@ Configuration file has three **mandatory** elements: **Camera**, **Light** and *
 ### File configuration
 ##### Mandatory Elements
 *  Ambient Light:
-  ![Ambient light line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/ambient_line.png)
+  ![Ambient light line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/Img/ambient_line.png)
     * **Identifier**: A
     *  **Ambient lighting ratio** in range [0.0,1.0]: 0.2
     *  **Colors** in RGB in range [0-255]: 255, 255, 255
 *  Camera
-   ![Camera line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/camera_line.png)
+   ![Camera line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/Img/camera_line.png)
     *  **Identifier**: C
     *  **XYZ coordinates** of the view point: 60,0,0
     *  **3D normalized orientation** vector. In range [-1,1] for each x,y,z axis: 1.0,0.0,0.0
     *  FOV : Horizontal field of view in degrees in range [0,180]: 170
 *  Light
-  ![Light line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/light_line.png)
+  ![Light line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/Img/light_line.png)
     * **Identifier**: L
     * **XYZ coordinates** of the light point: 90,50,70
     * The light brightness ratio in range [0.0,1.0]: 0.7
@@ -78,19 +78,19 @@ Configuration file has three **mandatory** elements: **Camera**, **Light** and *
 
 ##### Optional Elements
 *  Plane
-  ![Plane line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/plane_line.png)
+  ![Plane line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/Img/plane_line.png)
     * **Identifier**: pl
     * **XYZ coordinates** of a point in the plane: 0.0,0.0,-500.0
     * **3D normalized** vector. In range [-1,1] for each x,y,z axis: -1.0,1.0,1.0
     * **Colors** in RGB in range [0-255]: 0,0,225
 *  Sphere
-   ![Sphere line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/sphere_line.png)
+   ![Sphere line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/Img/sphere_line.png)
     * **Identifier**: sp
     * **XYZ coordinates** of the sphere center: 90,0.0,0.0
     * **Diameter**: 60
     * **Colors** in RGB in range [0-255]: 0, 0, 255
 *   Cylinder
-   ![Cylinder line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/cylinder_line.png)
+   ![Cylinder line](https://github.com/josephcheel/42-MiniRT/blob/main/Resources/Img/cylinder_line.png)
     * **Identifier**: cy
     * **XYZ coordinates** of the center of the cylinder: 90.0,0.0,0.0
     * **3D normalized** vector of axis of cylinder. In range [-1,1] for each x,y,z axis: 0.0,1,1.0
