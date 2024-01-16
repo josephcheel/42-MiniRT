@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   int_vect_cono.c                                    :+:      :+:    :+:   */
+/*   int_vect_cono_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/14 14:46:29 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:12:54 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt_bonus.h"
+#include "../inc/minirt_bonus.h"
 
 static double	*calc_lambda_c(t_vec3 *v, double r, double h)
 {
