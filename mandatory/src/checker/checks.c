@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:41:05 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 02:57:19 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:52:30 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ int	validate_scene_file(char *filename)
 
 bool	ft_check_line_data(char **content)
 {
-	int	error;
+	static int	line = 0;
+	int			error;
 
 	error = 0;
 	if (ft_strcmp(content[0], "A") == 0)
@@ -104,5 +105,8 @@ bool	ft_check_line_data(char **content)
 		error = cylinder_data_check(content);
 	else
 		error = 0;
+	if (!error)
+		printf("[FILE CONFIG] Syntax Error: on line %d\n", line);
+	line++;
 	return (error);
 }

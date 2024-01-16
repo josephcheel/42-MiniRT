@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:37:41 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 02:38:13 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:38:40 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 bool	plane_data_check(char **content)
 {
+	if (ft_array_size(content) != 4)
+		return (false);
 	if (!ft_is_vec3(content[1]))
 		return (false);
 	if (ft_is_vec3(content[2]))
@@ -35,6 +37,8 @@ bool	plane_data_check(char **content)
 
 bool	sphere_data_check(char **content)
 {
+	if (ft_array_size(content) != 4)
+		return (false);
 	if (!ft_is_vec3(content[1]))
 		return (false);
 	if (!ft_isdouble(content[2]))
@@ -51,6 +55,8 @@ bool	sphere_data_check(char **content)
 
 bool	cylinder_data_check(char **content)
 {
+	if (ft_array_size(content) != 6)
+		return (false);
 	if (!ft_is_vec3(content[1]))
 		return (false);
 	if (ft_is_vec3(content[2]))

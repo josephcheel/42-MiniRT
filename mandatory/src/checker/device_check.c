@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:39:52 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 02:40:01 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:33:29 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 bool	ambient_light_data_check(char **content)
 {
+	if (ft_array_size(content) != 3)
+		return (false);
 	if (!ft_isdouble(content[1]))
 		return (false);
 	if (ft_is_rgb(content[2]))
@@ -28,6 +30,8 @@ bool	ambient_light_data_check(char **content)
 
 bool	camera_data_check(char **content)
 {
+	if (ft_array_size(content) != 4)
+		return (false);
 	if (!ft_is_vec3(content[1]))
 		return (false);
 	if (ft_is_vec3(content[2]))
@@ -45,6 +49,8 @@ bool	camera_data_check(char **content)
 
 bool	light_data_check(char **content)
 {
+	if (ft_array_size(content) != 4)
+		return (false);
 	if (!ft_is_vec3(content[1]))
 		return (false);
 	if (ft_isdouble(content[2]))
