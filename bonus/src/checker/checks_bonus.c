@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:41:05 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 11:12:54 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:23:55 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ bool	ft_check_line_data(char **content)
 		error = plane_data_check(content);
 	else if (ft_strcmp(content[0], "sp") == 0)
 		error = sphere_data_check(content);
-	else if (ft_strcmp(content[0], "cy") == 0)
+	else if (ft_strcmp(content[0], "cy") == 0 || \
+			ft_strcmp(content[0], "cn") == 0)
 		error = cylinder_data_check(content);
 	else
 		error = 0;

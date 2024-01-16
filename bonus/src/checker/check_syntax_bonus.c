@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 23:53:28 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 11:20:03 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:22:53 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,3 @@ bool	ft_is_rgb(char *str)
 		return (false);
 	return (true);
 }
-
-// int main()
-// {
-// 	char *str = "255,255,25";
-// 	printf("%d\n", ft_is_rgb(str));
-// 	return (0);
-// }	
