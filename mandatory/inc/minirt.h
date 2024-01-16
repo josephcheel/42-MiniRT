@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/16 02:57:58 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 03:11:54 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,106 +223,13 @@ typedef struct s_field
 	t_light		*orig_light;
 }	t_field;
 
-// funciones publicas
-//initvars
-//Initializers
+/* Initializers */
 t_field		*initializer(char *av);
 t_field		*init_field(void);
 void		init_mlx(t_field *field);
 
-// Checkers
+/* syntax data checker */
 int			validate_scene_file(char *filename);
-
-//Closers
-int			ft_close(t_field *field);
-//int			ft_close(int keycode, t_mlx *mlx);
-
-int			read_file(char *filename, t_field *field);
-void		free_field(t_field *field);
-
-//algebra vectorial
-t_vec3		create_vect(double x, double y, double z);
-t_vec3		suma_vector(t_vec3 a, t_vec3 b);
-t_vec3		resta_vector(t_vec3 a, t_vec3 b);
-t_vec3		prod_vectorial(t_vec3 a, t_vec3 b);
-double		modulo_vector(t_vec3 a);
-double		prod_escalar(t_vec3 a, t_vec3 b);
-t_vec_pos	*int_vect_esfera(t_vec_pos vp1,	t_vec3 pr, double r);
-t_vec_pos	*int_vect_cilind(t_vec_pos vp1, t_vec_pos vpc, double r, double h);
-t_vec_pos	*int_vect_plano(t_vec_pos pi, t_vec_pos pl);
-t_vec_pos	*int_vect_cono(t_vec_pos vpi, t_vec_pos vpc, double r, double h);
-t_vec3		prod_cte_vector(double a, t_vec3 b);
-t_vec3		div_cte_vector(double a, t_vec3 b);
-double		dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v);
-int			get_devices(t_field *field, char *line);
-int			get_geom(t_field *field, char *line);
-double		*solv_eq_ord_2(double *p);
-t_vec3		conv_v_unit(t_vec3 v);
-int			is_zero_vec(t_vec3 v);
-t_vec_pos	init_vp(t_color c);
-t_vec3		rotate_vector(t_vec3 v, t_vec3 k, double ang_rot);
-
-// Adders
-t_vec3		add_vec3(char *vector3);
-t_color		add_color(char *color);
-
-// GEOMETRY LIST UTILS
-void		ft_geomadd_back(t_geom **lst, t_geom *new_node);
-t_geom		*ft_geomlast(t_geom *lst);
-void		ft_geom_size(t_geom *head);
-void		ft_free_geometry(t_geom **head);
-void		create_field_vectors(t_field *field);
-void		def_pixel_vp(t_field *field, t_indexes in, t_indexes lim);
-void		get_colored_int_pt(int pixel, t_field *field);
-t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo);
-void		set_point_int(t_field *field);
-int			dump_mem_2_scr(t_field *field);
-int			move_light(t_field *field);
-t_color		set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl);
-void		rgb_to_hsl(t_color *c);
-void		hsl_to_rgb(t_color *c);
-
-// LIGHTS LIST UTILS
-t_light		*ft_clone_light(t_light *light);
-t_light		*ft_lightlast(t_light *lst);
-void		ft_lightadd_back(t_light **lst, t_light *new_node);
-int			ft_lightsize(t_light *lst);
-void		ft_free_light(t_light **head);
-t_light		*ft_clone_lightning(t_light *light);
-void		def_vector_sense(t_field *field);
-
-// JUST FOR DEBUGGING
-void		ft_print_geometry_node(t_geom *node);
-void		ft_print_geometry_full(t_geom *head);
-void		ft_print_camera(t_field *field);
-void		ft_print_light(t_field *field);
-void		ft_print_ambient(t_field *field);
-void		ft_check_calculations(void);
-void		ft_print_vector(char *s, t_vec_pos v);
-void		print_pixel_values(int x, int y, t_field *field);
-void		ft_print_vec3(char *s, t_vec3 vec);
-void		print_color_values(char *s, t_color c);
-
-void		create_field_vectors(t_field *field);
-int			rgb_to_hex(t_color color);
-
-//events
-int			mouse_events_mov(int x, int y, t_field *field);
-int			mouse_events_rel(int mouse, int x, int y, t_field *field);
-int			mouse_events_pre(int mouse, int x, int y, t_field *field);
-int			key_events_press(int key, t_field *field);
-int			key_events_release(int key, t_field *field);
-
-int			rgb_error(t_color color);
-int			ratio_double_error(double min, double max, double nbr);
-int			ratio_int_error(int min, int max, int nbr);
-int			ratio_vec3_error(int min, int max, t_vec3 vector);
-t_geom		*geom_error(char *str);
-
-void		zoom(int cte, t_field *field);
-void		displ(t_field *field, int x, int y);
-void		cam_rotate(t_field *field, int x, int y);
-
 bool		ft_check_line_data(char **content);
 bool		ambient_light_data_check(char **content);
 bool		camera_data_check(char **content);
@@ -336,5 +243,96 @@ bool		ft_is_vec3(char *str);
 bool		ft_check_vect3_ratio(char *content, double min, double max);
 bool		ft_check_rgb_ratio(char *content);
 bool		ft_is_rgb(char *str);
+
+int			rgb_error(t_color color);
+int			ratio_double_error(double min, double max, double nbr);
+int			ratio_int_error(int min, int max, int nbr);
+int			ratio_vec3_error(int min, int max, t_vec3 vector);
+
+/* Parser */
+int			read_file(char *filename, t_field *field);
+int			get_devices(t_field *field, char *line);
+int			get_geom(t_field *field, char *line);
+
+//Closers
+int			ft_close(t_field *field);
+
+
+void		free_field(t_field *field);
+
+/* Algebra vectorial */
+t_vec3		create_vect(double x, double y, double z);
+t_vec3		suma_vector(t_vec3 a, t_vec3 b);
+t_vec3		resta_vector(t_vec3 a, t_vec3 b);
+t_vec3		prod_vectorial(t_vec3 a, t_vec3 b);
+double		modulo_vector(t_vec3 a);
+double		prod_escalar(t_vec3 a, t_vec3 b);
+t_vec_pos	*int_vect_esfera(t_vec_pos vp1,	t_vec3 pr, double r);
+t_vec_pos	*int_vect_cilind(t_vec_pos vp1, t_vec_pos vpc, double r, double h);
+t_vec_pos	*int_vect_plano(t_vec_pos pi, t_vec_pos pl);
+t_vec_pos	*int_vect_cono(t_vec_pos vpi, t_vec_pos vpc, double r, double h);
+t_vec3		prod_cte_vector(double a, t_vec3 b);
+t_vec3		div_cte_vector(double a, t_vec3 b);
+double		dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v);
+double		*solv_eq_ord_2(double *p);
+t_vec3		conv_v_unit(t_vec3 v);
+int			is_zero_vec(t_vec3 v);
+t_vec_pos	init_vp(t_color c);
+t_vec3		rotate_vector(t_vec3 v, t_vec3 k, double ang_rot);
+
+/* Adders */
+t_vec3		add_vec3(char *vector3);
+t_color		add_color(char *color);
+
+/* Geometry Struct */
+void		ft_geomadd_back(t_geom **lst, t_geom *new_node);
+t_geom		*ft_geomlast(t_geom *lst);
+void		ft_geom_size(t_geom *head);
+void		ft_free_geometry(t_geom **head);
+
+/* Intersection operations*/
+int			dump_mem_2_scr(t_field *field);
+void		def_pixel_vp(t_field *field, t_indexes in, t_indexes lim);
+void		get_colored_int_pt(int pixel, t_field *field);
+t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo);
+void		set_point_int(t_field *field);
+
+/* Color */
+t_color		set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl);
+void		rgb_to_hsl(t_color *c);
+void		hsl_to_rgb(t_color *c);
+
+/*	Light Struct Functions */
+t_light		*ft_clone_light(t_light *light);
+t_light		*ft_lightlast(t_light *lst);
+void		ft_lightadd_back(t_light **lst, t_light *new_node);
+int			ft_lightsize(t_light *lst);
+void		ft_free_light(t_light **head);
+t_light		*ft_clone_lightning(t_light *light);
+void		def_vector_sense(t_field *field);
+
+/* Debug */
+void		ft_check_calculations(void);
+void		ft_print_vector(char *s, t_vec_pos v);
+void		print_pixel_values(int x, int y, t_field *field);
+void		ft_print_vec3(char *s, t_vec3 vec);
+void		print_color_values(char *s, t_color c);
+
+
+/* Events */
+int			mouse_events_mov(int x, int y, t_field *field);
+int			mouse_events_rel(int mouse, int x, int y, t_field *field);
+int			mouse_events_pre(int mouse, int x, int y, t_field *field);
+int			key_events_press(int key, t_field *field);
+int			key_events_release(int key, t_field *field);
+
+
+
+void		zoom(int cte, t_field *field);
+void		displ(t_field *field, int x, int y);
+void		cam_rotate(t_field *field, int x, int y);
+int			move_light(t_field *field);
+
+
 
 #endif
