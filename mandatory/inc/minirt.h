@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/16 10:56:42 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:40:53 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 //# define PIXEL 0.0000054
 # define PIXEL 0.5
-# define GEO_IDENT "sp cy pl cn"
+# define GEO_IDENT "sp cy pl"
 # define DEV_IDENT "C L A"
 
 # define CAMERA 'C'
@@ -73,7 +73,6 @@ enum e_type_geo
 	SPHERE,
 	CYLINDER,
 	PLANE,
-	CONUS,
 	MAX_GEOM
 };
 
@@ -269,7 +268,6 @@ double		prod_escalar(t_vec3 a, t_vec3 b);
 t_vec_pos	*int_vect_esfera(t_vec_pos vp1,	t_vec3 pr, double r);
 t_vec_pos	*int_vect_cilind(t_vec_pos vp1, t_vec_pos vpc, double r, double h);
 t_vec_pos	*int_vect_plano(t_vec_pos pi, t_vec_pos pl);
-t_vec_pos	*int_vect_cono(t_vec_pos vpi, t_vec_pos vpc, double r, double h);
 t_vec3		prod_cte_vector(double a, t_vec3 b);
 t_vec3		div_cte_vector(double a, t_vec3 b);
 double		dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v);

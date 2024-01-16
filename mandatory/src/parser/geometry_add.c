@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 10:26:06 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:29:07 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,25 +66,6 @@ t_geom	*get_cylinder( char *line)
 	return (cylinder);
 }
 
-t_geom	*get_conus( char *line)
-{
-	t_geom	*cone;
-	char	**content;
-
-	content = ft_split(line, ' ');
-	cone = malloc(sizeof(t_geom));
-	cone->type = CONUS;
-	cone->vp.pt = add_vec3(content[1]);
-	cone->vp.v = conv_v_unit(add_vec3(content[2]));
-	cone->r = ft_atof(content[3]) / 2;
-	cone->height = ft_atof(content[4]);
-	cone->color = add_color(content[5]);
-	cone->sense = 1;
-	cone->next = NULL;
-	ft_array_free(content, ft_array_size(content));
-	return (cone);
-}
-
 int	get_geom(t_field *field, char *line)
 {
 	t_geom	*temp;
@@ -98,8 +79,6 @@ int	get_geom(t_field *field, char *line)
 		temp = get_plane(line);
 	else if (ft_strcmp(type[0], "cy") == 0)
 		temp = get_cylinder(line);
-	else if (ft_strcmp(type[0], "cn") == 0)
-		temp = get_conus(line);
 	ft_geomadd_back(&field->geom, temp);
 	ft_array_free(type, ft_array_size(type));
 	return (0);

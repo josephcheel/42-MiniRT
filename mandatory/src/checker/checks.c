@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:41:05 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 10:52:30 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:40:20 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,19 @@ static int	element_error(t_vec3 elem)
 	return (0);
 }
 
+static void	free_error_file(char *line, char *raw_line, char **content)
+{
+	free(line);
+	free (raw_line);
+	ft_array_free(content, ft_array_size(content));
+}
+
 static int	validate_scene_loop(char *line, char *raw_line, t_vec3 *elem)
 {
-	char	**content;
+	static int	l_nbr = 0;
+	char		**content;
 
+	l_nbr++;
 	if (!line || ft_strlen(line) == 0)
 		;
 	else
@@ -38,9 +47,8 @@ static int	validate_scene_loop(char *line, char *raw_line, t_vec3 *elem)
 		content = ft_split(line, ' ');
 		if (!ft_check_line_data(content))
 		{
-			ft_array_free(content, ft_array_size(content));
-			free(line);
-			free (raw_line);
+			printf("[FILE CONFIG] Syntax Error: on line %d\n", l_nbr);
+			free_error_file(line, raw_line, content);
 			return (0);
 		}
 		if (ft_strcmp(content[0], "A") == 0)
@@ -87,8 +95,7 @@ int	validate_scene_file(char *filename)
 
 bool	ft_check_line_data(char **content)
 {
-	static int	line = 0;
-	int			error;
+	int	error;
 
 	error = 0;
 	if (ft_strcmp(content[0], "A") == 0)
@@ -105,8 +112,5 @@ bool	ft_check_line_data(char **content)
 		error = cylinder_data_check(content);
 	else
 		error = 0;
-	if (!error)
-		printf("[FILE CONFIG] Syntax Error: on line %d\n", line);
-	line++;
 	return (error);
 }

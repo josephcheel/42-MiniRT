@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/14 00:33:54 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:30:32 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo)
 		out = int_vect_cilind(*vps, geo->vp, geo->r, geo->height);
 	else if (geo->type == PLANE)
 		out = int_vect_plano(*vps, geo->vp);
-	else if (geo->type == CONUS)
-		out = int_vect_cono(*vps, geo->vp, geo->r, geo->height);
 	else
 		out = NULL;
 	return (out);
