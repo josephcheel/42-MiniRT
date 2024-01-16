@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/09 18:12:50 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 01:32:45 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ t_geom	*get_sphere(char *line)
 	sphere->vp.v = create_vect(0, 0, 0);
 	sphere->r = ft_atof(content[2]) / 2;
 	sphere->color = add_color(content[3]);
-	if (rgb_error(sphere->color))
-		return (geom_error("Sphere Color: out of range\n"));
 	sphere->sense = 1;
 	sphere->next = NULL;
 	ft_array_free(content, ft_array_size(content));
@@ -41,12 +39,8 @@ t_geom	*get_plane(char *line)
 	plane = malloc(sizeof(t_geom));
 	plane->type = PLANE;
 	plane->vp.pt = add_vec3(content[1]);
-	if (ratio_vec3_error(-1, 1, add_vec3(content[2])))
-		return (geom_error("Plane normalized Orientatio: out of range\n"));
 	plane->vp.v = conv_v_unit(add_vec3(content[2]));
 	plane->color = add_color(content[3]);
-	if (rgb_error(plane->color))
-		return (geom_error("Plane Color: out of range\n"));
 	plane->sense = 1;
 	plane->next = NULL;
 	ft_array_free(content, ft_array_size(content));
@@ -62,14 +56,10 @@ t_geom	*get_cylinder( char *line)
 	cylinder = malloc(sizeof(t_geom));
 	cylinder->type = CYLINDER;
 	cylinder->vp.pt = add_vec3(content[1]);
-	if (ratio_vec3_error(-1, 1, add_vec3(content[2])))
-		return (geom_error("Cylinder normalized Orientatio: out of range\n"));
 	cylinder->vp.v = conv_v_unit(add_vec3(content[2]));
 	cylinder->r = ft_atof(content[3]) / 2;
 	cylinder->height = ft_atof(content[4]);
 	cylinder->color = add_color(content[5]);
-	if (rgb_error(cylinder->color))
-		return (geom_error("Cylinder Color: out of range\n"));
 	cylinder->sense = 1;
 	cylinder->next = NULL;
 	ft_array_free(content, ft_array_size(content));
@@ -85,14 +75,10 @@ t_geom	*get_conus( char *line)
 	cone = malloc(sizeof(t_geom));
 	cone->type = CONUS;
 	cone->vp.pt = add_vec3(content[1]);
-	if (ratio_vec3_error(-1, 1, add_vec3(content[2])))
-		return (geom_error("Conus normalized Orientatio: out of range\n"));
 	cone->vp.v = conv_v_unit(add_vec3(content[2]));
 	cone->r = ft_atof(content[3]) / 2;
 	cone->height = ft_atof(content[4]);
 	cone->color = add_color(content[5]);
-	if (rgb_error(cone->color))
-		return (geom_error("Conus Color: out of range\n"));
 	cone->sense = 1;
 	cone->next = NULL;
 	ft_array_free(content, ft_array_size(content));

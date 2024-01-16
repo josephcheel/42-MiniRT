@@ -73,9 +73,9 @@ INCLUDE_BONUS	+=	$(addprefix -I , $(INC_BONUS))
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅✧─SORCES─✧❅✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-SRC_MINIRT		=	main.c initializers.c error_msg.c hsl_to_rgb.c rgb_to_hsl.c \
+SRC_MINIRT		=	main.c initializers.c hsl_to_rgb.c rgb_to_hsl.c \
 					def_vector_sense.c
-CHECKER			=	init_vars.c checks.c
+CHECKER			=	init_vars.c checks.c device_check.c geometry_check.c check_syntax.c check_ratios.c
 PARSERS			=	device_add.c geometry_add.c adders.c
 GEOMETRY		=	geom_lstcreate.c get_int_pt.c def_pixel_vp.c \
 					dump_mem_2_scr.c set_pixel_color.c
@@ -106,7 +106,7 @@ else
 endif
 
 #Flags to compile in MAC
-all: 		CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H -O3#-fsanitize=address
+all: 		CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H -O3 #-fsanitize=address
 all: 		MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 all: 		mlx_link libft_link $(NAME)
 

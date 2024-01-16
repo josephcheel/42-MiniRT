@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/13 13:31:35 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 02:57:58 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,5 +322,19 @@ t_geom		*geom_error(char *str);
 void		zoom(int cte, t_field *field);
 void		displ(t_field *field, int x, int y);
 void		cam_rotate(t_field *field, int x, int y);
+
+bool		ft_check_line_data(char **content);
+bool		ambient_light_data_check(char **content);
+bool		camera_data_check(char **content);
+bool		light_data_check(char **content);
+bool		plane_data_check(char **content);
+bool		sphere_data_check(char **content);
+bool		cylinder_data_check(char **content);
+
+bool		ft_isdouble(char *nbr);
+bool		ft_is_vec3(char *str);
+bool		ft_check_vect3_ratio(char *content, double min, double max);
+bool		ft_check_rgb_ratio(char *content);
+bool		ft_is_rgb(char *str);
 
 #endif
