@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/16 03:11:54 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:56:42 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,6 @@ int			get_geom(t_field *field, char *line);
 //Closers
 int			ft_close(t_field *field);
 
-
 void		free_field(t_field *field);
 
 /* Algebra vectorial */
@@ -318,7 +317,6 @@ void		print_pixel_values(int x, int y, t_field *field);
 void		ft_print_vec3(char *s, t_vec3 vec);
 void		print_color_values(char *s, t_color c);
 
-
 /* Events */
 int			mouse_events_mov(int x, int y, t_field *field);
 int			mouse_events_rel(int mouse, int x, int y, t_field *field);
@@ -326,13 +324,10 @@ int			mouse_events_pre(int mouse, int x, int y, t_field *field);
 int			key_events_press(int key, t_field *field);
 int			key_events_release(int key, t_field *field);
 
-
-
+/* Movements */
 void		zoom(int cte, t_field *field);
 void		displ(t_field *field, int x, int y);
 void		cam_rotate(t_field *field, int x, int y);
 int			move_light(t_field *field);
-
-
 
 #endif
