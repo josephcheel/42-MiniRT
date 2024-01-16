@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/14 00:52:39 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:27:04 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_int_pts	calcula_color(int pixel, t_field *field)
 		ptr = ptr->next;
 		free (out);
 	}
-	vp_int.pt.c = set_pixel_color(vp_int, field, *vps);
+	vp_int.pt.c = set_pixel_color(vp_int, field);
 	return (vp_int);
 }
 

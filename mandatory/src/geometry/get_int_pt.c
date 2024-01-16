@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 11:30:32 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:26:05 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,5 @@ void	get_colored_int_pt(int pixel, t_field *field)
 		vp_int = get_colored_loop(vps, field, vp_int, ptr);
 		ptr = ptr->next;
 	}
-	vp_int->pt.c = set_pixel_color(*vp_int, field, *vps);
+	vp_int->pt.c = set_pixel_color(*vp_int, field);
 }

@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/14 02:08:19 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:27:33 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,6 @@ static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt)
 	return (aux);
 }
 
-static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
-{
-	double	aux;
-	t_vec3	out;
-
-	aux = 2 * prod_escalar(vp.v, vl_pt.v);
-	if (aux < 0)
-		return (0);
-	out = resta_vector(prod_cte_vector(aux, vp.v), vl_pt.v);
-	aux = prod_escalar(out, pixl.v);
-	aux = pow(aux, 4);
-	return (aux);
-}
-
 /*
 @brief Calculates the color of the pixel depending of the light position
 @brief The function also takes into account if there is any surface that
@@ -90,7 +76,7 @@ static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
 @param field
 @return Returns the color of the pixel.
 */
-t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
+t_color	set_pixel_color(t_int_pts vp, t_field *field)
 {
 	t_vec_pos	v_luz_pt;
 	double		fact[3];
@@ -108,7 +94,7 @@ t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 	{
 		fact[0] = field->ambient.ratio;
 		fact[1] = field->light->ratio * get_difuse(vp.pt, v_luz_pt);
-		fact[2] = field->light->ratio * get_specular(vp.pt, v_luz_pt, pixl);
+		fact[2] = 0;
 	}
 	vp.pt.c.l = fact[0] + fact[1] + fact[2];
 	if (field->light->ratio < field->ambient.ratio)
