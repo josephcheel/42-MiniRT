@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 11:12:54 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:45:28 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt)
 	aux = prod_escalar(vp.v, vl_pt.v);
 	if (aux < 0)
 		return (0);
-	aux = pow(aux, 2);
+	aux = pow(aux, 20);
 	return (aux);
 }
 
@@ -78,7 +78,7 @@ static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
 		return (0);
 	out = resta_vector(prod_cte_vector(aux, vp.v), vl_pt.v);
 	aux = prod_escalar(out, pixl.v);
-	aux = pow(aux, 4);
+	aux = pow(aux, 2);
 	return (aux);
 }
 
@@ -110,7 +110,7 @@ t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 		fact[1] = field->light->ratio * get_difuse(vp.pt, v_luz_pt);
 		fact[2] = field->light->ratio * get_specular(vp.pt, v_luz_pt, pixl);
 	}
-	vp.pt.c.l = fact[0] + fact[1] + fact[2];
+	vp.pt.c.l = fact[0] + fact[1] * fact[2];
 	if (field->light->ratio < field->ambient.ratio)
 		vp.pt.c.l = field->ambient.ratio;
 	else if (vp.pt.c.l > field->light->ratio)
