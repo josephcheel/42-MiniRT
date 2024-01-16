@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_mouse_cod_lnx.h                                :+:      :+:    :+:   */
+/*   key_mouse_cod_lnx_bonus.h                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 07:19:38 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/11 20:58:14 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:25:52 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_MOUSE_COD_LNX_H
-# define KEY_MOUSE_COD_LNX_H
+#ifndef KEY_MOUSE_COD_LNX_BONUS_H
+# define KEY_MOUSE_COD_LNX_BONUS_H
 
 # define XK_UPARROW 0xff52	 /* U+2191 UPWARDS ARROW */
 # define XK_DOWNARROW 0xff54	 /* U+2193 DOWNWARDS ARROW */

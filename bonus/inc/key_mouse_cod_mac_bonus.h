@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_mouse_cod_mac.h                                :+:      :+:    :+:   */
+/*   key_mouse_cod_mac_bonus.h                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 07:20:01 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/11 19:42:44 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:25:38 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_MOUSE_COD_MAC_H
-# define KEY_MOUSE_COD_MAC_H
+#ifndef KEY_MOUSE_COD_MAC_BONUS_H
+# define KEY_MOUSE_COD_MAC_BONUS_H
 
 # define XK_UPARROW 0x7e	 /* U+2191 UPWARDS ARROW */
 # define XK_DOWNARROW 0x7d	 /* U+2193 DOWNWARDS ARROW */

@@ -6,12 +6,12 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/16 11:13:15 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:25:18 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef MINIRT_BONUS_H
+# define MINIRT_BONUS_H
 # include "../../mlx/mlx.h"
 # include "../../libft/inc/libft.h"
 # include "colors_bonus.h"
