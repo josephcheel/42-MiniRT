@@ -6,11 +6,11 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 23:53:28 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 11:12:36 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:20:03 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt_bonus"
+#include "../../inc/minirt_bonus.h"
 
 /*
 Checks if a string is a double with format [NBR[.]NBR]
