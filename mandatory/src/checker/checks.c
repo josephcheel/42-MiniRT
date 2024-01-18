@@ -6,11 +6,11 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:41:05 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 11:40:20 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:36:28 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
 
 /*
 ** Print the mandatory objects[A, L, C] message.

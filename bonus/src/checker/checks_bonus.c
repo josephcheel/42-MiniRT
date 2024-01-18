@@ -6,11 +6,11 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:41:05 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 11:45:41 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:38:46 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt_bonus.h"
+#include "../../inc/minirt_bonus.h"
 
 /*
 ** Print the mandatory objects[A, L, C] message.
