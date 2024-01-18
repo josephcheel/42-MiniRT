@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 12:45:28 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:32:25 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt)
 	aux = prod_escalar(vp.v, vl_pt.v);
 	if (aux < 0)
 		return (0);
-	aux = pow(aux, 20);
+	aux = pow(aux, 2);
 	return (aux);
 }
 
