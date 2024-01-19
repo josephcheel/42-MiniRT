@@ -36,13 +36,14 @@ static int	get_cyl_sense(t_geom *g, t_light *l)
 {
 	t_vec3	v;
 	double	d;
+	double	rad_rev;
 
 	v = resta_vector(l->pos, g->vp.pt);
 	d = prod_escalar(v, g->vp.v);
-	if(d < 0 || d > h)
+	if (d < 0 || d > g->height)
 		return (1);
-	b = dist_pto_vector(l->pos, g->vp.pt, g->vp.v);
-	if (b < g->r)
+	rad_rev = dist_pto_vector(l->pos, g->vp.pt, g->vp.v);
+	if (rad_rev < g->r)
 		return (-1);
 	return (1);
 }
@@ -61,14 +62,14 @@ static int	get_cone_sense(t_geom *g, t_light *l)
 {
 	t_vec3	v;
 	double	d;
-	double	b;
+	double	rad_rev;
 
 	v = resta_vector(l->pos, g->vp.pt);
 	d = prod_escalar(v, g->vp.v);
-	if(d < 0 || d > h)
+	if (d < 0 || d > g->height)
 		return (1);
-	b = dist_pto_vector(l->pos, g->vp.pt, g->vp.v);
-	if (b < (g->r * (g->height - d)))
+	rad_rev = dist_pto_vector(l->pos, g->vp.pt, g->vp.v);
+	if (rad_rev < (g->r * (g->height - d)))
 		return (-1);
 	return (1);
 }
@@ -84,7 +85,7 @@ void	def_vector_sense(t_field *field)
 			ptr->sense = get_plane_sense(ptr, field->light);
 		else if (ptr->type == SPHERE)
 			ptr->sense = get_sphere_sense(ptr, field->light);
-		else if (ptr.type == CYLINDER)
+		else if (ptr->type == CYLINDER)
 			ptr->sense = get_cyl_sense(ptr, field->light);
 		else
 			ptr->sense = get_cone_sense(ptr, field->light);
