@@ -76,7 +76,7 @@ static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt)
 @param field
 @return Returns the color of the pixel.
 */
-t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
+t_color	set_pixel_color(t_int_pts vp, t_field *field)
 {
 	t_vec_pos	v_luz_pt;
 	double		fact[2];
