@@ -95,8 +95,10 @@ static t_vec_pos	*get_point_result(double *lambda_c, t_vec_pos vpi, \
 	t_vec_pos	*out;
 	double		*lambda;
 
-	if ((lambda_c[0] == 0 && lambda_c[1] == 0) || \
-		(lambda_c[0] == h && lambda_c[1] == h))
+	if ((lambda_c[0] == 0 && lambda_c[1] == 0) \
+		|| (lambda_c[0] == h && lambda_c[1] == h) \
+		|| (lambda_c[0] == 0 && lambda_c[1] == h) \
+		|| (lambda_c[0] == h && lambda_c[1] == 0))
 		return (NULL);
 	lambda = calc_lambda(lambda_c, vpi, vpc);
 	out = calculate_point(lambda, lambda_c, vpi, vpc);
