@@ -106,5 +106,5 @@ void	get_colored_int_pt(int pixel, t_field *field)
 		vp_int = get_colored_loop(vps, field, vp_int, ptr);
 		ptr = ptr->next;
 	}
-	vp_int->pt.c = set_pixel_color(*vp_int, field, *vps);
+	vp_int->pt.c = set_pixel_color(*vp_int, field);
 }
