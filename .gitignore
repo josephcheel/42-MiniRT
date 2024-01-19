@@ -6,4 +6,5 @@ miniRT.dSYM/
 *.o
 *.d
 miniRT
+miniRT_bonus
 mlx/*
