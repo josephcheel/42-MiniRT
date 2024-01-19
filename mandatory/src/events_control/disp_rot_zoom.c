@@ -107,8 +107,8 @@ void	cam_rotate(t_field *field, int x, int y)
 		ang_rot = acos(prod_escalar(v_rot[1], v_rot[0]));
 		field->camera.center.vx = \
 		rotate_vector(field->camera.center.vx, v_rot[2], ang_rot);
-		v_rot[0] = resta_vector(field->camera.center.pos, \
-					field->camera.observer);
+		v_rot[0] = resta_vector(field->camera.observer, 
+				field->camera.center.pos);
 		v_rot[1] = rotate_vector(v_rot[0], v_rot[2], ang_rot);
 		field->camera.observer = \
 				suma_vector(field->camera.center.pos, v_rot[1]);
