@@ -44,7 +44,7 @@ int	get_camera(t_field *field, char *line)
 	else
 	{
 		lambda = - (field->mlx.size_x - FRAME) \
-		* PIXEL / 2 / tan(field->camera.fov / 2);
+		* PIXEL / 2 / tan(field->camera.fov / 2 / 180 * M_PI);
 		aux = prod_cte_vector(lambda, field->camera.center.vx);
 		field->camera.observer = suma_vector(field->camera.center.pos, aux);
 	}
