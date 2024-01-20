@@ -9,7 +9,7 @@
 </h1>
 <!--FINISH HEADER-->
 
->A project on Ray-Tracing and rendering three-dimensional computer-generated images. Using MiniLibX, the 42 graphical library.
+> A project on Ray-Tracing and rendering three-dimensional computer-generated images. Using MiniLibX, the 42 graphical library.
 
 <div align="center">
 <img align="center"  width="800" src="https://github.com/josephcheel/42-MiniRT/blob/main/Resources/Img/img5.png">
@@ -17,6 +17,10 @@
 
 ### What is the project about
 MiniRT is a project that introduces the basics of Ray tracing, focusing on 3D computer-generated images from a configuration file. It includes ambient light, lights, camera, and three geometrical figures (Plane, Sphere, Cylinder). The bonus part introduces multiple lights, cones as a geometrical figure, and additional elements.
+
+> [!TIP]
+> If you need more technical info, go check our [Github-Wiki](https://github.com/josephcheel/42-MiniRT/wiki) 
+
 ## General Instrucctions
 * Makefile will compile your source files. It must include 'all' and 'bonus' rules for the Mandatory and Bonus parts, respectively. It should not relink.
 * You are required to use MiniLibX for this project.
