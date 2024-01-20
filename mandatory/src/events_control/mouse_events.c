@@ -40,7 +40,8 @@ int	mouse_events_pre(int mouse, int x, int y, t_field *field)
 	return (0);
 }
 
-/// @brief Select which events to realize depending on the mouse buttons release.
+/// @brief Select which events to realize depending on the mouse 
+/// @brief buttons release.
 /// @param mouse	Event received
 /// @param x		coord x of mouse
 /// @param y		Coord Y of mouse

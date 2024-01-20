@@ -49,6 +49,5 @@ void	def_pixel_vp(t_field *field, t_indexes in, t_indexes lim)
 		pixel->v = field->camera.center.vx;
 	else
 		pixel->v = conv_v_unit(resta_vector(pixel->pt, field->camera.observer));
-	//	pixel->v = conv_v_unit(pixel->v);
 	pixel->c = field->ambient.color;
 }
