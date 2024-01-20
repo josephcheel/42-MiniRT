@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 19:01:53 by jcheel-n          #+#    #+#             */
-/*   Updated: 2023/12/04 03:40:08 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:33:56 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <stdbool.h>
 
 //**************** LIBFT FUNCTIONS *******************//
 
@@ -98,10 +99,14 @@ char			*ft_strpbrk(const char *s, const char *charset);
 int				ft_isspace(int c);
 int				ft_isstrspace(char *str);
 int				ft_isallspace(char *str);
+int				ft_isallalpha(char *str);
+bool			ft_isstrarray(char *str, char **array);
 
 char			*get_next_line(int fd);
 void			ft_print_array(char **array);
 double			ft_atof(const char *str);
 char			**ft_split_spaces(char const *s);
+
+int				ft_check_extension(char *filename, char *ext);
 
 #endif
