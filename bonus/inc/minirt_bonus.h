@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/16 11:25:18 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:41:34 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,6 +237,7 @@ bool		light_data_check(char **content);
 bool		plane_data_check(char **content);
 bool		sphere_data_check(char **content);
 bool		cylinder_data_check(char **content);
+bool		checkboard_data_check(char **content);
 
 bool		ft_isdouble(char *nbr);
 bool		ft_is_vec3(char *str);

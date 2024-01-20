@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:41:05 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/18 16:38:46 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:38:23 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ bool	ft_check_line_data(char **content)
 	else if (ft_strcmp(content[0], "cy") == 0 || \
 			ft_strcmp(content[0], "cn") == 0)
 		error = cylinder_data_check(content);
+	else if (ft_strcmp(content[0], "CHECKBOARD") == 0)
+		error = checkboard_data_check(content);
 	else
 		error = 0;
 	return (error);

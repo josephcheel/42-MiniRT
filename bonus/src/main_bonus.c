@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/17 20:38:37 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:18:21 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,11 @@ int	prt_help(void)
 	return (0);
 }
 
-int	check_extension(char *s)
-{
-	int	len_str;
-
-	len_str = ft_strlen(s);
-	s = &s[len_str - 3];
-	if (!ft_strcmp(s, ".rt"))
-		return (1);
-	return (0);
-}
-
 int	main(int ac, char **av)
 {
 	t_field	*field;
 
-	if (ac != 2 || !check_extension(av[1]))
+	if (ac != 2 || !ft_check_extension(av[1], ".rt"))
 		return (prt_help());
 	if (validate_scene_file(av[1]))
 		return (1);
