@@ -11,6 +11,149 @@
 /* ************************************************************************** */
 
 #include "../../inc/minirt_bonus.h"
+static double calculate_behind_pts(t_int_pts vp, t_vec_pos vl_pt, t_geom *ptr)
+{
+	t_vec3 aux;
+	double dist[3];
+	t_vec_pos *out;
+
+	aux = resta_vector(vl_pt.pt, vp.pt.pt);
+	dist[0] = modulo_vector(aux);
+	dist[1] = LONG_MAX;
+	dist[2] = LONG_MAX;
+	out = get_int_pt(&vl_pt, ptr);
+	if (out != NULL)
+	{
+		aux = resta_vector(vl_pt.pt, out[0].pt);
+		dist[1] = modulo_vector(aux);
+		if (prod_escalar(aux, vl_pt.v) < 0)
+			dist[1] = LONG_MAX;
+		aux = resta_vector(vl_pt.pt, out[1].pt);
+		dist[2] = modulo_vector(aux);
+		if (prod_escalar(aux, vl_pt.v) < 0)
+			dist[2] = LONG_MAX;
+	}
+	free(out);
+	if (dist[0] > dist[1] || dist[0] > dist[2])
+		return (true);
+	return (false);
+}
+/*
+static double calculate_behind_pts(t_int_pts vp, t_vec_pos vl_pt, t_geom *ptr)
+{
+	t_vec_pos aux;
+	double dist[3];
+	t_vec_pos *out;
+
+	aux = vp.pt;
+	aux.v = resta_vector(vp.pt.pt, vl_pt.pt);
+	dist[0] = modulo_vector(aux.v);
+	aux.v = conv_v_unit(aux.v);
+	dist[1] = LONG_MAX;
+	dist[2] = LONG_MAX;
+	//out = get_int_pt(&vl_pt, ptr);
+	out = get_int_pt(&aux, ptr);
+	if (out != NULL)
+	{
+		aux.pt = resta_vector(vl_pt.pt, out[0].pt);
+		dist[1] = modulo_vector(aux.pt);
+		if (prod_escalar(aux.pt, vl_pt.v) < 0)
+			dist[1] = LONG_MAX;
+		aux.pt = resta_vector(vl_pt.pt, out[1].pt);
+		dist[2] = modulo_vector(aux.pt);
+		if (prod_escalar(aux.pt, vl_pt.v) < 0)
+			dist[2] = LONG_MAX;
+	}
+	free(out);
+	if (dist[0] > dist[1] || dist[0] > dist[2])
+		return (true);
+	return (false);
+}
+*/
+static bool is_behind_srf(t_int_pts vp, t_vec_pos vl_pt, t_geom *geo)
+{
+	t_geom *ptr;
+
+	ptr = geo;
+	while (ptr)
+	{
+		if (ptr != vp.geom)
+		{
+			if (calculate_behind_pts(vp, vl_pt, ptr))
+				return (true);
+		}
+		ptr = ptr->next;
+	}
+	return (false);
+}
+
+static double get_difuse(t_vec_pos vp, t_vec_pos vl_pt)
+{
+	double aux;
+
+	aux = prod_escalar(vp.v, vl_pt.v);
+	if (aux < 0)
+		return (0);
+	return (aux);
+}
+
+static double get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
+{
+	double aux;
+	t_vec3 out;
+
+	aux = 2 * prod_escalar(vp.v, vl_pt.v);
+	if (aux < 0)
+		return (0);
+	out = resta_vector(prod_cte_vector(aux, vp.v), vl_pt.v);
+	aux = prod_escalar(out, pixl.v);
+	aux = pow(aux, 8);
+	return (aux);
+}
+
+/*
+@brief Calculates the color of the pixel depending of the light position
+@brief The function also takes into account if there is any surface that
+@brief is in between the point and the light (Shadow from other element)
+@param vp
+@param field
+@return Returns the color of the pixel.
+*/
+t_color set_pixel_color_print(t_int_pts vp, t_field *field, t_vec_pos pixl)
+{
+	t_vec_pos v_luz_pt;
+	double fact[3];
+
+	v_luz_pt.pt = field->light->pos;
+	v_luz_pt.v = conv_v_unit(resta_vector(v_luz_pt.pt, vp.pt.pt));
+	v_luz_pt.c = field->light->color;
+	if (is_behind_srf(vp, v_luz_pt, field->geom))
+	{
+		fact[0] = field->ambient.ratio;
+		fact[1] = 0;
+		fact[2] = 0;
+		printf("Está detras de una superficie %i \n",field->geom->type);
+		ft_print_vec3("El punto de la superficie es ", field->geom->vp.pt);
+		ft_print_vec3("El vector de la superficie es ", field->geom->vp.v);
+		ft_print_vec3("El punto vpint es ", vp.pt.pt);
+		ft_print_vec3("El punto luz es es ", v_luz_pt.pt);
+	}
+	else
+	{
+		fact[0] = field->ambient.ratio;
+		fact[1] = field->light->ratio * get_difuse(vp.pt, v_luz_pt);
+		fact[2] = field->light->ratio * get_specular(vp.pt, v_luz_pt, pixl);
+	}
+	if (vp.pt.c.l > fact[0] + fact[1])
+		vp.pt.c.l = fact[0] + fact[1];
+	vp.pt.c.l += fact[2];
+	if (field->light->ratio < field->ambient.ratio)
+		vp.pt.c.l = field->ambient.ratio;
+	else if (vp.pt.c.l > field->light->ratio)
+		vp.pt.c.l = field->light->ratio;
+	hsl_to_rgb(&vp.pt.c);
+	return (vp.pt.c);
+}
 
 void	print_color_values(char *s, t_color c)
 {
@@ -32,7 +175,7 @@ static bool	is_bhd_cam(t_vec3 pint, t_vec3 pi, t_vec3 vx)
 }
 
 static t_int_pts	get_min_vect(t_int_pts cur, t_vec_pos *new,
-						t_geom *geom)
+						t_geom *geom, t_vec_pos *pixl)
 {
 	t_int_pts	out;
 	double		long_cur;
@@ -41,11 +184,11 @@ static t_int_pts	get_min_vect(t_int_pts cur, t_vec_pos *new,
 	out = cur;
 	if (!new)
 		return (cur);
-	long_cur = modulo_vector(cur.pt.pt);
+	long_cur = modulo_vector(resta_vector(cur.pt.pt, pixl->pt));
 	i = -1;
 	while (++i < 2)
 	{
-		if (modulo_vector(new[i].pt) < long_cur)
+		if (modulo_vector(resta_vector(new[i].pt, pixl->pt)) < long_cur)
 		{
 			out.pt = new[i];
 			out.pt.c = geom->color;
@@ -89,15 +232,25 @@ t_int_pts	calcula_color(int pixel, t_field *field)
 		i = -1;
 		while (++i < 2)
 		{
+			printf("==============================\n");
 			if (out && !is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))
-				vp_int = get_min_vect(vp_int, out, ptr);
+				vp_int = get_min_vect(vp_int, out, ptr, vps);
+			if (out)
+				ft_print_vec3("El punto out es ", out->pt);
+			else
+				printf("No intersection \n");
+			ft_print_vec3("El punto vpint es ", vp_int.pt.pt);
+			ft_print_vec3("El Vector direccional del pixel es ", vps->v);
+			ft_print_vec3("El Vector posicion del pixel  es ", vps->pt);
+			print_color_values("El color resultante es: ", vp_int.pt.c);
+			printf("==============================\n");
 			if (ptr->type == PLANE)
 				i++;
 		}
 		ptr = ptr->next;
 		free (out);
 	}
-	vp_int.pt.c = set_pixel_color(vp_int, field, *vps);
+	vp_int.pt.c = set_pixel_color_print(vp_int, field, *vps);
 	return (vp_int);
 }
 

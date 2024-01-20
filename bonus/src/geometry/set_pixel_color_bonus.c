@@ -18,7 +18,7 @@ static double	calculate_behind_pts(t_int_pts vp, t_vec_pos vl_pt, t_geom *ptr)
 	double		dist[3];
 	t_vec_pos	*out;
 
-	aux = resta_vector(vp.pt.pt, vl_pt.pt);
+	aux = resta_vector(vl_pt.pt, vp.pt.pt);
 	dist[0] = modulo_vector(aux);
 	dist[1] = LONG_MAX;
 	dist[2] = LONG_MAX;
@@ -64,7 +64,6 @@ static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt)
 	aux = prod_escalar(vp.v, vl_pt.v);
 	if (aux < 0)
 		return (0);
-	aux = pow(aux, 2);
 	return (aux);
 }
 
@@ -78,7 +77,11 @@ static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
 		return (0);
 	out = resta_vector(prod_cte_vector(aux, vp.v), vl_pt.v);
 	aux = prod_escalar(out, pixl.v);
+<<<<<<< HEAD
 	aux = pow(aux, 2);
+=======
+	aux = pow(aux, 8);
+>>>>>>> 35b2746526a7d2aec5e3fda740e843519a0ad17c
 	return (aux);
 }
 
@@ -98,19 +101,23 @@ t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 	v_luz_pt.pt = field->light->pos;
 	v_luz_pt.v = conv_v_unit(resta_vector(v_luz_pt.pt, vp.pt.pt));
 	v_luz_pt.c = field->light->color;
+	fact[1] = 0;
+	fact[2] = 0;
 	if (is_behind_srf(vp, v_luz_pt, field->geom))
-	{
 		fact[0] = field->ambient.ratio;
-		fact[1] = 0;
-		fact[2] = 0;
-	}
 	else
 	{
 		fact[0] = field->ambient.ratio;
 		fact[1] = field->light->ratio * get_difuse(vp.pt, v_luz_pt);
 		fact[2] = field->light->ratio * get_specular(vp.pt, v_luz_pt, pixl);
 	}
+<<<<<<< HEAD
 	vp.pt.c.l = fact[0] + fact[1] * fact[2];
+=======
+	if (vp.pt.c.l > fact[0] + fact[1])
+		vp.pt.c.l = fact[0] + fact[1];
+	vp.pt.c.l += fact[2];
+>>>>>>> 35b2746526a7d2aec5e3fda740e843519a0ad17c
 	if (field->light->ratio < field->ambient.ratio)
 		vp.pt.c.l = field->ambient.ratio;
 	else if (vp.pt.c.l > field->light->ratio)
