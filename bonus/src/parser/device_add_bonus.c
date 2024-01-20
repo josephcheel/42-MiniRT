@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 11:12:54 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/20 23:14:20 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	get_devices(t_field *field, char *line)
 	}
 	else if (ft_strcmp(type[0], "A") == 0)
 		error = get_ambient_light(field, line);
+	else if (ft_strcmp(type[0], "CHECKBOARD") == 0)
+		error = get_checkboard(field, line);
 	ft_array_free(type, ft_array_size(type));
 	return (error);
 }

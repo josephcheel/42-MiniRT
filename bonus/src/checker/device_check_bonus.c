@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:39:52 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/20 22:38:31 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/20 23:05:52 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ bool	light_data_check(char **content)
 
 bool	checkboard_data_check(char **content)
 {
-	const char	*colors[] = {"BLACK", "RED", "GREEN", \
+	const char	*colors[8] = {"BLACK", "RED", "GREEN", \
 	"YELLOW", "BLUE", "MAGENTA", "CYAN", "WHITE"};
 
 	if (ft_array_size(content) != 3)
@@ -76,14 +76,14 @@ bool	checkboard_data_check(char **content)
 		if (!ft_isstrarray(content[1], (char **)colors))
 			return (false);
 	}
-	if (!ft_is_rgb(content[1]) || !ft_check_rgb_ratio(content[1]))
+	else if (!ft_is_rgb(content[1]) || !ft_check_rgb_ratio(content[1]))
 		return (false);
-	if (ft_isallalpha(content[1]))
+	if (ft_isallalpha(content[2]))
 	{
 		if (!ft_isstrarray(content[2], (char **)colors))
 			return (false);
 	}
-	if (!ft_is_rgb(content[2]) || !ft_check_rgb_ratio(content[2]))
+	else if (!ft_is_rgb(content[2]) && !ft_check_rgb_ratio(content[2]))
 		return (false);
 	return (true);
 }

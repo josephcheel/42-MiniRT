@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/16 11:12:54 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/20 23:13:48 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_field	*init_field(void)
 		return (NULL);
 	field->geom = NULL;
 	field->light = NULL;
+	field->chckbd.is_chckbd = false;
 	init_events(field);
 	return (field);
 }

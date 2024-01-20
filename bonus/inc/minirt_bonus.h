@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/20 22:41:34 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/20 23:26:22 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 //# define PIXEL 0.0000054
 # define PIXEL 0.5
 # define GEO_IDENT "sp cy pl cn"
-# define DEV_IDENT "C L A"
+# define DEV_IDENT "C L A CHECKBOARD"
 
 # define CAMERA 'C'
 # define LIGHT 'L'
@@ -82,6 +82,7 @@ enum e_type_device
 	C,
 	L,
 	A,
+	CHECKBOARD,
 	MAX_DEVICES
 };
 
@@ -209,18 +210,26 @@ typedef struct s_ray
 	t_vec3	*dir;	
 }	t_ray;
 
+typedef struct s_checkboard
+{
+	bool		is_chckbd;
+	t_color		c1;
+	t_color		c2;
+}	t_checkboard;
+
 typedef struct s_field
 {
-	t_geom		*geom;
-	t_color		bck_col;
-	t_ambient	ambient;
-	t_camera	camera;
-	t_light		*light;
-	t_mlx		mlx;
-	t_event		events;
-	t_vec3		aux;
-	t_camera	orig_camera;
-	t_light		*orig_light;
+	t_geom			*geom;
+	t_color			bck_col;
+	t_ambient		ambient;
+	t_camera		camera;
+	t_light			*light;
+	t_mlx			mlx;
+	t_event			events;
+	t_vec3			aux;
+	t_camera		orig_camera;
+	t_light			*orig_light;
+	t_checkboard	chckbd;
 }	t_field;
 
 /* Initializers */
@@ -254,7 +263,7 @@ int			ratio_vec3_error(int min, int max, t_vec3 vector);
 int			read_file(char *filename, t_field *field);
 int			get_devices(t_field *field, char *line);
 int			get_geom(t_field *field, char *line);
-
+int			get_checkboard(t_field *field, char *line);
 //Closers
 int			ft_close(t_field *field);
 
