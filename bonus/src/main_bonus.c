@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/20 22:18:21 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:44:33 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	prt_help(void)
 	ft_putstr_fd(CHR_RED, 2);
 	ft_putstr_fd("=========Usage==========\n", 2);
 	ft_putstr_fd(RESET, 2);
-	ft_putstr_fd("./miniRT \n", 2);
+	ft_putstr_fd("./miniRT ", 2);
 	ft_putstr_fd(CHR_BLUE, 2);
 	ft_putstr_fd("filename\n", 2);
 	ft_putstr_fd(RESET, 2);
