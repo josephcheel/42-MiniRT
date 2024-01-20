@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_mouse_cod_lnx.h                                :+:      :+:    :+:   */
+/*   key_mouse_cod_lnx_bonus.h                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_MOUSE_COD_LNX_H
-# define KEY_MOUSE_COD_LNX_H
+#ifndef KEY_MOUSE_COD_LNX_BONUS_H
+# define KEY_MOUSE_COD_LNX_BONUS_H
 
 # define XK_UPARROW 0xff52	 /* U+2191 UPWARDS ARROW */
 # define XK_DOWNARROW 0xff54	 /* U+2193 DOWNWARDS ARROW */

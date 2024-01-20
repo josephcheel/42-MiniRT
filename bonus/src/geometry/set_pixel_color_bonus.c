@@ -97,12 +97,10 @@ t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 	v_luz_pt.pt = field->light->pos;
 	v_luz_pt.v = conv_v_unit(resta_vector(v_luz_pt.pt, vp.pt.pt));
 	v_luz_pt.c = field->light->color;
+	fact[1] = 0;
+	fact[2] = 0;
 	if (is_behind_srf(vp, v_luz_pt, field->geom))
-	{
 		fact[0] = field->ambient.ratio;
-		fact[1] = 0;
-		fact[2] = 0;
-	}
 	else
 	{
 		fact[0] = field->ambient.ratio;

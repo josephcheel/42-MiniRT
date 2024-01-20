@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_mouse_cod_mac.h                                :+:      :+:    :+:   */
+/*   key_mouse_cod_mac_bonus.h                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_MOUSE_COD_MAC_H
-# define KEY_MOUSE_COD_MAC_H
+#ifndef KEY_MOUSE_COD_MAC_BONUS_H
+# define KEY_MOUSE_COD_MAC_BONUS_H
 
 # define XK_UPARROW 0x7e	 /* U+2191 UPWARDS ARROW */
 # define XK_DOWNARROW 0x7d	 /* U+2193 DOWNWARDS ARROW */

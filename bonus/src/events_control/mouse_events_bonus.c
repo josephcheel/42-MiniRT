@@ -20,7 +20,7 @@
 /// @return
 // 	For testing add
 //	print_pixel_values(x, y, field);
-int mouse_events_pre(int mouse, int x, int y, t_field *field)
+int	mouse_events_pre(int mouse, int x, int y, t_field *field)
 {
 	if (mouse == MOUSE_BTN_ROT_UP)
 		zoom(-10, field);
@@ -40,7 +40,8 @@ int mouse_events_pre(int mouse, int x, int y, t_field *field)
 	return (0);
 }
 
-/// @brief Select which events to realize depending on the mouse buttons release.
+/// @brief Select which events to realize depending on the mouse
+/// @brief buttons release.
 /// @param mouse	Event received
 /// @param x		coord x of mouse
 /// @param y		Coord Y of mouse
@@ -48,7 +49,7 @@ int mouse_events_pre(int mouse, int x, int y, t_field *field)
 /// @return
 // 	For testing add
 //	print_pixel_values(x, y, field);
-int mouse_events_rel(int mouse, int x, int y, t_field *field)
+int	mouse_events_rel(int mouse, int x, int y, t_field *field)
 {
 	if (mouse == MOUSE_BTN_MIDDLE)
 		field->events.btn_cent_presd = 0;
