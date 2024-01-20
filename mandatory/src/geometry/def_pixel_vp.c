@@ -41,16 +41,13 @@ static t_vec3	pix_vec(t_indexes in, t_indexes lim, t_axis axis)
 /// @param lim Max pixels in screen
 void	def_pixel_vp(t_field *field, t_indexes in, t_indexes lim)
 {
-	field->camera.field_vp[in.i + in.j * (lim.i)].pt = \
-		pix_vec(in, lim, field->camera.center);
+	t_vec_pos	*pixel;
+
+	pixel = &field->camera.field_vp[in.i + in.j * (lim.i)];
+	pixel->pt = pix_vec(in, lim, field->camera.center);
 	if (field->camera.fov == 0)
-		field->camera.field_vp[in.i + in.j * (lim.i)].v = \
-			field->camera.center.vx;
+		pixel->v = field->camera.center.vx;
 	else
-		field->camera.field_vp[in.i + in.j * (lim.i)].v = \
-			resta_vector(field->camera.field_vp[in.i + in.j * lim.i].pt, \
-				field->camera.observer);
-	field->camera.field_vp[in.i + in.j * (lim.i)].v = \
-		conv_v_unit(field->camera.field_vp[in.i + in.j * lim.i].v);
-	field->camera.field_vp[in.i + in.j * (lim.i)].c = field->ambient.color;
+		pixel->v = conv_v_unit(resta_vector(pixel->pt, field->camera.observer));
+	pixel->c = field->ambient.color;
 }

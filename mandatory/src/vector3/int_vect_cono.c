@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   int_vect_cono_bonus.c                              :+:      :+:    :+:   */
+/*   int_vect_cono.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/16 11:12:54 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/14 14:46:29 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt_bonus.h"
+#include "../inc/minirt.h"
 
 static double	*calc_lambda_c(t_vec3 *v, double r, double h)
 {
@@ -95,10 +95,10 @@ static t_vec_pos	*get_point_result(double *lambda_c, t_vec_pos vpi, \
 	t_vec_pos	*out;
 	double		*lambda;
 
-	if ((lambda_c[0] == 0 && lambda_c[1] == 0) \
-		|| (lambda_c[0] == h && lambda_c[1] == h) \
-		|| (lambda_c[0] == 0 && lambda_c[1] == h) \
-		|| (lambda_c[0] == h && lambda_c[1] == 0))
+	if ((lambda_c[0] == 0 && lambda_c[1] == 0) || \
+		(lambda_c[0] == h && lambda_c[1] == h) || \
+		(lambda_c[0] == 0 && lambda_c[1] == h) || \
+		(lambda_c[0] == h && lambda_c[1] == 0))
 		return (NULL);
 	lambda = calc_lambda(lambda_c, vpi, vpc);
 	out = calculate_point(lambda, lambda_c, vpi, vpc);

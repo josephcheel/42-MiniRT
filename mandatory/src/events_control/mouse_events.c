@@ -12,6 +12,14 @@
 
 #include "../../inc/minirt.h"
 
+/// @brief Select which events to realize depending on the mouse buttons preset
+/// @param mouse	Event received
+/// @param x		coord x of mouse
+/// @param y		Coord Y of mouse
+/// @param field	Struct with the information of the scene.
+/// @return
+// 	For testing add
+//	print_pixel_values(x, y, field);
 int	mouse_events_pre(int mouse, int x, int y, t_field *field)
 {
 	if (mouse == MOUSE_BTN_ROT_UP)
@@ -24,7 +32,6 @@ int	mouse_events_pre(int mouse, int x, int y, t_field *field)
 		field->events.btn_rght_presd = 1;
 	else if (mouse == MOUSE_BTN_LEFT)
 	{
-		print_pixel_values(x, y, field);
 		field->events.btn_left_presd = 1;
 		x = x - field->mlx.size_x / 2;
 		y = field->mlx.size_y / 2 - y;
@@ -33,17 +40,19 @@ int	mouse_events_pre(int mouse, int x, int y, t_field *field)
 	return (0);
 }
 
+/// @brief Select which events to realize depending on the mouse 
+/// @brief buttons release.
+/// @param mouse	Event received
+/// @param x		coord x of mouse
+/// @param y		Coord Y of mouse
+/// @param field	Struct with the information of the scene.
+/// @return
+// 	For testing add
+//	print_pixel_values(x, y, field);
 int	mouse_events_rel(int mouse, int x, int y, t_field *field)
 {
-	if (mouse == MOUSE_BTN_ROT_UP)
-		printf("Button rotation up--%i -- %i\n", x, y);
-	else if (mouse == MOUSE_BTN_MIDDLE)
-	{
-		printf("Middle button released--%i -- %i\n", x, y);
+	if (mouse == MOUSE_BTN_MIDDLE)
 		field->events.btn_cent_presd = 0;
-	}
-	else if (mouse == MOUSE_BTN_ROT_DW)
-		printf("Button rotation DW--%i -- %i\n", x, y);
 	else if (mouse == MOUSE_BTN_RIGHT)
 		field->events.btn_rght_presd = 0;
 	if (mouse == MOUSE_BTN_LEFT && x > 0 && y > 0)

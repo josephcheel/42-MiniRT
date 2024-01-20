@@ -25,7 +25,7 @@ static bool	is_bhd_cam(t_vec3 pint, t_vec3 pi, t_vec3 vx)
 }
 
 static t_int_pts	*get_min_vect(t_int_pts *cur, t_vec_pos *new,
-						t_geom *geom)
+						t_geom *geom, t_vec_pos *pixl)
 {
 	t_int_pts	*out;
 	double		long_cur;
@@ -34,11 +34,11 @@ static t_int_pts	*get_min_vect(t_int_pts *cur, t_vec_pos *new,
 	out = cur;
 	if (!new)
 		return (out);
-	long_cur = modulo_vector(cur->pt.pt);
+	long_cur = modulo_vector(resta_vector(cur->pt.pt, pixl->pt));
 	i = -1;
 	while (++i < 2)
 	{
-		if (modulo_vector(new[i].pt) < long_cur)
+		if (modulo_vector(resta_vector(new[i].pt, pixl->pt)) < long_cur)
 		{
 			out->pt = new[i];
 			out->pt.c = geom->color;
@@ -75,7 +75,7 @@ static t_int_pts	*get_colored_loop(t_vec_pos *vps, t_field *field,
 	{
 		if (out && !is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))
 		{
-			vp_int = get_min_vect(vp_int, out, ptr);
+			vp_int = get_min_vect(vp_int, out, ptr, vps);
 			vp_int->pt.v = prod_cte_vector(ptr->sense, vp_int->pt.v);
 		}
 		if (ptr->type == PLANE)

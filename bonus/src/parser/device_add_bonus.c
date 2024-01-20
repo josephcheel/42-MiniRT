@@ -33,14 +33,19 @@ int	get_camera(t_field *field, char *line)
 
 	content = ft_split(line, ' ');
 	field->camera.center.pos = add_vec3(content[1]);
+<<<<<<< HEAD
+=======
+	if (ratio_vec3_error(-1, 1, add_vec3(content[2])))
+		return (write(2, "Camera normalized Orientation: out of range\n", 44));
+>>>>>>> 35b2746526a7d2aec5e3fda740e843519a0ad17c
 	get_camera_center(field, content);
 	field->camera.fov = ft_atoi(content[3]);
 	if (field->camera.fov == 0)
 		field->camera.observer = create_vect(LONG_MIN, LONG_MIN, LONG_MIN);
 	else
 	{
-		lambda = - (field->mlx.size_x - FRAME) \
-		* PIXEL / 2 / tan(field->camera.fov / 2);
+		lambda = -(field->mlx.size_x / 2 - FRAME) * PIXEL \
+			/ tan((double)field->camera.fov / 2 / 180 * M_PI);
 		aux = prod_cte_vector(lambda, field->camera.center.vx);
 		field->camera.observer = suma_vector(field->camera.center.pos, aux);
 	}

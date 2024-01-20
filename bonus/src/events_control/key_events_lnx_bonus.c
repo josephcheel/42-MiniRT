@@ -39,7 +39,6 @@ static void	key_events_resets(int key, t_field *field)
 
 int	key_events_press(int key, t_field *field)
 {
-	printf("Entro en keyevents press %x -- %p\n", key, field);
 	if (key == XK_CTRL)
 	{
 		field->events.key_ctrl_press = 1;
