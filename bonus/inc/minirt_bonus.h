@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/20 23:26:22 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/20 23:32:56 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ typedef struct s_ray
 typedef struct s_checkboard
 {
 	bool		is_chckbd;
+	double		size;
 	t_color		c1;
 	t_color		c2;
 }	t_checkboard;

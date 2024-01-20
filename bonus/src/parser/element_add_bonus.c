@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 23:09:18 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/20 23:27:01 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/20 23:35:04 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	get_checkboard(t_field *field, char *line)
 		get_color_from_string(content[2], &field->chckbd.c1);
 	else
 		field->chckbd.c2 = add_color(content[2]);
+	field->chckbd.size = ft_atof(content[3]);
 	ft_array_free(content, ft_array_size(content));
 	return (true);
 }

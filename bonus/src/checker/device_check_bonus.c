@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:39:52 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/20 23:05:52 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/20 23:34:20 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ bool	checkboard_data_check(char **content)
 	const char	*colors[8] = {"BLACK", "RED", "GREEN", \
 	"YELLOW", "BLUE", "MAGENTA", "CYAN", "WHITE"};
 
-	if (ft_array_size(content) != 3)
+	if (ft_array_size(content) != 4)
 		return (false);
 	if (ft_isallalpha(content[1]))
 	{
@@ -84,6 +84,8 @@ bool	checkboard_data_check(char **content)
 			return (false);
 	}
 	else if (!ft_is_rgb(content[2]) && !ft_check_rgb_ratio(content[2]))
+		return (false);
+	if (!ft_isdouble(content[3]))
 		return (false);
 	return (true);
 }
