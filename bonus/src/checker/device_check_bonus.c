@@ -16,7 +16,8 @@ bool	ambient_light_data_check(char **content)
 {
 	if (ft_array_size(content) != 3)
 		return (false);
-	if (!ft_isdouble(content[1]))
+	if (!ft_isdouble(content[1]) || \
+		ratio_double_error(0.0, 1.0, ft_atof(content[1])))
 		return (false);
 	if (ft_is_rgb(content[2]))
 	{
@@ -41,7 +42,7 @@ bool	camera_data_check(char **content)
 	}
 	else
 		return (false);
-	if (!ft_isnumeric(content[3]) && \
+	if (!ft_isnumeric(content[3]) || \
 		ratio_int_error(0, 180, ft_atoi(content[3])))
 		return (false);
 	return (true);
