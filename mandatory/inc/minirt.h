@@ -293,13 +293,8 @@ void		def_pixel_vp(t_field *field, t_indexes in, t_indexes lim);
 void		get_colored_int_pt(int pixel, t_field *field);
 t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo);
 void		set_point_int(t_field *field);
-<<<<<<< HEAD
 
 /* Color */
-=======
-int			dump_mem_2_scr(t_field *field);
-int			move_light(t_field *field);
->>>>>>> 35b2746526a7d2aec5e3fda740e843519a0ad17c
 t_color		set_pixel_color(t_int_pts vp, t_field *field);
 void		rgb_to_hsl(t_color *c);
 void		hsl_to_rgb(t_color *c);

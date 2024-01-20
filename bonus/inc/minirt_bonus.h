@@ -31,8 +31,8 @@
 #  include "../inc/key_mouse_cod_mac_bonus.h"
 # endif
 # define WIN_NAME "miniRT"
-# define WIN_X 540
-# define WIN_Y 540
+# define WIN_X 540*2
+# define WIN_Y 540*2
 # define FRAME 0
 
 //# define PIXEL 0.0000054

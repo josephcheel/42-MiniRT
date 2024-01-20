@@ -93,10 +93,6 @@ t_color	set_pixel_color(t_int_pts vp, t_field *field)
 	{
 		fact[0] = field->ambient.ratio;
 		fact[1] = field->light->ratio * get_difuse(vp.pt, v_luz_pt);
-<<<<<<< HEAD
-		fact[2] = 0;
-=======
->>>>>>> 35b2746526a7d2aec5e3fda740e843519a0ad17c
 	}
 	if (vp.pt.c.l > fact[0] + fact[1])
 		vp.pt.c.l = fact[0] + fact[1];
