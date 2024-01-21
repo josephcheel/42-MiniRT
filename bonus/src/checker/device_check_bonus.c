@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:39:52 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/20 23:34:20 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/21 15:50:53 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,42 +64,35 @@ bool	light_data_check(char **content)
 	return (true);
 }
 
-bool	checkboard_data_check(char **content)
+static bool	checkboard_color_check(char *content)
 {
 	const char	*colors[8] = {"BLACK", "RED", "GREEN", \
 	"YELLOW", "BLUE", "MAGENTA", "CYAN", "WHITE"};
 
-	if (ft_array_size(content) != 4)
-		return (false);
-	if (ft_isallalpha(content[1]))
+	if (ft_isallalpha(content))
 	{
-		if (!ft_isstrarray(content[1], (char **)colors))
+		if (!ft_isstrarray(content, (char **)colors))
 			return (false);
 	}
-	else if (!ft_is_rgb(content[1]) || !ft_check_rgb_ratio(content[1]))
-		return (false);
-	if (ft_isallalpha(content[2]))
-	{
-		if (!ft_isstrarray(content[2], (char **)colors))
-			return (false);
-	}
-	else if (!ft_is_rgb(content[2]) && !ft_check_rgb_ratio(content[2]))
-		return (false);
-	if (!ft_isdouble(content[3]))
+	else if (!ft_is_rgb(content) || !ft_check_rgb_ratio(content))
 		return (false);
 	return (true);
 }
 
-// bool	bumpmap_data_check(char **content)
-// {
-// 	if (ft_array_size(content) != 2)
-// 		return (false);
-// 	if (ft_check_extension(content[1], ".xpm"))
-// 		return (false);
-// 	if (!ft_strchr(content[1], '/'))
-// 	{
-// 		write(2, "Path must be absolute", 39);
-// 		return (false);
-// 	}
-// 	return (true);
-// }
+bool	checkboard_data_check(char **content)
+{
+	if (ft_array_size(content) != 4 && ft_array_size(content) != 5)
+		return (false);
+	if (!checkboard_color_check(content[1]))
+		return (false);
+	if (!checkboard_color_check(content[2]))
+		return (false);
+	if (!ft_isdouble(content[3]))
+		return (false);
+	if (ft_array_size(content) == 5)
+	{
+		if (!ft_isnumeric(content[4]))
+			return (false);
+	}
+	return (true);
+}
