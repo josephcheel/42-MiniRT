@@ -127,7 +127,7 @@ SRC_MINIRT_BN		=	main_bonus.c initializers_bonus.c hsl_to_rgb_bonus.c rgb_to_hsl
 CHECKER_BN			=	init_vars_bonus.c checks_bonus.c device_check_bonus.c geometry_check_bonus.c check_syntax_bonus.c check_ratios_bonus.c
 PARSERS_BN		=	device_add_bonus.c geometry_add_bonus.c adders_bonus.c element_add_bonus.c
 GEOMETRY_BN		=	geom_lstcreate_bonus.c get_int_pt_bonus.c def_pixel_vp_bonus.c \
-					dump_mem_2_scr_bonus.c set_pixel_color_bonus.c
+					dump_mem_2_scr_bonus.c set_pixel_color_bonus.c set_pixel_color_chckbd_bonus.c 
 LIGHTS_BN			=	lights_lstcreate_bonus.c lights_clone_bonus.c
 
 VECTOR3_BN			=	conv_v_unit_bonus.c div_cte_vector_bonus.c int_vect_esfera_bonus.c \

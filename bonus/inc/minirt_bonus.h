@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/20 23:32:56 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/21 01:26:58 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 #  include "../inc/key_mouse_cod_mac_bonus.h"
 # endif
 # define WIN_NAME "miniRT"
-# define WIN_X 540
+# define WIN_X 1080
 # define WIN_Y 540
 # define FRAME 0
 
@@ -309,6 +309,7 @@ void		set_point_int(t_field *field);
 
 /* Color */
 t_color		set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl);
+t_color		set_pixel_color_chckdb(t_int_pts vp, t_field *field);
 void		rgb_to_hsl(t_color *c);
 void		hsl_to_rgb(t_color *c);
 

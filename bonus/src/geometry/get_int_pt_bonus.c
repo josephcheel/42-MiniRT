@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 11:12:54 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/21 02:16:04 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,8 @@ void	get_colored_int_pt(int pixel, t_field *field)
 		vp_int = get_colored_loop(vps, field, vp_int, ptr);
 		ptr = ptr->next;
 	}
-	vp_int->pt.c = set_pixel_color(*vp_int, field, *vps);
+	if (vp_int->geom && field->chckbd.is_chckbd)
+		vp_int->pt.c = set_pixel_color_chckdb(*vp_int, field);
+	else
+		vp_int->pt.c = set_pixel_color(*vp_int, field, *vps);
 }
