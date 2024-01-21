@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:51:44 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/13 13:09:48 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/21 16:50:41 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	key_events_resets(int key, t_field *field)
 			field->light = ft_clone_light(field->orig_light);
 			printf("Restarting Light\n");
 		}
-		restart_screen(field);
 	}
 }
 
@@ -83,5 +82,9 @@ int	key_events_release(int key, t_field *field)
 		field->events.key_shift_press = 0;
 		restart_screen(field);
 	}
+	else if (key == XK_L)
+		restart_screen(field);
+	else if (key == XK_R)
+		dump_mem_2_scr(field);
 	return (0);
 }

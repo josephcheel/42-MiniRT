@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:51:44 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/13 13:08:02 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/21 16:50:05 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,26 @@ static void	restart_screen(t_field *field)
 
 static void	key_events_resets(int key, t_field *field)
 {
-	if (key == XK_R)
+	if (key == XK_R || key == XK_L)
 	{
-		free(field->camera.int_vp);
-		free(field->camera.field_vp);
-		field->camera = field->orig_camera;
-		printf("Restarting Camera\n");
+		if (key == XK_R)
+		{
+			free(field->camera.int_vp);
+			free(field->camera.field_vp);
+			field->camera = field->orig_camera;
+			printf("Restarting Camera\n");
+		}
+		else if (key == XK_L)
+		{
+			free(field->light);
+			field->light = ft_clone_light(field->orig_light);
+			printf("Restarting Light\n");
+		}
 	}
-	else if (key == XK_L)
-	{
-		free(field->light);
-		field->light = ft_clone_light(field->orig_light);
-		printf("Restarting Light\n");
-	}
-	restart_screen(field);
 }
 
 int	key_events_press(int key, t_field *field)
 {
-	printf("Entro en keyevents press %x -- %p\n", key, field);
 	if (key == XK_CTRL)
 	{
 		field->events.key_ctrl_press = 1;
@@ -81,5 +82,9 @@ int	key_events_release(int key, t_field *field)
 		field->events.key_shift_press = 0;
 		restart_screen(field);
 	}
+	else if (key == XK_L)
+		restart_screen(field);
+	else if (key == XK_R)
+		dump_mem_2_scr(field);
 	return (0);
 }
