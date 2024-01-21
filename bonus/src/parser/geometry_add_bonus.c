@@ -6,13 +6,13 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 11:12:54 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/21 14:25:14 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt_bonus.h"
 
-t_geom	*get_sphere(char *line)
+t_geom	*get_sphere(char *line, t_field *field)
 {
 	t_geom	*sphere;
 	char	**content;
@@ -26,11 +26,14 @@ t_geom	*get_sphere(char *line)
 	sphere->color = add_color(content[3]);
 	sphere->sense = 1;
 	sphere->next = NULL;
+	sphere->bumpmap.is_bumpmap = false;
+	if (ft_array_size(content) == 5)
+		sphere->bumpmap = get_bumpmap(content[4], field);
 	ft_array_free(content, ft_array_size(content));
 	return (sphere);
 }
 
-t_geom	*get_plane(char *line)
+t_geom	*get_plane(char *line, t_field *field)
 {
 	t_geom	*plane;
 	char	**content;
@@ -43,11 +46,14 @@ t_geom	*get_plane(char *line)
 	plane->color = add_color(content[3]);
 	plane->sense = 1;
 	plane->next = NULL;
+	plane->bumpmap.is_bumpmap = false;
+	if (ft_array_size(content) == 5)
+		plane->bumpmap = get_bumpmap(content[4], field);
 	ft_array_free(content, ft_array_size(content));
 	return (plane);
 }
 
-t_geom	*get_cylinder( char *line)
+t_geom	*get_cylinder( char *line, t_field *field)
 {
 	t_geom	*cylinder;
 	char	**content;
@@ -62,11 +68,14 @@ t_geom	*get_cylinder( char *line)
 	cylinder->color = add_color(content[5]);
 	cylinder->sense = 1;
 	cylinder->next = NULL;
+	cylinder->bumpmap.is_bumpmap = false;
+	if (ft_array_size(content) == 7)
+		cylinder->bumpmap = get_bumpmap(content[6], field);
 	ft_array_free(content, ft_array_size(content));
 	return (cylinder);
 }
 
-t_geom	*get_conus( char *line)
+t_geom	*get_conus( char *line, t_field *field)
 {
 	t_geom	*cone;
 	char	**content;
@@ -81,6 +90,9 @@ t_geom	*get_conus( char *line)
 	cone->color = add_color(content[5]);
 	cone->sense = 1;
 	cone->next = NULL;
+	cone->bumpmap.is_bumpmap = false;
+	if (ft_array_size(content) == 7)
+		cone->bumpmap = get_bumpmap(content[6], field);
 	ft_array_free(content, ft_array_size(content));
 	return (cone);
 }
@@ -93,13 +105,13 @@ int	get_geom(t_field *field, char *line)
 	temp = NULL;
 	type = ft_split(line, ' ');
 	if (ft_strcmp(type[0], "sp") == 0)
-		temp = get_sphere(line);
+		temp = get_sphere(line, field);
 	else if (ft_strcmp(type[0], "pl") == 0)
-		temp = get_plane(line);
+		temp = get_plane(line, field);
 	else if (ft_strcmp(type[0], "cy") == 0)
-		temp = get_cylinder(line);
+		temp = get_cylinder(line, field);
 	else if (ft_strcmp(type[0], "cn") == 0)
-		temp = get_conus(line);
+		temp = get_conus(line, field);
 	ft_geomadd_back(&field->geom, temp);
 	ft_array_free(type, ft_array_size(type));
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/21 02:16:04 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/21 13:54:39 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static t_int_pts	*get_min_vect(t_int_pts *cur, t_vec_pos *new,
 			out->pt = new[i];
 			out->pt.c = geom->color;
 			out->geom = geom;
+			out->bumpmap = geom->bumpmap;
 		}
 	}
 	return (out);
@@ -108,6 +109,8 @@ void	get_colored_int_pt(int pixel, t_field *field)
 	}
 	if (vp_int->geom && field->chckbd.is_chckbd)
 		vp_int->pt.c = set_pixel_color_chckdb(*vp_int, field);
-	else
+	else if (vp_int->geom && vp_int->bumpmap.is_bumpmap)
+		vp_int->pt.c = set_pixel_color_bumpmap(*vp_int, field, vp_int->geom);
+	if (field->chckbd.is_light)
 		vp_int->pt.c = set_pixel_color(*vp_int, field, *vps);
 }

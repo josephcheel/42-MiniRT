@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/21 01:26:58 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/21 15:51:05 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,11 +133,34 @@ typedef struct s_vec_pos
 	t_color	c;
 }	t_vec_pos;
 
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	int		frame;
+	int		size_x;
+	int		size_y;
+}	t_mlx;
+
+typedef struct s_bumpmap
+{
+	bool		is_bumpmap;
+	char		*filename;
+	int			width;
+	int			height;
+	t_color		min;
+	t_color		max;
+	t_mlx		mlx;
+	t_img_buff	buff;
+}	t_bumpmap;
+
 typedef struct s_geom
 {
 	enum e_type_geo	type;
 	t_vec_pos		vp;
 	t_color			color;
+	t_bumpmap		bumpmap;
 	double			r;
 	double			height;
 	int				sense;
@@ -155,7 +178,8 @@ typedef struct s_axis
 typedef struct s_int_pts
 {
 	t_vec_pos	pt;
-	void		*geom;
+	t_geom		*geom;
+	t_bumpmap	bumpmap;
 }	t_int_pts;
 
 typedef struct s_camera
@@ -194,16 +218,6 @@ typedef struct s_ambient
 	float	ratio;
 }	t_ambient;
 
-typedef struct s_mlx
-{
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int		frame;
-	int		size_x;
-	int		size_y;
-}	t_mlx;
-
 typedef struct s_ray
 {
 	t_vec3	*point;
@@ -213,9 +227,11 @@ typedef struct s_ray
 typedef struct s_checkboard
 {
 	bool		is_chckbd;
+	bool		is_light;
 	double		size;
 	t_color		c1;
 	t_color		c2;
+
 }	t_checkboard;
 
 typedef struct s_field
@@ -248,7 +264,7 @@ bool		plane_data_check(char **content);
 bool		sphere_data_check(char **content);
 bool		cylinder_data_check(char **content);
 bool		checkboard_data_check(char **content);
-
+bool		bumpmap_data_check(char *content);
 bool		ft_isdouble(char *nbr);
 bool		ft_is_vec3(char *str);
 bool		ft_check_vect3_ratio(char *content, double min, double max);
@@ -265,6 +281,7 @@ int			read_file(char *filename, t_field *field);
 int			get_devices(t_field *field, char *line);
 int			get_geom(t_field *field, char *line);
 int			get_checkboard(t_field *field, char *line);
+t_bumpmap	get_bumpmap(char *line, t_field *field);
 //Closers
 int			ft_close(t_field *field);
 
@@ -310,6 +327,7 @@ void		set_point_int(t_field *field);
 /* Color */
 t_color		set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl);
 t_color		set_pixel_color_chckdb(t_int_pts vp, t_field *field);
+t_color		set_pixel_color_bumpmap(t_int_pts vp, t_field *field, t_geom *geom);
 void		rgb_to_hsl(t_color *c);
 void		hsl_to_rgb(t_color *c);
 
