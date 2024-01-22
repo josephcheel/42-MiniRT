@@ -21,8 +21,7 @@ t_color	set_pixel_color_chckdb(t_int_pts vp, t_field *field)
 	a = ceil(round(vp.pt.pt.x) / (round(field->chckbd.size)));
 	b = ceil(round(vp.pt.pt.y) / (round(field->chckbd.size)));
 	c = ceil(round(vp.pt.pt.z) / (round(field->chckbd.size)));
-	if (((int)a + (int)b + (int)c) % 2 == 0)
+	if ((a + b + c) % 2 == 0)
 		return (field->chckbd.c1);
-	else
-		return (field->chckbd.c2);
+	return (field->chckbd.c2);
 }
