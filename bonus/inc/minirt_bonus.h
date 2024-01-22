@@ -147,6 +147,7 @@ typedef struct s_bumpmap
 {
 	bool		is_bumpmap;
 	char		*filename;
+	float		*z_map;
 	int			width;
 	int			height;
 	t_color		min;
