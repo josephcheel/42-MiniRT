@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/21 15:51:05 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/23 03:30:01 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,11 +143,18 @@ typedef struct s_mlx
 	int		size_y;
 }	t_mlx;
 
+typedef struct s_normal_map {
+	t_vec3	pt;
+	t_vec3	v;
+	float	h;
+} t_normal_map;
+
 typedef struct s_bumpmap
 {
 	bool		is_bumpmap;
 	char		*filename;
-	float		*z_map;
+	float		*h_map;
+	t_normal_map *normal_map;
 	int			width;
 	int			height;
 	t_color		min;
@@ -328,7 +335,7 @@ void		set_point_int(t_field *field);
 /* Color */
 t_color		set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl);
 t_color		set_pixel_color_chckdb(t_int_pts vp, t_field *field);
-t_color		set_pixel_color_bumpmap(t_int_pts vp, t_field *field, t_geom *geom);
+void		set_pixel_color_bumpmap(t_int_pts *vp, t_field *field, t_geom *geom);
 void		rgb_to_hsl(t_color *c);
 void		hsl_to_rgb(t_color *c);
 
