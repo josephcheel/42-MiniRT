@@ -54,13 +54,15 @@ t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo)
 	t_vec_pos	*out;
 
 	if (geo->type == SPHERE)
-		out = int_vect_esfera(*vps, geo->vp.pt, geo->r);
+		out = int_vect_esfera(*vps, geo);
 	else if (geo->type == CYLINDER)
-		out = int_vect_cilind(*vps, geo->vp, geo->r, geo->height);
+		out = int_vect_cilind(*vps, geo);
 	else if (geo->type == PLANE)
 		out = int_vect_plano(*vps, geo->vp);
 	else if (geo->type == CONUS)
-		out = int_vect_cono(*vps, geo->vp, geo->r, geo->height);
+		out = int_vect_cono(*vps, geo);
+	else if (geo->type == TRIANGLE)
+		out = int_vect_triang(*vps, geo);
 	else
 		out = NULL;
 	return (out);
