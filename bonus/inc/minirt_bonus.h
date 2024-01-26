@@ -37,7 +37,7 @@
 
 //# define PIXEL 0.0000054
 # define PIXEL 0.5
-# define GEO_IDENT "sp cy pl cn"
+# define GEO_IDENT "sp cy pl cn tr"
 # define DEV_IDENT "C L A CHECKBOARD"
 
 # define CAMERA 'C'
@@ -74,6 +74,7 @@ enum e_type_geo
 	CYLINDER,
 	PLANE,
 	CONUS,
+	TRIANGLE,
 	MAX_GEOM
 };
 
@@ -155,26 +156,28 @@ typedef struct s_bumpmap
 	t_img_buff	buff;
 }	t_bumpmap;
 
+typedef struct s_axis
+{
+	t_vec3	pos;
+	t_vec3	vx;
+	t_vec3	vy;
+	t_vec3	vz;
+}	t_axis;
+
 typedef struct s_geom
 {
 	enum e_type_geo	type;
 	t_vec_pos		vp;
+	t_vec_pos		vp1;
+	t_vec_pos		vp2;
 	t_color			color;
 	t_bumpmap		bumpmap;
+	t_axis			axis;
 	double			r;
 	double			height;
 	int				sense;
 	void			*next;
 }	t_geom;
-
-typedef struct s_axis
-{
-	t_vec3		pos;
-	t_vec3		vx;
-	t_vec3		vy;
-	t_vec3		vz;
-}	t_axis;
-
 typedef struct s_int_pts
 {
 	t_vec_pos	pt;
@@ -263,6 +266,7 @@ bool		light_data_check(char **content);
 bool		plane_data_check(char **content);
 bool		sphere_data_check(char **content);
 bool		cylinder_data_check(char **content);
+bool		triangle_data_check(char **content);
 bool		checkboard_data_check(char **content);
 bool		bumpmap_data_check(char *content);
 bool		ft_isdouble(char *nbr);
@@ -282,7 +286,13 @@ int			get_devices(t_field *field, char *line);
 int			get_geom(t_field *field, char *line);
 int			get_checkboard(t_field *field, char *line);
 t_bumpmap	get_bumpmap(char *line, t_field *field);
-//Closers
+t_geom		*get_plane(char *line, t_field *field);
+t_geom		*get_cylinder(char *line, t_field *field);
+t_geom		*get_sphere(char *line, t_field *field);
+t_geom		*get_conus(char *line, t_field *field);
+t_geom		*get_triang(char *line, t_field *field);
+
+// Closers
 int			ft_close(t_field *field);
 
 void		free_field(t_field *field);
@@ -294,10 +304,11 @@ t_vec3		resta_vector(t_vec3 a, t_vec3 b);
 t_vec3		prod_vectorial(t_vec3 a, t_vec3 b);
 double		modulo_vector(t_vec3 a);
 double		prod_escalar(t_vec3 a, t_vec3 b);
-t_vec_pos	*int_vect_esfera(t_vec_pos vp1,	t_vec3 pr, double r);
-t_vec_pos	*int_vect_cilind(t_vec_pos vp1, t_vec_pos vpc, double r, double h);
+t_vec_pos	*int_vect_esfera(t_vec_pos vp1,	t_geom *geo);
+t_vec_pos	*int_vect_cilind(t_vec_pos vp1, t_geom *geo);
 t_vec_pos	*int_vect_plano(t_vec_pos pi, t_vec_pos pl);
-t_vec_pos	*int_vect_cono(t_vec_pos vpi, t_vec_pos vpc, double r, double h);
+t_vec_pos	*int_vect_cono(t_vec_pos vpi, t_geom *geo);
+t_vec_pos	*int_vect_triang(t_vec_pos vpi, t_geom *geo);
 t_vec3		prod_cte_vector(double a, t_vec3 b);
 t_vec3		div_cte_vector(double a, t_vec3 b);
 double		dist_pto_vector(t_vec3 p1, t_vec3 p2, t_vec3 v);
@@ -339,6 +350,10 @@ int			ft_lightsize(t_light *lst);
 void		ft_free_light(t_light **head);
 t_light		*ft_clone_lightning(t_light *light);
 void		def_vector_sense(t_field *field);
+t_color		mult_color(t_color a, double b);
+t_color		mix_color(t_color a, t_color b);
+t_color		prod_color(t_color a, t_color b);
+t_color		limit_color(t_color a);
 
 /* Debug */
 void		ft_check_calculations(void);

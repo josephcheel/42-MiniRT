@@ -106,24 +106,24 @@ static t_vec_pos	*get_point_result(double *lambda_c, t_vec_pos vpi, \
 	return (out);
 }
 
-t_vec_pos	*int_vect_cono(t_vec_pos vpi, t_vec_pos vpc, double r, double h)
+t_vec_pos	*int_vect_cono(t_vec_pos vpi, t_geom *geo)
 {
 	t_vec3		vaux[2];
 	t_vec3		pci;
 	t_vec_pos	*out;
 	double		*lambda_c;
 
-	pci = resta_vector(vpi.pt, vpc.pt);
-	vaux[0] = prod_cte_vector(prod_escalar(vpc.v, pci), vpi.v);
-	vaux[0] = div_cte_vector(prod_escalar(vpc.v, vpi.v), vaux[0]);
+	pci = resta_vector(vpi.pt, geo->vp.pt);
+	vaux[0] = prod_cte_vector(prod_escalar(geo->vp.v, pci), vpi.v);
+	vaux[0] = div_cte_vector(prod_escalar(geo->vp.v, vpi.v), vaux[0]);
 	vaux[0] = resta_vector(pci, vaux[0]);
-	vaux[1] = prod_cte_vector(prod_escalar(vpc.v, vpc.v), vpi.v);
-	vaux[1] = div_cte_vector(prod_escalar(vpc.v, vpi.v), vaux[1]);
-	vaux[1] = resta_vector(vaux[1], vpc.v);
-	lambda_c = calc_lambda_c(vaux, r, h);
+	vaux[1] = prod_cte_vector(prod_escalar(geo->vp.v, geo->vp.v), vpi.v);
+	vaux[1] = div_cte_vector(prod_escalar(geo->vp.v, vpi.v), vaux[1]);
+	vaux[1] = resta_vector(vaux[1], geo->vp.v);
+	lambda_c = calc_lambda_c(vaux, geo->r, geo->height);
 	if (!lambda_c)
 		return (NULL);
-	out = get_point_result(lambda_c, vpi, vpc, h);
+	out = get_point_result(lambda_c, vpi, geo->vp, geo->height);
 	free(lambda_c);
 	return (out);
 }

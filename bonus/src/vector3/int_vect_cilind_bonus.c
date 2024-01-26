@@ -101,30 +101,30 @@ static t_vec_pos	*get_point_result(double **lambda, t_vec_pos vpi, \
 //	Note:
 // lambda[0] = lambda_i
 // lambda[1] = lambda_c
-t_vec_pos	*int_vect_cilind(t_vec_pos vpi, t_vec_pos vpc, double r, double h)
+t_vec_pos	*int_vect_cilind(t_vec_pos vpi, t_geom *geo)
 {
 	t_vec3		vaux[2];
 	t_vec3		pci;
 	t_vec_pos	*out;
 	double		*lambda[2];
 
-	pci = resta_vector(vpi.pt, vpc.pt);
-	vaux[0] = prod_cte_vector(prod_escalar(vpc.v, pci), vpc.v);
+	pci = resta_vector(vpi.pt, geo->vp.pt);
+	vaux[0] = prod_cte_vector(prod_escalar(geo->vp.v, pci), geo->vp.v);
 	vaux[0] = resta_vector(pci, vaux[0]);
-	vaux[1] = prod_cte_vector(prod_escalar(vpi.v, vpc.v), vpc.v);
+	vaux[1] = prod_cte_vector(prod_escalar(vpi.v, geo->vp.v), geo->vp.v);
 	vaux[1] = resta_vector(vpi.v, vaux[1]);
-	lambda[0] = calc_lambda(vaux, r);
+	lambda[0] = calc_lambda(vaux, geo->r);
 	if (!lambda[0])
 		return (NULL);
-	lambda[1] = limit_lambda(lambda[0], vpi, vpc, h);
-	if ((lambda[1][0] == 0 && lambda[1][1] == 0) \
-				|| (lambda[1][0] == h && lambda[1][1] == h))
+	lambda[1] = limit_lambda(lambda[0], vpi, geo->vp, geo->height);
+	if ((lambda[1][0] == 0 && lambda[1][1] == 0) || \
+		(lambda[1][0] == geo->height && lambda[1][1] == geo->height))
 	{
 		free(lambda[0]);
 		free(lambda[1]);
 		return (NULL);
 	}
-	out = get_point_result(lambda, vpi, vpc, h);
+	out = get_point_result(lambda, vpi, geo->vp, geo->height);
 	free(lambda[0]);
 	free(lambda[1]);
 	return (out);

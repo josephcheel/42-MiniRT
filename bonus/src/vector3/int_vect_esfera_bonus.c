@@ -27,23 +27,23 @@ static t_vec_pos	*calculate_intersection(t_vec_pos vpi, \
 	return (pt);
 }
 
-t_vec_pos	*int_vect_esfera(t_vec_pos vpi, t_vec3 pr, double r)
+t_vec_pos	*int_vect_esfera(t_vec_pos vpi, t_geom *geo)
 {
 	t_vec_pos	*pt;
 	double		param[3];
 	t_vec3		v2;
 	double		*lambda;
 
-	if (dist_pto_vector(vpi.pt, pr, vpi.v) > r)
+	if (dist_pto_vector(vpi.pt, geo->vp.pt, vpi.v) > geo->r)
 		return (NULL);
-	v2 = resta_vector(vpi.pt, pr);
+	v2 = resta_vector(vpi.pt, geo->vp.pt);
 	param[0] = prod_escalar(vpi.v, vpi.v);
 	param[1] = 2 * prod_escalar(vpi.v, v2);
-	param[2] = prod_escalar(v2, v2) - r * r;
+	param[2] = prod_escalar(v2, v2) - pow(geo->r, 2);
 	lambda = solv_eq_ord_2(param);
 	if (lambda != NULL)
 	{
-		pt = calculate_intersection(vpi, lambda, pr);
+		pt = calculate_intersection(vpi, lambda, geo->vp.pt);
 		free(lambda);
 	}
 	else
