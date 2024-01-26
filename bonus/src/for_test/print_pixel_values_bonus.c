@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../inc/minirt_bonus.h"
+
 static double calculate_behind_pts(t_int_pts vp, t_vec_pos vl_pt, t_geom *ptr)
 {
 	t_vec3 aux;
@@ -86,18 +87,84 @@ static bool is_behind_srf(t_int_pts vp, t_vec_pos vl_pt, t_geom *geo)
 	}
 	return (false);
 }
+/*
+static t_color get_difuse(t_vec_pos vp, t_vec_pos vl_pt, double amb_rate)
+{
+	t_color col;
+	double aux;
+	int i;
+	printf("*********************\n");
+	col = vp.c;
+	aux = fmax(0, prod_escalar(vp.v, vl_pt.v));
+	if (aux < amb_rate)
+		col.l = amb_rate;
+	else
+	{
+		i = (vp.c.h + vl_pt.c.h * aux) / 360;
+		col.h = vp.c.h + vl_pt.c.h * aux - i * 360;
+		col.s = (vp.c.s + vl_pt.c.s) * aux;
+		if (col.s > 1)
+			col.s = 1;
+		col.l = fmin(amb_rate + aux, vp.c.l);
+	}
+	printf("Valor aux = %f\n", aux);
+	print_color_values("Color difuse ", col);
+	hsl_to_rgb(&col);
+	printf("*********************\n");
+	return (col);
+}
+*/
+/*
+static t_color get_difuse(t_vec_pos vp, t_vec_pos vl_pt, double amb_rate)
+{
+	t_color col;
+	double aux;
+		int		i;
 
-static double get_difuse(t_vec_pos vp, t_vec_pos vl_pt)
+		i = (vp.c.h + vl_pt.c.h * aux) / 360;
+		col.h = vp.c.h + vl_pt.c.h * aux - i * 360;
+		col.s = (vp.c.s + vl_pt.c.s) * aux;
+		if (col.s > 1)
+			col.s = 1;
+
+	printf("*********************\n");
+	printf("Valor aux = %f\n", prod_escalar(vp.v, vl_pt.v));
+	printf("Valor amb rate = %f\n", amb_rate);
+	col = vp.c;
+	print_color_values("Color in ", col);
+	aux = fmax(0, prod_escalar(vp.v, vl_pt.v));
+//	if (aux < amb_rate)
+//	{
+//		col.l = amb_rate;
+//		col = mult_color(vp.c, amb_rate);
+//		col = mix_color(col, vl_pt.c);
+//	}
+//	else
+//	{
+		//aux = pow(aux, 2);
+		col = mult_color(vp.c, aux);
+		print_color_values("Color interm ", col);
+		col = mix_color(col, vl_pt.c);
+		//col = mix_color(col, mult_color(vl_pt.c, aux));
+		//		col.l = fmin(amb_rate + aux, vp.c.l);
+//	}
+	hsl_to_rgb(&col);
+	print_color_values("Color out ", col);
+	printf("*********************\n");
+
+	return (col);
+}
+*/
+static double get_difuse(t_vec_pos vp, t_vec_pos vl_pt, double amb_rate)
 {
 	double aux;
-
 	aux = prod_escalar(vp.v, vl_pt.v);
-	if (aux < 0)
-		return (0);
+	//	aux = pow(aux, 4);
+	if (aux < amb_rate)
+		aux = amb_rate;
 	return (aux);
 }
-
-static double get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
+static double get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl, double light_ratio)
 {
 	double aux;
 	t_vec3 out;
@@ -107,7 +174,10 @@ static double get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
 		return (0);
 	out = resta_vector(prod_cte_vector(aux, vp.v), vl_pt.v);
 	aux = prod_escalar(out, pixl.v);
+	if (aux > 0)
+		return (0);
 	aux = pow(aux, 8);
+	aux = fmin(aux, light_ratio);
 	return (aux);
 }
 
@@ -122,39 +192,63 @@ static double get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
 t_color set_pixel_color_print(t_int_pts vp, t_field *field, t_vec_pos pixl)
 {
 	t_vec_pos v_luz_pt;
-	double fact[3];
+	t_color out[4];
+	double aux;
+	t_light *lght;
 
-	v_luz_pt.pt = field->light->pos;
-	v_luz_pt.v = conv_v_unit(resta_vector(v_luz_pt.pt, vp.pt.pt));
-	v_luz_pt.c = field->light->color;
-	if (is_behind_srf(vp, v_luz_pt, field->geom))
+	if (vp.pt.pt.x == LONG_MAX && vp.pt.pt.z == LONG_MAX && vp.pt.pt.z == LONG_MAX)
+		out[3] = field->ambient.color;
+	else
 	{
-		fact[0] = field->ambient.ratio;
-		fact[1] = 0;
-		fact[2] = 0;
-		printf("Está detras de una superficie %i \n",field->geom->type);
+		lght = field->light;
+		while (lght)
+		{
+
+			printf("*********************\n");
+			print_color_values("Color in ", vp.pt.c);
+			print_color_values("Color in luz ", lght->color);
+			v_luz_pt.pt = lght->pos;
+			v_luz_pt.v = conv_v_unit(resta_vector(v_luz_pt.pt, vp.pt.pt));
+			v_luz_pt.c = lght->color;
+			if (is_behind_srf(vp, v_luz_pt, field->geom))
+			{
+				out[0] = mult_color(v_luz_pt.c, field->ambient.ratio);
+				print_color_values("Color bh ambient ", out[0]);
+				out[3] = prod_color(out[0], vp.pt.c);
+				hsl_to_rgb(&out[3]);
+			}
+			else
+			{
+				out[0] = mult_color(v_luz_pt.c, field->ambient.ratio);
+				print_color_values("Color ambient ", out[0]);
+				aux = get_difuse(vp.pt, v_luz_pt, field->ambient.ratio);
+				printf("Valor difuse = %f\n", aux);
+				out[1] = mult_color(v_luz_pt.c, aux);
+				print_color_values("Color difuse ", out[1]);
+				out[2] = mix_color(out[0], out[1]);
+				print_color_values("Color light mixed ", out[2]);
+				aux = get_specular(vp.pt, v_luz_pt, pixl, lght->ratio);
+				printf("Valor especular = %f\n", aux);
+				out[1] = mult_color(v_luz_pt.c, aux);
+				print_color_values("Color especular ", out[1]);
+				out[2] = mix_color(out[1], out[2]);
+				print_color_values("Color total ", out[2]);
+				out[3] = prod_color(out[2], vp.pt.c);
+				hsl_to_rgb(&out[3]);
+			}
+			print_color_values("Color out ", out[3]);
+			printf("*********************\n");
+			lght = lght->next;
+		}
+	}
+	return (out[3]);
+}
+/*		printf("Está detras de una superficie %i \n",field->geom->type);
 		ft_print_vec3("El punto de la superficie es ", field->geom->vp.pt);
 		ft_print_vec3("El vector de la superficie es ", field->geom->vp.v);
 		ft_print_vec3("El punto vpint es ", vp.pt.pt);
 		ft_print_vec3("El punto luz es es ", v_luz_pt.pt);
-	}
-	else
-	{
-		fact[0] = field->ambient.ratio;
-		fact[1] = field->light->ratio * get_difuse(vp.pt, v_luz_pt);
-		fact[2] = field->light->ratio * get_specular(vp.pt, v_luz_pt, pixl);
-	}
-	if (vp.pt.c.l > fact[0] + fact[1])
-		vp.pt.c.l = fact[0] + fact[1];
-	vp.pt.c.l += fact[2];
-	if (field->light->ratio < field->ambient.ratio)
-		vp.pt.c.l = field->ambient.ratio;
-	else if (vp.pt.c.l > field->light->ratio)
-		vp.pt.c.l = field->light->ratio;
-	hsl_to_rgb(&vp.pt.c);
-	return (vp.pt.c);
-}
-
+*/
 void	print_color_values(char *s, t_color c)
 {
 	printf("%s", s);
