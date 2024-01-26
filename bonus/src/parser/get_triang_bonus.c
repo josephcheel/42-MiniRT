@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/26 18:18:53 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:07:11 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static void	create_axis(t_geom *tri)
 {
-	t_vec3	pt;
-
 	tri->axis.pos.x = (tri->vp.pt.x + tri->vp.pt.x + tri->vp.pt.x) / 3;
 	tri->axis.pos.y = (tri->vp.pt.y + tri->vp.pt.y + tri->vp.pt.y) / 3;
 	tri->axis.pos.z = (tri->vp.pt.z + tri->vp.pt.z + tri->vp.pt.z) / 3;
