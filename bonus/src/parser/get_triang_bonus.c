@@ -31,7 +31,7 @@ t_geom	*get_triang(char *line, t_field *field)
 	triang->sense = 1;
 	triang->next = NULL;
 	triang->bumpmap.is_bumpmap = false;
-	if (ft_array_size(content) == 5)
+	if (ft_array_size(content) == 6)
 		triang->bumpmap = get_bumpmap(content[5], field);
 	ft_array_free(content, ft_array_size(content));
 	return (triang);

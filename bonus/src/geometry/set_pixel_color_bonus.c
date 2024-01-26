@@ -94,13 +94,18 @@ static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
 t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 {
 	t_vec_pos	v_luz_pt;
-	t_color		out[4];
+	t_color		out[5];
 	double		aux;
 	t_light		*lght;
 
+	out[3].r = 0;
+	out[3].g = 0;
+	out[3].b = 0;
+	out[3].a = 0;
+	rgb_to_hsl(&out[3]);
 	if (vp.pt.pt.x == LONG_MAX && vp.pt.pt.z == LONG_MAX \
 		&& vp.pt.pt.z == LONG_MAX)
-		out[3] = field->ambient.color;
+		out[4] = field->ambient.color;
 	else
 	{
 		lght = field->light;
@@ -111,7 +116,7 @@ t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 			v_luz_pt.c = lght->color;
 			if (is_behind_srf(vp, v_luz_pt, field->geom))
 			{
-				out[2] = mult_color(v_luz_pt.c, field->ambient.ratio);
+				out[3] = mult_color(v_luz_pt.c, field->ambient.ratio);
 			}
 			else
 			{
@@ -122,12 +127,13 @@ t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 				aux = get_specular(vp.pt, v_luz_pt, pixl);
 				out[1] = mult_color(v_luz_pt.c, aux);
 				out[2] = mix_color(out[1], out [2]);
+				out[3] = mix_color(out[3], out[2]);
 			}
 			lght = lght->next;
 		}
-		out[3] = prod_color(out[2], vp.pt.c);
-		out[3] = limit_color(out[3]);
+		out[4] = prod_color(out[3], vp.pt.c);
+		out[4] = limit_color(out[4]);
 		hsl_to_rgb(&out[3]);
 	}
-	return (out[3]);
+	return (out[4]);
 }

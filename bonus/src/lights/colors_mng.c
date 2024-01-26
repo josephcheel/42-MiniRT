@@ -15,7 +15,6 @@
 t_color	mix_color(t_color a, t_color b)
 {
 	t_color	c;
-	int		i;
 
 	c.a = (a.a + b.a);
 	c.r = (a.r + b.r);

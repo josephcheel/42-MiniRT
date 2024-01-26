@@ -192,12 +192,17 @@ static double get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl, double
 t_color set_pixel_color_print(t_int_pts vp, t_field *field, t_vec_pos pixl)
 {
 	t_vec_pos v_luz_pt;
-	t_color out[4];
+	t_color out[5];
 	double aux;
 	t_light *lght;
 
+	out[3].r = 0;
+	out[3].g = 0;
+	out[3].b = 0;
+	out[3].a = 0;
+	rgb_to_hsl(&out[3]);
 	if (vp.pt.pt.x == LONG_MAX && vp.pt.pt.z == LONG_MAX && vp.pt.pt.z == LONG_MAX)
-		out[3] = field->ambient.color;
+		out[4] = field->ambient.color;
 	else
 	{
 		lght = field->light;
@@ -232,16 +237,17 @@ t_color set_pixel_color_print(t_int_pts vp, t_field *field, t_vec_pos pixl)
 				out[1] = mult_color(v_luz_pt.c, aux);
 				print_color_values("Color especular ", out[1]);
 				out[2] = mix_color(out[1], out[2]);
-				print_color_values("Color total ", out[2]);
-				out[3] = prod_color(out[2], vp.pt.c);
-				hsl_to_rgb(&out[3]);
+				out[3] = mix_color(out[3], out[2]);
+				print_color_values("Color total ", out[3]);
 			}
-			print_color_values("Color out ", out[3]);
-			printf("*********************\n");
 			lght = lght->next;
 		}
+		out[4] = prod_color(out[3], vp.pt.c);
+		hsl_to_rgb(&out[4]);
+		print_color_values("Color out ", out[4]);
+		printf("*********************\n");
 	}
-	return (out[3]);
+	return (out[4]);
 }
 /*		printf("Está detras de una superficie %i \n",field->geom->type);
 		ft_print_vec3("El punto de la superficie es ", field->geom->vp.pt);

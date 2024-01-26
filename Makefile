@@ -106,7 +106,7 @@ else
 endif
 
 #Flags to compile in MAC
-all: 		CFLAGS		=	-Wall -Werror -Wextra -D KEY_MAC_H -O3 #-fsanitize=address
+all: 		CFLAGS		=	-Wall -Werror -Wextra KEY_MAC_H -O3 #-fsanitize=address -D 
 all: 		MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 all: 		mlx_link libft_link $(NAME)
 
