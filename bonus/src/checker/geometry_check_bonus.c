@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:37:41 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/21 13:00:09 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:32:14 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ bool	plane_data_check(char **content)
 		return (false);
 	if (!ft_is_rgb(content[3]) || !ft_check_rgb_ratio(content[3]))
 		return (false);
-	if (size == 5 && !bumpmap_data_check(content[4]))
+	if (size == 5 && (!bumpmap_data_check(content[4]) && \
+		ft_strcmp(content[4], "NO_CHECKBOARD") != 0))
+		return (false);
+	if (size == 6 && (!bumpmap_data_check(content[5]) && \
+		ft_strcmp(content[5], "NO_CHECKBOARD") != 0))
 		return (false);
 	return (true);
 }
@@ -35,7 +39,7 @@ bool	sphere_data_check(char **content)
 	int	size;
 
 	size = ft_array_size(content);
-	if (size != 4 && size != 5)
+	if (size != 4 && size != 5 && size != 6)
 		return (false);
 	if (!ft_is_vec3(content[1]))
 		return (false);
@@ -43,7 +47,11 @@ bool	sphere_data_check(char **content)
 		return (false);
 	if (!ft_is_rgb(content[3]) || !ft_check_rgb_ratio(content[3]))
 		return (false);
-	if (size == 5 && !bumpmap_data_check(content[4]))
+	if (size == 5 && (!bumpmap_data_check(content[4]) && \
+		ft_strcmp(content[4], "NO_CHECKBOARD") != 0))
+		return (false);
+	if (size == 6 && (!bumpmap_data_check(content[5]) && \
+		ft_strcmp(content[5], "NO_CHECKBOARD") != 0))
 		return (false);
 	return (true);
 }
@@ -53,7 +61,7 @@ bool	cylinder_data_check(char **content)
 	int	size;
 
 	size = ft_array_size(content);
-	if (size != 6 && size != 7)
+	if (size != 6 && size != 7 && size != 8)
 		return (false);
 	if (!ft_is_vec3(content[1]))
 		return (false);
@@ -65,7 +73,11 @@ bool	cylinder_data_check(char **content)
 		return (false);
 	if (!ft_is_rgb(content[5]) || !ft_check_rgb_ratio(content[5]))
 		return (false);
-	if (size == 7 && !bumpmap_data_check(content[6]))
+	if (size == 7 && (!bumpmap_data_check(content[6]) && \
+		ft_strcmp(content[6], "NO_CHECKBOARD") != 0))
+		return (false);
+	if (size == 8 && (!bumpmap_data_check(content[7]) && \
+		ft_strcmp(content[7], "NO_CHECKBOARD") != 0))
 		return (false);
 	return (true);
 }
@@ -75,7 +87,7 @@ bool	triangle_data_check(char **content)
 	int	size;
 
 	size = ft_array_size(content);
-	if (size != 5 && size != 6)
+	if (size != 5 && size != 6 && size != 7)
 		return (false);
 	if (!ft_is_vec3(content[1]))
 		return (false);
@@ -85,7 +97,11 @@ bool	triangle_data_check(char **content)
 		return (false);
 	if (!ft_is_rgb(content[4]) || !ft_check_rgb_ratio(content[4]))
 		return (false);
-	if (size == 6 && !bumpmap_data_check(content[5]))
+	if (size == 6 && (!bumpmap_data_check(content[5]) && \
+		ft_strcmp(content[5], "NO_CHECKBOARD") != 0))
+		return (false);
+	if (size == 7 && (!bumpmap_data_check(content[6]) && \
+		ft_strcmp(content[6], "NO_CHECKBOARD") != 0))
 		return (false);
 	return (true);
 }

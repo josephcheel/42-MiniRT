@@ -61,6 +61,7 @@ static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt, double amb_rate)
 {
 	double	aux;
 
+	(void)amb_rate;
 	aux = prod_escalar(vp.v, vl_pt.v);
 	if (aux < 0)
 		aux = 0;

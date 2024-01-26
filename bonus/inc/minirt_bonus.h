@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/26 16:49:58 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:39:37 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ typedef struct s_geom
 	t_vec_pos		vp2;
 	t_color			color;
 	t_bumpmap		bumpmap;
+	bool			is_chckbd;
 	t_axis			axis;
 	double			r;
 	double			height;
