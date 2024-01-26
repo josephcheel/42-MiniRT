@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/21 14:26:02 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:50:33 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	ft_free_geometry(t_geom **head)
 	temp = *head;
 	while (temp)
 	{
-		// if (temp->bumpmap.is_bumpmap)
-		// 	mlx_destroy_image(temp->bumpmap.mlx.mlx, temp->bumpmap.mlx.img);
 		temp = temp->next;
 		free(*head);
 		*head = temp;

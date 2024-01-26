@@ -6,12 +6,13 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/21 14:25:14 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:18:53 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt_bonus.h"
 
+<<<<<<< HEAD
 static void	create_axis(t_geom *tri)
 {
 	t_vec3	pt;
@@ -23,6 +24,24 @@ static void	create_axis(t_geom *tri)
 	tri->axis.vy = conv_v_unit(prod_vectorial(create_vect(0, 0, 1), \
 			tri->axis.vx));
 	tri->axis.vz = conv_v_unit(prod_vectorial(tri->axis.vx, tri->axis.vy));
+}
+
+static void	get_optional_values(t_field *field, t_geom *triang, char **content)
+{
+	if (ft_array_size(content) == 6)
+	{
+		if (ft_strcmp(content[5], "NO_CHECKBOARD") == 0)
+			triang->is_chckbd = false;
+		else
+			triang->bumpmap = get_bumpmap(content[5], field);
+	}
+	if (ft_array_size(content) == 7)
+	{
+		if (ft_strcmp(content[6], "NO_CHECKBOARD") == 0)
+			triang->is_chckbd = false;
+		else
+			triang->bumpmap = get_bumpmap(content[6], field);
+	}
 }
 
 t_geom	*get_triang(char *line, t_field *field)
@@ -45,8 +64,8 @@ t_geom	*get_triang(char *line, t_field *field)
 	triang->next = NULL;
 	triang->bumpmap.is_bumpmap = false;
 	create_axis(triang);
-	if (ft_array_size(content) == 6)
-		triang->bumpmap = get_bumpmap(content[5], field);
+	triang->is_chckbd = true;
+	get_optional_values(field, triang, content);
 	ft_array_free(content, ft_array_size(content));
 	return (triang);
 }

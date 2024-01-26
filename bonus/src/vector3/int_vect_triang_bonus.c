@@ -30,7 +30,6 @@ bool	is_out_triang(t_vec_pos *vp, t_geom *tr)
 
 t_vec_pos	*int_vect_triang(t_vec_pos pi, t_geom *tr)
 {
-	double		lambda;
 	t_vec_pos	*out;
 
 	out = int_vect_plano(pi, tr->vp);
