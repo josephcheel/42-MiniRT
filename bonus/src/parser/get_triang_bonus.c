@@ -12,7 +12,6 @@
 
 #include "../../inc/minirt_bonus.h"
 
-<<<<<<< HEAD
 static void	create_axis(t_geom *tri)
 {
 	t_vec3	pt;
