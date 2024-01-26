@@ -7,7 +7,7 @@ CHECKBOARD BLUE BLACK 75 1
 pl 0,0,-100       0,0,1         255,0,0
 pl 0,-100,0       0,1,0         0,225,0
 pl 500,0,0        -1,0,0         255,255,0 NO_CHECKBOARD
-sp 90,0,0        70               0,0,255     NO_CHECKBOARD NO_CHECKBOARD
-sp 90,40,40        70               0,0,255     NO_CHECKBOARD
+sp 90,0,0        70               255,0,255     NO_CHECKBOARD NO_CHECKBOARD
+sp 90,40,40        70               100,100,255     NO_CHECKBOARD
 cy 90.0,0.0,0   0,1,1.0          50 210         0,0,255 NO_CHECKBOARD
 cn 90.0,0.0,0   0,-1,-1.0          50 210      0,255,255 NO_CHECKBOARD
