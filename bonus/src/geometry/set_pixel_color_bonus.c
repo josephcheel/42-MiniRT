@@ -114,10 +114,9 @@ t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 			v_luz_pt.pt = lght->pos;
 			v_luz_pt.v = conv_v_unit(resta_vector(v_luz_pt.pt, vp.pt.pt));
 			v_luz_pt.c = lght->color;
+			out[0] = mult_color(v_luz_pt.c, field->ambient.ratio);
 			if (is_behind_srf(vp, v_luz_pt, field->geom))
-			{
-				out[3] = mult_color(v_luz_pt.c, field->ambient.ratio);
-			}
+				out[3] = mix_color(out[3], out[0]);
 			else
 			{
 				out[0] = mult_color(v_luz_pt.c, field->ambient.ratio);
