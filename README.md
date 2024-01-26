@@ -15,11 +15,11 @@
 <img align="center"  width="800" src="https://github.com/josephcheel/42-MiniRT/blob/main/Resources/Img/img4.png">
 </div>
 
+> [!CAUTION]
+> **If you need more technical info, go check our [Github-Wiki](https://github.com/josephcheel/42-MiniRT/wiki)**
+
 ### What is the project about
 MiniRT is a project that introduces the basics of Ray tracing, focusing on 3D computer-generated images from a configuration file. It includes ambient light, lights, camera, and three geometrical figures (Plane, Sphere, Cylinder). The bonus part introduces multiple lights, cones as a geometrical figure, and additional elements.
-
-> [!TIP]
-> If you need more technical info, go check our [Github-Wiki](https://github.com/josephcheel/42-MiniRT/wiki) 
 
 ## General Instrucctions
 * Makefile will compile your source files. It must include 'all' and 'bonus' rules for the Mandatory and Bonus parts, respectively. It should not relink.
