@@ -62,8 +62,8 @@ void	ft_free_geometry(t_geom **head)
 	temp = *head;
 	while (temp)
 	{
-		if (temp->bumpmap.is_bumpmap)
-			mlx_destroy_image(temp->bumpmap.mlx.mlx, temp->bumpmap.mlx.img);
+		// if (temp->bumpmap.is_bumpmap)
+		// 	mlx_destroy_image(temp->bumpmap.mlx.mlx, temp->bumpmap.mlx.img);
 		temp = temp->next;
 		free(*head);
 		*head = temp;

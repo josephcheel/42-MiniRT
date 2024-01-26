@@ -2,7 +2,7 @@ A 0.2            255,255,255
 C 0,0,0       1,0,0 90
 L 00,0,45      0.7              255,255,255 
 
-CHECKBOARD MAGENTA BLACK 75 1
+CHECKBOARD BLUE BLACK 75 1
 
 pl 0,0,-100       0,0,1         255,0,0
 pl 0,-100,0       0,1,0         0,225,0

@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/21 13:54:39 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/23 04:57:13 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ static t_int_pts	*get_colored_loop(t_vec_pos *vps, t_field *field,
 		if (ptr->type == PLANE)
 			i++;
 	}
+	if (vp_int->geom && vp_int->geom->bumpmap.is_bumpmap)
+		set_pixel_color_bumpmap(vp_int, field, vp_int->geom);
 	free(out);
 	return (vp_int);
 }
@@ -109,10 +111,12 @@ void	get_colored_int_pt(int pixel, t_field *field)
 		vp_int = get_colored_loop(vps, field, vp_int, ptr);
 		ptr = ptr->next;
 	}
+	// if (vp_int->geom && vp_int->geom->bumpmap.is_bumpmap)
+	// 	set_pixel_color_bumpmap(vp_int, field, vp_int->geom);
 	if (vp_int->geom && field->chckbd.is_chckbd)
 		vp_int->pt.c = set_pixel_color_chckdb(*vp_int, field);
-	else if (vp_int->geom && vp_int->bumpmap.is_bumpmap)
-		vp_int->pt.c = set_pixel_color_bumpmap(*vp_int, field, vp_int->geom);
+	// else if (vp_int->geom && vp_int->bumpmap.is_bumpmap)
+	// 	vp_int->pt.c = set_pixel_color_bumpmap(*vp_int, field, vp_int->geom);
 	if (field->chckbd.is_light)
 		vp_int->pt.c = set_pixel_color(*vp_int, field, *vps);
 }
