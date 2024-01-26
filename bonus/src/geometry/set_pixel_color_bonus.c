@@ -119,7 +119,7 @@ t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 				aux = get_difuse(vp.pt, v_luz_pt, field->ambient.ratio);
 				out[1] = mult_color(v_luz_pt.c, aux);
 				out[2] = mix_color(out[0], out[1]);
-				aux = get_specular(vp.pt, v_luz_pt, pixl, lght->ratio);
+				aux = get_specular(vp.pt, v_luz_pt, pixl);
 				out[1] = mult_color(v_luz_pt.c, aux);
 				out[2] = mix_color(out[1], out [2]);
 			}
