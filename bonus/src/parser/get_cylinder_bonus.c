@@ -33,22 +33,27 @@ static void	get_optional_values(t_field *field, t_geom *cylinder, \
 
 t_geom	*get_cylinder(char *line, t_field *field)
 {
-	t_geom	*cylinder;
+	t_geom	*cyl;
 	char	**content;
 
 	content = ft_split(line, ' ');
-	cylinder = malloc(sizeof(t_geom));
-	cylinder->type = CYLINDER;
-	cylinder->vp.pt = add_vec3(content[1]);
-	cylinder->vp.v = conv_v_unit(add_vec3(content[2]));
-	cylinder->r = ft_atof(content[3]) / 2;
-	cylinder->height = ft_atof(content[4]);
-	cylinder->color = add_color(content[5]);
-	cylinder->sense = 1;
-	cylinder->next = NULL;
-	cylinder->bumpmap.is_bumpmap = false;
-	cylinder->is_chckbd = true;
-	get_optional_values(field, cylinder, content);
+	cyl = malloc(sizeof(t_geom));
+	cyl->type = CYLINDER;
+	cyl->vp.pt = add_vec3(content[1]);
+	cyl->vp.v = conv_v_unit(add_vec3(content[2]));
+	cyl->r = ft_atof(content[3]) / 2;
+	cyl->height = ft_atof(content[4]);
+	cyl->color = add_color(content[5]);
+	cyl->sense = 1;
+	cyl->next = NULL;
+	cyl->axis.pos = cyl->vp.pt;
+	cyl->axis.vx = cyl->vp.v;
+	cyl->axis.vy = conv_v_unit(prod_vectorial(create_vect(0, 0, 1),
+			cyl->axis.vx));
+	cyl->axis.vz = conv_v_unit(prod_vectorial(cyl->axis.vx, cyl->axis.vy));
+	cyl->bumpmap.is_bumpmap = false;
+	cyl->is_chckbd = true;
+	get_optional_values(field, cyl, content);
 	ft_array_free(content, ft_array_size(content));
-	return (cylinder);
+	return (cyl);
 }

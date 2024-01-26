@@ -45,6 +45,11 @@ t_geom	*get_conus(char *line, t_field *field)
 	cone->color = add_color(content[5]);
 	cone->sense = 1;
 	cone->next = NULL;
+	cone->axis.pos = cone->vp.pt;
+	cone->axis.vx = cone->vp.v;
+	cone->axis.vy = conv_v_unit(prod_vectorial(create_vect(0, 0, 1), \
+			cone->axis.vx));
+	cone->axis.vz = conv_v_unit(prod_vectorial(cone->axis.vx, cone->axis.vy));
 	cone->bumpmap.is_bumpmap = false;
 	cone->is_chckbd = true;
 	get_optional_values(field, cone, content);
