@@ -148,14 +148,14 @@ typedef struct s_normal_map {
 	t_vec3	pt;
 	t_vec3	v;
 	float	h;
-} t_normal_map;
+}	t_normal_map;
 
 typedef struct s_bumpmap
 {
 	bool		is_bumpmap;
 	char		*filename;
 	float		*h_map;
-	t_normal_map *normal_map;
+	t_normal_map	*normal_map;
 	int			width;
 	int			height;
 	t_color		min;

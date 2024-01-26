@@ -14,21 +14,25 @@
 
 t_geom	*get_sphere(char *line, t_field *field)
 {
-	t_geom	*sphere;
+	t_geom	*sph;
 	char	**content;
 
 	content = ft_split(line, ' ');
-	sphere = malloc(sizeof(t_geom));
-	sphere->type = SPHERE;
-	sphere->vp.pt = add_vec3(content[1]);
-	sphere->vp.v = create_vect(0, 0, 0);
-	sphere->r = ft_atof(content[2]) / 2;
-	sphere->color = add_color(content[3]);
-	sphere->sense = 1;
-	sphere->next = NULL;
-	sphere->bumpmap.is_bumpmap = false;
+	sph = malloc(sizeof(t_geom));
+	sph->type = SPHERE;
+	sph->vp.pt = add_vec3(content[1]);
+	sph->vp.v = create_vect(0, 0, 0);
+	sph->r = ft_atof(content[2]) / 2;
+	sph->color = add_color(content[3]);
+	sph->sense = 1;
+	sph->next = NULL;
+	sph->bumpmap.is_bumpmap = false;
+	sph->axis.pos = sph->vp.pt;
+	sph->axis.vx = create_vect(1, 0, 0);
+	sph->axis.vy = create_vect(0, 1, 0);
+	sph->axis.vz = create_vect(0, 0, 1);
 	if (ft_array_size(content) == 5)
-		sphere->bumpmap = get_bumpmap(content[4], field);
+		sph->bumpmap = get_bumpmap(content[4], field);
 	ft_array_free(content, ft_array_size(content));
-	return (sphere);
+	return (sph);
 }

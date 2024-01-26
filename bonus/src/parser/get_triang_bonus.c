@@ -12,6 +12,19 @@
 
 #include "../../inc/minirt_bonus.h"
 
+static void	create_axis(t_geom *tri)
+{
+	t_vec3	pt;
+
+	tri->axis.pos.x = (tri->vp.pt.x + tri->vp.pt.x + tri->vp.pt.x) / 3;
+	tri->axis.pos.y = (tri->vp.pt.y + tri->vp.pt.y + tri->vp.pt.y) / 3;
+	tri->axis.pos.z = (tri->vp.pt.z + tri->vp.pt.z + tri->vp.pt.z) / 3;
+	tri->axis.vx = tri->vp.v;
+	tri->axis.vy = conv_v_unit(prod_vectorial(create_vect(0, 0, 1), \
+			tri->axis.vx));
+	tri->axis.vz = conv_v_unit(prod_vectorial(tri->axis.vx, tri->axis.vy));
+}
+
 t_geom	*get_triang(char *line, t_field *field)
 {
 	t_geom	*triang;
@@ -31,6 +44,7 @@ t_geom	*get_triang(char *line, t_field *field)
 	triang->sense = 1;
 	triang->next = NULL;
 	triang->bumpmap.is_bumpmap = false;
+	create_axis(triang);
 	if (ft_array_size(content) == 6)
 		triang->bumpmap = get_bumpmap(content[5], field);
 	ft_array_free(content, ft_array_size(content));

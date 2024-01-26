@@ -14,20 +14,25 @@
 
 t_geom	*get_plane(char *line, t_field *field)
 {
-	t_geom	*plane;
+	t_geom	*pln;
 	char	**content;
 
 	content = ft_split(line, ' ');
-	plane = malloc(sizeof(t_geom));
-	plane->type = PLANE;
-	plane->vp.pt = add_vec3(content[1]);
-	plane->vp.v = conv_v_unit(add_vec3(content[2]));
-	plane->color = add_color(content[3]);
-	plane->sense = 1;
-	plane->next = NULL;
-	plane->bumpmap.is_bumpmap = false;
+	pln = malloc(sizeof(t_geom));
+	pln->type = PLANE;
+	pln->vp.pt = add_vec3(content[1]);
+	pln->vp.v = conv_v_unit(add_vec3(content[2]));
+	pln->color = add_color(content[3]);
+	pln->sense = 1;
+	pln->next = NULL;
+	pln->axis.pos = pln->vp.pt;
+	pln->axis.vx = pln->vp.v;
+	pln->axis.vy = conv_v_unit(prod_vectorial(create_vect(0, 0, 1),
+			pln->axis.vx));
+	pln->axis.vz = conv_v_unit(prod_vectorial(pln->axis.vx, pln->axis.vy));
+	pln->bumpmap.is_bumpmap = false;
 	if (ft_array_size(content) == 5)
-		plane->bumpmap = get_bumpmap(content[4], field);
+		pln->bumpmap = get_bumpmap(content[4], field);
 	ft_array_free(content, ft_array_size(content));
-	return (plane);
+	return (pln);
 }
