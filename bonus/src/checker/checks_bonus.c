@@ -22,7 +22,7 @@ static int	element_error(t_vec3 elem)
 		write(2, "The file does not has All Mandatory Objects\n", 44);
 		return (write(2, "Ambient Light(A), Light(L) and Camera(C)\n", 42));
 	}
-	else if (elem.x > 1 || elem.y > 1 || elem.z > 1)
+	else if (elem.x > 1 || elem.z > 1)
 		return (write(2, "Error: Duplicated Object\n", 26));
 	return (0);
 }
@@ -106,6 +106,8 @@ bool	ft_check_line_data(char **content)
 		error = light_data_check(content);
 	else if (ft_strcmp(content[0], "pl") == 0)
 		error = plane_data_check(content);
+	else if (ft_strcmp(content[0], "tr") == 0)
+		error = triangle_data_check(content);
 	else if (ft_strcmp(content[0], "sp") == 0)
 		error = sphere_data_check(content);
 	else if (ft_strcmp(content[0], "cy") == 0 || \

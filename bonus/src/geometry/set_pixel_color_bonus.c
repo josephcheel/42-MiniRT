@@ -57,13 +57,13 @@ static bool	is_behind_srf(t_int_pts vp, t_vec_pos vl_pt, t_geom *geo)
 	return (false);
 }
 
-static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt)
+static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt, double amb_rate)
 {
 	double	aux;
 
 	aux = prod_escalar(vp.v, vl_pt.v);
 	if (aux < 0)
-		return (0);
+		aux = 0;
 	return (aux);
 }
 
@@ -77,7 +77,9 @@ static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
 		return (0);
 	out = resta_vector(prod_cte_vector(aux, vp.v), vl_pt.v);
 	aux = prod_escalar(out, pixl.v);
-	aux = pow(aux, 8);
+	if (aux > 0)
+		return (0);
+	aux = pow(aux, 32);
 	return (aux);
 }
 
@@ -92,28 +94,46 @@ static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
 t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 {
 	t_vec_pos	v_luz_pt;
-	double		fact[3];
+	t_color		out[5];
+	double		aux;
+	t_light		*lght;
 
-	v_luz_pt.pt = field->light->pos;
-	v_luz_pt.v = conv_v_unit(resta_vector(v_luz_pt.pt, vp.pt.pt));
-	v_luz_pt.c = field->light->color;
-	fact[1] = 0;
-	fact[2] = 0;
-	if (is_behind_srf(vp, v_luz_pt, field->geom))
-		fact[0] = field->ambient.ratio;
+	out[3].r = 0;
+	out[3].g = 0;
+	out[3].b = 0;
+	out[3].a = 0;
+	rgb_to_hsl(&out[3]);
+	if (vp.pt.pt.x == LONG_MAX && vp.pt.pt.z == LONG_MAX \
+		&& vp.pt.pt.z == LONG_MAX)
+		out[4] = field->ambient.color;
 	else
 	{
-		fact[0] = field->ambient.ratio;
-		fact[1] = field->light->ratio * get_difuse(vp.pt, v_luz_pt);
-		fact[2] = field->light->ratio * get_specular(vp.pt, v_luz_pt, pixl);
+		lght = field->light;
+		while (lght)
+		{
+			v_luz_pt.pt = lght->pos;
+			v_luz_pt.v = conv_v_unit(resta_vector(v_luz_pt.pt, vp.pt.pt));
+			v_luz_pt.c = lght->color;
+			if (is_behind_srf(vp, v_luz_pt, field->geom))
+			{
+				out[3] = mult_color(v_luz_pt.c, field->ambient.ratio);
+			}
+			else
+			{
+				out[0] = mult_color(v_luz_pt.c, field->ambient.ratio);
+				aux = get_difuse(vp.pt, v_luz_pt, field->ambient.ratio);
+				out[1] = mult_color(v_luz_pt.c, aux);
+				out[2] = mix_color(out[0], out[1]);
+				aux = get_specular(vp.pt, v_luz_pt, pixl);
+				out[1] = mult_color(v_luz_pt.c, aux);
+				out[2] = mix_color(out[1], out [2]);
+				out[3] = mix_color(out[3], out[2]);
+			}
+			lght = lght->next;
+		}
+		out[4] = prod_color(out[3], vp.pt.c);
+		out[4] = limit_color(out[4]);
+		hsl_to_rgb(&out[3]);
 	}
-	if (vp.pt.c.l > fact[0] + fact[1])
-		vp.pt.c.l = fact[0] + fact[1];
-	vp.pt.c.l += fact[2];
-	if (field->light->ratio < field->ambient.ratio)
-		vp.pt.c.l = field->ambient.ratio;
-	else if (vp.pt.c.l > field->light->ratio)
-		vp.pt.c.l = field->light->ratio;
-	hsl_to_rgb(&vp.pt.c);
-	return (vp.pt.c);
+	return (out[4]);
 }

@@ -81,7 +81,7 @@ void	def_vector_sense(t_field *field)
 	ptr = field->geom;
 	while (ptr)
 	{
-		if (ptr->type == PLANE)
+		if (ptr->type == PLANE || ptr->type == TRIANGLE)
 			ptr->sense = get_plane_sense(ptr, field->light);
 		else if (ptr->type == SPHERE)
 			ptr->sense = get_sphere_sense(ptr, field->light);

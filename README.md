@@ -110,8 +110,8 @@ Configuration file has three **mandatory** elements: **Camera**, **Light** and *
 * [**Phong Reflection Model**](https://en.wikipedia.org/wiki/Phong_reflection_model)
 * [**Modelo de Color HSV**](https://es.wikipedia.org/wiki/Modelo_de_color_HSV?useskin=vector)
 * [**HSL to RGB conversion**](https://www.programmingalgorithms.com/algorithm/hsl-to-rgb/c/)
-
-
+* [**Lighting with the Phong reflection model (Part1 of 2)**](https://www.youtube.com/watch?v=KdDdljGtfeg)
+* [**Lighting with the Phong reflection model (Part2 of 2)**](https://www.youtube.com/watch?v=lH61rdpJ5v8)
 <!--### Description of file arguments structure:
 # Ambient light
 A 0.2            255,255,255

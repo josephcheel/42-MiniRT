@@ -70,6 +70,26 @@ bool	cylinder_data_check(char **content)
 	return (true);
 }
 
+bool	triangle_data_check(char **content)
+{
+	int	size;
+
+	size = ft_array_size(content);
+	if (size != 5 && size != 6)
+		return (false);
+	if (!ft_is_vec3(content[1]))
+		return (false);
+	if (!ft_is_vec3(content[2]))
+		return (false);
+	if (!ft_is_vec3(content[3]))
+		return (false);
+	if (!ft_is_rgb(content[4]) || !ft_check_rgb_ratio(content[4]))
+		return (false);
+	if (size == 6 && !bumpmap_data_check(content[5]))
+		return (false);
+	return (true);
+}
+
 bool	bumpmap_data_check(char *content)
 {
 	if (!ft_check_extension(content, ".xpm"))

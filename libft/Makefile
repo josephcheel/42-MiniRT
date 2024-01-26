@@ -1,7 +1,7 @@
 NAME	=	libft.a
 
-CFLAGS =  -Wall -Wextra -Werror
-XFLAGS	= -fsanitize=address -g2
+CFLAGS =  -Wall -Wextra -Werror -g3
+XFLAGS	= #-fsanitize=address  -D
 
 AR		= ar -rcs
 RM		= rm -f

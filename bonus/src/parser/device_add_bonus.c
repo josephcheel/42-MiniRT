@@ -51,13 +51,17 @@ int	get_camera(t_field *field, char *line)
 int	get_light(t_field *field, char *line)
 {
 	char	**content;
+	t_light	*new_light;
 
 	content = ft_split(line, ' ');
-	field->light = malloc(sizeof(t_light));
-	field->light->pos = add_vec3(content[1]);
-	field->light->ratio = ft_atof(content[2]);
-	field->light->color = add_color(content[3]);
-	field->light->next = NULL;
+	new_light = malloc(sizeof(t_light));
+	if (!new_light)
+		return (1);
+	new_light->pos = add_vec3(content[1]);
+	new_light->ratio = ft_atof(content[2]);
+	new_light->color = add_color(content[3]);
+	new_light->next = NULL;
+	ft_lightadd_back(&field->light, new_light);
 	ft_array_free(content, ft_array_size(content));
 	return (0);
 }
@@ -88,7 +92,7 @@ int	get_devices(t_field *field, char *line)
 	else if (ft_strcmp(type[0], "L") == 0)
 	{
 		error = get_light(field, line);
-		field->orig_light = ft_clone_light(field->light);
+		field->orig_light = ft_clone_lightning(field->light);
 	}
 	else if (ft_strcmp(type[0], "A") == 0)
 		error = get_ambient_light(field, line);
