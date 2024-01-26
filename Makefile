@@ -162,7 +162,7 @@ bonus: 		MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 bonus: 		mlx_link libft_link $(NAME_BONUS)
 
 #Flags to compile in linux
-bonus_lnx:	CFLAGS		=	 -D KEY_LNX_H #-O3  -Wall -Werror -Wextra
+bonus_lnx:	CFLAGS		=	 -D KEY_LNX_H -O3  -Wall -Wextra # -Werror
 bonus_lnx:	MLXFLAGS 	= 	-L/usr/lib -Imlx -lXext -lX11 -L/usr/lib/X11 -lz 
 bonus_lnx:	mlx_lnx_link libft_link $(NAME_BONUS)
 
