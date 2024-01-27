@@ -6,7 +6,7 @@
 /*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/27 12:53:37 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:15:05 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,9 +197,10 @@ typedef struct s_geom
 }	t_geom;
 typedef struct s_int_pts
 {
-	t_vec_pos	pt;
-	t_geom		*geom;
-//	t_bumpmap	bumpmap;
+	t_vec_pos		pt;
+	t_geom			*geom;
+	t_normal_map	ref;
+	//	t_bumpmap	bumpmap;
 }	t_int_pts;
 
 typedef struct s_camera
@@ -357,8 +358,7 @@ void		set_point_int(t_field *field);
 /* Color */
 t_color		set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl);
 t_color		set_pixel_color_chckdb(t_int_pts vp, t_field *field);
-void		set_pixel_color_bumpmap(t_int_pts *vp, \
-		t_field *field, t_geom *geom);
+void		set_pixel_color_bumpmap(t_int_pts *vp, t_field *field);
 void		rgb_to_hsl(t_color *c);
 void		hsl_to_rgb(t_color *c);
 
@@ -374,8 +374,9 @@ t_color		mult_color(t_color a, double b);
 t_color		mix_color(t_color a, t_color b);
 t_color		prod_color(t_color a, t_color b);
 t_color		limit_color(t_color a);
+t_color		init_color(void);
 
-/* Debug */
+	/* Debug */
 void		ft_check_calculations(void);
 void		ft_print_vector(char *s, t_vec_pos v);
 void		print_pixel_values(int x, int y, t_field *field);
