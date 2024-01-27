@@ -6,7 +6,7 @@
 /*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 13:06:02 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/27 16:06:11 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:09:10 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	set_pixel_color_bumpmap(t_int_pts *vp_int, t_field *field)
 {
-	(void)vp;
+	(void)vp_int;
 	(void)field;
 	/*
 	if (vp->geom->type == PLANE)

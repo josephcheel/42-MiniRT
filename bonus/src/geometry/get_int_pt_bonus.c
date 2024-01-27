@@ -6,7 +6,7 @@
 /*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/27 15:23:58 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:08:55 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static t_int_pts	*get_colored_loop(t_vec_pos *vps, t_field *field,
 			vp_int->pt.v = prod_cte_vector(ptr->sense, vp_int->pt.v);
 			vp_int->ref.vz = vp_int->pt.v;
 			vp_int->ref.vx = conv_v_unit(prod_vectorial(vp_int->ref.vz, \
-						crea_vector(0, 0, 1)));
+						create_vect(0, 0, 1)));
 			vp_int->ref.vy = conv_v_unit(prod_vectorial(vp_int->ref.vz, \
 						vp_int->ref.vx));
 		}
