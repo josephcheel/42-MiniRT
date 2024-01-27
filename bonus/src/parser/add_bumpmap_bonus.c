@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_bumpmap_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:28:27 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/27 13:00:06 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:17:17 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ static t_vec3	get_slope(int pos, t_bumpmap *bump)
 	int		k[3];
 
 	ang.x = 0;
-	k[3] = bump->width * bump->height;
-	k[0] = (pos - 1 + k[3]) % k[3];
-	k[1] = (pos + 1 + k[3]) % k[3];
+	k[2] = bump->width * bump->height;
+	k[0] = (pos - 1 + k[2]) % k[2];
+	k[1] = (pos + 1 + k[2]) % k[2];
 	ang.y = acos((get_lum_map(&bump->buff.buffer[k[1]]) - \
 				get_lum_map(&bump->buff.buffer[k[0]])) / BM_PIXEL);
-	k[0] = (pos - bump->buff.line_bytes + k[3]) % k[3];
-	k[1] = (pos + bump->buff.line_bytes + k[3]) % k[3];
+	k[0] = (pos - bump->buff.line_bytes + k[2]) % k[2];
+	k[1] = (pos + bump->buff.line_bytes + k[2]) % k[2];
 	ang.z = acos(get_lum_map(&bump->buff.buffer[k[1]]) - \
 				get_lum_map(&bump->buff.buffer[k[0]]) / BM_PIXEL);
 	out = martix_rot(create_vect(0, 0, 1), ang);
