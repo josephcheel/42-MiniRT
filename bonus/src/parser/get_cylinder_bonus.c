@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/26 18:31:29 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/27 00:54:45 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_geom	*get_cylinder(char *line, t_field *field)
 	cyl->axis.pos = cyl->vp.pt;
 	cyl->axis.vx = cyl->vp.v;
 	cyl->axis.vy = conv_v_unit(prod_vectorial(create_vect(0, 0, 1),
-			cyl->axis.vx));
+				cyl->axis.vx));
 	cyl->axis.vz = conv_v_unit(prod_vectorial(cyl->axis.vx, cyl->axis.vy));
 	cyl->bumpmap.is_bumpmap = false;
 	cyl->is_chckbd = true;

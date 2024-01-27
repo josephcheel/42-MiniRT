@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/26 19:06:22 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/27 00:54:57 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_geom	*get_plane(char *line, t_field *field)
 	pln->axis.pos = pln->vp.pt;
 	pln->axis.vx = pln->vp.v;
 	pln->axis.vy = conv_v_unit(prod_vectorial(create_vect(0, 0, 1),
-			pln->axis.vx));
+				pln->axis.vx));
 	pln->axis.vz = conv_v_unit(prod_vectorial(pln->axis.vx, pln->axis.vy));
 	pln->bumpmap.is_bumpmap = false;
 	pln->is_chckbd = true;

@@ -6,17 +6,17 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 11:12:54 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/27 00:59:08 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt_bonus.h"
 
-static double calculate_behind_pts(t_int_pts vp, t_vec_pos vl_pt, t_geom *ptr)
+static double	calculate_behind_pts(t_int_pts vp, t_vec_pos vl_pt, t_geom *ptr)
 {
-	t_vec3 aux;
-	double dist[3];
-	t_vec_pos *out;
+	t_vec3		aux;
+	double		dist[3];
+	t_vec_pos	*out;
 
 	aux = resta_vector(vl_pt.pt, vp.pt.pt);
 	dist[0] = modulo_vector(aux);
@@ -71,9 +71,10 @@ static double calculate_behind_pts(t_int_pts vp, t_vec_pos vl_pt, t_geom *ptr)
 	return (false);
 }
 */
-static bool is_behind_srf(t_int_pts vp, t_vec_pos vl_pt, t_geom *geo)
+
+static bool	is_behind_srf(t_int_pts vp, t_vec_pos vl_pt, t_geom *geo)
 {
-	t_geom *ptr;
+	t_geom	*ptr;
 
 	ptr = geo;
 	while (ptr)
@@ -87,6 +88,7 @@ static bool is_behind_srf(t_int_pts vp, t_vec_pos vl_pt, t_geom *geo)
 	}
 	return (false);
 }
+
 /*
 static t_color get_difuse(t_vec_pos vp, t_vec_pos vl_pt, double amb_rate)
 {
@@ -155,19 +157,22 @@ static t_color get_difuse(t_vec_pos vp, t_vec_pos vl_pt, double amb_rate)
 	return (col);
 }
 */
-static double get_difuse(t_vec_pos vp, t_vec_pos vl_pt, double amb_rate)
+
+static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt, double amb_rate)
 {
-	double aux;
+	double	aux;
+
 	aux = prod_escalar(vp.v, vl_pt.v);
 	//	aux = pow(aux, 4);
 	if (aux < amb_rate)
 		aux = amb_rate;
 	return (aux);
 }
-static double get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl, double light_ratio)
+
+static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl, double light_ratio)
 {
-	double aux;
-	t_vec3 out;
+	double	aux;
+	t_vec3	out;
 
 	aux = 2 * prod_escalar(vp.v, vl_pt.v);
 	if (aux < 0)
@@ -189,12 +194,12 @@ static double get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl, double
 @param field
 @return Returns the color of the pixel.
 */
-t_color set_pixel_color_print(t_int_pts vp, t_field *field, t_vec_pos pixl)
+t_color	set_pixel_color_print(t_int_pts vp, t_field *field, t_vec_pos pixl)
 {
-	t_vec_pos v_luz_pt;
-	t_color out[5];
-	double aux;
-	t_light *lght;
+	t_vec_pos	v_luz_pt;
+	t_color		out[5];
+	double		aux;
+	t_light		*lght;
 
 	out[3].r = 0;
 	out[3].g = 0;
@@ -208,7 +213,6 @@ t_color set_pixel_color_print(t_int_pts vp, t_field *field, t_vec_pos pixl)
 		lght = field->light;
 		while (lght)
 		{
-
 			printf("*********************\n");
 			print_color_values("Color in ", vp.pt.c);
 			print_color_values("Color in luz ", lght->color);
@@ -255,6 +259,7 @@ t_color set_pixel_color_print(t_int_pts vp, t_field *field, t_vec_pos pixl)
 		ft_print_vec3("El punto vpint es ", vp.pt.pt);
 		ft_print_vec3("El punto luz es es ", v_luz_pt.pt);
 */
+
 void	print_color_values(char *s, t_color c)
 {
 	printf("%s", s);
