@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:28:27 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/27 16:17:17 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:10:05 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static double	get_lum_map(char *buff)
 	c.r = buff[2];
 	c.a = buff[3];
 	rgb_to_hsl(&c);
+	c.l = (c.l + 1) * 0.5;
 	return (c.l);
 }
 
