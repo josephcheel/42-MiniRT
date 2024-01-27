@@ -6,88 +6,47 @@
 /*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 13:06:02 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/27 16:09:10 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:52:50 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt_bonus.h"
 
-
-
-void	set_pixel_color_bumpmap(t_int_pts *vp_int, t_field *field)
+t_vec3 get_distance(t_int_pts *vp_int)
 {
-	(void)vp_int;
-	(void)field;
-	/*
-	if (vp->geom->type == PLANE)
-		{
+	t_vec3	out;
 
-		}
-		i_indexes p;
+	out = vp_int->pt.pt;
+	if (vp_int->geom->type == PLANE || vp_int->geom->type == TRIANGLE)
+	{
+		out = resta_vector(vp_int->pt.pt, vp_int->geom->vp.pt);
+		out = cambio_coord_vect(out, vp_int->ref);
+	}
+	return out;
+}
 
-		// x = 0;
-		// y = 0;
+t_indexes	get_indexes(t_vec3 pos, t_geom *geom)
+{
+	t_indexes	out;
 
-		if (vp->geom->type == PLANE)
-		{
-			if (vp->pt.pt.x  > geom->bumpmap.width - 1)
-				tmpx = (int)vp->pt.pt.x %  geom->bumpmap.width;
-			else
-				tmpx = (vp->pt.pt.x);
+	out.i = (int)(pos.x / BM_PIXEL) % geom->bumpmap.width;
+	out.j = -(int)(pos.y / BM_PIXEL) % geom->bumpmap.height;
+	if (out.i < 0)
+		out.i += geom->bumpmap.width;
+	if (out.j < 0)
+		out.j += geom->bumpmap.height;
+	return (out);
+}
 
-			if (vp->pt.pt.x  < 0)
-				tmpx = geom->bumpmap.width - 1- vp->pt.pt.x;
-			else
-				tmpx = (vp->pt.pt.x);
+void set_pixel_color_bumpmap(t_int_pts *vp_int, t_field *field)
+{
+	t_vec3		out;
+	t_indexes	ind;
 
-			if (vp->pt.pt.y > geom->bumpmap.height - 1)
-				tmpy = (int)vp->pt.pt.y % geom->bumpmap.height;
-			else
-				tmpy = (vp->pt.pt.y);
-
-			if (vp->pt.pt.y  < 0 )
-				tmpy = (geom->bumpmap.height -1 - vp->pt.pt.y);
-			else
-				tmpy = (vp->pt.pt.y);
-			// if (fabs(vp->pt.pt.x) > geom->bumpmap.width - 1)
-			// 	y = (int)vp->pt.pt.x % geom->bumpmap.width;
-			// if (fabs(vp->pt.pt.y) > geom->bumpmap.height - 1)
-			// 	x = abs((int)vp->pt.pt.y % geom->bumpmap.height);
-			// printf("IMAGE WIDTH : %d HEAIGHT %d\n", geom->bumpmap.width, geom->bumpmap.height);
-			// printf("AFT X %d Y %d\n", x, y);
-			// printf("LIGHT ADJUSTMENT %f\n", geom->bumpmap.h_map[x + y * (geom->bumpmap.width)]);
-			//printf("%d\n", x + (y * geom->bumpmap.width));
-			x = tmpx;
-			y = tmpy;
-			if (x + (y * geom->bumpmap.width ) >= 0 && x + (y * geom->bumpmap.width ) < (geom->bumpmap.height * geom->bumpmap.width))
-			{
-				vp->pt.v = geom->bumpmap.normal_map[x + (y * geom->bumpmap.width )].v;
-				// vp->pt.pt.z += (geom->bumpmap.normal_map[x + (y * geom->bumpmap.width )].h);
-				vp->pt.c = add_color("0,0,255");
-			}
-		}
-		// y++;
-		// x++;
-		// if (y > geom->bumpmap.height)
-		// 	y = 0;
-		// if (x > geom->bumpmap.width)
-		// 	x = 0;
-		// out.r = get_r(color[2]);
-		// out.g = get_g(color[1]);
-		// out.b = get_b(color[0]);
-		// // 	pixel[0] = color.b;
-		// // pixel[1] = color.g;
-		// // pixel[2] = color.r;
-		// // pixel[3] = color.a;
-		// print_color_values("COLOR", out);
-		// // mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-		// // a = ceil(round(vp.pt.pt.x) / round(geom->bumpmap.width * geom->bumpmap.height));
-		// // b = ceil(round(vp.pt.pt.y) / round(geom->bumpmap.width * geom->bumpmap.height));
-		// // c = ceil(round(vp.pt.pt.z) / round(geom->bumpmap.width * geom->bumpmap.height));
-		// // if (((int)a + (int)b + (int)c) % 2 == 0)
-		// // 	return (field->chckbd.c1);
-		// // else
-		// // 	return (field->chckbd.c2);
-		// return (vp.geom->color);
-	*/
+	out = get_distance(vp_int);
+	ind = get_indexes(out, vp_int->geom);
+	out = vp_int->geom->bumpmap.normal_map[ind.i + ind.j * \
+										vp_int->geom->bumpmap.width];
+	vp_int->pt.v = cambio_coord_vect(out, mat_inversa(vp_int->ref));
+	return ;
 }

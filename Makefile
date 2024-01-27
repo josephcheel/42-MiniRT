@@ -137,7 +137,9 @@ VECTOR3_BN			=	conv_v_unit_bonus.c div_cte_vector_bonus.c int_vect_esfera_bonus.
 				dist_pto_vector_bonus.c int_vect_plano_bonus.c prod_cte_vector_bonus.c \
 				prod_vectorial_bonus.c suma_vector_bonus.c print_vector_bonus.c \
 				create_vector_bonus.c int_vect_cilind_bonus.c solv_eq_ord_2_bonus.c is_zero_vect_bonus.c \
-				init_vp_bonus.c int_vect_cono_bonus.c rotate_vector_bonus.c int_vect_triang_bonus.c matrix_rot_bonus.c vect_dot_matrix.c
+				init_vp_bonus.c int_vect_cono_bonus.c rotate_vector_bonus.c int_vect_triang_bonus.c \
+				matrix_rot_bonus.c vect_dot_matrix.c cambio_coord_vect_bonus.c vect_unitarios_bonus.c \
+				mat_inversa.c
 EVENTS_MAC_BN		= key_events_mac_bonus.c mouse_events_bonus.c close_bonus.c disp_rot_zoom_bonus.c
 EVENTS_LNX_BN		= key_events_lnx_bonus.c mouse_events_bonus.c close_bonus.c disp_rot_zoom_bonus.c
 TEST_BN 			= print_pixel_values_bonus.c
