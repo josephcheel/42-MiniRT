@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_pixel_color_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/18 18:32:25 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:53:23 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,56 +84,60 @@ static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
 	return (aux);
 }
 
-/*
-@brief Calculates the color of the pixel depending of the light position
-@brief The function also takes into account if there is any surface that
-@brief is in between the point and the light (Shadow from other element)
-@param vp
-@param field
-@return Returns the color of the pixel.
-*/
-t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
+t_color	sum_lights(t_int_pts vp, t_field *field, t_vec_pos pixl, t_light *lght)
 {
 	t_vec_pos	v_luz_pt;
-	t_color		out[5];
 	double		aux;
-	t_light		*lght;
+	t_color		out[4];
 
-	out[3].r = 0;
-	out[3].g = 0;
-	out[3].b = 0;
-	out[3].a = 0;
-	rgb_to_hsl(&out[3]);
-	if (vp.pt.pt.x == LONG_MAX && vp.pt.pt.z == LONG_MAX \
-		&& vp.pt.pt.z == LONG_MAX)
-		out[4] = field->ambient.color;
+	out[3] = init_color();
+	v_luz_pt.pt = lght->pos;
+	v_luz_pt.v = conv_v_unit(resta_vector(v_luz_pt.pt, vp.pt.pt));
+	v_luz_pt.c = lght->color;
+	out[0] = mult_color(v_luz_pt.c, field->ambient.ratio);
+	if (is_behind_srf(vp, v_luz_pt, field->geom))
+		out[3] = mix_color(out[3], out[0]);
 	else
 	{
+		aux = get_difuse(vp.pt, v_luz_pt, field->ambient.ratio);
+		out[1] = mult_color(v_luz_pt.c, aux);
+		out[2] = mix_color(out[0], out[1]);
+		aux = get_specular(vp.pt, v_luz_pt, pixl);
+		out[1] = mult_color(v_luz_pt.c, aux);
+		out[2] = mix_color(out[1], out[2]);
+		out[3] = mix_color(out[3], out[2]);
+	}
+	return (out[3]);
+}
+
+	/*
+	@brief Calculates the color of the pixel depending of the light position
+	@brief The function also takes into account if there is any surface that
+	@brief is in between the point and the light (Shadow from other element)
+	@param vp
+	@param field
+	@return Returns the color of the pixel.
+	*/
+	t_color set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
+{
+	t_color		out[2];
+	t_light		*lght;
+
+	if (vp.pt.pt.x == LONG_MAX && vp.pt.pt.z == LONG_MAX && \
+			vp.pt.pt.z == LONG_MAX)
+		out[0] = field->ambient.color;
+	else
+	{
+		out[0] = init_color();
 		lght = field->light;
 		while (lght)
 		{
-			v_luz_pt.pt = lght->pos;
-			v_luz_pt.v = conv_v_unit(resta_vector(v_luz_pt.pt, vp.pt.pt));
-			v_luz_pt.c = lght->color;
-			out[0] = mult_color(v_luz_pt.c, field->ambient.ratio);
-			if (is_behind_srf(vp, v_luz_pt, field->geom))
-				out[3] = mix_color(out[3], out[0]);
-			else
-			{
-				out[0] = mult_color(v_luz_pt.c, field->ambient.ratio);
-				aux = get_difuse(vp.pt, v_luz_pt, field->ambient.ratio);
-				out[1] = mult_color(v_luz_pt.c, aux);
-				out[2] = mix_color(out[0], out[1]);
-				aux = get_specular(vp.pt, v_luz_pt, pixl);
-				out[1] = mult_color(v_luz_pt.c, aux);
-				out[2] = mix_color(out[1], out [2]);
-				out[3] = mix_color(out[3], out[2]);
-			}
+			out[0] = mix_color(out[0], sum_lights(vp, field, pixl, lght));
 			lght = lght->next;
 		}
-		out[4] = prod_color(out[3], vp.pt.c);
-		out[4] = limit_color(out[4]);
-		hsl_to_rgb(&out[3]);
+		out[1] = prod_color(out[0], vp.pt.c);
+		out[1] = limit_color(out[1]);
+		rgb_to_hsl(&out[1]);
 	}
-	return (out[4]);
+	return (out[1]);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_int_pt_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/26 18:16:12 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:08:55 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_int_pts	*get_min_vect(t_int_pts *cur, t_vec_pos *new,
 			out->pt = new[i];
 			out->pt.c = geom->color;
 			out->geom = geom;
-			out->bumpmap = geom->bumpmap;
+			//out->bumpmap = geom->bumpmap; //no se necesita. está ya en la geometria
 		}
 	}
 	return (out);
@@ -82,12 +82,17 @@ static t_int_pts	*get_colored_loop(t_vec_pos *vps, t_field *field,
 		{
 			vp_int = get_min_vect(vp_int, out, ptr, vps);
 			vp_int->pt.v = prod_cte_vector(ptr->sense, vp_int->pt.v);
+			vp_int->ref.vz = vp_int->pt.v;
+			vp_int->ref.vx = conv_v_unit(prod_vectorial(vp_int->ref.vz, \
+						create_vect(0, 0, 1)));
+			vp_int->ref.vy = conv_v_unit(prod_vectorial(vp_int->ref.vz, \
+						vp_int->ref.vx));
 		}
 		if (ptr->type == PLANE)
 			i++;
 	}
 	if (vp_int->geom && vp_int->geom->bumpmap.is_bumpmap)
-		set_pixel_color_bumpmap(vp_int, field, vp_int->geom);
+		set_pixel_color_bumpmap(vp_int, field);
 	free(out);
 	return (vp_int);
 }
