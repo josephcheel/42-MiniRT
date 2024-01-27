@@ -112,6 +112,8 @@ Configuration file has three **mandatory** elements: **Camera**, **Light** and *
 * [**HSL to RGB conversion**](https://www.programmingalgorithms.com/algorithm/hsl-to-rgb/c/)
 * [**Lighting with the Phong reflection model (Part1 of 2)**](https://www.youtube.com/watch?v=KdDdljGtfeg)
 * [**Lighting with the Phong reflection model (Part2 of 2)**](https://www.youtube.com/watch?v=lH61rdpJ5v8)
+* [**A very good bump mapping explanation**](https://www.youtube.com/watch?v=cM7RjEtZGHw)
+
 <!--### Description of file arguments structure:
 # Ambient light
 A 0.2            255,255,255
