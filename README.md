@@ -1,4 +1,5 @@
 <!--HEADER-->
+<meta name="google-site-verification" content="xwKyivIzCEghH_Kkz_hvH6afLNd9ofRPss9yeHkGlig" />
 <h1 align="center"> MiniRT | 
   <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://cdn.simpleicons.org/42/white">
