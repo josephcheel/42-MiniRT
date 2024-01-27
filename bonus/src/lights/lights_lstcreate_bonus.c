@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/16 11:12:54 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:52:39 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,16 @@ int	ft_lightsize(t_light *lst)
 	t_light	*tmp;
 
 	i = 0;
+	if (!lst)
+		return (0);
+	i++;
 	tmp = lst;
 	while (tmp->next)
 	{
+		i++;
 		tmp = tmp->next;
 		if (tmp->next == NULL)
 			return (i);
-		i++;
 	}
 	return (i);
 }

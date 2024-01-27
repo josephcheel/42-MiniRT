@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:21:33 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/21 14:26:02 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:53:18 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	read_file(char *filename, t_field *field)
 		free (raw_line);
 		raw_line = get_next_line(fd);
 	}
+	field->orig_light = ft_clone_lightning(field->light);
 	free(raw_line);
 	return (0);
 }
