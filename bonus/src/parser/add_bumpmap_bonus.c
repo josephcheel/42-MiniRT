@@ -6,7 +6,7 @@
 /*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:28:27 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/27 13:00:06 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:46:16 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static bool	create_bump_matrix(t_bumpmap *bumpmap)
 
 	p.i = -1;
 	p.j = 0;
-	bumpmap->normal_map = malloc(sizeof(t_normal_map) * \
+	bumpmap->normal_map = malloc(sizeof(t_matrix) * \
 				(bumpmap->height * bumpmap->width));
 	if (!bumpmap->normal_map)
 		return (false);

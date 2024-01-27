@@ -6,7 +6,7 @@
 /*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/27 11:17:52 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:53:18 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ t_vec3	martix_rot(t_vec3 v, t_vec3 ang)
 	t_matrix	m;
 	t_vec3		out;
 
-	m.x.x = cos(ang.y) * cos(ang.z);
-	m.x.y = -cos(ang.y) * sin(ang.z);
-	m.x.z = -sin(ang.y);
-	m.y.x = -sin(ang.x) * sin(ang.y) * cos(ang.z) + cos(ang.x) * sin(ang.z);
-	m.y.y = sin(ang.x) * sin(ang.y) * sin(ang.z) + cos(ang.x) * cos(ang.z);
-	m.y.z = -sin(ang.x) * cos(ang.y);
-	m.z.x = cos(ang.x) * sin(ang.y) * cos(ang.z) + sin(ang.x) * sin(ang.z);
-	m.z.y = -cos(ang.x) * sin(ang.y) * sin(ang.z) + sin(ang.x) * cos(ang.z);
-	m.z.z = cos(ang.x) * cos(ang.y);
+	m.vx.x = cos(ang.y) * cos(ang.z);
+	m.vx.y = -cos(ang.y) * sin(ang.z);
+	m.vx.z = -sin(ang.y);
+	m.vy.x = -sin(ang.x) * sin(ang.y) * cos(ang.z) + cos(ang.x) * sin(ang.z);
+	m.vy.y = sin(ang.x) * sin(ang.y) * sin(ang.z) + cos(ang.x) * cos(ang.z);
+	m.vy.z = -sin(ang.x) * cos(ang.y);
+	m.vz.x = cos(ang.x) * sin(ang.y) * cos(ang.z) + sin(ang.x) * sin(ang.z);
+	m.vz.y = -cos(ang.x) * sin(ang.y) * sin(ang.z) + sin(ang.x) * cos(ang.z);
+	m.vz.z = cos(ang.x) * cos(ang.y);
 	out = vect_dot_matrix(v, m);
 	return (out);
 }

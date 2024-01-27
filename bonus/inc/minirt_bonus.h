@@ -6,7 +6,7 @@
 /*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/27 15:15:05 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:46:54 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,9 @@ typedef struct s_vec3
 
 typedef struct s_matrix
 {
-	t_vec3	x;
-	t_vec3	y;
-	t_vec3	z;
+	t_vec3	vx;
+	t_vec3	vy;
+	t_vec3	vz;
 }	t_matrix;
 typedef struct s_vec2
 {
@@ -152,12 +152,13 @@ typedef struct s_mlx
 	int		size_y;
 }	t_mlx;
 
+/*
 typedef struct s_normal_map {
 	t_vec3	vx;
 	t_vec3	vy;
 	t_vec3	vz;
 }	t_normal_map;
-
+*/
 typedef struct s_bumpmap
 {
 	bool			is_bumpmap;
@@ -199,8 +200,7 @@ typedef struct s_int_pts
 {
 	t_vec_pos		pt;
 	t_geom			*geom;
-	t_normal_map	ref;
-	//	t_bumpmap	bumpmap;
+	t_matrix		ref;
 }	t_int_pts;
 
 typedef struct s_camera
@@ -337,6 +337,11 @@ t_vec_pos	init_vp(t_color c);
 t_vec3		rotate_vector(t_vec3 v, t_vec3 k, double ang_rot);
 t_vec3		martix_rot(t_vec3 v, t_vec3 ang);
 t_vec3		vect_dot_matrix(t_vec3 v, t_matrix m);
+t_vec3		vect_unit_x(void);
+t_vec3		vect_unit_y(void);
+t_vec3		vect_unit_z(void);
+t_vec3		cambio_coord_vect(t_vec3 v, t_matrix m);
+t_matrix	mat_inversa(t_matrix m);
 
 /* Adders */
 t_vec3		add_vec3(char *vector3);
