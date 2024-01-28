@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
 /*   Updated: 2024/01/27 17:46:54 by eavedill         ###   ########.fr       */
@@ -163,12 +163,9 @@ typedef struct s_bumpmap
 {
 	bool			is_bumpmap;
 	char			*filename;
-	float			*h_map;
 	t_vec3			*normal_map;
 	int				width;
 	int				height;
-	t_color			min;
-	t_color			max;
 	t_mlx			mlx;
 	t_img_buff		buff;
 }	t_bumpmap;

@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/21 15:02:27 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:19:47 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,7 @@ int	get_devices(t_field *field, char *line)
 		field->orig_camera = field->camera;
 	}
 	else if (ft_strcmp(type[0], "L") == 0)
-	{
 		error = get_light(field, line);
-		field->orig_light = ft_clone_lightning(field->light);
-	}
 	else if (ft_strcmp(type[0], "A") == 0)
 		error = get_ambient_light(field, line);
 	else if (ft_strcmp(type[0], "CHECKBOARD") == 0)

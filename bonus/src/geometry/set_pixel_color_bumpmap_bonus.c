@@ -43,6 +43,7 @@ void set_pixel_color_bumpmap(t_int_pts *vp_int, t_field *field)
 	t_vec3		out;
 	t_indexes	ind;
 
+	(void)field;
 	out = get_distance(vp_int);
 	ind = get_indexes(out, vp_int->geom);
 	out = vp_int->geom->bumpmap.normal_map[ind.i + ind.j * \

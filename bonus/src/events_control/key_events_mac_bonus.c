@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:51:44 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/21 16:47:01 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:44:57 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	key_events_resets(int key, t_field *field)
 		}
 		else if (key == XK_L)
 		{
-			free(field->light);
-			field->light = ft_clone_light(field->orig_light);
+			ft_free_light(&field->light);
+			field->light = ft_clone_lightning(field->orig_light);
 			printf("Restarting Light\n");
 		}
 	}
