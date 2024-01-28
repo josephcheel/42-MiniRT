@@ -135,9 +135,10 @@ t_color	sum_lights(t_int_pts vp, t_field *field, t_vec_pos pixl, t_light *lght)
 			out[0] = mix_color(out[0], sum_lights(vp, field, pixl, lght));
 			lght = lght->next;
 		}
-		out[1] = prod_color(out[0], vp.pt.c);
-		out[1] = limit_color(out[1]);
-		rgb_to_hsl(&out[1]);
+		
 	}
+	out[1] = prod_color(out[0], vp.pt.c);
+	out[1] = limit_color(out[1]);
+	rgb_to_hsl(&out[1]);
 	return (out[1]);
 }
