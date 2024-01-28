@@ -21,7 +21,7 @@ static double	get_lum_map(char *buff)
 	c.r = buff[2];
 	c.a = buff[3];
 	rgb_to_hsl(&c);
-	c.l = (c.l + 1) * 0.5;
+	c.l = (c.l + 2);
 	return (c.l);
 }
 
@@ -32,13 +32,15 @@ static t_vec3	get_slope(int pos, t_bumpmap *bump)
 	int		k[3];
 
 	ang.z = 0;
-	k[2] = bump->width * bump->height;
-	k[0] = (pos - bump->buff.pixel_bits / 8 + k[2]) % k[2];
-	k[1] = (pos + bump->buff.pixel_bits / 8 + k[2]) % k[2];
+	k[2] = bump->buff.pixel_bits * bump->buff.line_bytes * 8;
+	k[0] = (pos - bump->buff.pixel_bits + k[2]) % k[2];
+	k[1] = (pos + bump->buff.pixel_bits + k[2]) % k[2];
+//	printf("valork0  %i valor k1 %i valor pos %i\n", k[0], k[1] , pos);
 	ang.y = asin((get_lum_map(&bump->buff.buffer[k[1]]) - \
 				get_lum_map(&bump->buff.buffer[k[0]])) / BM_PIXEL);
-	k[0] = (pos - bump->buff.line_bytes + k[2]) % k[2];
-	k[1] = (pos + bump->buff.line_bytes + k[2]) % k[2];
+	k[0] = (pos - bump->buff.line_bytes * 8 + k[2]) % k[2];
+	k[1] = (pos + bump->buff.line_bytes * 8 + k[2]) % k[2];
+//	printf("valork0  %i valor k1 %i valor pos %i\n", k[0], k[1] , pos);
 	ang.x = asin(get_lum_map(&bump->buff.buffer[k[1]]) - \
 				get_lum_map(&bump->buff.buffer[k[0]]) / BM_PIXEL);
 	out = martix_rot(create_vect(0, 0, 1), ang);

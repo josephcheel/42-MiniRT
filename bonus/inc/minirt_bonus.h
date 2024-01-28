@@ -32,13 +32,14 @@
 # endif
 # define WIN_NAME "miniRT"
 # define WIN_X 1080
-# define WIN_Y 540
+# define WIN_Y 580
 # define FRAME 0
 
 //# define PIXEL 0.0000054
 
 # define PIXEL 0.5
 # define BM_PIXEL 2
+# define BM_DEFINIT 1
 # define GEO_IDENT "sp cy pl cn tr"
 # define DEV_IDENT "C L A CHECKBOARD"
 

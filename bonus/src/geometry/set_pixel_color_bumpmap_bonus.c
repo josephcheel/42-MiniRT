@@ -31,12 +31,17 @@ t_indexes	get_indexes(t_vec3 pos, t_geom *geom)
 
 	// printf ("%d %d\n", 15 % 10, -31 % 500);
 	// if ((int)fabs(pos.y) > geom->bumpmap.height)
-	out.i = -(int)(pos.y / BM_PIXEL) % geom->bumpmap.height;
-	out.j = (int)(pos.x / BM_PIXEL) % geom->bumpmap.width;
+	out.i = (int)fmod(pos.x, geom->bumpmap.width) / BM_DEFINIT;
+	out.j = -(int)fmod(pos.y, geom->bumpmap.height) / BM_DEFINIT;
 	if (out.i < 0)
-		out.i += geom->bumpmap.height;
+		out.i += geom->bumpmap.width;
 	if (out.j < 0)
-		out.j += geom->bumpmap.width;
+		out.j += geom->bumpmap.height;
+//	printf("posicion i = %f, posicion j = %f\n", pos.x, pos.y);
+//	printf("ancho i = %i, ancho j = %i\n", geom->bumpmap.width, geom->bumpmap.height);
+//	printf("ind i = %i, ind j = %i\n", out.i, out.j);
+//	printf("valor de k = %i\n", out.i + out.j * geom->bumpmap.width);
+	
 	return (out);
 }
 
@@ -48,8 +53,7 @@ void set_pixel_color_bumpmap(t_int_pts *vp_int, t_field *field)
 	(void)field;
 	out = get_distance(vp_int);
 	ind = get_indexes(out, vp_int->geom);
-	
-	out = vp_int->geom->bumpmap.normal_map[ind.j + ind.i * \
+	out = vp_int->geom->bumpmap.normal_map[ind.i + ind.j * \
 										vp_int->geom->bumpmap.width];
 	vp_int->pt.v = cambio_coord_vect(out, mat_inversa(vp_int->ref));
 	return ;
