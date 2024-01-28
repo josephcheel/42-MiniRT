@@ -339,7 +339,15 @@ t_int_pts	calcula_color(int pixel, t_field *field)
 		{
 			printf("==============================\n");
 			if (out && !is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))
+			{
 				vp_int = get_min_vect(vp_int, out, ptr, vps);
+				vp_int.pt.v = prod_cte_vector(ptr->sense, vp_int.pt.v);
+				vp_int.ref.vz = vp_int.pt.v;
+				vp_int.ref.vx = conv_v_unit(prod_vectorial(create_vect(0, 0, 1), \
+							vp_int.ref.vz));
+				vp_int.ref.vy = conv_v_unit(prod_vectorial(vp_int.ref.vz, \
+							vp_int.ref.vx));
+			}
 			if (out)
 				ft_print_vec3("El punto out es ", out->pt);
 			else
@@ -355,6 +363,8 @@ t_int_pts	calcula_color(int pixel, t_field *field)
 		ptr = ptr->next;
 		free (out);
 	}
+	if (vp_int.geom && vp_int.geom->bumpmap.is_bumpmap)
+		set_pixel_color_bumpmap(&vp_int, field);
 	vp_int.pt.c = set_pixel_color_print(vp_int, field, *vps);
 	return (vp_int);
 }

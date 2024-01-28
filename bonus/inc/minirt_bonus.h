@@ -38,7 +38,7 @@
 //# define PIXEL 0.0000054
 
 # define PIXEL 0.5
-# define BM_PIXEL 1
+# define BM_PIXEL 2
 # define GEO_IDENT "sp cy pl cn tr"
 # define DEV_IDENT "C L A CHECKBOARD"
 

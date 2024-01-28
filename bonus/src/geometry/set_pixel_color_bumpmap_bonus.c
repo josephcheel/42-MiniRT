@@ -29,12 +29,14 @@ t_indexes	get_indexes(t_vec3 pos, t_geom *geom)
 {
 	t_indexes	out;
 
-	out.i = (int)(pos.x / BM_PIXEL) % geom->bumpmap.width;
-	out.j = -(int)(pos.y / BM_PIXEL) % geom->bumpmap.height;
+	// printf ("%d %d\n", 15 % 10, -31 % 500);
+	// if ((int)fabs(pos.y) > geom->bumpmap.height)
+	out.i = -(int)(pos.y / BM_PIXEL) % geom->bumpmap.height;
+	out.j = (int)(pos.x / BM_PIXEL) % geom->bumpmap.width;
 	if (out.i < 0)
-		out.i += geom->bumpmap.width;
+		out.i += geom->bumpmap.height;
 	if (out.j < 0)
-		out.j += geom->bumpmap.height;
+		out.j += geom->bumpmap.width;
 	return (out);
 }
 
@@ -46,7 +48,8 @@ void set_pixel_color_bumpmap(t_int_pts *vp_int, t_field *field)
 	(void)field;
 	out = get_distance(vp_int);
 	ind = get_indexes(out, vp_int->geom);
-	out = vp_int->geom->bumpmap.normal_map[ind.i + ind.j * \
+	
+	out = vp_int->geom->bumpmap.normal_map[ind.j + ind.i * \
 										vp_int->geom->bumpmap.width];
 	vp_int->pt.v = cambio_coord_vect(out, mat_inversa(vp_int->ref));
 	return ;

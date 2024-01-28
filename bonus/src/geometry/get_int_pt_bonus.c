@@ -83,8 +83,8 @@ static t_int_pts	*get_colored_loop(t_vec_pos *vps, t_field *field,
 			vp_int = get_min_vect(vp_int, out, ptr, vps);
 			vp_int->pt.v = prod_cte_vector(ptr->sense, vp_int->pt.v);
 			vp_int->ref.vz = vp_int->pt.v;
-			vp_int->ref.vx = conv_v_unit(prod_vectorial(vp_int->ref.vz, \
-						create_vect(0, 0, 1)));
+			vp_int->ref.vx = conv_v_unit(prod_vectorial(create_vect(0, 0, 1), \
+						vp_int->ref.vz));
 			vp_int->ref.vy = conv_v_unit(prod_vectorial(vp_int->ref.vz, \
 						vp_int->ref.vx));
 		}

@@ -31,15 +31,15 @@ static t_vec3	get_slope(int pos, t_bumpmap *bump)
 	t_vec3	ang;
 	int		k[3];
 
-	ang.x = 0;
+	ang.z = 0;
 	k[2] = bump->width * bump->height;
-	k[0] = (pos - 1 + k[2]) % k[2];
-	k[1] = (pos + 1 + k[2]) % k[2];
-	ang.y = acos((get_lum_map(&bump->buff.buffer[k[1]]) - \
+	k[0] = (pos - bump->buff.pixel_bits / 8 + k[2]) % k[2];
+	k[1] = (pos + bump->buff.pixel_bits / 8 + k[2]) % k[2];
+	ang.y = asin((get_lum_map(&bump->buff.buffer[k[1]]) - \
 				get_lum_map(&bump->buff.buffer[k[0]])) / BM_PIXEL);
 	k[0] = (pos - bump->buff.line_bytes + k[2]) % k[2];
 	k[1] = (pos + bump->buff.line_bytes + k[2]) % k[2];
-	ang.z = acos(get_lum_map(&bump->buff.buffer[k[1]]) - \
+	ang.x = asin(get_lum_map(&bump->buff.buffer[k[1]]) - \
 				get_lum_map(&bump->buff.buffer[k[0]]) / BM_PIXEL);
 	out = martix_rot(create_vect(0, 0, 1), ang);
 	return (out);
@@ -58,9 +58,9 @@ static bool	create_bump_matrix(t_bumpmap *bumpmap)
 		return (false);
 	while (++p.i < bumpmap->width && p.j < bumpmap->height)
 	{
-		k = p.j * bumpmap->buff.line_bytes + p.i * bumpmap->buff.pixel_bits / 8;
-		bumpmap->normal_map[p.i * p.j] = get_slope(k, bumpmap);
-		if (p.i == bumpmap->width)
+		k = p.j * bumpmap->buff.line_bytes + p.i * bumpmap->buff.pixel_bits / 8;	
+		bumpmap->normal_map[p.i + p.j * bumpmap->width] = get_slope(k, bumpmap);
+		if (p.i == bumpmap->width - 1)
 		{
 			p.i = -1;
 			p.j++;
