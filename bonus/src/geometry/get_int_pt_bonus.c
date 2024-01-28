@@ -118,10 +118,13 @@ void	get_colored_int_pt(int pixel, t_field *field)
 	}
 	// if (vp_int->geom && vp_int->geom->bumpmap.is_bumpmap)
 	// 	set_pixel_color_bumpmap(vp_int, field, vp_int->geom);
+
 	if (vp_int->geom && field->chckbd.is_chckbd && vp_int->geom->is_chckbd == true)
 		vp_int->pt.c = set_pixel_color_chckdb(*vp_int, field);
+
 	// else if (vp_int->geom && vp_int->bumpmap.is_bumpmap)
 	// 	vp_int->pt.c = set_pixel_color_bumpmap(*vp_int, field, vp_int->geom);
+
 	if (field->chckbd.is_light)
 		vp_int->pt.c = set_pixel_color(*vp_int, field, *vps);
 }
