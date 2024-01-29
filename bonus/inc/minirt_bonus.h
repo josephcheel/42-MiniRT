@@ -154,13 +154,6 @@ typedef struct s_mlx
 	int		size_y;
 }	t_mlx;
 
-/*
-typedef struct s_normal_map {
-	t_vec3	vx;
-	t_vec3	vy;
-	t_vec3	vz;
-}	t_normal_map;
-*/
 typedef struct s_bumpmap
 {
 	bool			is_bumpmap;
