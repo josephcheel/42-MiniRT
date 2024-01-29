@@ -18,7 +18,7 @@ static double	calculate_behind_pts(t_int_pts vp, t_vec_pos vl_pt, t_geom *ptr)
 	double		dist[3];
 	t_vec_pos	*out;
 
-	aux = resta_vector(vp.pt.pt, vl_pt.pt);
+	aux = resta_vector(vl_pt.pt, vp.pt.pt);
 	dist[0] = modulo_vector(aux);
 	dist[1] = LONG_MAX;
 	dist[2] = LONG_MAX;
@@ -57,15 +57,56 @@ static bool	is_behind_srf(t_int_pts vp, t_vec_pos vl_pt, t_geom *geo)
 	return (false);
 }
 
-static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt)
+static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt, double amb_rate)
 {
 	double	aux;
 
+	(void)amb_rate;
 	aux = prod_escalar(vp.v, vl_pt.v);
 	if (aux < 0)
-		return (0);
-	aux = pow(aux, 2);
+		aux = 0;
 	return (aux);
+}
+
+// static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl)
+// {
+// 	double	aux;
+// 	t_vec3	out;
+
+// 	aux = 2 * prod_escalar(vp.v, vl_pt.v);
+// 	if (aux < 0)
+// 		return (0);
+// 	out = resta_vector(prod_cte_vector(aux, vp.v), vl_pt.v);
+// 	aux = prod_escalar(out, pixl.v);
+// 	if (aux > 0)
+// 		return (0);
+// 	aux = pow(aux, 32);
+// 	return (aux);
+// }
+
+t_color	sum_lights(t_int_pts vp, t_field *field, t_light *lght)
+{
+	t_vec_pos	v_luz_pt;
+	double		aux;
+	t_color		out[4];
+
+	out[2] = init_color();
+	v_luz_pt.pt = lght->pos;
+	v_luz_pt.v = conv_v_unit(resta_vector(v_luz_pt.pt, vp.pt.pt));
+	v_luz_pt.c = lght->color;
+	out[0] = mult_color(v_luz_pt.c, field->ambient.ratio);
+	if (is_behind_srf(vp, v_luz_pt, field->geom))
+		out[2] = mix_color(out[2], out[0]);
+	else
+	{
+		aux = get_difuse(vp.pt, v_luz_pt, field->ambient.ratio);
+		out[1] = mult_color(v_luz_pt.c, aux);
+		out[2] = mix_color(out[0], out[1]);
+		out[1] = mult_color(v_luz_pt.c, aux);
+		out[2] = mix_color(out[1], out[2]);
+		out[3] = mix_color(out[3], out[2]);
+	}
+	return (out[2]);
 }
 
 /*
@@ -78,28 +119,24 @@ static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt)
 */
 t_color	set_pixel_color(t_int_pts vp, t_field *field)
 {
-	t_vec_pos	v_luz_pt;
-	double		fact[2];
+	t_color		out[2];
+	t_light		*lght;
 
-	v_luz_pt.pt = field->light->pos;
-	v_luz_pt.v = conv_v_unit(resta_vector(v_luz_pt.pt, vp.pt.pt));
-	v_luz_pt.c = field->light->color;
-	if (is_behind_srf(vp, v_luz_pt, field->geom))
-	{
-		fact[0] = field->ambient.ratio;
-		fact[1] = 0;
-	}
+	if (vp.pt.pt.x == LONG_MAX && vp.pt.pt.z == LONG_MAX && \
+			vp.pt.pt.z == LONG_MAX)
+		out[0] = field->ambient.color;
 	else
 	{
-		fact[0] = field->ambient.ratio;
-		fact[1] = field->light->ratio * get_difuse(vp.pt, v_luz_pt);
+		out[0] = init_color();
+		lght = field->light;
+		while (lght)
+		{
+			out[0] = mix_color(out[0], sum_lights(vp, field, lght));
+			lght = lght->next;
+		}
 	}
-	if (vp.pt.c.l > fact[0] + fact[1])
-		vp.pt.c.l = fact[0] + fact[1];
-	if (field->light->ratio < field->ambient.ratio)
-		vp.pt.c.l = field->ambient.ratio;
-	else if (vp.pt.c.l > field->light->ratio)
-		vp.pt.c.l = field->light->ratio;
-	hsl_to_rgb(&vp.pt.c);
-	return (vp.pt.c);
+	out[1] = prod_color(out[0], vp.pt.c);
+	out[1] = limit_color(out[1]);
+	rgb_to_hsl(&out[1]);
+	return (out[1]);
 }
