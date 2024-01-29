@@ -29,14 +29,14 @@ static void	get_optional_values(t_field *field, t_geom *triang, char **content)
 	{
 		if (ft_strcmp(content[5], "NO_CHECKBOARD") == 0)
 			triang->is_chckbd = false;
-		else
+		else if (triang->bumpmap.is_bumpmap == false)
 			triang->bumpmap = get_bumpmap(content[5], field);
 	}
 	if (ft_array_size(content) == 7)
 	{
 		if (ft_strcmp(content[6], "NO_CHECKBOARD") == 0)
 			triang->is_chckbd = false;
-		else
+		else if (triang->bumpmap.is_bumpmap == false)
 			triang->bumpmap = get_bumpmap(content[6], field);
 	}
 }
