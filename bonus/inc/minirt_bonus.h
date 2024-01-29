@@ -351,7 +351,8 @@ void		def_pixel_vp(t_field *field, t_indexes in, t_indexes lim);
 void		get_colored_int_pt(int pixel, t_field *field);
 t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo);
 void		set_point_int(t_field *field);
-
+void		create_ref(t_vec_pos *vps, t_int_pts *vp_int, t_vec_pos *out, \
+			t_geom *ptr);
 /* Color */
 t_color		set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl);
 t_color		set_pixel_color_chckdb(t_int_pts vp, t_field *field);
