@@ -60,9 +60,9 @@ t_color	mult_color(t_color a, double b)
 	return (c);
 }
 
-t_color init_color(void)
+t_color	init_color(void)
 {
-	t_color c;
+	t_color	c;
 
 	c.r = 0;
 	c.g = 0;
