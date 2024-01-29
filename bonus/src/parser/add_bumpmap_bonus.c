@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   add_bumpmap_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:28:27 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/27 17:46:16 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:09:20 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt_bonus.h"
 
-static double	get_lum_map(char *buff)
+static t_color	get_lum_map(char *buff)
 {
 	t_color	c;
 
@@ -22,28 +22,27 @@ static double	get_lum_map(char *buff)
 	c.a = buff[3];
 	rgb_to_hsl(&c);
 	c.l = (c.l + 2);
-	return (c.l);
+	return (c);
 }
 
-static t_vec3	get_slope(int pos, t_bumpmap *bump)
+static t_vec_pos	get_slope(int pos, t_bumpmap *bump)
 {
-	t_vec3	out;
-	t_vec3	ang;
-	int		k[3];
+	t_vec_pos	out;
+	t_vec3		ang;
+	int			k[3];
 
+	out = init_vp(get_lum_map(&bump->buff.buffer[pos]));
 	ang.z = 0;
 	k[2] = bump->buff.pixel_bits * bump->buff.line_bytes * 8;
 	k[0] = (pos - bump->buff.pixel_bits + k[2]) % k[2];
 	k[1] = (pos + bump->buff.pixel_bits + k[2]) % k[2];
-//	printf("valork0  %i valor k1 %i valor pos %i\n", k[0], k[1] , pos);
-	ang.y = asin((get_lum_map(&bump->buff.buffer[k[1]]) - \
-				get_lum_map(&bump->buff.buffer[k[0]])) / BM_PIXEL);
+	ang.y = asin((get_lum_map(&bump->buff.buffer[k[1]]).l - \
+				get_lum_map(&bump->buff.buffer[k[0]]).l) / BM_PIXEL);
 	k[0] = (pos - bump->buff.line_bytes * 8 + k[2]) % k[2];
 	k[1] = (pos + bump->buff.line_bytes * 8 + k[2]) % k[2];
-//	printf("valork0  %i valor k1 %i valor pos %i\n", k[0], k[1] , pos);
-	ang.x = asin(get_lum_map(&bump->buff.buffer[k[1]]) - \
-				get_lum_map(&bump->buff.buffer[k[0]]) / BM_PIXEL);
-	out = martix_rot(create_vect(0, 0, 1), ang);
+	ang.x = asin((get_lum_map(&bump->buff.buffer[k[1]]).l - \
+				get_lum_map(&bump->buff.buffer[k[0]]).l) / BM_PIXEL);
+	out.v = martix_rot(create_vect(0, 0, 1), ang);
 	return (out);
 }
 
@@ -54,13 +53,14 @@ static bool	create_bump_matrix(t_bumpmap *bumpmap)
 
 	p.i = -1;
 	p.j = 0;
-	bumpmap->normal_map = malloc(sizeof(t_matrix) * \
+	bumpmap->normal_map = malloc(sizeof(t_vec_pos) * \
 				(bumpmap->height * bumpmap->width));
 	if (!bumpmap->normal_map)
 		return (false);
 	while (++p.i < bumpmap->width && p.j < bumpmap->height)
 	{
-		k = p.j * bumpmap->buff.line_bytes + p.i * bumpmap->buff.pixel_bits / 8;	
+		k = p.j * bumpmap->buff.line_bytes + p.i * \
+								bumpmap->buff.pixel_bits / 8;
 		bumpmap->normal_map[p.i + p.j * bumpmap->width] = get_slope(k, bumpmap);
 		if (p.i == bumpmap->width - 1)
 		{

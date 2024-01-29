@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/27 17:46:54 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:05:32 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@
 //# define PIXEL 0.0000054
 
 # define PIXEL 0.5
-# define BM_PIXEL 2
+# define BM_PIXEL 1
 # define BM_DEFINIT 1
+
 # define GEO_IDENT "sp cy pl cn tr"
 # define DEV_IDENT "C L A CHECKBOARD"
 
@@ -164,7 +165,7 @@ typedef struct s_bumpmap
 {
 	bool			is_bumpmap;
 	char			*filename;
-	t_vec3			*normal_map;
+	t_vec_pos		*normal_map;
 	int				width;
 	int				height;
 	t_mlx			mlx;
