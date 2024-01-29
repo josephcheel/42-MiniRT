@@ -6,7 +6,7 @@
 /*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/27 16:08:55 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:20:16 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static t_int_pts	*get_min_vect(t_int_pts *cur, t_vec_pos *new,
 			out->pt = new[i];
 			out->pt.c = geom->color;
 			out->geom = geom;
-			//out->bumpmap = geom->bumpmap; //no se necesita. está ya en la geometria
 		}
 	}
 	return (out);
@@ -68,8 +67,31 @@ t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo)
 	return (out);
 }
 
-static t_int_pts	*get_colored_loop(t_vec_pos *vps, t_field *field,
-						t_int_pts *vp_int, t_geom *ptr)
+static void	create_ref(t_vec_pos *vps, t_int_pts *vp_int, t_vec_pos *out, \
+			t_geom *ptr)
+{
+	vp_int = get_min_vect(vp_int, out, ptr, vps);
+	vp_int->pt.v = prod_cte_vector(ptr->sense, vp_int->pt.v);
+	vp_int->ref.vz = vp_int->pt.v;
+	if (vp_int->ref.vz.x == 0 && vp_int->ref.vz.y == 0)
+	{
+		if (vp_int->ref.vz.z > 0)
+			vp_int->ref.vy = create_vect(0, 1, 0);
+		else
+			vp_int->ref.vy = create_vect(0, -1, 0);
+		vp_int->ref.vx = create_vect(1, 0, 0);
+	}
+	else
+	{
+		vp_int->ref.vx = conv_v_unit(prod_vectorial(\
+							create_vect(0, 0, 1), vp_int->ref.vz));
+		vp_int->ref.vy = conv_v_unit(prod_vectorial(vp_int->ref.vz, \
+							vp_int->ref.vx));
+	}
+}
+
+static void get_colored_loop(t_vec_pos *vps, t_field *field, \
+								t_int_pts *vp_int, t_geom *ptr)
 {
 	t_vec_pos	*out;
 	int			i;
@@ -79,22 +101,13 @@ static t_int_pts	*get_colored_loop(t_vec_pos *vps, t_field *field,
 	while (++i < 2)
 	{
 		if (out && !is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))
-		{
-			vp_int = get_min_vect(vp_int, out, ptr, vps);
-			vp_int->pt.v = prod_cte_vector(ptr->sense, vp_int->pt.v);
-			vp_int->ref.vz = vp_int->pt.v;
-			vp_int->ref.vx = conv_v_unit(prod_vectorial(create_vect(0, 0, 1), \
-						vp_int->ref.vz));
-			vp_int->ref.vy = conv_v_unit(prod_vectorial(vp_int->ref.vz, \
-						vp_int->ref.vx));
-		}
+			create_ref(vps, vp_int, out, ptr);
 		if (ptr->type == PLANE)
 			i++;
 	}
 	if (vp_int->geom && vp_int->geom->bumpmap.is_bumpmap)
 		set_pixel_color_bumpmap(vp_int, field);
 	free(out);
-	return (vp_int);
 }
 
 /// @brief Gives the color of the closest surface to the pixel.
@@ -113,18 +126,11 @@ void	get_colored_int_pt(int pixel, t_field *field)
 	vp_int->geom = NULL;
 	while (ptr)
 	{
-		vp_int = get_colored_loop(vps, field, vp_int, ptr);
+		get_colored_loop(vps, field, vp_int, ptr);
 		ptr = ptr->next;
 	}
-	// if (vp_int->geom && vp_int->geom->bumpmap.is_bumpmap)
-	// 	set_pixel_color_bumpmap(vp_int, field, vp_int->geom);
-
 	if (vp_int->geom && field->chckbd.is_chckbd && vp_int->geom->is_chckbd == true)
 		vp_int->pt.c = set_pixel_color_chckdb(*vp_int, field);
-
-	// else if (vp_int->geom && vp_int->bumpmap.is_bumpmap)
-	// 	vp_int->pt.c = set_pixel_color_bumpmap(*vp_int, field, vp_int->geom);
-
 	if (field->chckbd.is_light)
 		vp_int->pt.c = set_pixel_color(*vp_int, field, *vps);
 }
