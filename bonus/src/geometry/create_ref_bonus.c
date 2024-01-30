@@ -36,7 +36,7 @@ static t_int_pts	*get_min_vect(t_int_pts *cur, t_vec_pos *new,
 	return (out);
 }
 
-static void create_ref(t_vec_pos *vps, t_int_pts *vp_int, t_vec_pos *out,
+void create_ref(t_vec_pos *vps, t_int_pts *vp_int, t_vec_pos *out,
 					   t_geom *ptr)
 {
 	double ax;
