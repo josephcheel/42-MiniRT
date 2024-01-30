@@ -6,7 +6,7 @@
 /*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/29 16:20:16 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:10:05 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,18 @@ t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo)
 static void	create_ref(t_vec_pos *vps, t_int_pts *vp_int, t_vec_pos *out, \
 			t_geom *ptr)
 {
+	double	ax;
+
 	vp_int = get_min_vect(vp_int, out, ptr, vps);
-	vp_int->pt.v = prod_cte_vector(ptr->sense, vp_int->pt.v);
 	vp_int->ref.vz = vp_int->pt.v;
-	if (vp_int->ref.vz.x == 0 && vp_int->ref.vz.y == 0)
+	ax = round(prod_escalar(vp_int->pt.v, create_vect(0, 0, 1)) * 1E5) / 1E5;
+	if (ax == 1 || ax == -1)
 	{
+		if (vp_int->ref.vz.z == 0)
+		{
+			vp_int->ref.vz = create_vect(0, 0, 1);
+			vp_int->ref.vy = create_vect(0, 1, 0);
+		}
 		if (vp_int->ref.vz.z > 0)
 			vp_int->ref.vy = create_vect(0, 1, 0);
 		else
@@ -85,10 +92,20 @@ static void	create_ref(t_vec_pos *vps, t_int_pts *vp_int, t_vec_pos *out, \
 	{
 		vp_int->ref.vx = conv_v_unit(prod_vectorial(\
 							create_vect(0, 0, 1), vp_int->ref.vz));
-		vp_int->ref.vy = conv_v_unit(prod_vectorial(vp_int->ref.vz, \
-							vp_int->ref.vx));
+		vp_int->ref.vy = conv_v_unit(\
+							prod_vectorial(vp_int->ref.vz, vp_int->ref.vx));
 	}
 }
+/*
+to print in case of error.
+//	vp_int->pt.v = prod_cte_vector(ptr->sense, vp_int->pt.v);
+//	ft_print_vec3("Valor de vp.pt", vp_int->pt.pt);
+//	ft_print_vec3("Valor de vp.v", vp_int->pt.v);
+//	printf("valores de aux %f -- %f\n", ax[1], ax[0]);ax[0] == 0 ||
+//		ft_print_vec3("Valor de vp.vz ", vp_int->ref.vz);
+//		ft_print_vec3("Valor de vp.vx ", vp_int->ref.vx);
+//		ft_print_vec3("Valor de vp.vy ", vp_int->ref.vy);
+*/
 
 static void get_colored_loop(t_vec_pos *vps, t_field *field, \
 								t_int_pts *vp_int, t_geom *ptr)
@@ -98,9 +115,9 @@ static void get_colored_loop(t_vec_pos *vps, t_field *field, \
 
 	out = get_int_pt(vps, ptr);
 	i = -1;
-	while (++i < 2)
+	while (out && ++i < 2)
 	{
-		if (out && !is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))
+		if (!is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))
 			create_ref(vps, vp_int, out, ptr);
 		if (ptr->type == PLANE)
 			i++;
