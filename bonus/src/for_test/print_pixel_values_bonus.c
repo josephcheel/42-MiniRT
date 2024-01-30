@@ -3,15 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   print_pixel_values_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/27 00:59:08 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/30 12:24:16 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt_bonus.h"
 
+void	print_pixel_values(int x, int y, t_field *field)
+{
+	int	k;
+
+	if (x < FRAME || y < FRAME || x > (field->mlx.size_x - FRAME) || \
+		y > (field->mlx.size_y - FRAME))
+		return ;
+	k = (x - FRAME) + (y - FRAME) * (field->mlx.size_x - 2 * FRAME);
+	printf("*********************************************************\n");
+	ft_print_vec3("Posicion del punto de luz: ", field->light->pos);
+	printf("Datos del punto visualizado por la cámara:\n");
+	ft_print_vec3("El Vector camara es", field->camera.int_vp[k].pt.pt);
+	ft_print_vec3("El Vector direccional  es ", field->camera.int_vp[k].pt.v);
+}
+
+/*
 static double	calculate_behind_pts(t_int_pts vp, t_vec_pos vl_pt, t_geom *ptr)
 {
 	t_vec3		aux;
@@ -39,38 +55,6 @@ static double	calculate_behind_pts(t_int_pts vp, t_vec_pos vl_pt, t_geom *ptr)
 		return (true);
 	return (false);
 }
-/*
-static double calculate_behind_pts(t_int_pts vp, t_vec_pos vl_pt, t_geom *ptr)
-{
-	t_vec_pos aux;
-	double dist[3];
-	t_vec_pos *out;
-
-	aux = vp.pt;
-	aux.v = resta_vector(vp.pt.pt, vl_pt.pt);
-	dist[0] = modulo_vector(aux.v);
-	aux.v = conv_v_unit(aux.v);
-	dist[1] = LONG_MAX;
-	dist[2] = LONG_MAX;
-	//out = get_int_pt(&vl_pt, ptr);
-	out = get_int_pt(&aux, ptr);
-	if (out != NULL)
-	{
-		aux.pt = resta_vector(vl_pt.pt, out[0].pt);
-		dist[1] = modulo_vector(aux.pt);
-		if (prod_escalar(aux.pt, vl_pt.v) < 0)
-			dist[1] = LONG_MAX;
-		aux.pt = resta_vector(vl_pt.pt, out[1].pt);
-		dist[2] = modulo_vector(aux.pt);
-		if (prod_escalar(aux.pt, vl_pt.v) < 0)
-			dist[2] = LONG_MAX;
-	}
-	free(out);
-	if (dist[0] > dist[1] || dist[0] > dist[2])
-		return (true);
-	return (false);
-}
-*/
 
 static bool	is_behind_srf(t_int_pts vp, t_vec_pos vl_pt, t_geom *geo)
 {
@@ -88,75 +72,6 @@ static bool	is_behind_srf(t_int_pts vp, t_vec_pos vl_pt, t_geom *geo)
 	}
 	return (false);
 }
-
-/*
-static t_color get_difuse(t_vec_pos vp, t_vec_pos vl_pt, double amb_rate)
-{
-	t_color col;
-	double aux;
-	int i;
-	printf("*********************\n");
-	col = vp.c;
-	aux = fmax(0, prod_escalar(vp.v, vl_pt.v));
-	if (aux < amb_rate)
-		col.l = amb_rate;
-	else
-	{
-		i = (vp.c.h + vl_pt.c.h * aux) / 360;
-		col.h = vp.c.h + vl_pt.c.h * aux - i * 360;
-		col.s = (vp.c.s + vl_pt.c.s) * aux;
-		if (col.s > 1)
-			col.s = 1;
-		col.l = fmin(amb_rate + aux, vp.c.l);
-	}
-	printf("Valor aux = %f\n", aux);
-	print_color_values("Color difuse ", col);
-	hsl_to_rgb(&col);
-	printf("*********************\n");
-	return (col);
-}
-*/
-/*
-static t_color get_difuse(t_vec_pos vp, t_vec_pos vl_pt, double amb_rate)
-{
-	t_color col;
-	double aux;
-		int		i;
-
-		i = (vp.c.h + vl_pt.c.h * aux) / 360;
-		col.h = vp.c.h + vl_pt.c.h * aux - i * 360;
-		col.s = (vp.c.s + vl_pt.c.s) * aux;
-		if (col.s > 1)
-			col.s = 1;
-
-	printf("*********************\n");
-	printf("Valor aux = %f\n", prod_escalar(vp.v, vl_pt.v));
-	printf("Valor amb rate = %f\n", amb_rate);
-	col = vp.c;
-	print_color_values("Color in ", col);
-	aux = fmax(0, prod_escalar(vp.v, vl_pt.v));
-//	if (aux < amb_rate)
-//	{
-//		col.l = amb_rate;
-//		col = mult_color(vp.c, amb_rate);
-//		col = mix_color(col, vl_pt.c);
-//	}
-//	else
-//	{
-		//aux = pow(aux, 2);
-		col = mult_color(vp.c, aux);
-		print_color_values("Color interm ", col);
-		col = mix_color(col, vl_pt.c);
-		//col = mix_color(col, mult_color(vl_pt.c, aux));
-		//		col.l = fmin(amb_rate + aux, vp.c.l);
-//	}
-	hsl_to_rgb(&col);
-	print_color_values("Color out ", col);
-	printf("*********************\n");
-
-	return (col);
-}
-*/
 
 static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt, double amb_rate)
 {
@@ -186,14 +101,6 @@ static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl, double
 	return (aux);
 }
 
-/*
-@brief Calculates the color of the pixel depending of the light position
-@brief The function also takes into account if there is any surface that
-@brief is in between the point and the light (Shadow from other element)
-@param vp
-@param field
-@return Returns the color of the pixel.
-*/
 t_color	set_pixel_color_print(t_int_pts vp, t_field *field, t_vec_pos pixl)
 {
 	t_vec_pos	v_luz_pt;
@@ -253,12 +160,6 @@ t_color	set_pixel_color_print(t_int_pts vp, t_field *field, t_vec_pos pixl)
 	}
 	return (out[4]);
 }
-/*		printf("Está detras de una superficie %i \n",field->geom->type);
-		ft_print_vec3("El punto de la superficie es ", field->geom->vp.pt);
-		ft_print_vec3("El vector de la superficie es ", field->geom->vp.v);
-		ft_print_vec3("El punto vpint es ", vp.pt.pt);
-		ft_print_vec3("El punto luz es es ", v_luz_pt.pt);
-*/
 
 void	print_color_values(char *s, t_color c)
 {
@@ -302,22 +203,6 @@ static t_int_pts	get_min_vect(t_int_pts cur, t_vec_pos *new,
 	}
 	return (out);
 }
-
-/*
-	t_vec_pos	aux;
-	aux = new[0];
-	double		long_new;
-	long_new = modulo_vector(new[0].pt);
-	if (geom->type != PLANE && modulo_vector(new[1].pt) < long_new)
-	{
-		aux = new[1];
-		long_new = modulo_vector(new[1].pt);
-	}
-	if (long_cur > long_new && !is_behind_cam(aux, vps))
-	{
-	}
-
-*/
 
 t_int_pts	calcula_color(int pixel, t_field *field)
 {
@@ -416,3 +301,4 @@ void	print_pixel_values(int x, int y, t_field *field)
 	print_color_values("El color resultante es: ", inters.pt.c);
 	printf("==============================================================\n");
 }
+*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_events_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:50:25 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/16 11:12:54 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/30 12:19:42 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	mouse_events_pre(int mouse, int x, int y, t_field *field)
 		field->events.btn_rght_presd = 1;
 	else if (mouse == MOUSE_BTN_LEFT)
 	{
-		print_pixel_values(x, y, field);
 		field->events.btn_left_presd = 1;
 		x = x - field->mlx.size_x / 2;
 		y = field->mlx.size_y / 2 - y;
@@ -58,6 +57,7 @@ int	mouse_events_rel(int mouse, int x, int y, t_field *field)
 		field->events.btn_rght_presd = 0;
 	if (mouse == MOUSE_BTN_LEFT && x > 0 && y > 0)
 	{
+		print_pixel_values(x, y, field);
 		if (field->events.key_alt_press || field->events.key_ctrl_press)
 			displ(field, x, y);
 		if (field->events.key_shift_press)

@@ -6,7 +6,7 @@
 /*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 19:53:12 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/30 11:53:18 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/30 12:21:33 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static t_int_pts	*get_min_vect(t_int_pts *cur, t_vec_pos *new,
 	return (out);
 }
 
-static void create_ref(t_vec_pos *vps, t_int_pts *vp_int, t_vec_pos *out,
-					   t_geom *ptr)
+void	create_ref(t_vec_pos *vps, t_int_pts *vp_int, t_vec_pos *out,
+														t_geom *ptr)
 {
-	double ax;
+	double	ax;
 
 	vp_int = get_min_vect(vp_int, out, ptr, vps);
 	vp_int->ref.vz = vp_int->pt.v;
@@ -59,9 +59,9 @@ static void create_ref(t_vec_pos *vps, t_int_pts *vp_int, t_vec_pos *out,
 	}
 	else
 	{
-		vp_int->ref.vx = conv_v_unit(prod_vectorial(
+		vp_int->ref.vx = conv_v_unit(prod_vectorial(\
 			create_vect(0, 0, 1), vp_int->ref.vz));
-		vp_int->ref.vy = conv_v_unit(
+		vp_int->ref.vy = conv_v_unit(\
 			prod_vectorial(vp_int->ref.vz, vp_int->ref.vx));
 	}
 }
