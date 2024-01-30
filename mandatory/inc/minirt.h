@@ -299,6 +299,12 @@ t_color		set_pixel_color(t_int_pts vp, t_field *field);
 void		rgb_to_hsl(t_color *c);
 void		hsl_to_rgb(t_color *c);
 
+t_color		mix_color(t_color a, t_color b);
+t_color		limit_color(t_color a);
+t_color		prod_color(t_color a, t_color b);
+t_color		mult_color(t_color a, double b);
+t_color		init_color(void);
+
 /*	Light Struct Functions */
 t_light		*ft_clone_light(t_light *light);
 t_light		*ft_lightlast(t_light *lst);

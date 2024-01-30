@@ -110,15 +110,15 @@ t_color	sum_lights(t_int_pts vp, t_field *field, t_vec_pos pixl, t_light *lght)
 	return (out[3]);
 }
 
-	/*
-	@brief Calculates the color of the pixel depending of the light position
-	@brief The function also takes into account if there is any surface that
-	@brief is in between the point and the light (Shadow from other element)
-	@param vp
-	@param field
-	@return Returns the color of the pixel.
-	*/
-	t_color set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
+/*
+@brief Calculates the color of the pixel depending of the light position
+@brief The function also takes into account if there is any surface that
+@brief is in between the point and the light (Shadow from other element)
+@param vp
+@param field
+@return Returns the color of the pixel.
+*/
+t_color	set_pixel_color(t_int_pts vp, t_field *field, t_vec_pos pixl)
 {
 	t_color		out[2];
 	t_light		*lght;
@@ -135,7 +135,6 @@ t_color	sum_lights(t_int_pts vp, t_field *field, t_vec_pos pixl, t_light *lght)
 			out[0] = mix_color(out[0], sum_lights(vp, field, pixl, lght));
 			lght = lght->next;
 		}
-		
 	}
 	out[1] = prod_color(out[0], vp.pt.c);
 	out[1] = limit_color(out[1]);

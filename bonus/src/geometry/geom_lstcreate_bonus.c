@@ -62,6 +62,8 @@ void	ft_free_geometry(t_geom **head)
 	temp = *head;
 	while (temp)
 	{
+		if (temp->bumpmap.is_bumpmap == true)
+			free(temp->bumpmap.normal_map);
 		temp = temp->next;
 		free(*head);
 		*head = temp;

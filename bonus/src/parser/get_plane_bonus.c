@@ -18,14 +18,14 @@ static void	get_optional_values(t_field *field, t_geom *plane, char **content)
 	{
 		if (ft_strcmp(content[4], "NO_CHECKBOARD") == 0)
 			plane->is_chckbd = false;
-		else
+		else if (plane->bumpmap.is_bumpmap == false)
 			plane->bumpmap = get_bumpmap(content[4], field);
 	}
 	if (ft_array_size(content) == 6)
 	{
 		if (ft_strcmp(content[5], "NO_CHECKBOARD") == 0)
 			plane->is_chckbd = false;
-		else
+		else if (plane->bumpmap.is_bumpmap == false)
 			plane->bumpmap = get_bumpmap(content[5], field);
 	}
 }

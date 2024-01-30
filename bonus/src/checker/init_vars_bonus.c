@@ -85,7 +85,6 @@ int	read_file(char *filename, t_field *field)
 		free (raw_line);
 		raw_line = get_next_line(fd);
 	}
-	field->orig_light = ft_clone_lightning(field->light);
 	free(raw_line);
 	return (0);
 }
@@ -97,8 +96,8 @@ void	free_field(t_field *field)
 	ft_free_geometry(&field->geom);
 	free(field->camera.field_vp);
 	free(field->camera.int_vp);
-	free(field->light);
-	free(field->orig_light);
+	ft_free_light(&field->orig_light);
+	ft_free_light(&field->light);
 	free(field);
 	return ;
 }

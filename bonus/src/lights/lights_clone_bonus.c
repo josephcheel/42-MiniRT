@@ -27,15 +27,19 @@ t_light	*ft_clone_light(t_light *light)
 t_light	*ft_clone_lightning(t_light *light)
 {
 	int		size;
+	t_light	*tmp;
 	t_light	*new_light;
+	t_light	*new_lst;
 
+	new_lst = NULL;
 	new_light = NULL;
+	tmp = light;
 	size = ft_lightsize(light);
 	while (size--)
 	{
-		new_light = ft_clone_light(light);
-		ft_lightadd_back(&new_light, new_light);
-		light = light->next;
+		new_light = ft_clone_light(tmp);
+		ft_lightadd_back(&new_lst, new_light);
+		tmp = tmp->next;
 	}
-	return (new_light);
+	return (new_lst);
 }

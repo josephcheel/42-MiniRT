@@ -79,7 +79,7 @@ CHECKER			=	init_vars.c checks.c device_check.c geometry_check.c check_syntax.c 
 PARSERS			=	device_add.c geometry_add.c adders.c
 GEOMETRY		=	geom_lstcreate.c get_int_pt.c def_pixel_vp.c \
 					dump_mem_2_scr.c set_pixel_color.c
-LIGHTS			=	lights_lstcreate.c lights_clone.c
+LIGHTS			=	lights_lstcreate.c lights_clone.c color_mng.c
 
 VECTOR3			=	conv_v_unit.c div_cte_vector.c int_vect_esfera.c \
 				modulo_vector.c prod_escalar.c resta_vector.c \
@@ -89,7 +89,7 @@ VECTOR3			=	conv_v_unit.c div_cte_vector.c int_vect_esfera.c \
 				init_vp.c rotate_vector.c 
 EVENTS_MAC		= key_events_mac.c mouse_events.c close.c disp_rot_zoom.c
 EVENTS_LNX		= key_events_lnx.c mouse_events.c close.c disp_rot_zoom.c
-TEST 			= print_pixel_values.c
+#TEST 			= print_pixel_values.c
 
 SRCS			+=	$(addprefix $(MAN_DIR), $(addprefix $(SRC_DIR), $(SRC_MINIRT)))
 SRCS			+=	$(addprefix $(MAN_DIR), $(addprefix $(SRC_DIR), $(addprefix $(CHECKER_DIR), $(CHECKER))))
@@ -128,9 +128,9 @@ CHECKER_BN			=	init_vars_bonus.c checks_bonus.c device_check_bonus.c geometry_ch
 PARSERS_BN		=	device_add_bonus.c geometry_add_bonus.c adders_bonus.c element_add_bonus.c \
 					add_bumpmap_bonus.c get_conus_bonus.c get_cylinder_bonus.c get_plane_bonus.c \
 					get_sphere_bonus.c get_triang_bonus.c
-GEOMETRY_BN		=	geom_lstcreate_bonus.c get_int_pt_bonus.c def_pixel_vp_bonus.c \
+GEOMETRY_BN		=	geom_lstcreate_bonus.c get_int_pt_bonus.c def_pixel_vp_bonus.c create_ref_bonus.c\
 					dump_mem_2_scr_bonus.c set_pixel_color_bonus.c set_pixel_color_chckbd_bonus.c set_pixel_color_bumpmap_bonus.c 
-LIGHTS_BN			=	lights_lstcreate_bonus.c lights_clone_bonus.c colors_mng.c
+LIGHTS_BN			=	lights_lstcreate_bonus.c lights_clone_bonus.c colors_mng_bonus.c
 
 VECTOR3_BN			=	conv_v_unit_bonus.c div_cte_vector_bonus.c int_vect_esfera_bonus.c \
 				modulo_vector_bonus.c prod_escalar_bonus.c resta_vector_bonus.c \

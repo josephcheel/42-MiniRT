@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors_mng.c                                       :+:      :+:    :+:   */
+/*   color_mng.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 13:21:35 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/27 14:14:19 by eavedill         ###   ########.fr       */
+/*   Created: 2024/01/29 18:53:00 by jcheel-n          #+#    #+#             */
+/*   Updated: 2024/01/29 18:53:01 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt_bonus.h"
+#include "../../inc/minirt.h"
 
 t_color	mix_color(t_color a, t_color b)
 {
@@ -60,9 +60,9 @@ t_color	mult_color(t_color a, double b)
 	return (c);
 }
 
-t_color init_color(void)
+t_color	init_color(void)
 {
-	t_color c;
+	t_color	c;
 
 	c.r = 0;
 	c.g = 0;
