@@ -3,8 +3,6 @@ C -200,0,0       1,0,0 120
 
 L -1000,-50,70      0.5              255,255,255 
 
-pl 0,-200,0        -1,1,0         90,125,150 ./textures/foto.xpm
-pl 0,200,0        0,-1,0         90,125,150 ./textures/waal.xpm
+pl 50,-300,0        -1,-1,0         90,125,150 ./textures/waal.xpm
+pl 100,0,0        -1,0,0         23,210,88 ./textures/waal3.xpm
 pl 0,0,-200        0,0,1         23,210,88 ./textures/grass03.xpm
-
-

@@ -6,7 +6,7 @@
 /*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:19:31 by eavedill          #+#    #+#             */
-/*   Updated: 2024/01/29 15:05:32 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:03:29 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 
 # define PIXEL 0.5
 # define BM_PIXEL 1
-# define BM_DEFINIT 1
+# define BM_DEFINIT 0.5
 
 # define GEO_IDENT "sp cy pl cn tr"
 # define DEV_IDENT "C L A CHECKBOARD"

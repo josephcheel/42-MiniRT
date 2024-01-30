@@ -6,7 +6,7 @@
 /*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/29 16:20:16 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:54:49 by eavedill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ t_vec_pos	*get_int_pt(t_vec_pos *vps, t_geom *geo)
 	return (out);
 }
 
-static void	get_colored_loop(t_vec_pos *vps, t_field *field, \
+
+static void get_colored_loop(t_vec_pos *vps, t_field *field, \
 								t_int_pts *vp_int, t_geom *ptr)
 {
 	t_vec_pos	*out;
@@ -51,9 +52,9 @@ static void	get_colored_loop(t_vec_pos *vps, t_field *field, \
 
 	out = get_int_pt(vps, ptr);
 	i = -1;
-	while (++i < 2)
+	while (out && ++i < 2)
 	{
-		if (out && !is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))
+		if (!is_bhd_cam(out[i].pt, vps->pt, field->camera.center.vx))
 			create_ref(vps, vp_int, out, ptr);
 		if (ptr->type == PLANE)
 			i++;
