@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/26 19:07:11 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:41:42 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	create_axis(t_geom *tri)
 
 static void	get_optional_values(t_field *field, t_geom *triang, char **content)
 {
-	if (ft_array_size(content) == 6)
+	if (ft_array_size(content) >= 6)
 	{
 		if (ft_strcmp(content[5], "NO_CHECKBOARD") == 0)
 			triang->is_chckbd = false;
