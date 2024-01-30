@@ -3,8 +3,8 @@ C -150,0,0       1,0,0 120
 
 L 90,-50,70      0.7              255,255,255 
 
-
-pl 0,0,-300       0,0,1         255,0,0 ./textures/earth_spc.xpm
+CHECKBOARD BLUE BLACK 50 
+pl 0,0,-300       0,0,1         255,0,0 NO_CHECKBOARD NO_CHECKBOARD
 pl 0,0,300       0,0,-1         255,0,0 
 pl 0,-300,0       0,1,0         0,225,0  
 pl 0,300,0       0,-1,0         0,225,0  

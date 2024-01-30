@@ -6,7 +6,7 @@
 /*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:37:41 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/26 18:32:14 by jcheel-n         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:21:59 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	plane_data_check(char **content)
 	int	size;
 
 	size = ft_array_size(content);
-	if (size != 4 && size != 5)
+	if (size != 4 && size != 5 && size != 6)
 		return (false);
 	if (!ft_is_vec3(content[1]))
 		return (false);
