@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_plane_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eavedill <eavedill@student.42barcelona>    +#+  +:+       +#+        */
+/*   By: jcheel-n <jcheel-n@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 20:17:30 by jcheel-n          #+#    #+#             */
-/*   Updated: 2024/01/27 13:57:12 by eavedill         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:41:40 by jcheel-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	get_optional_values(t_field *field, t_geom *plane, char **content)
 {
-	if (ft_array_size(content) == 5)
+	if (ft_array_size(content) >= 5)
 	{
 		if (ft_strcmp(content[4], "NO_CHECKBOARD") == 0)
 			plane->is_chckbd = false;

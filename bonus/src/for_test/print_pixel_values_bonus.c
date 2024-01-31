@@ -84,7 +84,8 @@ static double	get_difuse(t_vec_pos vp, t_vec_pos vl_pt, double amb_rate)
 	return (aux);
 }
 
-static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, t_vec_pos pixl, double light_ratio)
+static double	get_specular(t_vec_pos vp, t_vec_pos vl_pt, \
+	t_vec_pos pixl, double light_ratio)
 {
 	double	aux;
 	t_vec3	out;
@@ -113,7 +114,8 @@ t_color	set_pixel_color_print(t_int_pts vp, t_field *field, t_vec_pos pixl)
 	out[3].b = 0;
 	out[3].a = 0;
 	rgb_to_hsl(&out[3]);
-	if (vp.pt.pt.x == LONG_MAX && vp.pt.pt.z == LONG_MAX && vp.pt.pt.z == LONG_MAX)
+	if (vp.pt.pt.x == LONG_MAX && vp.pt.pt.z == LONG_MAX && \
+		vp.pt.pt.z == LONG_MAX)
 		out[4] = field->ambient.color;
 	else
 	{
@@ -228,8 +230,8 @@ t_int_pts	calcula_color(int pixel, t_field *field)
 				vp_int = get_min_vect(vp_int, out, ptr, vps);
 				vp_int.pt.v = prod_cte_vector(ptr->sense, vp_int.pt.v);
 				vp_int.ref.vz = vp_int.pt.v;
-				vp_int.ref.vx = conv_v_unit(prod_vectorial(create_vect(0, 0, 1), \
-							vp_int.ref.vz));
+				vp_int.ref.vx = conv_v_unit(prod_vectorial(create_vect(0, 0, 1),\
+							 vp_int.ref.vz));
 				vp_int.ref.vy = conv_v_unit(prod_vectorial(vp_int.ref.vz, \
 							vp_int.ref.vx));
 			}
